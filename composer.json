@@ -14,8 +14,7 @@
         "php": ">=5.4",
         "ext-curl": "*",
         "ext-json": "*",
-        "ext-mbstring": "*",
-	"aspose/storage-sdk-php": "1.0.*"
+        "ext-mbstring": "*"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.8"

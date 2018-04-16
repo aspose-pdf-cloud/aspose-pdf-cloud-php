@@ -39,8 +39,6 @@
 
 namespace Aspose\PDF;
 
-use Aspose\Storage\AsposeApp;
-
 /**
  * ApiClient Class Doc Comment
  *
@@ -77,11 +75,11 @@ class ApiClient
      * Constructor of the class
      *
      */
-    public function __construct()
+    public function __construct($apiKey, $appSid, $baseProductUri)
     {
-        $this->apiKey = AsposeApp::$apiKey;
-        $this->apiServer = AsposeApp::$baseProductUri;
-        $this->appSid = AsposeApp::$appSID;
+        $this->apiKey = $apiKey;
+        $this->apiServer = $baseProductUri;
+        $this->appSid = $appSid;
 
         $this->config = Configuration::getDefaultConfiguration();
 
@@ -298,8 +296,8 @@ class ApiClient
 
         $postData = [];
         $postData["grant_type"] = 'client_credentials';
-        $postData["client_id"] = AsposeApp::$appSID;
-        $postData["client_secret"] = AsposeApp::$apiKey;
+        $postData["client_id"] = $this->appSid;
+        $postData["client_secret"] = $this->apiKey;
 
 
         // form data

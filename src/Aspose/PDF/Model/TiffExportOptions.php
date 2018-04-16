@@ -66,13 +66,13 @@ class TiffExportOptions implements ArrayAccess
       */
     protected static $swaggerTypes = [
         'brightness' => 'double',
-        'compression' => 'string',
-        'color_depth' => 'string',
+        'compression' => '\Aspose\PDF\Model\CompressionType',
+        'color_depth' => '\Aspose\PDF\Model\ColorDepth',
         'left_margin' => 'int',
         'right_margin' => 'int',
         'top_margin' => 'int',
         'bottom_margin' => 'int',
-        'orientation' => 'string',
+        'orientation' => '\Aspose\PDF\Model\ShapeType',
         'skip_blank_pages' => 'bool',
         'width' => 'int',
         'height' => 'int',
@@ -284,7 +284,7 @@ class TiffExportOptions implements ArrayAccess
 
     /**
      * Gets compression
-     * @return string
+     * @return \Aspose\PDF\Model\CompressionType
      */
     public function getCompression()
     {
@@ -293,7 +293,7 @@ class TiffExportOptions implements ArrayAccess
 
     /**
      * Sets compression
-     * @param string $compression Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None.
+     * @param \Aspose\PDF\Model\CompressionType $compression Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None.
      * @return $this
      */
     public function setCompression($compression)
@@ -305,7 +305,7 @@ class TiffExportOptions implements ArrayAccess
 
     /**
      * Gets color_depth
-     * @return string
+     * @return \Aspose\PDF\Model\ColorDepth
      */
     public function getColorDepth()
     {
@@ -314,7 +314,7 @@ class TiffExportOptions implements ArrayAccess
 
     /**
      * Sets color_depth
-     * @param string $color_depth Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp.
+     * @param \Aspose\PDF\Model\ColorDepth $color_depth Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp.
      * @return $this
      */
     public function setColorDepth($color_depth)
@@ -410,7 +410,7 @@ class TiffExportOptions implements ArrayAccess
 
     /**
      * Gets orientation
-     * @return string
+     * @return \Aspose\PDF\Model\ShapeType
      */
     public function getOrientation()
     {
@@ -419,7 +419,7 @@ class TiffExportOptions implements ArrayAccess
 
     /**
      * Sets orientation
-     * @param string $orientation Image orientation. Possible values are: None, Landscape, Portait.
+     * @param \Aspose\PDF\Model\ShapeType $orientation Image orientation. Possible values are: None, Landscape, Portait.
      * @return $this
      */
     public function setOrientation($orientation)

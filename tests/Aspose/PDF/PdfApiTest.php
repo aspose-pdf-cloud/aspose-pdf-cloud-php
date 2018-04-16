@@ -21,11 +21,12 @@
  *
  */
 
-require_once realpath(__DIR__) . '/Utils.php';
+//require_once realpath(__DIR__) . '/Utils.php';
 
 use Aspose\PDF\Api\PdfApi;
 use Aspose\PDF\Model\HttpStatusCode;
-use Aspose\Storage\AsposeApp;
+use Aspose\PDF\ApiClient;
+//use Aspose\Storage\AsposeApp;
 
 class PdfApiTest extends PHPUnit_Framework_TestCase
 {
@@ -35,23 +36,40 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        AsposeApp::$appSID = Utils::appSID;
-        AsposeApp::$apiKey = Utils::apiKey;
-        $this->pdfApi = new PdfApi();
-        $this->tempFolder = 'TempPdf';
+        $appSid = 'b03fc72c-e765-4427-822c-8c50a6dd628a';
+	    $apiKey = '95e2a135b1e1b5e8e6b4a97395b30213';
+
+        $apiClient = new ApiClient($apiKey, $appSid, null);
+
+
+        $this->pdfApi = new PdfApi($apiClient);
+        $this->tempFolder = 'TempPdfCloud';
 
         $config = $this->pdfApi->getApiClient()->getConfig();
         $config->setHost('http://api-dev.aspose.cloud/v1.1');
 
     }
 
+    private function uploadFile($fileName, $subFolder = null) 
+    {
+        if (null != $subFolder)
+        {
+            $path = $this->tempFolder . '/' . $subFolder . '/' . $fileName;       
+        }
+        else
+        {
+            $path = $this->tempFolder . '/' . $fileName;
+        }
+		$file = realpath(__DIR__ . '/../../..') . '/testData/' . $fileName;
+		$result = $this->pdfApi->PutCreate($Path=$path, $file); 
+	} 
 
     //Annotations Tests
-
+/*
     public function testGetPageAnnotations()
     {
         $name = 'PdfWithAnnotations.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 2;
 
@@ -67,26 +85,27 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $name = 'PdfWithImages2.pdf';
         $appendFileName = '4pages.pdf';
 
-        Utils::uploadFile($name);
-        Utils::uploadFile($appendFileName);
+        $this->uploadFile($name);
+        $this->uploadFile($appendFileName);
 
         $startPage = 2;
         $endPage = 4;
 
-        $response = $this->pdfApi->postAppendDocument($name, null, $appendFileName, $startPage, $endPage, null, $this->tempFolder);
+        $response = $this->pdfApi->postAppendDocument($name, null, $this->tempFolder . '/' . $appendFileName, $startPage, $endPage, null, $this->tempFolder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
+
 
     public function testPostAppendDocumentUsingBodyParams()
     {
         $name = 'PdfWithImages2.pdf';
         $appendFileName = '4pages.pdf';
 
-        Utils::uploadFile($name);
-        Utils::uploadFile($appendFileName);
+        $this->uploadFile($name);
+        $this->uploadFile($appendFileName);
 
         $appendDocument = new Aspose\PDF\Model\AppendDocument();
-        $appendDocument->setDocument($appendFileName);
+        $appendDocument->setDocument($this->tempFolder . '/' . $appendFileName);
         $appendDocument->setStartPage(2);
         $appendDocument->setEndPage(4);
 
@@ -100,7 +119,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetDocumentAttachmentByIndex()
     {
         $name = 'PdfWithEmbeddedFiles.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $attachmentIndex = 1;
 
@@ -111,7 +130,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetDocumentAttachments()
     {
         $name = 'PdfWithEmbeddedFiles.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $response = $this->pdfApi->getDocumentAttachments($name, null, $this->tempFolder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
@@ -120,7 +139,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetDownloadDocumentAttachmentByIndex()
     {
         $name = 'PdfWithEmbeddedFiles.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $attachmentIndex = 1;
     
@@ -134,10 +153,10 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetDocumentBookmarks()
     {
         $name = 'PdfWithBookmarks.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
-        $response = $this->pdfApi->getDocumentBookmarks($name, null, $this->tempFolder);
-        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+        $response = $this->pdfApi->getDocumentBookmarks($name, null, null, $this->tempFolder);
+        $this->assertNotNull($response);
     }
 
 
@@ -146,17 +165,17 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutDocumentSaveAsTiffUsingQueryParams()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $resultFile = '4pages.tiff';
         $brightness = 0.6;
-        $compression = 'Ccitt4';
-        $colorDepth = 'format1bpp';
+        $compression = Aspose\PDF\Model\CompressionType::CCITT4;
+        $colorDepth = Aspose\PDF\Model\ColorDepth::FORMAT1BPP;
         $leftMargin = 0;
         $rightMargin = 0;
         $topMargin = 0;
         $bottomMargin = 0;
-        $orientation = 'portait'; // Yes, we know 'portrait'. It will be fixed in the next version.
+        $orientation = Aspose\PDF\Model\ShapeType::PORTRAIT;
         $skipBlankPages = true;
         $width = 1200;
         $height = 1600;
@@ -175,18 +194,18 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutDocumentSaveAsTiffUsingBodyParams()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $exportOptions = new  Aspose\PDF\Model\TiffExportOptions();
         $exportOptions->setResultFile('4pages.tiff');
         $exportOptions->setBrightness(0.6);
-        $exportOptions->setCompression('Ccitt4');
-        $exportOptions->setColorDepth('format1bpp');
+        $exportOptions->setCompression(Aspose\PDF\Model\CompressionType::CCITT4);
+        $exportOptions->setColorDepth(Aspose\PDF\Model\ColorDepth::FORMAT1BPP);
         $exportOptions->setLeftMargin(0);
         $exportOptions->setRightMargin(0);
         $exportOptions->setTopMargin(0);
         $exportOptions->setBottomMargin(0);
-        $exportOptions->setOrientation('portait'); // Yes, we know 'portrait'. It will be fixed in the next version.
+        $exportOptions->setOrientation(Aspose\PDF\Model\ShapeType::PORTRAIT);
         $exportOptions->setSkipBlankPages(true);
         $exportOptions->setWidth(1200);
         $exportOptions->setHeight(1600);
@@ -211,7 +230,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetDocument()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
 
@@ -223,7 +242,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostOptimizeDocument()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $optimizeOptions = new Aspose\PDF\Model\OptimizeOptions();
         $optimizeOptions->setAllowReusePageContent(false);
@@ -243,7 +262,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostSplitDocument()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
 
@@ -280,7 +299,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $folder = $this->tempFolder;
         $templateFile = $folder . '/' . $templateName;
 
-        Utils::uploadFile($templateName);
+        $this->uploadFile($templateName);
 
         $templateType = 'html';
 
@@ -292,20 +311,20 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutCreateDocumentFromImages()
     {
         $image1 = '33539.jpg';
-        Utils::uploadFile($image1);
+        $this->uploadFile($image1, 'pdfimages');
 
         $image2 = '44781.jpg';
-        Utils::uploadFile($image2);
+        $this->uploadFile($image2, 'pdfimages');
 
         $resultDocName = 'pdffromimagesinquery.pdf';
         $folder = $this->tempFolder;
 
         $images = new Aspose\PDF\Model\ImagesListRequest();
-        $images->setImagesList([ $folder . '/' . $image1,  $folder . '/' . $image2]);
+        $images->setImagesList(['pdfimages/' . $image1, 'pdfimages/' . $image2]);
 
         $ocr = false;
 
-        $response = $this->pdfApi->putCreateDocumentFromImages($resultDocName, $images , $ocr, $ocr_lang = 'eng', $storage = null, $folder);
+        $response = $this->pdfApi->putCreateDocumentFromImages($resultDocName, $images , $ocr, null, null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
@@ -315,7 +334,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetField()
     {
         $name = 'PdfWithAcroForm.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
         $fieldName = 'textField';
@@ -328,7 +347,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetFields()
     {
         $name = 'PdfWithAcroForm.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
 
@@ -340,7 +359,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostCreateField()
     {
         $name = 'Hello_world.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $rect = new Aspose\PDF\Model\Rectangle();
         $rect->setX(50);
@@ -366,7 +385,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutUpdateField()
     {
         $name = 'PdfWithAcroForm.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $fieldName = 'textField';
 
@@ -386,7 +405,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetFragment()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $fragmentNumber = 1;
@@ -400,7 +419,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetFragmentTextFormat()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $fragmentNumber = 1;
@@ -414,7 +433,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetFragments()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $folder = $this->tempFolder;
@@ -427,7 +446,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetSegment()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $fragmentNumber = 1;
@@ -442,7 +461,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetSegmentTextFormat()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $fragmentNumber = 1;
@@ -457,7 +476,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetSegments()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $fragmentNumber = 1;
@@ -473,13 +492,13 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetImage()
     {
         $name = 'PdfWithImages2.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $imageNumber = 1;
         $folder = $this->tempFolder;
 
-        $response = $this->pdfApi->getImage($name, $pageNumber, $imageNumber, $storage = null, $folder);
+        $response = $this->pdfApi->getImage($name, $pageNumber, $imageNumber, null, 0, 0, null, $folder);
         $this->assertNotNull($response);
     }
 
@@ -487,7 +506,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetImages()
     {
         $name = 'PdfWithImages2.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $folder = $this->tempFolder;
@@ -500,10 +519,10 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostReplaceImage()
     {
         $name = 'PdfWithImages2.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $imageFileName = 'Koala.jpg';
-        Utils::uploadFile($imageFileName);
+        $this->uploadFile($imageFileName);
 
         $pageNumber = 1;
         $imageNumber = 1;
@@ -513,20 +532,20 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->postReplaceImage($name, $pageNumber, $imageNumber, $imageFile, $storage = null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
-
+*/
 
     // Links Tests
 
     public function testGetPageLinkAnnotationByIndex()
     {
         $name = 'PdfWithLinks.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $linkIndex = 1;
         $folder = $this->tempFolder;
 
-        $response = $this->pdfApi->getPageLinkAnnotationByIndex($name, $pageNumber, $linkIndex, $storage = null, $folder);
+        $response = $this->pdfApi->getPageLinkAnnotationByIndex($name, $pageNumber, $linkIndex, null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
@@ -534,7 +553,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetPageLinkAnnotations()
     {
         $name = 'PdfWithLinks.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $folder = $this->tempFolder;
@@ -543,7 +562,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
-
+/*
     // Merge Tests
 
     public function testPutMergeDocuments()
@@ -551,7 +570,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $nameList = ['4pages.pdf', 'PdfWithImages2.pdf', 'marketing.pdf'];
         foreach ($nameList as $name)
         {
-            Utils::uploadFile($name);
+            $this->uploadFile($name);
         }
 
         $resultName = 'MergingResult.pdf';
@@ -572,7 +591,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testDeletePage()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $folder = $this->tempFolder;
@@ -585,7 +604,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetPage()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 3;
         $folder = $this->tempFolder;
@@ -598,7 +617,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetPages()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
 
@@ -610,7 +629,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetWordsPerPage()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
 
@@ -622,7 +641,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostMovePage()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
         $pageNumber = 1;
@@ -636,7 +655,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutAddNewPage()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
 
@@ -648,10 +667,10 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutPageAddStamp()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $stampFileName = 'Penguins.jpg';
-        Utils::uploadFile($stampFileName);
+        $this->uploadFile($stampFileName);
 
         $pageNumber = 1;
         $folder = $this->tempFolder;
@@ -676,7 +695,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutAddText()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $folder = $this->tempFolder;
@@ -739,7 +758,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testDeleteProperties()
     {
         $name = 'PdfWithAcroForm.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $property1 = new Aspose\PDF\Model\DocumentProperty();
         $property1->setName('prop1');
@@ -763,7 +782,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testDeleteProperty()
     {
         $name = 'PdfWithAcroForm.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $property1 = new Aspose\PDF\Model\DocumentProperty();
         $property1->setName('prop1');
@@ -781,7 +800,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetDocumentProperties()
     {
         $name = 'PdfWithAcroForm.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $property1 = new Aspose\PDF\Model\DocumentProperty();
         $property1->setName('prop1');
@@ -804,7 +823,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetDocumentProperty()
     {
         $name = 'PdfWithAcroForm.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $property1 = new Aspose\PDF\Model\DocumentProperty();
         $property1->setName('prop1');
@@ -822,7 +841,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutSetProperty()
     {
         $name = 'PdfWithAcroForm.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $property1 = new Aspose\PDF\Model\DocumentProperty();
         $property1->setName('prop1');
@@ -842,10 +861,10 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostSignDocument()
     {
         $name = 'BlankWithSignature.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $signatureFileName = 'test1234.pfx';
-        Utils::uploadFile($signatureFileName);
+        $this->uploadFile($signatureFileName);
 
         $rectangle = new Aspose\PDF\Model\Rectangle();
         $rectangle->setX(100);
@@ -875,10 +894,10 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostSignPage()
     {
         $name = 'BlankWithSignature.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $signatureFileName = 'test1234.pfx';
-        Utils::uploadFile($signatureFileName);
+        $this->uploadFile($signatureFileName);
 
         $pageNumber = 1;
 
@@ -912,7 +931,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetPageTextItems()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $folder = $this->tempFolder;
@@ -924,7 +943,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetTextItems()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
 
@@ -938,7 +957,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostDocumentReplaceText()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $textReplaceRequest = new Aspose\PDF\Model\TextReplaceRequest();
         $textReplaceRequest->setOldValue('Page');
@@ -955,7 +974,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostDocumentReplaceTextList()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $textReplaceRequest1 = new Aspose\PDF\Model\TextReplaceRequest();
         $textReplaceRequest1->setOldValue('First');
@@ -980,7 +999,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostPageReplaceText()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
 
@@ -999,7 +1018,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostPageReplaceTextList()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
 
@@ -1028,7 +1047,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutSearchableDocument()
     {
         $name = 'rusdoc.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $lang = 'rus,eng';
         $folder = $this->tempFolder;
@@ -1040,7 +1059,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutSearchableDocumentWithDefaultLang()
     {
         $name = 'rusdoc.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $folder = $this->tempFolder;
 
@@ -1054,7 +1073,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetText()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $x = 0;
         $y = 0;
@@ -1070,7 +1089,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetPageTextByTwoTextOnPage()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $pageNumber = 1;
         $x = 0;
@@ -1091,7 +1110,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostDocumentTextReplaceWholeDocByRect()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
 
         $rect = new Aspose\PDF\Model\Rectangle();
         $rect->setX(100);
@@ -1119,7 +1138,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPostPageTextReplaceByRect()
     {
         $name = '4pages.pdf';
-        Utils::uploadFile($name);
+        $this->uploadFile($name);
         $pageNumber = 1;
 
         $rect = new Aspose\PDF\Model\Rectangle();
@@ -1143,5 +1162,5 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->postPageTextReplace($name, $pageNumber, $textReplaceList, $storage = null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
-
+*/
 }
