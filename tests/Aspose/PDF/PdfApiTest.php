@@ -25,7 +25,8 @@
 
 use Aspose\PDF\Api\PdfApi;
 use Aspose\PDF\Model\HttpStatusCode;
-use Aspose\PDF\ApiClient;
+use Aspose\PDF\Configuration;
+//use Aspose\PDF\ApiClient;
 //use Aspose\Storage\AsposeApp;
 
 class PdfApiTest extends PHPUnit_Framework_TestCase
@@ -33,21 +34,22 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
     protected $pdfApi;
     protected $tempFolder;
+    protected $config;
 
     protected function setUp()
     {
         $appSid = 'b03fc72c-e765-4427-822c-8c50a6dd628a';
-	    $apiKey = '95e2a135b1e1b5e8e6b4a97395b30213';
+	    $appKey = '95e2a135b1e1b5e8e6b4a97395b30213';
+        $host = 'http://api-dev.aspose.cloud/v1.1';
 
-        $apiClient = new ApiClient($apiKey, $appSid, null);
-
-
-        $this->pdfApi = new PdfApi($apiClient);
         $this->tempFolder = 'TempPdfCloud';
+        
+        $this->config = new Configuration();
+        $this->config->setAppKey($appKey);
+        $this->config->setAppSid($appSid);
+        $this->config->setHost($host);
 
-        $config = $this->pdfApi->getApiClient()->getConfig();
-        $config->setHost('http://api-dev.aspose.cloud/v1.1');
-
+        $this->pdfApi = new PdfApi(null, $this->config);
     }
 
     private function uploadFile($fileName, $subFolder = null) 
@@ -65,7 +67,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 	} 
 
     //Annotations Tests
-/*
+
     public function testGetPageAnnotations()
     {
         $name = 'PdfWithAnnotations.pdf';
@@ -311,20 +313,20 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testPutCreateDocumentFromImages()
     {
         $image1 = '33539.jpg';
-        $this->uploadFile($image1, 'pdfimages');
+        $this->uploadFile($image1);
 
         $image2 = '44781.jpg';
-        $this->uploadFile($image2, 'pdfimages');
+        $this->uploadFile($image2);
 
         $resultDocName = 'pdffromimagesinquery.pdf';
         $folder = $this->tempFolder;
 
         $images = new Aspose\PDF\Model\ImagesListRequest();
-        $images->setImagesList(['pdfimages/' . $image1, 'pdfimages/' . $image2]);
+        $images->setImagesList([$this->tempFolder . '/' . $image1, $this->tempFolder . '/' . $image2]);
 
         $ocr = false;
 
-        $response = $this->pdfApi->putCreateDocumentFromImages($resultDocName, $images , $ocr, null, null, $folder);
+        $response = $this->pdfApi->putCreateDocumentFromImages($resultDocName, $images , 'false', 'eng', null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
@@ -532,7 +534,36 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->postReplaceImage($name, $pageNumber, $imageNumber, $imageFile, $storage = null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
-*/
+
+    public function testGetImageWithFormat()
+    {
+        $name = 'PdfWithImages2.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 1;
+        $imageNumber = 1;
+        $folder = $this->tempFolder;
+
+        $response = $this->pdfApi->getImage($name, $pageNumber, $imageNumber, 'jpeg', 100, 100, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPostReplaceImageFromRequest()
+    {
+        $name = 'PdfWithImages2.pdf';
+        $this->uploadFile($name);
+
+        $imageFileName = 'Koala.jpg';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $imageFileName;
+
+        $pageNumber = 1;
+        $imageNumber = 1;
+        $folder = $this->tempFolder;
+        $imageFile = $folder . '/' . $imageFileName;
+
+        $response = $this->pdfApi->postReplaceImage($name, $pageNumber, $imageNumber, null, null, $folder, $file);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
 
     // Links Tests
 
@@ -562,7 +593,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
-/*
+
     // Merge Tests
 
     public function testPutMergeDocuments()
@@ -576,6 +607,14 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resultName = 'MergingResult.pdf';
 
         $mergeDocuments = new Aspose\PDF\Model\MergeDocuments();
+
+        $i = 0;
+        foreach ($nameList as $name)
+        {
+            $nameList[$i] = $this->tempFolder . '/' . $name;
+            $i++;
+        }
+
         $mergeDocuments->setList($nameList);
 
         $folder = $this->tempFolder;
@@ -609,10 +648,21 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $pageNumber = 3;
         $folder = $this->tempFolder;
 
-        $response = $this->pdfApi->getPage($name, $pageNumber, $storage = null, $folder);
+        $response = $this->pdfApi->getPage($name, $pageNumber, null, 0, 0, null, $folder);
         $this->assertNotNull($response);
     }
 
+    public function testGetPageWithFormat()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 3;
+        $folder = $this->tempFolder;
+
+        $response = $this->pdfApi->getPage($name, $pageNumber, 'jpeg', 100, 100, null, $folder);
+        $this->assertNotNull($response);
+    }
 
     public function testGetPages()
     {
@@ -685,7 +735,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $stamp->setXIndent(100);
         $stamp->setYIndent(100);
 
-        $response = $this->pdfApi->putPageAddStamp($name, $pageNumber, $stamp, $storage = null, $folder);
+        $response = $this->pdfApi->putPageAddStamp($name, $pageNumber, $stamp, null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
@@ -748,7 +798,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $paragraph->setLines([$textLine]);
 
 
-        $response = $this->pdfApi->putAddText($name, $pageNumber, $paragraph, $storage = null, $folder);
+        $response = $this->pdfApi->putAddText($name, $pageNumber, $paragraph, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
@@ -852,7 +902,6 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->putSetProperty($name, $property1->getName(), $property1, $storage = null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
-
 
 
 
@@ -1162,5 +1211,211 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->postPageTextReplace($name, $pageNumber, $textReplaceList, $storage = null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
-*/
+
+
+    // Convert Tests
+
+    public function testGetPdfInStorageToDoc()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        $folder = $this->tempFolder;
+
+        $response = $this->pdfApi->getPdfInStorageToDoc($name, null, null, null, null, null, null, null, null, $folder);
+        $this->assertNotNull($response);        
+    }
+           
+    public function testPutPdfInStorageToDoc()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        $folder = $this->tempFolder;
+        $resFileName = "result.doc";
+        
+        $response = $this->pdfApi->putPdfInStorageToDoc($name, $this->tempFolder . '/' . $resFileName, null, null, null, null, null, null, null, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToDoc()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.doc";
+
+        $response = $this->pdfApi->putPdfInRequestToDoc($this->tempFolder . '/' . $resFileName, null, null, null, null, null, null, null, null, $file);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetPdfInStorageToPdfA()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $type = Aspose\PDF\Model\PdfAType::PDFA1_A;
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToPdfA($name, $type, $folder);
+        $this->assertNotNull($response);        
+    }
+           
+    public function testPutPdfInStorageToPdfA()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $type = Aspose\PDF\Model\PdfAType::PDFA1_A;
+        $folder = $this->tempFolder;
+        $resFileName = "result.pdf";
+        
+        $response = $this->pdfApi->putPdfInStorageToPdfA($name, $this->tempFolder . '/' . $resFileName, $type, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToPdfA()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $type = Aspose\PDF\Model\PdfAType::PDFA1_A;
+        $resFileName = "result.pdf";
+
+        $response = $this->pdfApi->putPdfInRequestToPdfA($this->tempFolder . '/' . $resFileName, $type, $file);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetPdfInStorageToTiff()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToTiff($name, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $folder);
+        $this->assertNotNull($response);        
+    }
+           
+    public function testPutPdfInStorageToTiff()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.tiff";
+        
+        $response = $this->pdfApi->putPdfInStorageToTiff($name, $this->tempFolder . '/' . $resFileName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToTiff()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.tiff";
+
+        $response = $this->pdfApi->putPdfInRequestToTiff($this->tempFolder . '/' . $resFileName, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $file);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetPdfInStorageToSvg()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToSvg($name, null, $folder);
+        $this->assertNotNull($response);        
+    }
+           
+    public function testPutPdfInStorageToSvg()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.svg";
+        
+        $response = $this->pdfApi->putPdfInStorageToSvg($name, $this->tempFolder . '/' . $resFileName, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToSvg()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.svg";
+
+        $response = $this->pdfApi->putPdfInRequestToSvg($this->tempFolder . '/' . $resFileName, null, $file);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetPdfInStorageToXps()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToXps($name, $folder);
+        $this->assertNotNull($response);        
+    }
+           
+    public function testPutPdfInStorageToXps()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.xps";
+        
+        $response = $this->pdfApi->putPdfInStorageToXps($name, $this->tempFolder . '/' . $resFileName, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToXps()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.xps";
+
+        $response = $this->pdfApi->putPdfInRequestToXps($this->tempFolder . '/' . $resFileName, $file);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetPdfInStorageToXls()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToXls($name, null, null, null, null, $folder);
+        $this->assertNotNull($response);        
+    }
+           
+    public function testPutPdfInStorageToXls()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.xls";
+        
+        $response = $this->pdfApi->putPdfInStorageToXls($name, $this->tempFolder . '/' . $resFileName, null, null, null, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToXls()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.xls";
+
+        $response = $this->pdfApi->putPdfInRequestToXls($this->tempFolder . '/' . $resFileName, null, null, null, null, $file);
+        $this->assertNotNull($response);
+    }
 }
