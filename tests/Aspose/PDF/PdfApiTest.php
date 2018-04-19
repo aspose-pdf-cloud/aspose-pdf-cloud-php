@@ -21,13 +21,10 @@
  *
  */
 
-//require_once realpath(__DIR__) . '/Utils.php';
 
 use Aspose\PDF\Api\PdfApi;
 use Aspose\PDF\Model\HttpStatusCode;
 use Aspose\PDF\Configuration;
-//use Aspose\PDF\ApiClient;
-//use Aspose\Storage\AsposeApp;
 
 class PdfApiTest extends PHPUnit_Framework_TestCase
 {
