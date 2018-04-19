@@ -36,8 +36,8 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     protected function setUp()
     {
         // Get App key and App SID from https://cloud.aspose.com
-        $appSid = 'b03fc72c-e765-4427-822c-8c50a6dd628a';
-	    $appKey = '95e2a135b1e1b5e8e6b4a97395b30213';
+        $appSid = '';
+	    $appKey = '';
         $host = 'http://api-dev.aspose.cloud/v1.1';
 
         $this->tempFolder = 'TempPdfCloud';
