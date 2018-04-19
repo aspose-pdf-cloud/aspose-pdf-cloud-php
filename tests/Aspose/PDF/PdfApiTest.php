@@ -35,6 +35,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
+        // Get App key and App SID from https://cloud.aspose.com
         $appSid = 'b03fc72c-e765-4427-822c-8c50a6dd628a';
 	    $appKey = '95e2a135b1e1b5e8e6b4a97395b30213';
         $host = 'http://api-dev.aspose.cloud/v1.1';
@@ -1415,4 +1416,26 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->putPdfInRequestToXls($this->tempFolder . '/' . $resFileName, null, null, null, null, $file);
         $this->assertNotNull($response);
     }
+
+    // Upload/Download Tests
+    public function testUploadFile()
+    {
+        $name = '4pages.pdf';
+        $path = $this->tempFolder . '/' . $name;
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $response = $this->pdfApi->putCreate($path, $file);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    public function testGetDownload()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getDownload($path);
+        $this->assertNotNull($response);
+    }
+
 }
