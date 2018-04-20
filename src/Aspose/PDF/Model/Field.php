@@ -6,7 +6,7 @@
  *
  * @category Class
  * @package  Aspose\PDF
- * @author   Swaagger Codegen team
+ * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
 
@@ -38,30 +38,31 @@
  */
 
 namespace Aspose\PDF\Model;
-
-use \ArrayAccess;
+use \Aspose\PDF\ObjectSerializer;
 
 /**
  * Field Class Doc Comment
  *
- * @category    Class
+ * @category Class
  * @description Represents form field.
- * @package     Aspose\PDF
- * @author      Swagger Codegen team
- * @link        https://github.com/swagger-api/swagger-codegen
+ * @package  Aspose\PDF
+ * @author   Swagger Codegen team
+ * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Field extends LinkElement implements ArrayAccess
+class Field extends LinkElement 
 {
     const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
+      *
       * @var string
       */
     protected static $swaggerModelName = 'Field';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
+      *
       * @var string[]
       */
     protected static $swaggerTypes = [
@@ -74,6 +75,7 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
       * Array of property to format mappings. Used for (de)serialization
+      *
       * @var string[]
       */
     protected static $swaggerFormats = [
@@ -84,18 +86,30 @@ class Field extends LinkElement implements ArrayAccess
         'rect' => null
     ];
 
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
     public static function swaggerTypes()
     {
         return self::$swaggerTypes + parent::swaggerTypes();
     }
 
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
     public static function swaggerFormats()
     {
         return self::$swaggerFormats + parent::swaggerFormats();
     }
 
     /**
-     * Array of attributes where the key is the local name, and the value is the original name
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
      * @var string[]
      */
     protected static $attributeMap = [
@@ -106,9 +120,9 @@ class Field extends LinkElement implements ArrayAccess
         'rect' => 'Rect'
     ];
 
-
     /**
      * Array of attributes to setter functions (for deserialization of responses)
+     *
      * @var string[]
      */
     protected static $setters = [
@@ -119,9 +133,9 @@ class Field extends LinkElement implements ArrayAccess
         'rect' => 'setRect'
     ];
 
-
     /**
      * Array of attributes to getter functions (for serialization of requests)
+     *
      * @var string[]
      */
     protected static $getters = [
@@ -132,34 +146,57 @@ class Field extends LinkElement implements ArrayAccess
         'rect' => 'getRect'
     ];
 
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
     public static function attributeMap()
     {
         return parent::attributeMap() + self::$attributeMap;
     }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
     public static function setters()
     {
         return parent::setters() + self::$setters;
     }
 
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
     public static function getters()
     {
         return parent::getters() + self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
     }
 
     
 
     
 
-    /**
-     * Associative array for storing property values
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property values initializing the model
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -173,19 +210,19 @@ class Field extends LinkElement implements ArrayAccess
     }
 
     /**
-     * show all the invalid properties with reasons.
+     * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalid_properties = parent::listInvalidProperties();
+        $invalidProperties = parent::listInvalidProperties();
 
-        return $invalid_properties;
+        return $invalidProperties;
     }
 
     /**
-     * validate all the properties in the model
+     * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
@@ -202,6 +239,7 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Gets name
+     *
      * @return string
      */
     public function getName()
@@ -211,7 +249,9 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Sets name
+     *
      * @param string $name Field name.
+     *
      * @return $this
      */
     public function setName($name)
@@ -223,6 +263,7 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Gets type
+     *
      * @return \Aspose\PDF\Model\FieldType
      */
     public function getType()
@@ -232,7 +273,9 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Sets type
+     *
      * @param \Aspose\PDF\Model\FieldType $type Field type.
+     *
      * @return $this
      */
     public function setType($type)
@@ -244,6 +287,7 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Gets values
+     *
      * @return string[]
      */
     public function getValues()
@@ -253,7 +297,9 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Sets values
+     *
      * @param string[] $values Field values.
+     *
      * @return $this
      */
     public function setValues($values)
@@ -265,6 +311,7 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Gets selected_items
+     *
      * @return int[]
      */
     public function getSelectedItems()
@@ -274,7 +321,9 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Sets selected_items
+     *
      * @param int[] $selected_items Selected items.
+     *
      * @return $this
      */
     public function setSelectedItems($selected_items)
@@ -286,6 +335,7 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Gets rect
+     *
      * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRect()
@@ -295,7 +345,9 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Sets rect
+     *
      * @param \Aspose\PDF\Model\Rectangle $rect Field rectangle.
+     *
      * @return $this
      */
     public function setRect($rect)
@@ -306,7 +358,9 @@ class Field extends LinkElement implements ArrayAccess
     }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return boolean
      */
     public function offsetExists($offset)
@@ -316,7 +370,9 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Gets offset.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -326,8 +382,10 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed   $value  Value to be set
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -341,7 +399,9 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return void
      */
     public function offsetUnset($offset)
@@ -351,15 +411,19 @@ class Field extends LinkElement implements ArrayAccess
 
     /**
      * Gets the string presentation of the object
+     *
      * @return string
      */
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Aspose\PDF\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
         }
 
-        return json_encode(\Aspose\PDF\ObjectSerializer::sanitizeForSerialization($this));
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * TextHorizontalAlignment
+ * ColorDepth
  *
  * PHP version 5
  *
@@ -41,25 +41,23 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * TextHorizontalAlignment Class Doc Comment
+ * ColorDepth Class Doc Comment
  *
  * @category Class
- * @description 
+ * @description Used to specify the parameter value passed to a Tiff image device.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class TextHorizontalAlignment
+class ColorDepth
 {
     /**
      * Possible values of this enum
      */
-    const LEFT = 'Left';
-    const RIGHT = 'Right';
-    const CENTER = 'Center';
-    const JUSTIFY = 'Justify';
-    const FULL_JUSTIFY = 'FullJustify';
-    const NONE = 'None';
+    const _DEFAULT = 'Default';
+    const FORMAT8BPP = 'Format8bpp';
+    const FORMAT4BPP = 'Format4bpp';
+    const FORMAT1BPP = 'Format1bpp';
     
     /**
      * Gets allowable values of the enum
@@ -68,12 +66,10 @@ class TextHorizontalAlignment
     public static function getAllowableEnumValues()
     {
         return [
-            self::LEFT,
-            self::RIGHT,
-            self::CENTER,
-            self::JUSTIFY,
-            self::FULL_JUSTIFY,
-            self::NONE,
+            self::_DEFAULT,
+            self::FORMAT8BPP,
+            self::FORMAT4BPP,
+            self::FORMAT1BPP,
         ];
     }
 }

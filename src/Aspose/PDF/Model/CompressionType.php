@@ -1,6 +1,6 @@
 <?php
 /**
- * TextHorizontalAlignment
+ * CompressionType
  *
  * PHP version 5
  *
@@ -41,24 +41,23 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * TextHorizontalAlignment Class Doc Comment
+ * CompressionType Class Doc Comment
  *
  * @category Class
- * @description 
+ * @description Used to specify the parameter value passed to a Tiff image device.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class TextHorizontalAlignment
+class CompressionType
 {
     /**
      * Possible values of this enum
      */
-    const LEFT = 'Left';
-    const RIGHT = 'Right';
-    const CENTER = 'Center';
-    const JUSTIFY = 'Justify';
-    const FULL_JUSTIFY = 'FullJustify';
+    const LZW = 'LZW';
+    const CCITT4 = 'CCITT4';
+    const CCITT3 = 'CCITT3';
+    const RLE = 'RLE';
     const NONE = 'None';
     
     /**
@@ -68,11 +67,10 @@ class TextHorizontalAlignment
     public static function getAllowableEnumValues()
     {
         return [
-            self::LEFT,
-            self::RIGHT,
-            self::CENTER,
-            self::JUSTIFY,
-            self::FULL_JUSTIFY,
+            self::LZW,
+            self::CCITT4,
+            self::CCITT3,
+            self::RLE,
             self::NONE,
         ];
     }

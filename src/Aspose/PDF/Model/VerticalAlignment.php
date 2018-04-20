@@ -6,7 +6,7 @@
  *
  * @category Class
  * @package  Aspose\PDF
- * @author   Swaagger Codegen team
+ * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
 
@@ -38,15 +38,16 @@
  */
 
 namespace Aspose\PDF\Model;
+use \Aspose\PDF\ObjectSerializer;
 
 /**
  * VerticalAlignment Class Doc Comment
  *
- * @category    Class
+ * @category Class
  * @description Enumeration of possible vertical alignment values.
- * @package     Aspose\PDF
- * @author      Swagger Codegen team
- * @link        https://github.com/swagger-api/swagger-codegen
+ * @package  Aspose\PDF
+ * @author   Swagger Codegen team
+ * @link     https://github.com/swagger-api/swagger-codegen
  */
 class VerticalAlignment
 {

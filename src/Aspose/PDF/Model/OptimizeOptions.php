@@ -6,7 +6,7 @@
  *
  * @category Class
  * @package  Aspose\PDF
- * @author   Swaagger Codegen team
+ * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
 
@@ -40,28 +40,31 @@
 namespace Aspose\PDF\Model;
 
 use \ArrayAccess;
+use \Aspose\PDF\ObjectSerializer;
 
 /**
  * OptimizeOptions Class Doc Comment
  *
- * @category    Class
+ * @category Class
  * @description Represents Pdf optimize options.
- * @package     Aspose\PDF
- * @author      Swagger Codegen team
- * @link        https://github.com/swagger-api/swagger-codegen
+ * @package  Aspose\PDF
+ * @author   Swagger Codegen team
+ * @link     https://github.com/swagger-api/swagger-codegen
  */
-class OptimizeOptions implements ArrayAccess
+class OptimizeOptions implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
+      *
       * @var string
       */
     protected static $swaggerModelName = 'OptimizeOptions';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
+      *
       * @var string[]
       */
     protected static $swaggerTypes = [
@@ -76,6 +79,7 @@ class OptimizeOptions implements ArrayAccess
 
     /**
       * Array of property to format mappings. Used for (de)serialization
+      *
       * @var string[]
       */
     protected static $swaggerFormats = [
@@ -88,18 +92,30 @@ class OptimizeOptions implements ArrayAccess
         'unembed_fonts' => null
     ];
 
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
     }
 
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
     public static function swaggerFormats()
     {
         return self::$swaggerFormats;
     }
 
     /**
-     * Array of attributes where the key is the local name, and the value is the original name
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
      * @var string[]
      */
     protected static $attributeMap = [
@@ -112,9 +128,9 @@ class OptimizeOptions implements ArrayAccess
         'unembed_fonts' => 'UnembedFonts'
     ];
 
-
     /**
      * Array of attributes to setter functions (for deserialization of responses)
+     *
      * @var string[]
      */
     protected static $setters = [
@@ -127,9 +143,9 @@ class OptimizeOptions implements ArrayAccess
         'unembed_fonts' => 'setUnembedFonts'
     ];
 
-
     /**
      * Array of attributes to getter functions (for serialization of requests)
+     *
      * @var string[]
      */
     protected static $getters = [
@@ -142,19 +158,45 @@ class OptimizeOptions implements ArrayAccess
         'unembed_fonts' => 'getUnembedFonts'
     ];
 
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
     public static function attributeMap()
     {
         return self::$attributeMap;
     }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
     public static function setters()
     {
         return self::$setters;
     }
 
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
     public static function getters()
     {
         return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
     }
 
     
@@ -163,13 +205,16 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Associative array for storing property values
+     *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property values initializing the model
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -183,40 +228,40 @@ class OptimizeOptions implements ArrayAccess
     }
 
     /**
-     * show all the invalid properties with reasons.
+     * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalid_properties = [];
+        $invalidProperties = [];
 
         if ($this->container['allow_reuse_page_content'] === null) {
-            $invalid_properties[] = "'allow_reuse_page_content' can't be null";
+            $invalidProperties[] = "'allow_reuse_page_content' can't be null";
         }
         if ($this->container['compress_images'] === null) {
-            $invalid_properties[] = "'compress_images' can't be null";
+            $invalidProperties[] = "'compress_images' can't be null";
         }
         if ($this->container['image_quality'] === null) {
-            $invalid_properties[] = "'image_quality' can't be null";
+            $invalidProperties[] = "'image_quality' can't be null";
         }
         if ($this->container['link_duplcate_streams'] === null) {
-            $invalid_properties[] = "'link_duplcate_streams' can't be null";
+            $invalidProperties[] = "'link_duplcate_streams' can't be null";
         }
         if ($this->container['remove_unused_objects'] === null) {
-            $invalid_properties[] = "'remove_unused_objects' can't be null";
+            $invalidProperties[] = "'remove_unused_objects' can't be null";
         }
         if ($this->container['remove_unused_streams'] === null) {
-            $invalid_properties[] = "'remove_unused_streams' can't be null";
+            $invalidProperties[] = "'remove_unused_streams' can't be null";
         }
         if ($this->container['unembed_fonts'] === null) {
-            $invalid_properties[] = "'unembed_fonts' can't be null";
+            $invalidProperties[] = "'unembed_fonts' can't be null";
         }
-        return $invalid_properties;
+        return $invalidProperties;
     }
 
     /**
-     * validate all the properties in the model
+     * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
@@ -251,6 +296,7 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets allow_reuse_page_content
+     *
      * @return bool
      */
     public function getAllowReusePageContent()
@@ -260,7 +306,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Sets allow_reuse_page_content
+     *
      * @param bool $allow_reuse_page_content If true page contents will be reused when document is optimized for equal pages.
+     *
      * @return $this
      */
     public function setAllowReusePageContent($allow_reuse_page_content)
@@ -272,6 +320,7 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets compress_images
+     *
      * @return bool
      */
     public function getCompressImages()
@@ -281,7 +330,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Sets compress_images
+     *
      * @param bool $compress_images If this flag is set to true images will be compressed in the document. compression level is specfied with ImageQuality property.
+     *
      * @return $this
      */
     public function setCompressImages($compress_images)
@@ -293,6 +344,7 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets image_quality
+     *
      * @return int
      */
     public function getImageQuality()
@@ -302,7 +354,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Sets image_quality
+     *
      * @param int $image_quality Specifie slevel of image compression when CompressIamges flag is used.
+     *
      * @return $this
      */
     public function setImageQuality($image_quality)
@@ -314,6 +368,7 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets link_duplcate_streams
+     *
      * @return bool
      */
     public function getLinkDuplcateStreams()
@@ -323,7 +378,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Sets link_duplcate_streams
+     *
      * @param bool $link_duplcate_streams If this flag is set to true, Resource streams will be analyzed. If duplicate streams are found (i.e. if stream contents is equal), then thes streams will be stored as one object.  This allows to decrease document size in some cases (for example, when same document was concatenedted multiple times).
+     *
      * @return $this
      */
     public function setLinkDuplcateStreams($link_duplcate_streams)
@@ -335,6 +392,7 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets remove_unused_objects
+     *
      * @return bool
      */
     public function getRemoveUnusedObjects()
@@ -344,7 +402,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Sets remove_unused_objects
+     *
      * @param bool $remove_unused_objects If this flag is set to true, all document objects will be checked and unused objects (i.e. objects which does not have any reference) are removed from document.
+     *
      * @return $this
      */
     public function setRemoveUnusedObjects($remove_unused_objects)
@@ -356,6 +416,7 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets remove_unused_streams
+     *
      * @return bool
      */
     public function getRemoveUnusedStreams()
@@ -365,7 +426,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Sets remove_unused_streams
+     *
      * @param bool $remove_unused_streams If this flag set to true, every resource is checked on it's usage. If resource is never used, then resources is removed. This may decrease document size for example when pages were extracted from document.
+     *
      * @return $this
      */
     public function setRemoveUnusedStreams($remove_unused_streams)
@@ -377,6 +440,7 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets unembed_fonts
+     *
      * @return bool
      */
     public function getUnembedFonts()
@@ -386,7 +450,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Sets unembed_fonts
+     *
      * @param bool $unembed_fonts Make fonts not embedded if set to true.
+     *
      * @return $this
      */
     public function setUnembedFonts($unembed_fonts)
@@ -397,7 +463,9 @@ class OptimizeOptions implements ArrayAccess
     }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return boolean
      */
     public function offsetExists($offset)
@@ -407,7 +475,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets offset.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -417,8 +487,10 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed   $value  Value to be set
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -432,7 +504,9 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return void
      */
     public function offsetUnset($offset)
@@ -442,15 +516,19 @@ class OptimizeOptions implements ArrayAccess
 
     /**
      * Gets the string presentation of the object
+     *
      * @return string
      */
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Aspose\PDF\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
         }
 
-        return json_encode(\Aspose\PDF\ObjectSerializer::sanitizeForSerialization($this));
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

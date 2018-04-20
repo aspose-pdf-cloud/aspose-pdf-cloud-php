@@ -1,6 +1,6 @@
 <?php
 /**
- * TextHorizontalAlignment
+ * PdfAType
  *
  * PHP version 5
  *
@@ -41,25 +41,21 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * TextHorizontalAlignment Class Doc Comment
+ * PdfAType Class Doc Comment
  *
  * @category Class
- * @description 
+ * @description Allows to specify PdfA file format.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class TextHorizontalAlignment
+class PdfAType
 {
     /**
      * Possible values of this enum
      */
-    const LEFT = 'Left';
-    const RIGHT = 'Right';
-    const CENTER = 'Center';
-    const JUSTIFY = 'Justify';
-    const FULL_JUSTIFY = 'FullJustify';
-    const NONE = 'None';
+    const PDFA1_A = 'PDFA1A';
+    const PDFA1_B = 'PDFA1B';
     
     /**
      * Gets allowable values of the enum
@@ -68,12 +64,8 @@ class TextHorizontalAlignment
     public static function getAllowableEnumValues()
     {
         return [
-            self::LEFT,
-            self::RIGHT,
-            self::CENTER,
-            self::JUSTIFY,
-            self::FULL_JUSTIFY,
-            self::NONE,
+            self::PDFA1_A,
+            self::PDFA1_B,
         ];
     }
 }

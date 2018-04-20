@@ -1,11 +1,11 @@
 <?php
 /**
- * TextHorizontalAlignment
+ * ModelInterface
  *
  * PHP version 5
  *
  * @category Class
- * @package  Aspose\PDF
+ * @package  Aspose\PDF\Model
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
@@ -38,44 +38,69 @@
  */
 
 namespace Aspose\PDF\Model;
-use \Aspose\PDF\ObjectSerializer;
 
 /**
- * TextHorizontalAlignment Class Doc Comment
+ * Interface abstracting model access.
  *
- * @category Class
- * @description 
- * @package  Aspose\PDF
- * @author   Swagger Codegen team
- * @link     https://github.com/swagger-api/swagger-codegen
+ * @package Aspose\PDF\Model
+ * @author  Swagger Codegen team
  */
-class TextHorizontalAlignment
+interface ModelInterface
 {
     /**
-     * Possible values of this enum
+     * The original name of the model.
+     *
+     * @return string
      */
-    const LEFT = 'Left';
-    const RIGHT = 'Right';
-    const CENTER = 'Center';
-    const JUSTIFY = 'Justify';
-    const FULL_JUSTIFY = 'FullJustify';
-    const NONE = 'None';
-    
+    public function getModelName();
+
     /**
-     * Gets allowable values of the enum
-     * @return string[]
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
      */
-    public static function getAllowableEnumValues()
-    {
-        return [
-            self::LEFT,
-            self::RIGHT,
-            self::CENTER,
-            self::JUSTIFY,
-            self::FULL_JUSTIFY,
-            self::NONE,
-        ];
-    }
+    public static function swaggerTypes();
+
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
+    public static function swaggerFormats();
+
+    /**
+     * Array of attributes where the key is the local name, and the value is the original name
+     *
+     * @return array
+     */
+    public static function attributeMap();
+
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
+    public static function setters();
+
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
+    public static function getters();
+
+    /**
+     * Show all the invalid properties with reasons.
+     *
+     * @return array
+     */
+    public function listInvalidProperties();
+
+    /**
+     * Validate all the properties in the model
+     * return true if all passed
+     *
+     * @return bool
+     */
+    public function valid();
 }
-
-

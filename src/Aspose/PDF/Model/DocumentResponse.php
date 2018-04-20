@@ -6,7 +6,7 @@
  *
  * @category Class
  * @package  Aspose\PDF
- * @author   Swaagger Codegen team
+ * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
 
@@ -38,29 +38,30 @@
  */
 
 namespace Aspose\PDF\Model;
-
-use \ArrayAccess;
+use \Aspose\PDF\ObjectSerializer;
 
 /**
  * DocumentResponse Class Doc Comment
  *
- * @category    Class
- * @package     Aspose\PDF
- * @author      Swagger Codegen team
- * @link        https://github.com/swagger-api/swagger-codegen
+ * @category Class
+ * @package  Aspose\PDF
+ * @author   Swagger Codegen team
+ * @link     https://github.com/swagger-api/swagger-codegen
  */
-class DocumentResponse extends SaaSposeResponse implements ArrayAccess
+class DocumentResponse extends SaaSposeResponse 
 {
     const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
+      *
       * @var string
       */
     protected static $swaggerModelName = 'DocumentResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
+      *
       * @var string[]
       */
     protected static $swaggerTypes = [
@@ -70,6 +71,7 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
       * Array of property to format mappings. Used for (de)serialization
+      *
       * @var string[]
       */
     protected static $swaggerFormats = [
@@ -77,18 +79,30 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
         'messages' => null
     ];
 
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
     public static function swaggerTypes()
     {
         return self::$swaggerTypes + parent::swaggerTypes();
     }
 
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
     public static function swaggerFormats()
     {
         return self::$swaggerFormats + parent::swaggerFormats();
     }
 
     /**
-     * Array of attributes where the key is the local name, and the value is the original name
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
      * @var string[]
      */
     protected static $attributeMap = [
@@ -96,9 +110,9 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
         'messages' => 'Messages'
     ];
 
-
     /**
      * Array of attributes to setter functions (for deserialization of responses)
+     *
      * @var string[]
      */
     protected static $setters = [
@@ -106,9 +120,9 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
         'messages' => 'setMessages'
     ];
 
-
     /**
      * Array of attributes to getter functions (for serialization of requests)
+     *
      * @var string[]
      */
     protected static $getters = [
@@ -116,34 +130,57 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
         'messages' => 'getMessages'
     ];
 
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
     public static function attributeMap()
     {
         return parent::attributeMap() + self::$attributeMap;
     }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
     public static function setters()
     {
         return parent::setters() + self::$setters;
     }
 
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
     public static function getters()
     {
         return parent::getters() + self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
     }
 
     
 
     
 
-    /**
-     * Associative array for storing property values
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property values initializing the model
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -154,19 +191,19 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
     }
 
     /**
-     * show all the invalid properties with reasons.
+     * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalid_properties = parent::listInvalidProperties();
+        $invalidProperties = parent::listInvalidProperties();
 
-        return $invalid_properties;
+        return $invalidProperties;
     }
 
     /**
-     * validate all the properties in the model
+     * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
@@ -183,6 +220,7 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
      * Gets document
+     *
      * @return \Aspose\PDF\Model\Document
      */
     public function getDocument()
@@ -192,7 +230,9 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
      * Sets document
-     * @param \Aspose\PDF\Model\Document $document
+     *
+     * @param \Aspose\PDF\Model\Document $document document
+     *
      * @return $this
      */
     public function setDocument($document)
@@ -204,6 +244,7 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
      * Gets messages
+     *
      * @return string[]
      */
     public function getMessages()
@@ -213,7 +254,9 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
      * Sets messages
-     * @param string[] $messages
+     *
+     * @param string[] $messages messages
+     *
      * @return $this
      */
     public function setMessages($messages)
@@ -224,7 +267,9 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
     }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return boolean
      */
     public function offsetExists($offset)
@@ -234,7 +279,9 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
      * Gets offset.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -244,8 +291,10 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed   $value  Value to be set
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -259,7 +308,9 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return void
      */
     public function offsetUnset($offset)
@@ -269,15 +320,19 @@ class DocumentResponse extends SaaSposeResponse implements ArrayAccess
 
     /**
      * Gets the string presentation of the object
+     *
      * @return string
      */
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Aspose\PDF\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
         }
 
-        return json_encode(\Aspose\PDF\ObjectSerializer::sanitizeForSerialization($this));
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

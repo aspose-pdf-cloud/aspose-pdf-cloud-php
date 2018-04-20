@@ -40,4 +40,5 @@ composer.lock
 .buildpath
 .project
 .settings
+/.vscode/
 

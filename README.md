@@ -10,26 +10,35 @@ APIs of this SDK can be called as follows:
 
 ```php
 <?php
-require_once realpath(__DIR__ . '/..') . '/vendor/autoload.php';
+use Aspose\PDF\Api\PdfApi;
+use Aspose\PDF\Model\HttpStatusCode;
+use Aspose\PDF\Configuration;
 
-use AsposePdfCloud\Api\PdfApi;
-use Aspose\Storage\AsposeApp;
-
-class PdfUsage
+class PdfApiUsage
 {
 
     protected $pdfApi;
-    protected $folder;
+    protected $tempFolder;
+    protected $config;
 
     protected function setUp()
     {
         // Get App key and App SID from https://cloud.aspose.com
-        AsposeApp::$appSID = 'AppSID';
-        AsposeApp::$apiKey = 'ApiKey';
+        $appSid = '';
+	    $appKey = '';
+        $host = 'http://api-dev.aspose.cloud/v1.1';
+
+        $this->tempFolder = 'TempPdfCloud';
         
-        $this->pdfApi = new PdfApi();
-        $this->folder = 'folderNameInCloud';
+        $this->config = new Configuration();
+        $this->config->setAppKey($appKey);
+        $this->config->setAppSid($appSid);
+        $this->config->setHost($host);
+
+        $this->pdfApi = new PdfApi(null, $this->config);
     }
+
+    //Annotations Tests
 
     public function testGetPageAnnotations()
     {

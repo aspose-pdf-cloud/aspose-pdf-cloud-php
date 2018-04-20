@@ -6,7 +6,7 @@
  *
  * @category Class
  * @package  Aspose\PDF
- * @author   Swaagger Codegen team
+ * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
 
@@ -40,28 +40,31 @@
 namespace Aspose\PDF\Model;
 
 use \ArrayAccess;
+use \Aspose\PDF\ObjectSerializer;
 
 /**
  * Link Class Doc Comment
  *
- * @category    Class
+ * @category Class
  * @description Provides information for the object link. This is supposed to be an atom:link, therefore it should have all attributes specified here http://tools.ietf.org/html/rfc4287#section-4.2.7
- * @package     Aspose\PDF
- * @author      Swagger Codegen team
- * @link        https://github.com/swagger-api/swagger-codegen
+ * @package  Aspose\PDF
+ * @author   Swagger Codegen team
+ * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Link implements ArrayAccess
+class Link implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = 'Type';
 
     /**
       * The original name of the model.
+      *
       * @var string
       */
     protected static $swaggerModelName = 'Link';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
+      *
       * @var string[]
       */
     protected static $swaggerTypes = [
@@ -73,6 +76,7 @@ class Link implements ArrayAccess
 
     /**
       * Array of property to format mappings. Used for (de)serialization
+      *
       * @var string[]
       */
     protected static $swaggerFormats = [
@@ -82,18 +86,30 @@ class Link implements ArrayAccess
         'title' => null
     ];
 
+    /**
+     * Array of property to type mappings. Used for (de)serialization
+     *
+     * @return array
+     */
     public static function swaggerTypes()
     {
         return self::$swaggerTypes;
     }
 
+    /**
+     * Array of property to format mappings. Used for (de)serialization
+     *
+     * @return array
+     */
     public static function swaggerFormats()
     {
         return self::$swaggerFormats;
     }
 
     /**
-     * Array of attributes where the key is the local name, and the value is the original name
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
      * @var string[]
      */
     protected static $attributeMap = [
@@ -103,9 +119,9 @@ class Link implements ArrayAccess
         'title' => 'Title'
     ];
 
-
     /**
      * Array of attributes to setter functions (for deserialization of responses)
+     *
      * @var string[]
      */
     protected static $setters = [
@@ -115,9 +131,9 @@ class Link implements ArrayAccess
         'title' => 'setTitle'
     ];
 
-
     /**
      * Array of attributes to getter functions (for serialization of requests)
+     *
      * @var string[]
      */
     protected static $getters = [
@@ -127,19 +143,45 @@ class Link implements ArrayAccess
         'title' => 'getTitle'
     ];
 
+    /**
+     * Array of attributes where the key is the local name,
+     * and the value is the original name
+     *
+     * @return array
+     */
     public static function attributeMap()
     {
         return self::$attributeMap;
     }
 
+    /**
+     * Array of attributes to setter functions (for deserialization of responses)
+     *
+     * @return array
+     */
     public static function setters()
     {
         return self::$setters;
     }
 
+    /**
+     * Array of attributes to getter functions (for serialization of requests)
+     *
+     * @return array
+     */
     public static function getters()
     {
         return self::$getters;
+    }
+
+    /**
+     * The original name of the model.
+     *
+     * @return string
+     */
+    public function getModelName()
+    {
+        return self::$swaggerModelName;
     }
 
     
@@ -148,13 +190,16 @@ class Link implements ArrayAccess
 
     /**
      * Associative array for storing property values
+     *
      * @var mixed[]
      */
     protected $container = [];
 
     /**
      * Constructor
-     * @param mixed[] $data Associated array of property values initializing the model
+     *
+     * @param mixed[] $data Associated array of property values
+     *                      initializing the model
      */
     public function __construct(array $data = null)
     {
@@ -169,19 +214,19 @@ class Link implements ArrayAccess
     }
 
     /**
-     * show all the invalid properties with reasons.
+     * Show all the invalid properties with reasons.
      *
      * @return array invalid properties with reasons
      */
     public function listInvalidProperties()
     {
-        $invalid_properties = [];
+        $invalidProperties = [];
 
-        return $invalid_properties;
+        return $invalidProperties;
     }
 
     /**
-     * validate all the properties in the model
+     * Validate all the properties in the model
      * return true if all passed
      *
      * @return bool True if all properties are valid
@@ -195,6 +240,7 @@ class Link implements ArrayAccess
 
     /**
      * Gets href
+     *
      * @return string
      */
     public function getHref()
@@ -204,7 +250,9 @@ class Link implements ArrayAccess
 
     /**
      * Sets href
+     *
      * @param string $href The \"href\" attribute contains the link's IRI. atom:link elements MUST have an href attribute, whose value MUST be a IRI reference
+     *
      * @return $this
      */
     public function setHref($href)
@@ -216,6 +264,7 @@ class Link implements ArrayAccess
 
     /**
      * Gets rel
+     *
      * @return string
      */
     public function getRel()
@@ -225,7 +274,9 @@ class Link implements ArrayAccess
 
     /**
      * Sets rel
+     *
      * @param string $rel atom:link elements MAY have a \"rel\" attribute that indicates the link relation type.  If the \"rel\" attribute is not present, the link element MUST be interpreted as if the link relation type is \"alternate\".
+     *
      * @return $this
      */
     public function setRel($rel)
@@ -237,6 +288,7 @@ class Link implements ArrayAccess
 
     /**
      * Gets type
+     *
      * @return string
      */
     public function getType()
@@ -246,7 +298,9 @@ class Link implements ArrayAccess
 
     /**
      * Sets type
+     *
      * @param string $type On the link element, the \"type\" attribute's value is an advisory media type: it is a hint about the type of the representation that is expected to be returned when the value of the href attribute is dereferenced.  Note that the type attribute does not override the actual media type returned with the representation.
+     *
      * @return $this
      */
     public function setType($type)
@@ -258,6 +312,7 @@ class Link implements ArrayAccess
 
     /**
      * Gets title
+     *
      * @return string
      */
     public function getTitle()
@@ -267,7 +322,9 @@ class Link implements ArrayAccess
 
     /**
      * Sets title
+     *
      * @param string $title The \"title\" attribute conveys human-readable information about the link.  The content of the \"title\" attribute is Language-Sensitive.
+     *
      * @return $this
      */
     public function setTitle($title)
@@ -278,7 +335,9 @@ class Link implements ArrayAccess
     }
     /**
      * Returns true if offset exists. False otherwise.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return boolean
      */
     public function offsetExists($offset)
@@ -288,7 +347,9 @@ class Link implements ArrayAccess
 
     /**
      * Gets offset.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return mixed
      */
     public function offsetGet($offset)
@@ -298,8 +359,10 @@ class Link implements ArrayAccess
 
     /**
      * Sets value based on offset.
-     * @param  integer $offset Offset
-     * @param  mixed   $value  Value to be set
+     *
+     * @param integer $offset Offset
+     * @param mixed   $value  Value to be set
+     *
      * @return void
      */
     public function offsetSet($offset, $value)
@@ -313,7 +376,9 @@ class Link implements ArrayAccess
 
     /**
      * Unsets offset.
-     * @param  integer $offset Offset
+     *
+     * @param integer $offset Offset
+     *
      * @return void
      */
     public function offsetUnset($offset)
@@ -323,15 +388,19 @@ class Link implements ArrayAccess
 
     /**
      * Gets the string presentation of the object
+     *
      * @return string
      */
     public function __toString()
     {
         if (defined('JSON_PRETTY_PRINT')) { // use JSON pretty print
-            return json_encode(\Aspose\PDF\ObjectSerializer::sanitizeForSerialization($this), JSON_PRETTY_PRINT);
+            return json_encode(
+                ObjectSerializer::sanitizeForSerialization($this),
+                JSON_PRETTY_PRINT
+            );
         }
 
-        return json_encode(\Aspose\PDF\ObjectSerializer::sanitizeForSerialization($this));
+        return json_encode(ObjectSerializer::sanitizeForSerialization($this));
     }
 }
 

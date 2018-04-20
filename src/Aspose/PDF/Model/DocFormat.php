@@ -1,6 +1,6 @@
 <?php
 /**
- * TextHorizontalAlignment
+ * DocFormat
  *
  * PHP version 5
  *
@@ -41,25 +41,21 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * TextHorizontalAlignment Class Doc Comment
+ * DocFormat Class Doc Comment
  *
  * @category Class
- * @description 
+ * @description Allows to specify .doc or .docx file format.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class TextHorizontalAlignment
+class DocFormat
 {
     /**
      * Possible values of this enum
      */
-    const LEFT = 'Left';
-    const RIGHT = 'Right';
-    const CENTER = 'Center';
-    const JUSTIFY = 'Justify';
-    const FULL_JUSTIFY = 'FullJustify';
-    const NONE = 'None';
+    const DOC = 'Doc';
+    const DOC_X = 'DocX';
     
     /**
      * Gets allowable values of the enum
@@ -68,12 +64,8 @@ class TextHorizontalAlignment
     public static function getAllowableEnumValues()
     {
         return [
-            self::LEFT,
-            self::RIGHT,
-            self::CENTER,
-            self::JUSTIFY,
-            self::FULL_JUSTIFY,
-            self::NONE,
+            self::DOC,
+            self::DOC_X,
         ];
     }
 }
