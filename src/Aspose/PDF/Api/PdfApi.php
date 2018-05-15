@@ -93,6 +93,316 @@ class PdfApi
     }
 
     /**
+     * Operation deleteField
+     *
+     * Delete document field by name.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $field_name The field name/ (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function deleteField($name, $field_name, $storage = null, $folder = null)
+    {
+        list($response) = $this->deleteFieldWithHttpInfo($name, $field_name, $storage, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation deleteFieldWithHttpInfo
+     *
+     * Delete document field by name.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $field_name The field name/ (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteFieldWithHttpInfo($name, $field_name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->deleteFieldRequest($name, $field_name, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteFieldAsync
+     *
+     * Delete document field by name.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $field_name The field name/ (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteFieldAsync($name, $field_name, $storage = null, $folder = null)
+    {
+        return $this->deleteFieldAsyncWithHttpInfo($name, $field_name, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteFieldAsyncWithHttpInfo
+     *
+     * Delete document field by name.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $field_name The field name/ (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteFieldAsyncWithHttpInfo($name, $field_name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->deleteFieldRequest($name, $field_name, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteField'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $field_name The field name/ (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function deleteFieldRequest($name, $field_name, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling deleteField'
+            );
+        }
+        // verify the required parameter 'field_name' is set
+        if ($field_name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $field_name when calling deleteField'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/fields/{fieldName}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($field_name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'fieldName' . '}',
+                ObjectSerializer::toPathValue($field_name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'DELETE',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation deletePage
      *
      * Delete document page by its number.
@@ -8651,6 +8961,1407 @@ class PdfApi
     }
 
     /**
+     * Operation getPdfInStorageToEpub
+     *
+     * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPdfInStorageToEpub($name, $content_recognition_mode = null, $folder = null)
+    {
+        list($response) = $this->getPdfInStorageToEpubWithHttpInfo($name, $content_recognition_mode, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPdfInStorageToEpubWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPdfInStorageToEpubWithHttpInfo($name, $content_recognition_mode = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToEpubRequest($name, $content_recognition_mode, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPdfInStorageToEpubAsync
+     *
+     * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToEpubAsync($name, $content_recognition_mode = null, $folder = null)
+    {
+        return $this->getPdfInStorageToEpubAsyncWithHttpInfo($name, $content_recognition_mode, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPdfInStorageToEpubAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToEpubAsyncWithHttpInfo($name, $content_recognition_mode = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToEpubRequest($name, $content_recognition_mode, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPdfInStorageToEpub'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPdfInStorageToEpubRequest($name, $content_recognition_mode = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPdfInStorageToEpub'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/epub';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($content_recognition_mode !== null) {
+            $queryParams['contentRecognitionMode'] = ObjectSerializer::toQueryValue($content_recognition_mode);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPdfInStorageToHtml
+     *
+     * Converts PDF document (located on storage) to Html format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPdfInStorageToHtml($name, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        list($response) = $this->getPdfInStorageToHtmlWithHttpInfo($name, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPdfInStorageToHtmlWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to Html format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPdfInStorageToHtmlWithHttpInfo($name, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToHtmlRequest($name, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPdfInStorageToHtmlAsync
+     *
+     * Converts PDF document (located on storage) to Html format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToHtmlAsync($name, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        return $this->getPdfInStorageToHtmlAsyncWithHttpInfo($name, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPdfInStorageToHtmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to Html format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToHtmlAsyncWithHttpInfo($name, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToHtmlRequest($name, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPdfInStorageToHtml'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPdfInStorageToHtmlRequest($name, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPdfInStorageToHtml'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/html';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($additional_margin_width_in_points !== null) {
+            $queryParams['additionalMarginWidthInPoints'] = ObjectSerializer::toQueryValue($additional_margin_width_in_points);
+        }
+        // query params
+        if ($compress_svg_graphics_if_any !== null) {
+            $queryParams['compressSvgGraphicsIfAny'] = ObjectSerializer::toQueryValue($compress_svg_graphics_if_any);
+        }
+        // query params
+        if ($convert_marked_content_to_layers !== null) {
+            $queryParams['convertMarkedContentToLayers'] = ObjectSerializer::toQueryValue($convert_marked_content_to_layers);
+        }
+        // query params
+        if ($default_font_name !== null) {
+            $queryParams['defaultFontName'] = ObjectSerializer::toQueryValue($default_font_name);
+        }
+        // query params
+        if ($document_type !== null) {
+            $queryParams['documentType'] = ObjectSerializer::toQueryValue($document_type);
+        }
+        // query params
+        if ($fixed_layout !== null) {
+            $queryParams['fixedLayout'] = ObjectSerializer::toQueryValue($fixed_layout);
+        }
+        // query params
+        if ($image_resolution !== null) {
+            $queryParams['imageResolution'] = ObjectSerializer::toQueryValue($image_resolution);
+        }
+        // query params
+        if ($minimal_line_width !== null) {
+            $queryParams['minimalLineWidth'] = ObjectSerializer::toQueryValue($minimal_line_width);
+        }
+        // query params
+        if ($prevent_glyphs_grouping !== null) {
+            $queryParams['preventGlyphsGrouping'] = ObjectSerializer::toQueryValue($prevent_glyphs_grouping);
+        }
+        // query params
+        if ($split_css_into_pages !== null) {
+            $queryParams['splitCssIntoPages'] = ObjectSerializer::toQueryValue($split_css_into_pages);
+        }
+        // query params
+        if ($split_into_pages !== null) {
+            $queryParams['splitIntoPages'] = ObjectSerializer::toQueryValue($split_into_pages);
+        }
+        // query params
+        if ($use_z_order !== null) {
+            $queryParams['useZOrder'] = ObjectSerializer::toQueryValue($use_z_order);
+        }
+        // query params
+        if ($antialiasing_processing !== null) {
+            $queryParams['antialiasingProcessing'] = ObjectSerializer::toQueryValue($antialiasing_processing);
+        }
+        // query params
+        if ($css_class_names_prefix !== null) {
+            $queryParams['cssClassNamesPrefix'] = ObjectSerializer::toQueryValue($css_class_names_prefix);
+        }
+        // query params
+        if (is_array($explicit_list_of_saved_pages)) {
+            $explicit_list_of_saved_pages = ObjectSerializer::serializeCollection($explicit_list_of_saved_pages, 'multi', true);
+        }
+        if ($explicit_list_of_saved_pages !== null) {
+            $queryParams['explicitListOfSavedPages'] = ObjectSerializer::toQueryValue($explicit_list_of_saved_pages);
+        }
+        // query params
+        if ($font_encoding_strategy !== null) {
+            $queryParams['fontEncodingStrategy'] = ObjectSerializer::toQueryValue($font_encoding_strategy);
+        }
+        // query params
+        if ($font_saving_mode !== null) {
+            $queryParams['fontSavingMode'] = ObjectSerializer::toQueryValue($font_saving_mode);
+        }
+        // query params
+        if ($html_markup_generation_mode !== null) {
+            $queryParams['htmlMarkupGenerationMode'] = ObjectSerializer::toQueryValue($html_markup_generation_mode);
+        }
+        // query params
+        if ($letters_positioning_method !== null) {
+            $queryParams['lettersPositioningMethod'] = ObjectSerializer::toQueryValue($letters_positioning_method);
+        }
+        // query params
+        if ($pages_flow_type_depends_on_viewers_screen_size !== null) {
+            $queryParams['pagesFlowTypeDependsOnViewersScreenSize'] = ObjectSerializer::toQueryValue($pages_flow_type_depends_on_viewers_screen_size);
+        }
+        // query params
+        if ($parts_embedding_mode !== null) {
+            $queryParams['partsEmbeddingMode'] = ObjectSerializer::toQueryValue($parts_embedding_mode);
+        }
+        // query params
+        if ($raster_images_saving_mode !== null) {
+            $queryParams['rasterImagesSavingMode'] = ObjectSerializer::toQueryValue($raster_images_saving_mode);
+        }
+        // query params
+        if ($remove_empty_areas_on_top_and_bottom !== null) {
+            $queryParams['removeEmptyAreasOnTopAndBottom'] = ObjectSerializer::toQueryValue($remove_empty_areas_on_top_and_bottom);
+        }
+        // query params
+        if ($save_shadowed_texts_as_transparent_texts !== null) {
+            $queryParams['saveShadowedTextsAsTransparentTexts'] = ObjectSerializer::toQueryValue($save_shadowed_texts_as_transparent_texts);
+        }
+        // query params
+        if ($save_transparent_texts !== null) {
+            $queryParams['saveTransparentTexts'] = ObjectSerializer::toQueryValue($save_transparent_texts);
+        }
+        // query params
+        if ($special_folder_for_all_images !== null) {
+            $queryParams['specialFolderForAllImages'] = ObjectSerializer::toQueryValue($special_folder_for_all_images);
+        }
+        // query params
+        if ($special_folder_for_svg_images !== null) {
+            $queryParams['specialFolderForSvgImages'] = ObjectSerializer::toQueryValue($special_folder_for_svg_images);
+        }
+        // query params
+        if ($try_save_text_underlining_and_strikeouting_in_css !== null) {
+            $queryParams['trySaveTextUnderliningAndStrikeoutingInCss'] = ObjectSerializer::toQueryValue($try_save_text_underlining_and_strikeouting_in_css);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPdfInStorageToLaTeX
+     *
+     * Converts PDF document (located on storage) to LaTeX format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPdfInStorageToLaTeX($name, $pages_count = null, $folder = null)
+    {
+        list($response) = $this->getPdfInStorageToLaTeXWithHttpInfo($name, $pages_count, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPdfInStorageToLaTeXWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to LaTeX format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPdfInStorageToLaTeXWithHttpInfo($name, $pages_count = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToLaTeXRequest($name, $pages_count, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPdfInStorageToLaTeXAsync
+     *
+     * Converts PDF document (located on storage) to LaTeX format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToLaTeXAsync($name, $pages_count = null, $folder = null)
+    {
+        return $this->getPdfInStorageToLaTeXAsyncWithHttpInfo($name, $pages_count, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPdfInStorageToLaTeXAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to LaTeX format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToLaTeXAsyncWithHttpInfo($name, $pages_count = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToLaTeXRequest($name, $pages_count, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPdfInStorageToLaTeX'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPdfInStorageToLaTeXRequest($name, $pages_count = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPdfInStorageToLaTeX'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/latex';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($pages_count !== null) {
+            $queryParams['pagesCount'] = ObjectSerializer::toQueryValue($pages_count);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPdfInStorageToMobiXml
+     *
+     * Converts PDF document (located on storage) to MOBIXML format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPdfInStorageToMobiXml($name, $folder = null)
+    {
+        list($response) = $this->getPdfInStorageToMobiXmlWithHttpInfo($name, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPdfInStorageToMobiXmlWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to MOBIXML format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPdfInStorageToMobiXmlWithHttpInfo($name, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToMobiXmlRequest($name, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPdfInStorageToMobiXmlAsync
+     *
+     * Converts PDF document (located on storage) to MOBIXML format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToMobiXmlAsync($name, $folder = null)
+    {
+        return $this->getPdfInStorageToMobiXmlAsyncWithHttpInfo($name, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPdfInStorageToMobiXmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to MOBIXML format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToMobiXmlAsyncWithHttpInfo($name, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToMobiXmlRequest($name, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPdfInStorageToMobiXml'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPdfInStorageToMobiXmlRequest($name, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPdfInStorageToMobiXml'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/mobixml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getPdfInStorageToPdfA
      *
      * Converts PDF document (located on storage) to PdfA format and returns resulting file in response content
@@ -8857,6 +10568,306 @@ class PdfApi
         // query params
         if ($type !== null) {
             $queryParams['type'] = ObjectSerializer::toQueryValue($type);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPdfInStorageToPptx
+     *
+     * Converts PDF document (located on storage) to PPTX format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPdfInStorageToPptx($name, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        list($response) = $this->getPdfInStorageToPptxWithHttpInfo($name, $separate_images, $slides_as_images, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPdfInStorageToPptxWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to PPTX format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPdfInStorageToPptxWithHttpInfo($name, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToPptxRequest($name, $separate_images, $slides_as_images, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPdfInStorageToPptxAsync
+     *
+     * Converts PDF document (located on storage) to PPTX format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToPptxAsync($name, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        return $this->getPdfInStorageToPptxAsyncWithHttpInfo($name, $separate_images, $slides_as_images, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPdfInStorageToPptxAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to PPTX format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToPptxAsyncWithHttpInfo($name, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToPptxRequest($name, $separate_images, $slides_as_images, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPdfInStorageToPptx'
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPdfInStorageToPptxRequest($name, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPdfInStorageToPptx'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/pptx';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($separate_images !== null) {
+            $queryParams['separateImages'] = ObjectSerializer::toQueryValue($separate_images);
+        }
+        // query params
+        if ($slides_as_images !== null) {
+            $queryParams['slidesAsImages'] = ObjectSerializer::toQueryValue($slides_as_images);
         }
         // query params
         if ($folder !== null) {
@@ -9884,6 +11895,288 @@ class PdfApi
         if ($uniform_worksheets !== null) {
             $queryParams['uniformWorksheets'] = ObjectSerializer::toQueryValue($uniform_worksheets);
         }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPdfInStorageToXml
+     *
+     * Converts PDF document (located on storage) to XML format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPdfInStorageToXml($name, $folder = null)
+    {
+        list($response) = $this->getPdfInStorageToXmlWithHttpInfo($name, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPdfInStorageToXmlWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to XML format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPdfInStorageToXmlWithHttpInfo($name, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToXmlRequest($name, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPdfInStorageToXmlAsync
+     *
+     * Converts PDF document (located on storage) to XML format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToXmlAsync($name, $folder = null)
+    {
+        return $this->getPdfInStorageToXmlAsyncWithHttpInfo($name, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPdfInStorageToXmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to XML format and returns resulting file in response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPdfInStorageToXmlAsyncWithHttpInfo($name, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPdfInStorageToXmlRequest($name, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPdfInStorageToXml'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPdfInStorageToXmlRequest($name, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPdfInStorageToXml'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/xml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
         // query params
         if ($folder !== null) {
             $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
@@ -11962,6 +14255,303 @@ class PdfApi
     }
 
     /**
+     * Operation getVerifySignature
+     *
+     * Verify signature document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $sign_name Sign name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SignatureVerifyResponse
+     */
+    public function getVerifySignature($name, $sign_name, $folder = null)
+    {
+        list($response) = $this->getVerifySignatureWithHttpInfo($name, $sign_name, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getVerifySignatureWithHttpInfo
+     *
+     * Verify signature document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $sign_name Sign name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SignatureVerifyResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getVerifySignatureWithHttpInfo($name, $sign_name, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SignatureVerifyResponse';
+        $request = $this->getVerifySignatureRequest($name, $sign_name, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SignatureVerifyResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getVerifySignatureAsync
+     *
+     * Verify signature document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $sign_name Sign name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getVerifySignatureAsync($name, $sign_name, $folder = null)
+    {
+        return $this->getVerifySignatureAsyncWithHttpInfo($name, $sign_name, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getVerifySignatureAsyncWithHttpInfo
+     *
+     * Verify signature document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $sign_name Sign name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getVerifySignatureAsyncWithHttpInfo($name, $sign_name, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SignatureVerifyResponse';
+        $request = $this->getVerifySignatureRequest($name, $sign_name, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getVerifySignature'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $sign_name Sign name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getVerifySignatureRequest($name, $sign_name, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getVerifySignature'
+            );
+        }
+        // verify the required parameter 'sign_name' is set
+        if ($sign_name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $sign_name when calling getVerifySignature'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/verifySignature';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($sign_name !== null) {
+            $queryParams['signName'] = ObjectSerializer::toQueryValue($sign_name);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getWordsPerPage
      *
      * Get number of words per document page.
@@ -12187,6 +14777,288 @@ class PdfApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getXfaPdfInStorageToAcroForm
+     *
+     * Converts PDF document which contatins XFA form (located on storage) to PDF with AcroForm and returns resulting file response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getXfaPdfInStorageToAcroForm($name, $folder = null)
+    {
+        list($response) = $this->getXfaPdfInStorageToAcroFormWithHttpInfo($name, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getXfaPdfInStorageToAcroFormWithHttpInfo
+     *
+     * Converts PDF document which contatins XFA form (located on storage) to PDF with AcroForm and returns resulting file response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getXfaPdfInStorageToAcroFormWithHttpInfo($name, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getXfaPdfInStorageToAcroFormRequest($name, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getXfaPdfInStorageToAcroFormAsync
+     *
+     * Converts PDF document which contatins XFA form (located on storage) to PDF with AcroForm and returns resulting file response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getXfaPdfInStorageToAcroFormAsync($name, $folder = null)
+    {
+        return $this->getXfaPdfInStorageToAcroFormAsyncWithHttpInfo($name, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getXfaPdfInStorageToAcroFormAsyncWithHttpInfo
+     *
+     * Converts PDF document which contatins XFA form (located on storage) to PDF with AcroForm and returns resulting file response content
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getXfaPdfInStorageToAcroFormAsyncWithHttpInfo($name, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getXfaPdfInStorageToAcroFormRequest($name, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getXfaPdfInStorageToAcroForm'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getXfaPdfInStorageToAcroFormRequest($name, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getXfaPdfInStorageToAcroForm'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/xfatoacroform';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
                 ['application/json']
             );
         }
@@ -19315,6 +22187,297 @@ class PdfApi
     }
 
     /**
+     * Operation putFieldsFlatten
+     *
+     * Flatten form fields in document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putFieldsFlatten($name, $storage = null, $folder = null)
+    {
+        list($response) = $this->putFieldsFlattenWithHttpInfo($name, $storage, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putFieldsFlattenWithHttpInfo
+     *
+     * Flatten form fields in document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putFieldsFlattenWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putFieldsFlattenRequest($name, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putFieldsFlattenAsync
+     *
+     * Flatten form fields in document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putFieldsFlattenAsync($name, $storage = null, $folder = null)
+    {
+        return $this->putFieldsFlattenAsyncWithHttpInfo($name, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putFieldsFlattenAsyncWithHttpInfo
+     *
+     * Flatten form fields in document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putFieldsFlattenAsyncWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putFieldsFlattenRequest($name, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putFieldsFlatten'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putFieldsFlattenRequest($name, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putFieldsFlatten'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/fields/flatten';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putMergeDocuments
      *
      * Merge a list of documents.
@@ -20293,6 +23456,1411 @@ class PdfApi
     }
 
     /**
+     * Operation putPdfInRequestToEpub
+     *
+     * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInRequestToEpub($out_path, $content_recognition_mode = null, $file = null)
+    {
+        list($response) = $this->putPdfInRequestToEpubWithHttpInfo($out_path, $content_recognition_mode, $file);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInRequestToEpubWithHttpInfo
+     *
+     * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInRequestToEpubWithHttpInfo($out_path, $content_recognition_mode = null, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToEpubRequest($out_path, $content_recognition_mode, $file);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInRequestToEpubAsync
+     *
+     * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToEpubAsync($out_path, $content_recognition_mode = null, $file = null)
+    {
+        return $this->putPdfInRequestToEpubAsyncWithHttpInfo($out_path, $content_recognition_mode, $file)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInRequestToEpubAsyncWithHttpInfo
+     *
+     * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToEpubAsyncWithHttpInfo($out_path, $content_recognition_mode = null, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToEpubRequest($out_path, $content_recognition_mode, $file);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInRequestToEpub'
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInRequestToEpubRequest($out_path, $content_recognition_mode = null, $file = null)
+    {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInRequestToEpub'
+            );
+        }
+
+        $resourcePath = '/pdf/convert/epub';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($content_recognition_mode !== null) {
+            $queryParams['contentRecognitionMode'] = ObjectSerializer::toQueryValue($content_recognition_mode);
+        }
+
+
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $filename = ObjectSerializer::toFormValue($file);
+            $handle = fopen($filename, "rb");
+            $fsize = filesize($filename);
+            $contents = fread($handle, $fsize);
+            $formParams['file'] = $contents;
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams['file'];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPdfInRequestToHtml
+     *
+     * Converts PDF document (in request content) to Html format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInRequestToHtml($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
+    {
+        list($response) = $this->putPdfInRequestToHtmlWithHttpInfo($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInRequestToHtmlWithHttpInfo
+     *
+     * Converts PDF document (in request content) to Html format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInRequestToHtmlWithHttpInfo($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToHtmlRequest($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInRequestToHtmlAsync
+     *
+     * Converts PDF document (in request content) to Html format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToHtmlAsync($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
+    {
+        return $this->putPdfInRequestToHtmlAsyncWithHttpInfo($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInRequestToHtmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (in request content) to Html format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToHtmlAsyncWithHttpInfo($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToHtmlRequest($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInRequestToHtml'
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInRequestToHtmlRequest($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
+    {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInRequestToHtml'
+            );
+        }
+
+        $resourcePath = '/pdf/convert/html';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($additional_margin_width_in_points !== null) {
+            $queryParams['additionalMarginWidthInPoints'] = ObjectSerializer::toQueryValue($additional_margin_width_in_points);
+        }
+        // query params
+        if ($compress_svg_graphics_if_any !== null) {
+            $queryParams['compressSvgGraphicsIfAny'] = ObjectSerializer::toQueryValue($compress_svg_graphics_if_any);
+        }
+        // query params
+        if ($convert_marked_content_to_layers !== null) {
+            $queryParams['convertMarkedContentToLayers'] = ObjectSerializer::toQueryValue($convert_marked_content_to_layers);
+        }
+        // query params
+        if ($default_font_name !== null) {
+            $queryParams['defaultFontName'] = ObjectSerializer::toQueryValue($default_font_name);
+        }
+        // query params
+        if ($document_type !== null) {
+            $queryParams['documentType'] = ObjectSerializer::toQueryValue($document_type);
+        }
+        // query params
+        if ($fixed_layout !== null) {
+            $queryParams['fixedLayout'] = ObjectSerializer::toQueryValue($fixed_layout);
+        }
+        // query params
+        if ($image_resolution !== null) {
+            $queryParams['imageResolution'] = ObjectSerializer::toQueryValue($image_resolution);
+        }
+        // query params
+        if ($minimal_line_width !== null) {
+            $queryParams['minimalLineWidth'] = ObjectSerializer::toQueryValue($minimal_line_width);
+        }
+        // query params
+        if ($prevent_glyphs_grouping !== null) {
+            $queryParams['preventGlyphsGrouping'] = ObjectSerializer::toQueryValue($prevent_glyphs_grouping);
+        }
+        // query params
+        if ($split_css_into_pages !== null) {
+            $queryParams['splitCssIntoPages'] = ObjectSerializer::toQueryValue($split_css_into_pages);
+        }
+        // query params
+        if ($split_into_pages !== null) {
+            $queryParams['splitIntoPages'] = ObjectSerializer::toQueryValue($split_into_pages);
+        }
+        // query params
+        if ($use_z_order !== null) {
+            $queryParams['useZOrder'] = ObjectSerializer::toQueryValue($use_z_order);
+        }
+        // query params
+        if ($antialiasing_processing !== null) {
+            $queryParams['antialiasingProcessing'] = ObjectSerializer::toQueryValue($antialiasing_processing);
+        }
+        // query params
+        if ($css_class_names_prefix !== null) {
+            $queryParams['cssClassNamesPrefix'] = ObjectSerializer::toQueryValue($css_class_names_prefix);
+        }
+        // query params
+        if (is_array($explicit_list_of_saved_pages)) {
+            $explicit_list_of_saved_pages = ObjectSerializer::serializeCollection($explicit_list_of_saved_pages, 'multi', true);
+        }
+        if ($explicit_list_of_saved_pages !== null) {
+            $queryParams['explicitListOfSavedPages'] = ObjectSerializer::toQueryValue($explicit_list_of_saved_pages);
+        }
+        // query params
+        if ($font_encoding_strategy !== null) {
+            $queryParams['fontEncodingStrategy'] = ObjectSerializer::toQueryValue($font_encoding_strategy);
+        }
+        // query params
+        if ($font_saving_mode !== null) {
+            $queryParams['fontSavingMode'] = ObjectSerializer::toQueryValue($font_saving_mode);
+        }
+        // query params
+        if ($html_markup_generation_mode !== null) {
+            $queryParams['htmlMarkupGenerationMode'] = ObjectSerializer::toQueryValue($html_markup_generation_mode);
+        }
+        // query params
+        if ($letters_positioning_method !== null) {
+            $queryParams['lettersPositioningMethod'] = ObjectSerializer::toQueryValue($letters_positioning_method);
+        }
+        // query params
+        if ($pages_flow_type_depends_on_viewers_screen_size !== null) {
+            $queryParams['pagesFlowTypeDependsOnViewersScreenSize'] = ObjectSerializer::toQueryValue($pages_flow_type_depends_on_viewers_screen_size);
+        }
+        // query params
+        if ($parts_embedding_mode !== null) {
+            $queryParams['partsEmbeddingMode'] = ObjectSerializer::toQueryValue($parts_embedding_mode);
+        }
+        // query params
+        if ($raster_images_saving_mode !== null) {
+            $queryParams['rasterImagesSavingMode'] = ObjectSerializer::toQueryValue($raster_images_saving_mode);
+        }
+        // query params
+        if ($remove_empty_areas_on_top_and_bottom !== null) {
+            $queryParams['removeEmptyAreasOnTopAndBottom'] = ObjectSerializer::toQueryValue($remove_empty_areas_on_top_and_bottom);
+        }
+        // query params
+        if ($save_shadowed_texts_as_transparent_texts !== null) {
+            $queryParams['saveShadowedTextsAsTransparentTexts'] = ObjectSerializer::toQueryValue($save_shadowed_texts_as_transparent_texts);
+        }
+        // query params
+        if ($save_transparent_texts !== null) {
+            $queryParams['saveTransparentTexts'] = ObjectSerializer::toQueryValue($save_transparent_texts);
+        }
+        // query params
+        if ($special_folder_for_all_images !== null) {
+            $queryParams['specialFolderForAllImages'] = ObjectSerializer::toQueryValue($special_folder_for_all_images);
+        }
+        // query params
+        if ($special_folder_for_svg_images !== null) {
+            $queryParams['specialFolderForSvgImages'] = ObjectSerializer::toQueryValue($special_folder_for_svg_images);
+        }
+        // query params
+        if ($try_save_text_underlining_and_strikeouting_in_css !== null) {
+            $queryParams['trySaveTextUnderliningAndStrikeoutingInCss'] = ObjectSerializer::toQueryValue($try_save_text_underlining_and_strikeouting_in_css);
+        }
+
+
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $filename = ObjectSerializer::toFormValue($file);
+            $handle = fopen($filename, "rb");
+            $fsize = filesize($filename);
+            $contents = fread($handle, $fsize);
+            $formParams['file'] = $contents;
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams['file'];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPdfInRequestToLaTeX
+     *
+     * Converts PDF document (in request content) to LaTeX format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInRequestToLaTeX($out_path, $pages_count = null, $file = null)
+    {
+        list($response) = $this->putPdfInRequestToLaTeXWithHttpInfo($out_path, $pages_count, $file);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInRequestToLaTeXWithHttpInfo
+     *
+     * Converts PDF document (in request content) to LaTeX format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInRequestToLaTeXWithHttpInfo($out_path, $pages_count = null, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToLaTeXRequest($out_path, $pages_count, $file);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInRequestToLaTeXAsync
+     *
+     * Converts PDF document (in request content) to LaTeX format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToLaTeXAsync($out_path, $pages_count = null, $file = null)
+    {
+        return $this->putPdfInRequestToLaTeXAsyncWithHttpInfo($out_path, $pages_count, $file)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInRequestToLaTeXAsyncWithHttpInfo
+     *
+     * Converts PDF document (in request content) to LaTeX format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToLaTeXAsyncWithHttpInfo($out_path, $pages_count = null, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToLaTeXRequest($out_path, $pages_count, $file);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInRequestToLaTeX'
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInRequestToLaTeXRequest($out_path, $pages_count = null, $file = null)
+    {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInRequestToLaTeX'
+            );
+        }
+
+        $resourcePath = '/pdf/convert/latex';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($pages_count !== null) {
+            $queryParams['pagesCount'] = ObjectSerializer::toQueryValue($pages_count);
+        }
+
+
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $filename = ObjectSerializer::toFormValue($file);
+            $handle = fopen($filename, "rb");
+            $fsize = filesize($filename);
+            $contents = fread($handle, $fsize);
+            $formParams['file'] = $contents;
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams['file'];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPdfInRequestToMobiXml
+     *
+     * Converts PDF document (in request content) to MOBIXML format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInRequestToMobiXml($out_path, $file = null)
+    {
+        list($response) = $this->putPdfInRequestToMobiXmlWithHttpInfo($out_path, $file);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInRequestToMobiXmlWithHttpInfo
+     *
+     * Converts PDF document (in request content) to MOBIXML format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInRequestToMobiXmlWithHttpInfo($out_path, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToMobiXmlRequest($out_path, $file);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInRequestToMobiXmlAsync
+     *
+     * Converts PDF document (in request content) to MOBIXML format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToMobiXmlAsync($out_path, $file = null)
+    {
+        return $this->putPdfInRequestToMobiXmlAsyncWithHttpInfo($out_path, $file)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInRequestToMobiXmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (in request content) to MOBIXML format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToMobiXmlAsyncWithHttpInfo($out_path, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToMobiXmlRequest($out_path, $file);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInRequestToMobiXml'
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInRequestToMobiXmlRequest($out_path, $file = null)
+    {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInRequestToMobiXml'
+            );
+        }
+
+        $resourcePath = '/pdf/convert/mobixml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+
+
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $filename = ObjectSerializer::toFormValue($file);
+            $handle = fopen($filename, "rb");
+            $fsize = filesize($filename);
+            $contents = fread($handle, $fsize);
+            $formParams['file'] = $contents;
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams['file'];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putPdfInRequestToPdfA
      *
      * Converts PDF document (in request content) to PdfA format and uploads resulting file to storage.
@@ -20503,6 +25071,307 @@ class PdfApi
         // query params
         if ($type !== null) {
             $queryParams['type'] = ObjectSerializer::toQueryValue($type);
+        }
+
+
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $filename = ObjectSerializer::toFormValue($file);
+            $handle = fopen($filename, "rb");
+            $fsize = filesize($filename);
+            $contents = fread($handle, $fsize);
+            $formParams['file'] = $contents;
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams['file'];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPdfInRequestToPptx
+     *
+     * Converts PDF document (in request content) to PPTX format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInRequestToPptx($out_path, $separate_images = null, $slides_as_images = null, $file = null)
+    {
+        list($response) = $this->putPdfInRequestToPptxWithHttpInfo($out_path, $separate_images, $slides_as_images, $file);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInRequestToPptxWithHttpInfo
+     *
+     * Converts PDF document (in request content) to PPTX format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInRequestToPptxWithHttpInfo($out_path, $separate_images = null, $slides_as_images = null, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToPptxRequest($out_path, $separate_images, $slides_as_images, $file);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInRequestToPptxAsync
+     *
+     * Converts PDF document (in request content) to PPTX format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToPptxAsync($out_path, $separate_images = null, $slides_as_images = null, $file = null)
+    {
+        return $this->putPdfInRequestToPptxAsyncWithHttpInfo($out_path, $separate_images, $slides_as_images, $file)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInRequestToPptxAsyncWithHttpInfo
+     *
+     * Converts PDF document (in request content) to PPTX format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToPptxAsyncWithHttpInfo($out_path, $separate_images = null, $slides_as_images = null, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToPptxRequest($out_path, $separate_images, $slides_as_images, $file);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInRequestToPptx'
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInRequestToPptxRequest($out_path, $separate_images = null, $slides_as_images = null, $file = null)
+    {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInRequestToPptx'
+            );
+        }
+
+        $resourcePath = '/pdf/convert/pptx';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($separate_images !== null) {
+            $queryParams['separateImages'] = ObjectSerializer::toQueryValue($separate_images);
+        }
+        // query params
+        if ($slides_as_images !== null) {
+            $queryParams['slidesAsImages'] = ObjectSerializer::toQueryValue($slides_as_images);
         }
 
 
@@ -21620,6 +26489,289 @@ class PdfApi
     }
 
     /**
+     * Operation putPdfInRequestToXml
+     *
+     * Converts PDF document (in request content) to XML format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInRequestToXml($out_path, $file = null)
+    {
+        list($response) = $this->putPdfInRequestToXmlWithHttpInfo($out_path, $file);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInRequestToXmlWithHttpInfo
+     *
+     * Converts PDF document (in request content) to XML format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInRequestToXmlWithHttpInfo($out_path, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToXmlRequest($out_path, $file);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInRequestToXmlAsync
+     *
+     * Converts PDF document (in request content) to XML format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToXmlAsync($out_path, $file = null)
+    {
+        return $this->putPdfInRequestToXmlAsyncWithHttpInfo($out_path, $file)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInRequestToXmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (in request content) to XML format and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInRequestToXmlAsyncWithHttpInfo($out_path, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInRequestToXmlRequest($out_path, $file);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInRequestToXml'
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInRequestToXmlRequest($out_path, $file = null)
+    {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInRequestToXml'
+            );
+        }
+
+        $resourcePath = '/pdf/convert/xml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+
+
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $filename = ObjectSerializer::toFormValue($file);
+            $handle = fopen($filename, "rb");
+            $fsize = filesize($filename);
+            $contents = fread($handle, $fsize);
+            $formParams['file'] = $contents;
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams['file'];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putPdfInRequestToXps
      *
      * Converts PDF document (in request content) to XPS format and uploads resulting file to storage.
@@ -22272,6 +27424,1467 @@ class PdfApi
     }
 
     /**
+     * Operation putPdfInStorageToEpub
+     *
+     * Converts PDF document (located on storage) to EPUB format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInStorageToEpub($name, $out_path, $content_recognition_mode = null, $folder = null)
+    {
+        list($response) = $this->putPdfInStorageToEpubWithHttpInfo($name, $out_path, $content_recognition_mode, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInStorageToEpubWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to EPUB format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInStorageToEpubWithHttpInfo($name, $out_path, $content_recognition_mode = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToEpubRequest($name, $out_path, $content_recognition_mode, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInStorageToEpubAsync
+     *
+     * Converts PDF document (located on storage) to EPUB format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToEpubAsync($name, $out_path, $content_recognition_mode = null, $folder = null)
+    {
+        return $this->putPdfInStorageToEpubAsyncWithHttpInfo($name, $out_path, $content_recognition_mode, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInStorageToEpubAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to EPUB format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToEpubAsyncWithHttpInfo($name, $out_path, $content_recognition_mode = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToEpubRequest($name, $out_path, $content_recognition_mode, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInStorageToEpub'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
+     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInStorageToEpubRequest($name, $out_path, $content_recognition_mode = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPdfInStorageToEpub'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInStorageToEpub'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/epub';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($content_recognition_mode !== null) {
+            $queryParams['contentRecognitionMode'] = ObjectSerializer::toQueryValue($content_recognition_mode);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPdfInStorageToHtml
+     *
+     * Converts PDF document (located on storage) to Html format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInStorageToHtml($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        list($response) = $this->putPdfInStorageToHtmlWithHttpInfo($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInStorageToHtmlWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to Html format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInStorageToHtmlWithHttpInfo($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToHtmlRequest($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInStorageToHtmlAsync
+     *
+     * Converts PDF document (located on storage) to Html format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToHtmlAsync($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        return $this->putPdfInStorageToHtmlAsyncWithHttpInfo($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInStorageToHtmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to Html format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToHtmlAsyncWithHttpInfo($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToHtmlRequest($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInStorageToHtml'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.html) (required)
+     * @param  int $additional_margin_width_in_points Defines width of margin that will be forcibly left around that output HTML-areas. (optional)
+     * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
+     * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
+     * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
+     * @param  int $document_type Result document type. (optional)
+     * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
+     * @param  int $image_resolution Resolution for image rendering. (optional)
+     * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
+     * @param  bool $prevent_glyphs_grouping This attribute switch on the mode when text glyphs will not be grouped into words and strings This mode allows to keep maximum precision during positioning of glyphs on the page and it can be used for conversion documents with music notes or glyphs that should be placed separately each other. This parameter will be applied to document only when the value of FixedLayout attribute is true. (optional)
+     * @param  bool $split_css_into_pages When multipage-mode selected(i.e &#39;SplitIntoPages&#39; is &#39;true&#39;), then this attribute defines whether should be created separate CSS-file for each result HTML page. (optional)
+     * @param  bool $split_into_pages The flag that indicates whether each page of source document will be converted into it&#39;s own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. (optional)
+     * @param  bool $use_z_order If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. (optional)
+     * @param  string $antialiasing_processing The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. (optional)
+     * @param  string $css_class_names_prefix When PDFtoHTML converter generates result CSSs, CSS class names (something like \&quot;.stl_01 {}\&quot; ... \&quot;.stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. (optional)
+     * @param  int[] $explicit_list_of_saved_pages With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. (optional)
+     * @param  string $font_encoding_strategy Defines encoding special rule to tune PDF decoding for current document. (optional)
+     * @param  string $font_saving_mode Defines font saving mode that will be used during saving of PDF to desirable format. (optional)
+     * @param  string $html_markup_generation_mode Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. (optional)
+     * @param  string $letters_positioning_method The mode of positioning of letters in words in result HTML. (optional)
+     * @param  bool $pages_flow_type_depends_on_viewers_screen_size If attribute &#39;SplitOnPages&#x3D;false&#39;, than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. (optional)
+     * @param  string $parts_embedding_mode It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. (optional)
+     * @param  string $raster_images_saving_mode Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. (optional)
+     * @param  bool $remove_empty_areas_on_top_and_bottom Defines whether in created HTML will be removed top and bottom empty area without any content (if any). (optional)
+     * @param  bool $save_shadowed_texts_as_transparent_texts Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). (optional)
+     * @param  bool $save_transparent_texts Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. (optional)
+     * @param  string $special_folder_for_all_images The path to directory to which must be saved any images if they are encountered during saving of document as HTML. If parameter is empty or null then image files(if any) wil be saved together with other files linked to HTML It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  string $special_folder_for_svg_images The path to directory to which must be saved only SVG-images if they are encountered during saving of document as HTML. If parameter is empty or null then SVG files(if any) wil be saved together with other image-files (near to output file) or in special folder for images (if it specified in SpecialImagesFolderIfAny option). It does not affect anything if CustomImageSavingStrategy property was successfully used to process relevant image file. (optional)
+     * @param  bool $try_save_text_underlining_and_strikeouting_in_css PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text&#39;s underlining and put this info into CSS instead of drawing of underlining graphically. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInStorageToHtmlRequest($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPdfInStorageToHtml'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInStorageToHtml'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/html';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($additional_margin_width_in_points !== null) {
+            $queryParams['additionalMarginWidthInPoints'] = ObjectSerializer::toQueryValue($additional_margin_width_in_points);
+        }
+        // query params
+        if ($compress_svg_graphics_if_any !== null) {
+            $queryParams['compressSvgGraphicsIfAny'] = ObjectSerializer::toQueryValue($compress_svg_graphics_if_any);
+        }
+        // query params
+        if ($convert_marked_content_to_layers !== null) {
+            $queryParams['convertMarkedContentToLayers'] = ObjectSerializer::toQueryValue($convert_marked_content_to_layers);
+        }
+        // query params
+        if ($default_font_name !== null) {
+            $queryParams['defaultFontName'] = ObjectSerializer::toQueryValue($default_font_name);
+        }
+        // query params
+        if ($document_type !== null) {
+            $queryParams['documentType'] = ObjectSerializer::toQueryValue($document_type);
+        }
+        // query params
+        if ($fixed_layout !== null) {
+            $queryParams['fixedLayout'] = ObjectSerializer::toQueryValue($fixed_layout);
+        }
+        // query params
+        if ($image_resolution !== null) {
+            $queryParams['imageResolution'] = ObjectSerializer::toQueryValue($image_resolution);
+        }
+        // query params
+        if ($minimal_line_width !== null) {
+            $queryParams['minimalLineWidth'] = ObjectSerializer::toQueryValue($minimal_line_width);
+        }
+        // query params
+        if ($prevent_glyphs_grouping !== null) {
+            $queryParams['preventGlyphsGrouping'] = ObjectSerializer::toQueryValue($prevent_glyphs_grouping);
+        }
+        // query params
+        if ($split_css_into_pages !== null) {
+            $queryParams['splitCssIntoPages'] = ObjectSerializer::toQueryValue($split_css_into_pages);
+        }
+        // query params
+        if ($split_into_pages !== null) {
+            $queryParams['splitIntoPages'] = ObjectSerializer::toQueryValue($split_into_pages);
+        }
+        // query params
+        if ($use_z_order !== null) {
+            $queryParams['useZOrder'] = ObjectSerializer::toQueryValue($use_z_order);
+        }
+        // query params
+        if ($antialiasing_processing !== null) {
+            $queryParams['antialiasingProcessing'] = ObjectSerializer::toQueryValue($antialiasing_processing);
+        }
+        // query params
+        if ($css_class_names_prefix !== null) {
+            $queryParams['cssClassNamesPrefix'] = ObjectSerializer::toQueryValue($css_class_names_prefix);
+        }
+        // query params
+        if (is_array($explicit_list_of_saved_pages)) {
+            $explicit_list_of_saved_pages = ObjectSerializer::serializeCollection($explicit_list_of_saved_pages, 'multi', true);
+        }
+        if ($explicit_list_of_saved_pages !== null) {
+            $queryParams['explicitListOfSavedPages'] = ObjectSerializer::toQueryValue($explicit_list_of_saved_pages);
+        }
+        // query params
+        if ($font_encoding_strategy !== null) {
+            $queryParams['fontEncodingStrategy'] = ObjectSerializer::toQueryValue($font_encoding_strategy);
+        }
+        // query params
+        if ($font_saving_mode !== null) {
+            $queryParams['fontSavingMode'] = ObjectSerializer::toQueryValue($font_saving_mode);
+        }
+        // query params
+        if ($html_markup_generation_mode !== null) {
+            $queryParams['htmlMarkupGenerationMode'] = ObjectSerializer::toQueryValue($html_markup_generation_mode);
+        }
+        // query params
+        if ($letters_positioning_method !== null) {
+            $queryParams['lettersPositioningMethod'] = ObjectSerializer::toQueryValue($letters_positioning_method);
+        }
+        // query params
+        if ($pages_flow_type_depends_on_viewers_screen_size !== null) {
+            $queryParams['pagesFlowTypeDependsOnViewersScreenSize'] = ObjectSerializer::toQueryValue($pages_flow_type_depends_on_viewers_screen_size);
+        }
+        // query params
+        if ($parts_embedding_mode !== null) {
+            $queryParams['partsEmbeddingMode'] = ObjectSerializer::toQueryValue($parts_embedding_mode);
+        }
+        // query params
+        if ($raster_images_saving_mode !== null) {
+            $queryParams['rasterImagesSavingMode'] = ObjectSerializer::toQueryValue($raster_images_saving_mode);
+        }
+        // query params
+        if ($remove_empty_areas_on_top_and_bottom !== null) {
+            $queryParams['removeEmptyAreasOnTopAndBottom'] = ObjectSerializer::toQueryValue($remove_empty_areas_on_top_and_bottom);
+        }
+        // query params
+        if ($save_shadowed_texts_as_transparent_texts !== null) {
+            $queryParams['saveShadowedTextsAsTransparentTexts'] = ObjectSerializer::toQueryValue($save_shadowed_texts_as_transparent_texts);
+        }
+        // query params
+        if ($save_transparent_texts !== null) {
+            $queryParams['saveTransparentTexts'] = ObjectSerializer::toQueryValue($save_transparent_texts);
+        }
+        // query params
+        if ($special_folder_for_all_images !== null) {
+            $queryParams['specialFolderForAllImages'] = ObjectSerializer::toQueryValue($special_folder_for_all_images);
+        }
+        // query params
+        if ($special_folder_for_svg_images !== null) {
+            $queryParams['specialFolderForSvgImages'] = ObjectSerializer::toQueryValue($special_folder_for_svg_images);
+        }
+        // query params
+        if ($try_save_text_underlining_and_strikeouting_in_css !== null) {
+            $queryParams['trySaveTextUnderliningAndStrikeoutingInCss'] = ObjectSerializer::toQueryValue($try_save_text_underlining_and_strikeouting_in_css);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPdfInStorageToLaTeX
+     *
+     * Converts PDF document (located on storage) to LaTeX format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInStorageToLaTeX($name, $out_path, $pages_count = null, $folder = null)
+    {
+        list($response) = $this->putPdfInStorageToLaTeXWithHttpInfo($name, $out_path, $pages_count, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInStorageToLaTeXWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to LaTeX format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInStorageToLaTeXWithHttpInfo($name, $out_path, $pages_count = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToLaTeXRequest($name, $out_path, $pages_count, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInStorageToLaTeXAsync
+     *
+     * Converts PDF document (located on storage) to LaTeX format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToLaTeXAsync($name, $out_path, $pages_count = null, $folder = null)
+    {
+        return $this->putPdfInStorageToLaTeXAsyncWithHttpInfo($name, $out_path, $pages_count, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInStorageToLaTeXAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to LaTeX format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToLaTeXAsyncWithHttpInfo($name, $out_path, $pages_count = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToLaTeXRequest($name, $out_path, $pages_count, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInStorageToLaTeX'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.tex) (required)
+     * @param  int $pages_count Pages count. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInStorageToLaTeXRequest($name, $out_path, $pages_count = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPdfInStorageToLaTeX'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInStorageToLaTeX'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/latex';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($pages_count !== null) {
+            $queryParams['pagesCount'] = ObjectSerializer::toQueryValue($pages_count);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPdfInStorageToMobiXml
+     *
+     * Converts PDF document (located on storage) to MOBIXML format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInStorageToMobiXml($name, $out_path, $folder = null)
+    {
+        list($response) = $this->putPdfInStorageToMobiXmlWithHttpInfo($name, $out_path, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInStorageToMobiXmlWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to MOBIXML format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInStorageToMobiXmlWithHttpInfo($name, $out_path, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToMobiXmlRequest($name, $out_path, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInStorageToMobiXmlAsync
+     *
+     * Converts PDF document (located on storage) to MOBIXML format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToMobiXmlAsync($name, $out_path, $folder = null)
+    {
+        return $this->putPdfInStorageToMobiXmlAsyncWithHttpInfo($name, $out_path, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInStorageToMobiXmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to MOBIXML format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToMobiXmlAsyncWithHttpInfo($name, $out_path, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToMobiXmlRequest($name, $out_path, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInStorageToMobiXml'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.mobixml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInStorageToMobiXmlRequest($name, $out_path, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPdfInStorageToMobiXml'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInStorageToMobiXml'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/mobixml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putPdfInStorageToPdfA
      *
      * Converts PDF document (located on storage) to PdfA format and uploads resulting file to storage
@@ -22493,6 +29106,321 @@ class PdfApi
         // query params
         if ($type !== null) {
             $queryParams['type'] = ObjectSerializer::toQueryValue($type);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPdfInStorageToPptx
+     *
+     * Converts PDF document (located on storage) to PPTX format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInStorageToPptx($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        list($response) = $this->putPdfInStorageToPptxWithHttpInfo($name, $out_path, $separate_images, $slides_as_images, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInStorageToPptxWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to PPTX format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInStorageToPptxWithHttpInfo($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToPptxRequest($name, $out_path, $separate_images, $slides_as_images, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInStorageToPptxAsync
+     *
+     * Converts PDF document (located on storage) to PPTX format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToPptxAsync($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        return $this->putPdfInStorageToPptxAsyncWithHttpInfo($name, $out_path, $separate_images, $slides_as_images, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInStorageToPptxAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to PPTX format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToPptxAsyncWithHttpInfo($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToPptxRequest($name, $out_path, $separate_images, $slides_as_images, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInStorageToPptx'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pptx) (required)
+     * @param  bool $separate_images Separate images. (optional)
+     * @param  bool $slides_as_images Slides as images. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInStorageToPptxRequest($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPdfInStorageToPptx'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInStorageToPptx'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/pptx';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($separate_images !== null) {
+            $queryParams['separateImages'] = ObjectSerializer::toQueryValue($separate_images);
+        }
+        // query params
+        if ($slides_as_images !== null) {
+            $queryParams['slidesAsImages'] = ObjectSerializer::toQueryValue($slides_as_images);
         }
         // query params
         if ($folder !== null) {
@@ -23655,6 +30583,303 @@ class PdfApi
     }
 
     /**
+     * Operation putPdfInStorageToXml
+     *
+     * Converts PDF document (located on storage) to XML format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putPdfInStorageToXml($name, $out_path, $folder = null)
+    {
+        list($response) = $this->putPdfInStorageToXmlWithHttpInfo($name, $out_path, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPdfInStorageToXmlWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to XML format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPdfInStorageToXmlWithHttpInfo($name, $out_path, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToXmlRequest($name, $out_path, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPdfInStorageToXmlAsync
+     *
+     * Converts PDF document (located on storage) to XML format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToXmlAsync($name, $out_path, $folder = null)
+    {
+        return $this->putPdfInStorageToXmlAsyncWithHttpInfo($name, $out_path, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPdfInStorageToXmlAsyncWithHttpInfo
+     *
+     * Converts PDF document (located on storage) to XML format and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPdfInStorageToXmlAsyncWithHttpInfo($name, $out_path, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putPdfInStorageToXmlRequest($name, $out_path, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPdfInStorageToXml'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.xml) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPdfInStorageToXmlRequest($name, $out_path, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPdfInStorageToXml'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPdfInStorageToXml'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/xml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putPdfInStorageToXps
      *
      * Converts PDF document (located on storage) to XPS format and uploads resulting file to storage
@@ -23878,6 +31103,296 @@ class PdfApi
 
         // body params
         $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPrivileges
+     *
+     * Update privilege document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\DocumentPrivilege $privileges Document privileges. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPrivileges($name, $privileges = null, $folder = null)
+    {
+        list($response) = $this->putPrivilegesWithHttpInfo($name, $privileges, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPrivilegesWithHttpInfo
+     *
+     * Update privilege document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\DocumentPrivilege $privileges Document privileges. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPrivilegesWithHttpInfo($name, $privileges = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPrivilegesRequest($name, $privileges, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPrivilegesAsync
+     *
+     * Update privilege document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\DocumentPrivilege $privileges Document privileges. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPrivilegesAsync($name, $privileges = null, $folder = null)
+    {
+        return $this->putPrivilegesAsyncWithHttpInfo($name, $privileges, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPrivilegesAsyncWithHttpInfo
+     *
+     * Update privilege document.
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\DocumentPrivilege $privileges Document privileges. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPrivilegesAsyncWithHttpInfo($name, $privileges = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPrivilegesRequest($name, $privileges, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPrivileges'
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\DocumentPrivilege $privileges Document privileges. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPrivilegesRequest($name, $privileges = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPrivileges'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/privileges';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($privileges)) {
+            $_tempBody = $privileges;
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -25113,6 +32628,586 @@ class PdfApi
         if (isset($fields)) {
             $_tempBody = $fields;
         }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putXfaPdfInRequestToAcroForm
+     *
+     * Converts PDF document which contatins XFA form (in request content) to PDF with AcroForm and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putXfaPdfInRequestToAcroForm($out_path, $file = null)
+    {
+        list($response) = $this->putXfaPdfInRequestToAcroFormWithHttpInfo($out_path, $file);
+        return $response;
+    }
+
+    /**
+     * Operation putXfaPdfInRequestToAcroFormWithHttpInfo
+     *
+     * Converts PDF document which contatins XFA form (in request content) to PDF with AcroForm and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putXfaPdfInRequestToAcroFormWithHttpInfo($out_path, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putXfaPdfInRequestToAcroFormRequest($out_path, $file);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putXfaPdfInRequestToAcroFormAsync
+     *
+     * Converts PDF document which contatins XFA form (in request content) to PDF with AcroForm and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXfaPdfInRequestToAcroFormAsync($out_path, $file = null)
+    {
+        return $this->putXfaPdfInRequestToAcroFormAsyncWithHttpInfo($out_path, $file)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putXfaPdfInRequestToAcroFormAsyncWithHttpInfo
+     *
+     * Converts PDF document which contatins XFA form (in request content) to PDF with AcroForm and uploads resulting file to storage.
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXfaPdfInRequestToAcroFormAsyncWithHttpInfo($out_path, $file = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putXfaPdfInRequestToAcroFormRequest($out_path, $file);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putXfaPdfInRequestToAcroForm'
+     *
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  \SplFileObject $file A file to be converted. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putXfaPdfInRequestToAcroFormRequest($out_path, $file = null)
+    {
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putXfaPdfInRequestToAcroForm'
+            );
+        }
+
+        $resourcePath = '/pdf/convert/xfatoacroform';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+
+
+        // form params
+        if ($file !== null) {
+            $multipart = true;
+            $filename = ObjectSerializer::toFormValue($file);
+            $handle = fopen($filename, "rb");
+            $fsize = filesize($filename);
+            $contents = fread($handle, $fsize);
+            $formParams['file'] = $contents;
+        }
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams['file'];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putXfaPdfInStorageToAcroForm
+     *
+     * Converts PDF document which contatins XFA form (located on storage) to PDF with AcroForm and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function putXfaPdfInStorageToAcroForm($name, $out_path, $folder = null)
+    {
+        list($response) = $this->putXfaPdfInStorageToAcroFormWithHttpInfo($name, $out_path, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putXfaPdfInStorageToAcroFormWithHttpInfo
+     *
+     * Converts PDF document which contatins XFA form (located on storage) to PDF with AcroForm and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putXfaPdfInStorageToAcroFormWithHttpInfo($name, $out_path, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putXfaPdfInStorageToAcroFormRequest($name, $out_path, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putXfaPdfInStorageToAcroFormAsync
+     *
+     * Converts PDF document which contatins XFA form (located on storage) to PDF with AcroForm and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXfaPdfInStorageToAcroFormAsync($name, $out_path, $folder = null)
+    {
+        return $this->putXfaPdfInStorageToAcroFormAsyncWithHttpInfo($name, $out_path, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putXfaPdfInStorageToAcroFormAsyncWithHttpInfo
+     *
+     * Converts PDF document which contatins XFA form (located on storage) to PDF with AcroForm and uploads resulting file to storage
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXfaPdfInStorageToAcroFormAsyncWithHttpInfo($name, $out_path, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->putXfaPdfInStorageToAcroFormRequest($name, $out_path, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putXfaPdfInStorageToAcroForm'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.pdf) (required)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putXfaPdfInStorageToAcroFormRequest($name, $out_path, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putXfaPdfInStorageToAcroForm'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putXfaPdfInStorageToAcroForm'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/convert/xfatoacroform';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(

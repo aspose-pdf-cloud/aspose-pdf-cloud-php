@@ -382,6 +382,20 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testDeleteField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+
+        $fieldName = 'textField';
+
+        $folder = $this->tempFolder;
+
+        $response = $this->pdfApi->deleteField($name, $fieldName, $storage = null, $folder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+
     public function testPutUpdateField()
     {
         $name = 'PdfWithAcroForm.pdf';
@@ -399,6 +413,19 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->putUpdateField($name, $fieldName, $field, $storage = null, $folder);
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
+
+
+    public function testPutFieldsFlatten()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+
+        $response = $this->pdfApi->putFieldsFlatten($name, $storage = null, $folder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
 
     // Fragments And Segments Tests
 
@@ -973,6 +1000,41 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     }
 
 
+    public function testGetVerifySignature()
+    {
+        $name = 'BlankWithSignature.pdf';
+        $this->uploadFile($name);
+
+        $signatureFileName = 'test1234.pfx';
+        $this->uploadFile($signatureFileName);
+
+        $rectangle = new Aspose\PDF\Model\Rectangle();
+        $rectangle->setX(100);
+        $rectangle->setY(100);
+        $rectangle->setWidth(400);
+        $rectangle->setHeight(100);
+
+        $folder = $this->tempFolder;
+
+        $signature = new Aspose\PDF\Model\Signature();
+        $signature->setAuthority('Sergey Smal');
+        $signature->setContact('test@mail.ru');
+        $signature->setDate('08/01/2012 12:15:00.000 PM');
+        $signature->setFormFieldName('Signature1');
+        $signature->setLocation('Ukraine');
+        $signature->setPassword('test1234');
+        $signature->setRectangle($rectangle);
+        $signature->setSignaturePath($folder . '/' . $signatureFileName);
+        $signature->setSignatureType(Aspose\PDF\Model\SignatureType::PKCS_7);
+        $signature->setVisible(true);
+
+        $responseSign = $this->pdfApi->postSignDocument($name, $signature, $storage = null, $folder);
+        $this->assertEquals(HttpStatusCode::OK, $responseSign->getCode());
+
+        $response = $this->pdfApi->getVerifySignature($name, $signature->getFormFieldName(), $folder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
     // Text Items Tests
 
     public function testGetPageTextItems()
@@ -1417,6 +1479,315 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($response);
     }
 
+
+    public function testGetPdfInStorageToHtml()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToHtml($name, null, null, null, null, null,  null,  null, null, 
+            null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+    public function testPutPdfInStorageToHtml()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.html";
+        
+        $response = $this->pdfApi->putPdfInStorageToHtml(
+            $name, 
+            $this->tempFolder . '/' . $resFileName, 
+            $additional_margin_width_in_points = null, 
+            $compress_svg_graphics_if_any = null, 
+            $convert_marked_content_to_layers = null, 
+            $default_font_name = null, 
+            $document_type = null, 
+            $fixed_layout = null, 
+            $image_resolution = null, 
+            $minimal_line_width = null, 
+            $prevent_glyphs_grouping = null, 
+            $split_css_into_pages = null, 
+            $split_into_pages = null, 
+            $use_z_order = null, 
+            $antialiasing_processing = null, 
+            $css_class_names_prefix = null, 
+            $explicit_list_of_saved_pages = null, 
+            $font_encoding_strategy = null, 
+            $font_saving_mode = null, 
+            $html_markup_generation_mode = null, 
+            $letters_positioning_method = null, 
+            $pages_flow_type_depends_on_viewers_screen_size = null, 
+            $parts_embedding_mode = null,
+            $raster_images_saving_mode = null, 
+            $remove_empty_areas_on_top_and_bottom = null, 
+            $save_shadowed_texts_as_transparent_texts = null, 
+            $save_transparent_texts = null, 
+            $special_folder_for_all_images = null, 
+            $special_folder_for_svg_images = null, 
+            $try_save_text_underlining_and_strikeouting_in_css = null, 
+            $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToHtml()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.html";
+
+        $response = $this->pdfApi->putPdfInRequestToHtml(
+            $this->tempFolder . '/' . $resFileName, 
+            $additional_margin_width_in_points = null, 
+            $compress_svg_graphics_if_any = null, 
+            $convert_marked_content_to_layers = null, 
+            $default_font_name = null, 
+            $document_type = null, 
+            $fixed_layout = null, 
+            $image_resolution = null, 
+            $minimal_line_width = null, 
+            $prevent_glyphs_grouping = null, 
+            $split_css_into_pages = null, 
+            $split_into_pages = null, 
+            $use_z_order = null, 
+            $antialiasing_processing = null, 
+            $css_class_names_prefix = null, 
+            $explicit_list_of_saved_pages = null, 
+            $font_encoding_strategy = null, 
+            $font_saving_mode = null, 
+            $html_markup_generation_mode = null, 
+            $letters_positioning_method = null, 
+            $pages_flow_type_depends_on_viewers_screen_size = null, 
+            $parts_embedding_mode = null,
+            $raster_images_saving_mode = null, 
+            $remove_empty_areas_on_top_and_bottom = null, 
+            $save_shadowed_texts_as_transparent_texts = null, 
+            $save_transparent_texts = null, 
+            $special_folder_for_all_images = null, 
+            $special_folder_for_svg_images = null, 
+            $try_save_text_underlining_and_strikeouting_in_css = null, 
+            $file);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetPdfInStorageToEpub()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToEpub($name, null, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+    public function testPutPdfInStorageToEpub()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.epub";
+        
+        $response = $this->pdfApi->putPdfInStorageToEpub($name, $this->tempFolder . '/' . $resFileName, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToEpub()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.epub";
+
+        $response = $this->pdfApi->putPdfInRequestToEpub($this->tempFolder . '/' . $resFileName, null, $file);
+        $this->assertNotNull($response);
+    }
+
+
+    public function testGetPdfInStorageToPptx()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToPptx($name, null, null, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+    public function testPutPdfInStorageToPptx()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.pptx";
+        
+        $response = $this->pdfApi->putPdfInStorageToPptx($name, $this->tempFolder . '/' . $resFileName, null, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToPptx()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.pptx";
+
+        $response = $this->pdfApi->putPdfInRequestToPptx($this->tempFolder . '/' . $resFileName, null, null, $file);
+        $this->assertNotNull($response);
+    }
+
+
+    public function testGetPdfInStorageToLaTeX()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToLaTeX($name, null, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+    public function testPutPdfInStorageToLaTeX()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.latex";
+        
+        $response = $this->pdfApi->putPdfInStorageToLaTeX($name, $this->tempFolder . '/' . $resFileName, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToLaTeX()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.latex";
+
+        $response = $this->pdfApi->putPdfInRequestToLaTeX($this->tempFolder . '/' . $resFileName, null, $file);
+        $this->assertNotNull($response);
+    }
+
+
+    public function testGetPdfInStorageToMobiXml()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToMobiXml($name, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+
+    public function testPutPdfInStorageToMobiXml()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.mobi";
+        
+        $response = $this->pdfApi->putPdfInStorageToMobiXml($name, $this->tempFolder . '/' . $resFileName, $folder);
+        $this->assertNotNull($response);
+    }
+
+
+    public function testPutPdfInRequestToMobiXml()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.mobi";
+
+        $response = $this->pdfApi->putPdfInRequestToMobiXml($this->tempFolder . '/' . $resFileName, $file);
+        $this->assertNotNull($response);
+    }
+
+
+    public function testGetXfaPdfInStorageToAcroForm()
+    {
+        $name = 'PdfWithXfaForm.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getXfaPdfInStorageToAcroForm($name, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+    public function testPutXfaPdfInStorageToAcroForm()
+    {
+        $name = 'PdfWithXfaForm.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.pdf";
+        
+        $response = $this->pdfApi->putXfaPdfInStorageToAcroForm($name, $this->tempFolder . '/' . $resFileName, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutXfaPdfInRequestToAcroForm()
+    {
+        $name = 'PdfWithXfaForm.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.pdf";
+
+        $response = $this->pdfApi->putXfaPdfInRequestToAcroForm($this->tempFolder . '/' . $resFileName, $file);
+        $this->assertNotNull($response);
+    }
+
+
+    public function testGetPdfInStorageToXml()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToXml($name, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+    public function testPutPdfInStorageToXml()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.xml";
+        
+        $response = $this->pdfApi->putPdfInStorageToXml($name, $this->tempFolder . '/' . $resFileName, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToXml()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.xml";
+
+        $response = $this->pdfApi->putPdfInRequestToXml($this->tempFolder . '/' . $resFileName, $file);
+        $this->assertNotNull($response);
+    }
+
+
     // Upload/Download Tests
     public function testUploadFile()
     {
@@ -1437,5 +1808,24 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->getDownload($path);
         $this->assertNotNull($response);
     }
+
+
+    // Privileges Tests
+
+    public function testPutPrivileges()
+    {
+        $name = "4pages.pdf";
+        $this->uploadFile($name);
+
+        $documentPrivilege = new Aspose\PDF\Model\DocumentPrivilege();
+        $documentPrivilege->setAllowCopy(false);
+        $documentPrivilege->setAllowPrint(false);
+
+        $folder = $this->tempFolder;
+
+        $response = $this->pdfApi->putPrivileges($name, $documentPrivilege, $folder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
 
 }
