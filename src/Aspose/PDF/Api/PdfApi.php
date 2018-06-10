@@ -39400,7 +39400,10 @@ class PdfApi
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }
-
+        
+        //PDFCLOUD-418
+        $options['connect_timeout'] = 5 * 60;
+        
         return $options;
     }
 
