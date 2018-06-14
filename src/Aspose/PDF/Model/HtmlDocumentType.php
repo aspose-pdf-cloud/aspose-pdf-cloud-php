@@ -44,7 +44,7 @@ use \Aspose\PDF\ObjectSerializer;
  * HtmlDocumentType Class Doc Comment
  *
  * @category Class
- * @description 
+ * @description Represents enumeration of the Html document types.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
@@ -54,8 +54,8 @@ class HtmlDocumentType
     /**
      * Possible values of this enum
      */
-    const XHTML = 0;
-    const HTML_5 = 1;
+    const XHTML = 'Xhtml';
+    const HTML5 = 'Html5';
     
     /**
      * Gets allowable values of the enum
@@ -65,7 +65,7 @@ class HtmlDocumentType
     {
         return [
             self::XHTML,
-            self::HTML_5,
+            self::HTML5,
         ];
     }
 }

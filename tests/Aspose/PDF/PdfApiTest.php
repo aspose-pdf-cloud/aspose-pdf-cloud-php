@@ -1827,5 +1827,247 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
+    //Convert to PDF Tests
+
+    public function testGetEpubInStorageToPdf()
+    {
+        $name = '4pages.epub';
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getEpubInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutEpubInStorageToPdf()
+    {
+        $name = '4pages.epub';
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromEpub.pdf";
+
+        $response = $this->pdfApi->putEpubInStorageToPdf($resultName, $src_path, $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+
+
+    public function testGetWebInStorageToPdf()
+    {
+        $sourceUrl = "http://google.com";
+
+        $response = $this->pdfApi->getWebInStorageToPdf($sourceUrl);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutWebInStorageToPdf()
+    {
+        $sourceUrl = "http://google.com";
+        $resultName = "fromWeb.pdf";
+
+        $response = $this->pdfApi->putWebInStorageToPdf( $resultName,  $sourceUrl, $height = null, 
+                $width = null, $is_landscape = null, $margin_left = null, 
+                $margin_bottom = null, $margin_right = null, $margin_top = null, 
+                $dst_folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+    public function testGetLaTeXInStorageToPdf()
+    {
+        $name = "TexExample.tex";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getLaTeXInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutLaTeXInStorageToPdf()
+    {
+        $name = "TexExample.tex";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromTex.pdf";
+
+        $response = $this->pdfApi->putLaTeXInStorageToPdf($resultName, $src_path, $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+    public function testGetMhtInStorageToPdf()
+    {
+        $name = "MhtExample.mht";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getMhtInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutMhtInStorageToPdf()
+    {
+        $name = "MhtExample.mht";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromMht.pdf";
+
+        $response = $this->pdfApi->putMhtInStorageToPdf($resultName, $src_path, $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+    public function testGetHtmlInStorageToPdf()
+    {
+        $name = "HtmlWithImage.zip";
+        $this->uploadFile($name);
+        $html_file_name = "HtmlWithImage.html";
+        $height = 650;
+        $width = 250;
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getHtmlInStorageToPdf($src_path, $html_file_name, $height, $width);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutHtmlInStorageToPdf()
+    {
+        $name = "HtmlWithImage.zip";
+        $this->uploadFile($name);
+        $html_file_name = "HtmlWithImage.html";
+        $height = 650;
+        $width = 250;
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromHtml.pdf";
+
+        $response = $this->pdfApi->putHtmlInStorageToPdf($name, $src_path, $html_file_name, 
+            $height, $width, $is_landscape = null, $margin_left = null, 
+            $margin_bottom = null, $margin_right = null, $margin_top = null, 
+            $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+    public function testGetXslFoInStorageToPdf()
+    {
+        $name = "XslfoExample.xslfo";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getXslFoInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutXslFoInStorageToPdf()
+    {
+        $name = "XslfoExample.xslfo";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromXlsFo.pdf";
+
+        $response = $this->pdfApi->putXslFoInStorageToPdf($resultName, $src_path, $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+    public function testGetXpsInStorageToPdf()
+    {
+        $name = "Simple.xps";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getXpsInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutXpsInStorageToPdf()
+    {
+        $name = "Simple.xps";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromXps.pdf";
+
+        $response = $this->pdfApi->putXpsInStorageToPdf($resultName, $src_path, $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+
+    public function testGetSvgInStorageToPdf()
+    {
+        $name = "Simple.svg";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getSvgInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutSvgInStorageToPdf()
+    {
+        $name = "Simple.svg";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromSvg.pdf";
+
+        $response = $this->pdfApi->putSvgInStorageToPdf($resultName, $src_path, $adjust_page_size = null, 
+            $height = null, $width = null, $is_landscape = null, $margin_left = null, 
+            $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+
+    public function testGetPclInStorageToPdf()
+    {
+        $name = "template.pcl";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getPclInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPclInStorageToPdf()
+    {
+        $name = "template.pcl";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromPcl.pdf";
+
+        $response = $this->pdfApi->putPclInStorageToPdf($resultName, $src_path, $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+
+    public function testGetXmlInStorageToPdf()
+    {
+        $name = "template.xml";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getXmlInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutXmlInStorageToPdf()
+    {
+        $name = "template.xml";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromXml.pdf";
+
+        $response = $this->pdfApi->putXmlInStorageToPdf($resultName, $src_path, $xsl_file_path = null, $dst_folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
 
 }

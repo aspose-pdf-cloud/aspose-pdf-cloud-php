@@ -3738,6 +3738,275 @@ class PdfApi
     }
 
     /**
+     * Operation getEpubInStorageToPdf
+     *
+     * Convert EPUB file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getEpubInStorageToPdf($src_path)
+    {
+        list($response) = $this->getEpubInStorageToPdfWithHttpInfo($src_path);
+        return $response;
+    }
+
+    /**
+     * Operation getEpubInStorageToPdfWithHttpInfo
+     *
+     * Convert EPUB file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getEpubInStorageToPdfWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getEpubInStorageToPdfRequest($src_path);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getEpubInStorageToPdfAsync
+     *
+     * Convert EPUB file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getEpubInStorageToPdfAsync($src_path)
+    {
+        return $this->getEpubInStorageToPdfAsyncWithHttpInfo($src_path)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getEpubInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert EPUB file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getEpubInStorageToPdfAsyncWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getEpubInStorageToPdfRequest($src_path);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getEpubInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getEpubInStorageToPdfRequest($src_path)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getEpubInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/epub';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getField
      *
      * Get document field by name.
@@ -5325,6 +5594,353 @@ class PdfApi
     }
 
     /**
+     * Operation getHtmlInStorageToPdf
+     *
+     * Convert HTML file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getHtmlInStorageToPdf($src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        list($response) = $this->getHtmlInStorageToPdfWithHttpInfo($src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        return $response;
+    }
+
+    /**
+     * Operation getHtmlInStorageToPdfWithHttpInfo
+     *
+     * Convert HTML file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getHtmlInStorageToPdfWithHttpInfo($src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getHtmlInStorageToPdfRequest($src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getHtmlInStorageToPdfAsync
+     *
+     * Convert HTML file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getHtmlInStorageToPdfAsync($src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        return $this->getHtmlInStorageToPdfAsyncWithHttpInfo($src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getHtmlInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert HTML file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getHtmlInStorageToPdfAsyncWithHttpInfo($src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getHtmlInStorageToPdfRequest($src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getHtmlInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getHtmlInStorageToPdfRequest($src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getHtmlInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'html_file_name' is set
+        if ($html_file_name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $html_file_name when calling getHtmlInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/html';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($html_file_name !== null) {
+            $queryParams['htmlFileName'] = ObjectSerializer::toQueryValue($html_file_name);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($is_landscape !== null) {
+            $queryParams['isLandscape'] = ObjectSerializer::toQueryValue($is_landscape);
+        }
+        // query params
+        if ($margin_left !== null) {
+            $queryParams['marginLeft'] = ObjectSerializer::toQueryValue($margin_left);
+        }
+        // query params
+        if ($margin_bottom !== null) {
+            $queryParams['marginBottom'] = ObjectSerializer::toQueryValue($margin_bottom);
+        }
+        // query params
+        if ($margin_right !== null) {
+            $queryParams['marginRight'] = ObjectSerializer::toQueryValue($margin_right);
+        }
+        // query params
+        if ($margin_top !== null) {
+            $queryParams['marginTop'] = ObjectSerializer::toQueryValue($margin_top);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getImage
      *
      * Extract document image in format specified.
@@ -5925,6 +6541,544 @@ class PdfApi
         } else {
             $headers = $this->headerSelector->selectHeaders(
                 ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getLaTeXInStorageToPdf
+     *
+     * Convert LaTeX file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getLaTeXInStorageToPdf($src_path)
+    {
+        list($response) = $this->getLaTeXInStorageToPdfWithHttpInfo($src_path);
+        return $response;
+    }
+
+    /**
+     * Operation getLaTeXInStorageToPdfWithHttpInfo
+     *
+     * Convert LaTeX file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getLaTeXInStorageToPdfWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getLaTeXInStorageToPdfRequest($src_path);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getLaTeXInStorageToPdfAsync
+     *
+     * Convert LaTeX file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getLaTeXInStorageToPdfAsync($src_path)
+    {
+        return $this->getLaTeXInStorageToPdfAsyncWithHttpInfo($src_path)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getLaTeXInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert LaTeX file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getLaTeXInStorageToPdfAsyncWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getLaTeXInStorageToPdfRequest($src_path);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getLaTeXInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getLaTeXInStorageToPdfRequest($src_path)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getLaTeXInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/latex';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getMhtInStorageToPdf
+     *
+     * Convert MHT file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getMhtInStorageToPdf($src_path)
+    {
+        list($response) = $this->getMhtInStorageToPdfWithHttpInfo($src_path);
+        return $response;
+    }
+
+    /**
+     * Operation getMhtInStorageToPdfWithHttpInfo
+     *
+     * Convert MHT file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getMhtInStorageToPdfWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getMhtInStorageToPdfRequest($src_path);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getMhtInStorageToPdfAsync
+     *
+     * Convert MHT file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getMhtInStorageToPdfAsync($src_path)
+    {
+        return $this->getMhtInStorageToPdfAsyncWithHttpInfo($src_path)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getMhtInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert MHT file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getMhtInStorageToPdfAsyncWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getMhtInStorageToPdfRequest($src_path);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getMhtInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getMhtInStorageToPdfRequest($src_path)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getMhtInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/mht';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
                 ['application/json']
             );
         }
@@ -8607,6 +9761,275 @@ class PdfApi
     }
 
     /**
+     * Operation getPclInStorageToPdf
+     *
+     * Convert PCL file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPclInStorageToPdf($src_path)
+    {
+        list($response) = $this->getPclInStorageToPdfWithHttpInfo($src_path);
+        return $response;
+    }
+
+    /**
+     * Operation getPclInStorageToPdfWithHttpInfo
+     *
+     * Convert PCL file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPclInStorageToPdfWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPclInStorageToPdfRequest($src_path);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPclInStorageToPdfAsync
+     *
+     * Convert PCL file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPclInStorageToPdfAsync($src_path)
+    {
+        return $this->getPclInStorageToPdfAsyncWithHttpInfo($src_path)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPclInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert PCL file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPclInStorageToPdfAsyncWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPclInStorageToPdfRequest($src_path);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPclInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPclInStorageToPdfRequest($src_path)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getPclInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/pcl';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getPdfInStorageToDoc
      *
      * Converts PDF document (located on storage) to DOC format and returns resulting file in response content
@@ -8966,7 +10389,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
@@ -8985,7 +10408,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
@@ -9062,7 +10485,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \InvalidArgumentException
@@ -9084,7 +10507,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \InvalidArgumentException
@@ -9136,7 +10559,7 @@ class PdfApi
      * Create request for operation 'getPdfInStorageToEpub'
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \InvalidArgumentException
@@ -9261,7 +10684,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -9307,7 +10730,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -9411,7 +10834,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -9460,7 +10883,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -9539,7 +10962,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -13583,6 +15006,347 @@ class PdfApi
     }
 
     /**
+     * Operation getSvgInStorageToPdf
+     *
+     * Convert SVG file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getSvgInStorageToPdf($src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        list($response) = $this->getSvgInStorageToPdfWithHttpInfo($src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        return $response;
+    }
+
+    /**
+     * Operation getSvgInStorageToPdfWithHttpInfo
+     *
+     * Convert SVG file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getSvgInStorageToPdfWithHttpInfo($src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getSvgInStorageToPdfRequest($src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getSvgInStorageToPdfAsync
+     *
+     * Convert SVG file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getSvgInStorageToPdfAsync($src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        return $this->getSvgInStorageToPdfAsyncWithHttpInfo($src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getSvgInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert SVG file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getSvgInStorageToPdfAsyncWithHttpInfo($src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getSvgInStorageToPdfRequest($src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getSvgInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getSvgInStorageToPdfRequest($src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getSvgInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/svg';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($adjust_page_size !== null) {
+            $queryParams['adjustPageSize'] = ObjectSerializer::toQueryValue($adjust_page_size);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($is_landscape !== null) {
+            $queryParams['isLandscape'] = ObjectSerializer::toQueryValue($is_landscape);
+        }
+        // query params
+        if ($margin_left !== null) {
+            $queryParams['marginLeft'] = ObjectSerializer::toQueryValue($margin_left);
+        }
+        // query params
+        if ($margin_bottom !== null) {
+            $queryParams['marginBottom'] = ObjectSerializer::toQueryValue($margin_bottom);
+        }
+        // query params
+        if ($margin_right !== null) {
+            $queryParams['marginRight'] = ObjectSerializer::toQueryValue($margin_right);
+        }
+        // query params
+        if ($margin_top !== null) {
+            $queryParams['marginTop'] = ObjectSerializer::toQueryValue($margin_top);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getText
      *
      * Read document text.
@@ -14552,6 +16316,338 @@ class PdfApi
     }
 
     /**
+     * Operation getWebInStorageToPdf
+     *
+     * Convert web page to PDF format and return resulting file in response.
+     *
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getWebInStorageToPdf($url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        list($response) = $this->getWebInStorageToPdfWithHttpInfo($url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        return $response;
+    }
+
+    /**
+     * Operation getWebInStorageToPdfWithHttpInfo
+     *
+     * Convert web page to PDF format and return resulting file in response.
+     *
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getWebInStorageToPdfWithHttpInfo($url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getWebInStorageToPdfRequest($url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getWebInStorageToPdfAsync
+     *
+     * Convert web page to PDF format and return resulting file in response.
+     *
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getWebInStorageToPdfAsync($url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        return $this->getWebInStorageToPdfAsyncWithHttpInfo($url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getWebInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert web page to PDF format and return resulting file in response.
+     *
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getWebInStorageToPdfAsyncWithHttpInfo($url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getWebInStorageToPdfRequest($url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getWebInStorageToPdf'
+     *
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getWebInStorageToPdfRequest($url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
+    {
+        // verify the required parameter 'url' is set
+        if ($url === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $url when calling getWebInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/web';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($url !== null) {
+            $queryParams['url'] = ObjectSerializer::toQueryValue($url);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($is_landscape !== null) {
+            $queryParams['isLandscape'] = ObjectSerializer::toQueryValue($is_landscape);
+        }
+        // query params
+        if ($margin_left !== null) {
+            $queryParams['marginLeft'] = ObjectSerializer::toQueryValue($margin_left);
+        }
+        // query params
+        if ($margin_bottom !== null) {
+            $queryParams['marginBottom'] = ObjectSerializer::toQueryValue($margin_bottom);
+        }
+        // query params
+        if ($margin_right !== null) {
+            $queryParams['marginRight'] = ObjectSerializer::toQueryValue($margin_right);
+        }
+        // query params
+        if ($margin_top !== null) {
+            $queryParams['marginTop'] = ObjectSerializer::toQueryValue($margin_top);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getWordsPerPage
      *
      * Get number of words per document page.
@@ -15048,6 +17144,822 @@ class PdfApi
                 $resourcePath
             );
         }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getXmlInStorageToPdf
+     *
+     * Convert XML file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getXmlInStorageToPdf($src_path, $xsl_file_path = null)
+    {
+        list($response) = $this->getXmlInStorageToPdfWithHttpInfo($src_path, $xsl_file_path);
+        return $response;
+    }
+
+    /**
+     * Operation getXmlInStorageToPdfWithHttpInfo
+     *
+     * Convert XML file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getXmlInStorageToPdfWithHttpInfo($src_path, $xsl_file_path = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getXmlInStorageToPdfRequest($src_path, $xsl_file_path);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getXmlInStorageToPdfAsync
+     *
+     * Convert XML file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getXmlInStorageToPdfAsync($src_path, $xsl_file_path = null)
+    {
+        return $this->getXmlInStorageToPdfAsyncWithHttpInfo($src_path, $xsl_file_path)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getXmlInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert XML file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getXmlInStorageToPdfAsyncWithHttpInfo($src_path, $xsl_file_path = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getXmlInStorageToPdfRequest($src_path, $xsl_file_path);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getXmlInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getXmlInStorageToPdfRequest($src_path, $xsl_file_path = null)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getXmlInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/xml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($xsl_file_path !== null) {
+            $queryParams['xslFilePath'] = ObjectSerializer::toQueryValue($xsl_file_path);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getXpsInStorageToPdf
+     *
+     * Convert XPS file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getXpsInStorageToPdf($src_path)
+    {
+        list($response) = $this->getXpsInStorageToPdfWithHttpInfo($src_path);
+        return $response;
+    }
+
+    /**
+     * Operation getXpsInStorageToPdfWithHttpInfo
+     *
+     * Convert XPS file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getXpsInStorageToPdfWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getXpsInStorageToPdfRequest($src_path);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getXpsInStorageToPdfAsync
+     *
+     * Convert XPS file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getXpsInStorageToPdfAsync($src_path)
+    {
+        return $this->getXpsInStorageToPdfAsyncWithHttpInfo($src_path)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getXpsInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert XPS file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getXpsInStorageToPdfAsyncWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getXpsInStorageToPdfRequest($src_path);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getXpsInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getXpsInStorageToPdfRequest($src_path)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getXpsInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/xps';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getXslFoInStorageToPdf
+     *
+     * Convert XslFo file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xslfo) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getXslFoInStorageToPdf($src_path)
+    {
+        list($response) = $this->getXslFoInStorageToPdfWithHttpInfo($src_path);
+        return $response;
+    }
+
+    /**
+     * Operation getXslFoInStorageToPdfWithHttpInfo
+     *
+     * Convert XslFo file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xslfo) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getXslFoInStorageToPdfWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getXslFoInStorageToPdfRequest($src_path);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getXslFoInStorageToPdfAsync
+     *
+     * Convert XslFo file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xslfo) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getXslFoInStorageToPdfAsync($src_path)
+    {
+        return $this->getXslFoInStorageToPdfAsyncWithHttpInfo($src_path)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getXslFoInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert XslFo file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xslfo) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getXslFoInStorageToPdfAsyncWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getXslFoInStorageToPdfRequest($src_path);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getXslFoInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xslfo) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getXslFoInStorageToPdfRequest($src_path)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getXslFoInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/xslfo';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+
 
         // body params
         $_tempBody = null;
@@ -22187,6 +25099,303 @@ class PdfApi
     }
 
     /**
+     * Operation putEpubInStorageToPdf
+     *
+     * Convert EPUB file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putEpubInStorageToPdf($name, $src_path, $dst_folder = null)
+    {
+        list($response) = $this->putEpubInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putEpubInStorageToPdfWithHttpInfo
+     *
+     * Convert EPUB file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putEpubInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putEpubInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putEpubInStorageToPdfAsync
+     *
+     * Convert EPUB file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putEpubInStorageToPdfAsync($name, $src_path, $dst_folder = null)
+    {
+        return $this->putEpubInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putEpubInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert EPUB file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putEpubInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putEpubInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putEpubInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.epub) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putEpubInStorageToPdfRequest($name, $src_path, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putEpubInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putEpubInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/epub';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putFieldsFlatten
      *
      * Flatten form fields in document.
@@ -22391,6 +25600,678 @@ class PdfApi
         // query params
         if ($folder !== null) {
             $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putHtmlInStorageToPdf
+     *
+     * Convert HTML file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putHtmlInStorageToPdf($name, $src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        list($response) = $this->putHtmlInStorageToPdfWithHttpInfo($name, $src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putHtmlInStorageToPdfWithHttpInfo
+     *
+     * Convert HTML file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putHtmlInStorageToPdfWithHttpInfo($name, $src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putHtmlInStorageToPdfRequest($name, $src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putHtmlInStorageToPdfAsync
+     *
+     * Convert HTML file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putHtmlInStorageToPdfAsync($name, $src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        return $this->putHtmlInStorageToPdfAsyncWithHttpInfo($name, $src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putHtmlInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert HTML file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putHtmlInStorageToPdfAsyncWithHttpInfo($name, $src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putHtmlInStorageToPdfRequest($name, $src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putHtmlInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.zip) (required)
+     * @param  string $html_file_name Name of HTML file in ZIP. (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putHtmlInStorageToPdfRequest($name, $src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putHtmlInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putHtmlInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'html_file_name' is set
+        if ($html_file_name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $html_file_name when calling putHtmlInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/html';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($html_file_name !== null) {
+            $queryParams['htmlFileName'] = ObjectSerializer::toQueryValue($html_file_name);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($is_landscape !== null) {
+            $queryParams['isLandscape'] = ObjectSerializer::toQueryValue($is_landscape);
+        }
+        // query params
+        if ($margin_left !== null) {
+            $queryParams['marginLeft'] = ObjectSerializer::toQueryValue($margin_left);
+        }
+        // query params
+        if ($margin_bottom !== null) {
+            $queryParams['marginBottom'] = ObjectSerializer::toQueryValue($margin_bottom);
+        }
+        // query params
+        if ($margin_right !== null) {
+            $queryParams['marginRight'] = ObjectSerializer::toQueryValue($margin_right);
+        }
+        // query params
+        if ($margin_top !== null) {
+            $queryParams['marginTop'] = ObjectSerializer::toQueryValue($margin_top);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putLaTeXInStorageToPdf
+     *
+     * Convert LaTeX file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putLaTeXInStorageToPdf($name, $src_path, $dst_folder = null)
+    {
+        list($response) = $this->putLaTeXInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putLaTeXInStorageToPdfWithHttpInfo
+     *
+     * Convert LaTeX file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putLaTeXInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putLaTeXInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putLaTeXInStorageToPdfAsync
+     *
+     * Convert LaTeX file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putLaTeXInStorageToPdfAsync($name, $src_path, $dst_folder = null)
+    {
+        return $this->putLaTeXInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putLaTeXInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert LaTeX file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putLaTeXInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putLaTeXInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putLaTeXInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.tex) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putLaTeXInStorageToPdfRequest($name, $src_path, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putLaTeXInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putLaTeXInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/latex';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
         }
 
         // path params
@@ -22703,6 +26584,303 @@ class PdfApi
         if (isset($merge_documents)) {
             $_tempBody = $merge_documents;
         }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putMhtInStorageToPdf
+     *
+     * Convert MHT file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putMhtInStorageToPdf($name, $src_path, $dst_folder = null)
+    {
+        list($response) = $this->putMhtInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putMhtInStorageToPdfWithHttpInfo
+     *
+     * Convert MHT file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putMhtInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putMhtInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putMhtInStorageToPdfAsync
+     *
+     * Convert MHT file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putMhtInStorageToPdfAsync($name, $src_path, $dst_folder = null)
+    {
+        return $this->putMhtInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putMhtInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert MHT file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putMhtInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putMhtInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putMhtInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.mht) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putMhtInStorageToPdfRequest($name, $src_path, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putMhtInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putMhtInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/mht';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -23101,6 +27279,303 @@ class PdfApi
     }
 
     /**
+     * Operation putPclInStorageToPdf
+     *
+     * Convert PCL file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPclInStorageToPdf($name, $src_path, $dst_folder = null)
+    {
+        list($response) = $this->putPclInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPclInStorageToPdfWithHttpInfo
+     *
+     * Convert PCL file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPclInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPclInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPclInStorageToPdfAsync
+     *
+     * Convert PCL file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPclInStorageToPdfAsync($name, $src_path, $dst_folder = null)
+    {
+        return $this->putPclInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPclInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert PCL file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPclInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPclInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPclInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.pcl) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPclInStorageToPdfRequest($name, $src_path, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPclInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putPclInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/pcl';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putPdfInRequestToDoc
      *
      * Converts PDF document (in request content) to DOC format and uploads resulting file to storage.
@@ -23118,7 +27593,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToDoc($out_path, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $file = null)
     {
@@ -23144,11 +27619,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToDocWithHttpInfo($out_path, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToDocRequest($out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $file);
 
         try {
@@ -23200,7 +27675,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -23260,7 +27735,7 @@ class PdfApi
      */
     public function putPdfInRequestToDocAsyncWithHttpInfo($out_path, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToDocRequest($out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $file);
 
         return $this->client
@@ -23461,12 +27936,12 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToEpub($out_path, $content_recognition_mode = null, $file = null)
     {
@@ -23480,16 +27955,16 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToEpubWithHttpInfo($out_path, $content_recognition_mode = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToEpubRequest($out_path, $content_recognition_mode, $file);
 
         try {
@@ -23541,7 +28016,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -23557,7 +28032,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
      * @throws \InvalidArgumentException
@@ -23579,7 +28054,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
      * @throws \InvalidArgumentException
@@ -23587,7 +28062,7 @@ class PdfApi
      */
     public function putPdfInRequestToEpubAsyncWithHttpInfo($out_path, $content_recognition_mode = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToEpubRequest($out_path, $content_recognition_mode, $file);
 
         return $this->client
@@ -23631,7 +28106,7 @@ class PdfApi
      * Create request for operation 'putPdfInRequestToEpub'
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
      * @throws \InvalidArgumentException
@@ -23757,7 +28232,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -23785,7 +28260,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToHtml($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
     {
@@ -23803,7 +28278,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -23831,11 +28306,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToHtmlWithHttpInfo($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToHtmlRequest($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file);
 
         try {
@@ -23887,7 +28362,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -23907,7 +28382,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -23956,7 +28431,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -23987,7 +28462,7 @@ class PdfApi
      */
     public function putPdfInRequestToHtmlAsyncWithHttpInfo($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToHtmlRequest($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file);
 
         return $this->client
@@ -24035,7 +28510,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -24296,7 +28771,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToLaTeX($out_path, $pages_count = null, $file = null)
     {
@@ -24315,11 +28790,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToLaTeXWithHttpInfo($out_path, $pages_count = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToLaTeXRequest($out_path, $pages_count, $file);
 
         try {
@@ -24371,7 +28846,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -24417,7 +28892,7 @@ class PdfApi
      */
     public function putPdfInRequestToLaTeXAsyncWithHttpInfo($out_path, $pages_count = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToLaTeXRequest($out_path, $pages_count, $file);
 
         return $this->client
@@ -24587,7 +29062,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToMobiXml($out_path, $file = null)
     {
@@ -24605,11 +29080,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToMobiXmlWithHttpInfo($out_path, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToMobiXmlRequest($out_path, $file);
 
         try {
@@ -24661,7 +29136,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -24705,7 +29180,7 @@ class PdfApi
      */
     public function putPdfInRequestToMobiXmlAsyncWithHttpInfo($out_path, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToMobiXmlRequest($out_path, $file);
 
         return $this->client
@@ -24871,7 +29346,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToPdfA($out_path, $type, $file = null)
     {
@@ -24890,11 +29365,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToPdfAWithHttpInfo($out_path, $type, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToPdfARequest($out_path, $type, $file);
 
         try {
@@ -24946,7 +29421,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -24992,7 +29467,7 @@ class PdfApi
      */
     public function putPdfInRequestToPdfAAsyncWithHttpInfo($out_path, $type, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToPdfARequest($out_path, $type, $file);
 
         return $this->client
@@ -25170,7 +29645,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToPptx($out_path, $separate_images = null, $slides_as_images = null, $file = null)
     {
@@ -25190,11 +29665,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToPptxWithHttpInfo($out_path, $separate_images = null, $slides_as_images = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToPptxRequest($out_path, $separate_images, $slides_as_images, $file);
 
         try {
@@ -25246,7 +29721,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -25294,7 +29769,7 @@ class PdfApi
      */
     public function putPdfInRequestToPptxAsyncWithHttpInfo($out_path, $separate_images = null, $slides_as_images = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToPptxRequest($out_path, $separate_images, $slides_as_images, $file);
 
         return $this->client
@@ -25470,7 +29945,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToSvg($out_path, $compress_output_to_zip_archive = null, $file = null)
     {
@@ -25489,11 +29964,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToSvgWithHttpInfo($out_path, $compress_output_to_zip_archive = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToSvgRequest($out_path, $compress_output_to_zip_archive, $file);
 
         try {
@@ -25545,7 +30020,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -25591,7 +30066,7 @@ class PdfApi
      */
     public function putPdfInRequestToSvgAsyncWithHttpInfo($out_path, $compress_output_to_zip_archive = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToSvgRequest($out_path, $compress_output_to_zip_archive, $file);
 
         return $this->client
@@ -25776,7 +30251,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToTiff($out_path, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $file = null)
     {
@@ -25809,11 +30284,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToTiffWithHttpInfo($out_path, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToTiffRequest($out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $file);
 
         try {
@@ -25865,7 +30340,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -25939,7 +30414,7 @@ class PdfApi
      */
     public function putPdfInRequestToTiffAsyncWithHttpInfo($out_path, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToTiffRequest($out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $file);
 
         return $this->client
@@ -26183,7 +30658,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToXls($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $file = null)
     {
@@ -26205,11 +30680,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToXlsRequest($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $file);
 
         try {
@@ -26261,7 +30736,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -26313,7 +30788,7 @@ class PdfApi
      */
     public function putPdfInRequestToXlsAsyncWithHttpInfo($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToXlsRequest($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $file);
 
         return $this->client
@@ -26498,7 +30973,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToXml($out_path, $file = null)
     {
@@ -26516,11 +30991,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToXmlWithHttpInfo($out_path, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToXmlRequest($out_path, $file);
 
         try {
@@ -26572,7 +31047,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -26616,7 +31091,7 @@ class PdfApi
      */
     public function putPdfInRequestToXmlAsyncWithHttpInfo($out_path, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToXmlRequest($out_path, $file);
 
         return $this->client
@@ -26781,7 +31256,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInRequestToXps($out_path, $file = null)
     {
@@ -26799,11 +31274,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInRequestToXpsWithHttpInfo($out_path, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToXpsRequest($out_path, $file);
 
         try {
@@ -26855,7 +31330,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -26899,7 +31374,7 @@ class PdfApi
      */
     public function putPdfInRequestToXpsAsyncWithHttpInfo($out_path, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInRequestToXpsRequest($out_path, $file);
 
         return $this->client
@@ -27073,7 +31548,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToDoc($name, $out_path, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $folder = null)
     {
@@ -27100,11 +31575,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToDocWithHttpInfo($name, $out_path, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToDocRequest($name, $out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder);
 
         try {
@@ -27156,7 +31631,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -27218,7 +31693,7 @@ class PdfApi
      */
     public function putPdfInStorageToDocAsyncWithHttpInfo($name, $out_path, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToDocRequest($name, $out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder);
 
         return $this->client
@@ -27430,12 +31905,12 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToEpub($name, $out_path, $content_recognition_mode = null, $folder = null)
     {
@@ -27450,16 +31925,16 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToEpubWithHttpInfo($name, $out_path, $content_recognition_mode = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToEpubRequest($name, $out_path, $content_recognition_mode, $folder);
 
         try {
@@ -27511,7 +31986,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -27528,7 +32003,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \InvalidArgumentException
@@ -27551,7 +32026,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \InvalidArgumentException
@@ -27559,7 +32034,7 @@ class PdfApi
      */
     public function putPdfInStorageToEpubAsyncWithHttpInfo($name, $out_path, $content_recognition_mode = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToEpubRequest($name, $out_path, $content_recognition_mode, $folder);
 
         return $this->client
@@ -27604,7 +32079,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode �roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      *
      * @throws \InvalidArgumentException
@@ -27740,7 +32215,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -27768,7 +32243,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToHtml($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
     {
@@ -27787,7 +32262,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -27815,11 +32290,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToHtmlWithHttpInfo($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToHtmlRequest($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
 
         try {
@@ -27871,7 +32346,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -27892,7 +32367,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -27942,7 +32417,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -27973,7 +32448,7 @@ class PdfApi
      */
     public function putPdfInStorageToHtmlAsyncWithHttpInfo($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToHtmlRequest($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
 
         return $this->client
@@ -28022,7 +32497,7 @@ class PdfApi
      * @param  bool $compress_svg_graphics_if_any The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. (optional)
      * @param  bool $convert_marked_content_to_layers If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with \&quot;data-pdflayer\&quot; attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. (optional)
      * @param  string $default_font_name Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. (optional)
-     * @param  int $document_type Result document type. (optional)
+     * @param  string $document_type Result document type. (optional)
      * @param  bool $fixed_layout The value indicating whether that HTML is created as fixed layout. (optional)
      * @param  int $image_resolution Resolution for image rendering. (optional)
      * @param  int $minimal_line_width This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. (optional)
@@ -28293,7 +32768,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToLaTeX($name, $out_path, $pages_count = null, $folder = null)
     {
@@ -28313,11 +32788,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToLaTeXWithHttpInfo($name, $out_path, $pages_count = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToLaTeXRequest($name, $out_path, $pages_count, $folder);
 
         try {
@@ -28369,7 +32844,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -28417,7 +32892,7 @@ class PdfApi
      */
     public function putPdfInStorageToLaTeXAsyncWithHttpInfo($name, $out_path, $pages_count = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToLaTeXRequest($name, $out_path, $pages_count, $folder);
 
         return $this->client
@@ -28598,7 +33073,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToMobiXml($name, $out_path, $folder = null)
     {
@@ -28617,11 +33092,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToMobiXmlWithHttpInfo($name, $out_path, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToMobiXmlRequest($name, $out_path, $folder);
 
         try {
@@ -28673,7 +33148,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -28719,7 +33194,7 @@ class PdfApi
      */
     public function putPdfInStorageToMobiXmlAsyncWithHttpInfo($name, $out_path, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToMobiXmlRequest($name, $out_path, $folder);
 
         return $this->client
@@ -28896,7 +33371,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToPdfA($name, $out_path, $type, $folder = null)
     {
@@ -28916,11 +33391,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToPdfAWithHttpInfo($name, $out_path, $type, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToPdfARequest($name, $out_path, $type, $folder);
 
         try {
@@ -28972,7 +33447,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -29020,7 +33495,7 @@ class PdfApi
      */
     public function putPdfInStorageToPdfAAsyncWithHttpInfo($name, $out_path, $type, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToPdfARequest($name, $out_path, $type, $folder);
 
         return $this->client
@@ -29209,7 +33684,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToPptx($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
     {
@@ -29230,11 +33705,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToPptxWithHttpInfo($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToPptxRequest($name, $out_path, $separate_images, $slides_as_images, $folder);
 
         try {
@@ -29286,7 +33761,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -29336,7 +33811,7 @@ class PdfApi
      */
     public function putPdfInStorageToPptxAsyncWithHttpInfo($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToPptxRequest($name, $out_path, $separate_images, $slides_as_images, $folder);
 
         return $this->client
@@ -29523,7 +33998,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToSvg($name, $out_path, $compress_output_to_zip_archive = null, $folder = null)
     {
@@ -29543,11 +34018,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToSvgWithHttpInfo($name, $out_path, $compress_output_to_zip_archive = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToSvgRequest($name, $out_path, $compress_output_to_zip_archive, $folder);
 
         try {
@@ -29599,7 +34074,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -29647,7 +34122,7 @@ class PdfApi
      */
     public function putPdfInStorageToSvgAsyncWithHttpInfo($name, $out_path, $compress_output_to_zip_archive = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToSvgRequest($name, $out_path, $compress_output_to_zip_archive, $folder);
 
         return $this->client
@@ -29843,7 +34318,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToTiff($name, $out_path, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $folder = null)
     {
@@ -29877,11 +34352,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToTiffWithHttpInfo($name, $out_path, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToTiffRequest($name, $out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder);
 
         try {
@@ -29933,7 +34408,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -30009,7 +34484,7 @@ class PdfApi
      */
     public function putPdfInStorageToTiffAsyncWithHttpInfo($name, $out_path, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToTiffRequest($name, $out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder);
 
         return $this->client
@@ -30264,7 +34739,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToXls($name, $out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $folder = null)
     {
@@ -30287,11 +34762,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToXlsWithHttpInfo($name, $out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToXlsRequest($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder);
 
         try {
@@ -30343,7 +34818,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -30397,7 +34872,7 @@ class PdfApi
      */
     public function putPdfInStorageToXlsAsyncWithHttpInfo($name, $out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToXlsRequest($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder);
 
         return $this->client
@@ -30593,7 +35068,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToXml($name, $out_path, $folder = null)
     {
@@ -30612,11 +35087,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToXmlWithHttpInfo($name, $out_path, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToXmlRequest($name, $out_path, $folder);
 
         try {
@@ -30668,7 +35143,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -30714,7 +35189,7 @@ class PdfApi
      */
     public function putPdfInStorageToXmlAsyncWithHttpInfo($name, $out_path, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToXmlRequest($name, $out_path, $folder);
 
         return $this->client
@@ -30890,7 +35365,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putPdfInStorageToXps($name, $out_path, $folder = null)
     {
@@ -30909,11 +35384,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putPdfInStorageToXpsWithHttpInfo($name, $out_path, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToXpsRequest($name, $out_path, $folder);
 
         try {
@@ -30965,7 +35440,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -31011,7 +35486,7 @@ class PdfApi
      */
     public function putPdfInStorageToXpsAsyncWithHttpInfo($name, $out_path, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putPdfInStorageToXpsRequest($name, $out_path, $folder);
 
         return $this->client
@@ -32085,6 +36560,375 @@ class PdfApi
     }
 
     /**
+     * Operation putSvgInStorageToPdf
+     *
+     * Convert SVG file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putSvgInStorageToPdf($name, $src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        list($response) = $this->putSvgInStorageToPdfWithHttpInfo($name, $src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putSvgInStorageToPdfWithHttpInfo
+     *
+     * Convert SVG file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putSvgInStorageToPdfWithHttpInfo($name, $src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putSvgInStorageToPdfRequest($name, $src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putSvgInStorageToPdfAsync
+     *
+     * Convert SVG file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putSvgInStorageToPdfAsync($name, $src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        return $this->putSvgInStorageToPdfAsyncWithHttpInfo($name, $src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putSvgInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert SVG file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putSvgInStorageToPdfAsyncWithHttpInfo($name, $src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putSvgInStorageToPdfRequest($name, $src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putSvgInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.svg) (required)
+     * @param  bool $adjust_page_size Adjust page size (optional)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putSvgInStorageToPdfRequest($name, $src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putSvgInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putSvgInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/svg';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($adjust_page_size !== null) {
+            $queryParams['adjustPageSize'] = ObjectSerializer::toQueryValue($adjust_page_size);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($is_landscape !== null) {
+            $queryParams['isLandscape'] = ObjectSerializer::toQueryValue($is_landscape);
+        }
+        // query params
+        if ($margin_left !== null) {
+            $queryParams['marginLeft'] = ObjectSerializer::toQueryValue($margin_left);
+        }
+        // query params
+        if ($margin_bottom !== null) {
+            $queryParams['marginBottom'] = ObjectSerializer::toQueryValue($margin_bottom);
+        }
+        // query params
+        if ($margin_right !== null) {
+            $queryParams['marginRight'] = ObjectSerializer::toQueryValue($margin_right);
+        }
+        // query params
+        if ($margin_top !== null) {
+            $queryParams['marginTop'] = ObjectSerializer::toQueryValue($margin_top);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putUpdateField
      *
      * Update field.
@@ -32702,6 +37546,366 @@ class PdfApi
     }
 
     /**
+     * Operation putWebInStorageToPdf
+     *
+     * Convert web page to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putWebInStorageToPdf($name, $url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        list($response) = $this->putWebInStorageToPdfWithHttpInfo($name, $url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putWebInStorageToPdfWithHttpInfo
+     *
+     * Convert web page to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putWebInStorageToPdfWithHttpInfo($name, $url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putWebInStorageToPdfRequest($name, $url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putWebInStorageToPdfAsync
+     *
+     * Convert web page to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putWebInStorageToPdfAsync($name, $url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        return $this->putWebInStorageToPdfAsyncWithHttpInfo($name, $url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putWebInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert web page to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putWebInStorageToPdfAsyncWithHttpInfo($name, $url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putWebInStorageToPdfRequest($name, $url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putWebInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $url Source url (required)
+     * @param  double $height Page height (optional)
+     * @param  double $width Page width (optional)
+     * @param  bool $is_landscape Is page landscaped (optional)
+     * @param  double $margin_left Page margin left (optional)
+     * @param  double $margin_bottom Page margin bottom (optional)
+     * @param  double $margin_right Page margin right (optional)
+     * @param  double $margin_top Page margin top (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putWebInStorageToPdfRequest($name, $url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putWebInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'url' is set
+        if ($url === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $url when calling putWebInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/web';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($url !== null) {
+            $queryParams['url'] = ObjectSerializer::toQueryValue($url);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($is_landscape !== null) {
+            $queryParams['isLandscape'] = ObjectSerializer::toQueryValue($is_landscape);
+        }
+        // query params
+        if ($margin_left !== null) {
+            $queryParams['marginLeft'] = ObjectSerializer::toQueryValue($margin_left);
+        }
+        // query params
+        if ($margin_bottom !== null) {
+            $queryParams['marginBottom'] = ObjectSerializer::toQueryValue($margin_bottom);
+        }
+        // query params
+        if ($margin_right !== null) {
+            $queryParams['marginRight'] = ObjectSerializer::toQueryValue($margin_right);
+        }
+        // query params
+        if ($margin_top !== null) {
+            $queryParams['marginTop'] = ObjectSerializer::toQueryValue($margin_top);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putXfaPdfInRequestToAcroForm
      *
      * Converts PDF document which contatins XFA form (in request content) to PDF with AcroForm and uploads resulting file to storage.
@@ -32711,7 +37915,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putXfaPdfInRequestToAcroForm($out_path, $file = null)
     {
@@ -32729,11 +37933,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putXfaPdfInRequestToAcroFormWithHttpInfo($out_path, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putXfaPdfInRequestToAcroFormRequest($out_path, $file);
 
         try {
@@ -32785,7 +37989,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -32829,7 +38033,7 @@ class PdfApi
      */
     public function putXfaPdfInRequestToAcroFormAsyncWithHttpInfo($out_path, $file = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putXfaPdfInRequestToAcroFormRequest($out_path, $file);
 
         return $this->client
@@ -32995,7 +38199,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \SplFileObject
+     * @return \Aspose\PDF\Model\SaaSposeResponse
      */
     public function putXfaPdfInStorageToAcroForm($name, $out_path, $folder = null)
     {
@@ -33014,11 +38218,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function putXfaPdfInStorageToAcroFormWithHttpInfo($name, $out_path, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putXfaPdfInStorageToAcroFormRequest($name, $out_path, $folder);
 
         try {
@@ -33070,7 +38274,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\SplFileObject',
+                        '\Aspose\PDF\Model\SaaSposeResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -33116,7 +38320,7 @@ class PdfApi
      */
     public function putXfaPdfInStorageToAcroFormAsyncWithHttpInfo($name, $out_path, $folder = null)
     {
-        $returnType = '\SplFileObject';
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
         $request = $this->putXfaPdfInStorageToAcroFormRequest($name, $out_path, $folder);
 
         return $this->client
@@ -33282,6 +38486,906 @@ class PdfApi
     }
 
     /**
+     * Operation putXmlInStorageToPdf
+     *
+     * Convert XML file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putXmlInStorageToPdf($name, $src_path, $xsl_file_path = null, $dst_folder = null)
+    {
+        list($response) = $this->putXmlInStorageToPdfWithHttpInfo($name, $src_path, $xsl_file_path, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putXmlInStorageToPdfWithHttpInfo
+     *
+     * Convert XML file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putXmlInStorageToPdfWithHttpInfo($name, $src_path, $xsl_file_path = null, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putXmlInStorageToPdfRequest($name, $src_path, $xsl_file_path, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putXmlInStorageToPdfAsync
+     *
+     * Convert XML file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXmlInStorageToPdfAsync($name, $src_path, $xsl_file_path = null, $dst_folder = null)
+    {
+        return $this->putXmlInStorageToPdfAsyncWithHttpInfo($name, $src_path, $xsl_file_path, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putXmlInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert XML file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXmlInStorageToPdfAsyncWithHttpInfo($name, $src_path, $xsl_file_path = null, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putXmlInStorageToPdfRequest($name, $src_path, $xsl_file_path, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putXmlInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xml) (required)
+     * @param  string $xsl_file_path Full XSL source filename (ex. /folder1/folder2/template.xsl) (optional)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putXmlInStorageToPdfRequest($name, $src_path, $xsl_file_path = null, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putXmlInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putXmlInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/xml';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($xsl_file_path !== null) {
+            $queryParams['xslFilePath'] = ObjectSerializer::toQueryValue($xsl_file_path);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putXpsInStorageToPdf
+     *
+     * Convert XPS file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putXpsInStorageToPdf($name, $src_path, $dst_folder = null)
+    {
+        list($response) = $this->putXpsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putXpsInStorageToPdfWithHttpInfo
+     *
+     * Convert XPS file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putXpsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putXpsInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putXpsInStorageToPdfAsync
+     *
+     * Convert XPS file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXpsInStorageToPdfAsync($name, $src_path, $dst_folder = null)
+    {
+        return $this->putXpsInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putXpsInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert XPS file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXpsInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putXpsInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putXpsInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putXpsInStorageToPdfRequest($name, $src_path, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putXpsInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putXpsInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/xps';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putXslFoInStorageToPdf
+     *
+     * Convert XslFo file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xpsfo) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putXslFoInStorageToPdf($name, $src_path, $dst_folder = null)
+    {
+        list($response) = $this->putXslFoInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putXslFoInStorageToPdfWithHttpInfo
+     *
+     * Convert XslFo file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xpsfo) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putXslFoInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putXslFoInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putXslFoInStorageToPdfAsync
+     *
+     * Convert XslFo file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xpsfo) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXslFoInStorageToPdfAsync($name, $src_path, $dst_folder = null)
+    {
+        return $this->putXslFoInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putXslFoInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert XslFo file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xpsfo) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putXslFoInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putXslFoInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putXslFoInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.xpsfo) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putXslFoInStorageToPdfRequest($name, $src_path, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putXslFoInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putXslFoInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/xslfo';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Create http client option
      *
      * @throws \RuntimeException on file opening failure
@@ -33296,7 +39400,10 @@ class PdfApi
                 throw new \RuntimeException('Failed to open the debug file: ' . $this->config->getDebugFile());
             }
         }
-
+        
+        //PDFCLOUD-418
+        $options['connect_timeout'] = 5 * 60;
+        
         return $options;
     }
 

@@ -1,6 +1,6 @@
 <?php
 /**
- * RecognitionMode2
+ * DocRecognitionMode
  *
  * PHP version 5
  *
@@ -41,22 +41,21 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * RecognitionMode2 Class Doc Comment
+ * DocRecognitionMode Class Doc Comment
  *
  * @category Class
- * @description When PDF file (that usually has fixed layout) is being converted,             the conversion engine tries to perform grouping and multi-level analysis to restore             the original document author&#39;s intent and produce result in flow layout.  This property tunes that conversion for this or that             desirable method of recognition of content.
+ * @description Allows to control how a PDF document is converted into a word processing document.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class RecognitionMode2
+class DocRecognitionMode
 {
     /**
      * Possible values of this enum
      */
+    const TEXTBOX = 'Textbox';
     const FLOW = 'Flow';
-    const PDF_FLOW = 'PdfFlow';
-    const FIXED = 'Fixed';
     
     /**
      * Gets allowable values of the enum
@@ -65,9 +64,8 @@ class RecognitionMode2
     public static function getAllowableEnumValues()
     {
         return [
+            self::TEXTBOX,
             self::FLOW,
-            self::PDF_FLOW,
-            self::FIXED,
         ];
     }
 }
