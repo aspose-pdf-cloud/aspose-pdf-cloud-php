@@ -8121,6 +8121,1920 @@ class PdfApi
     }
 
     /**
+     * Operation getPageConvertToBmp
+     *
+     * Convert document page to Bmp image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPageConvertToBmp($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->getPageConvertToBmpWithHttpInfo($name, $page_number, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPageConvertToBmpWithHttpInfo
+     *
+     * Convert document page to Bmp image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPageConvertToBmpWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToBmpRequest($name, $page_number, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPageConvertToBmpAsync
+     *
+     * Convert document page to Bmp image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToBmpAsync($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        return $this->getPageConvertToBmpAsyncWithHttpInfo($name, $page_number, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPageConvertToBmpAsyncWithHttpInfo
+     *
+     * Convert document page to Bmp image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToBmpAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToBmpRequest($name, $page_number, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPageConvertToBmp'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPageConvertToBmpRequest($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPageConvertToBmp'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling getPageConvertToBmp'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/bmp';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPageConvertToEmf
+     *
+     * Convert document page to Emf image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPageConvertToEmf($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->getPageConvertToEmfWithHttpInfo($name, $page_number, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPageConvertToEmfWithHttpInfo
+     *
+     * Convert document page to Emf image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPageConvertToEmfWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToEmfRequest($name, $page_number, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPageConvertToEmfAsync
+     *
+     * Convert document page to Emf image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToEmfAsync($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        return $this->getPageConvertToEmfAsyncWithHttpInfo($name, $page_number, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPageConvertToEmfAsyncWithHttpInfo
+     *
+     * Convert document page to Emf image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToEmfAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToEmfRequest($name, $page_number, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPageConvertToEmf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPageConvertToEmfRequest($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPageConvertToEmf'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling getPageConvertToEmf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/emf';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPageConvertToGif
+     *
+     * Convert document page to Gif image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPageConvertToGif($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->getPageConvertToGifWithHttpInfo($name, $page_number, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPageConvertToGifWithHttpInfo
+     *
+     * Convert document page to Gif image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPageConvertToGifWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToGifRequest($name, $page_number, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPageConvertToGifAsync
+     *
+     * Convert document page to Gif image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToGifAsync($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        return $this->getPageConvertToGifAsyncWithHttpInfo($name, $page_number, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPageConvertToGifAsyncWithHttpInfo
+     *
+     * Convert document page to Gif image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToGifAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToGifRequest($name, $page_number, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPageConvertToGif'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPageConvertToGifRequest($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPageConvertToGif'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling getPageConvertToGif'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/gif';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPageConvertToJpeg
+     *
+     * Convert document page to Jpeg image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPageConvertToJpeg($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->getPageConvertToJpegWithHttpInfo($name, $page_number, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPageConvertToJpegWithHttpInfo
+     *
+     * Convert document page to Jpeg image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPageConvertToJpegWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToJpegRequest($name, $page_number, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPageConvertToJpegAsync
+     *
+     * Convert document page to Jpeg image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToJpegAsync($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        return $this->getPageConvertToJpegAsyncWithHttpInfo($name, $page_number, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPageConvertToJpegAsyncWithHttpInfo
+     *
+     * Convert document page to Jpeg image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToJpegAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToJpegRequest($name, $page_number, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPageConvertToJpeg'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPageConvertToJpegRequest($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPageConvertToJpeg'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling getPageConvertToJpeg'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/jpeg';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPageConvertToPng
+     *
+     * Convert document page to Png image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPageConvertToPng($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->getPageConvertToPngWithHttpInfo($name, $page_number, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPageConvertToPngWithHttpInfo
+     *
+     * Convert document page to Png image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPageConvertToPngWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToPngRequest($name, $page_number, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPageConvertToPngAsync
+     *
+     * Convert document page to Png image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToPngAsync($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        return $this->getPageConvertToPngAsyncWithHttpInfo($name, $page_number, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPageConvertToPngAsyncWithHttpInfo
+     *
+     * Convert document page to Png image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToPngAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToPngRequest($name, $page_number, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPageConvertToPng'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPageConvertToPngRequest($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPageConvertToPng'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling getPageConvertToPng'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/png';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPageConvertToTiff
+     *
+     * Convert document page to Tiff image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPageConvertToTiff($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->getPageConvertToTiffWithHttpInfo($name, $page_number, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation getPageConvertToTiffWithHttpInfo
+     *
+     * Convert document page to Tiff image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPageConvertToTiffWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToTiffRequest($name, $page_number, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPageConvertToTiffAsync
+     *
+     * Convert document page to Tiff image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToTiffAsync($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        return $this->getPageConvertToTiffAsyncWithHttpInfo($name, $page_number, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPageConvertToTiffAsyncWithHttpInfo
+     *
+     * Convert document page to Tiff image.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageConvertToTiffAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPageConvertToTiffRequest($name, $page_number, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPageConvertToTiff'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPageConvertToTiffRequest($name, $page_number, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPageConvertToTiff'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling getPageConvertToTiff'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/tiff';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getPageLinkAnnotationByIndex
      *
      * Read document page link annotation by its index.
@@ -13895,6 +15809,275 @@ class PdfApi
                 $resourcePath
             );
         }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['multipart/form-data']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['multipart/form-data'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPsInStorageToPdf
+     *
+     * Convert PS file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \SplFileObject
+     */
+    public function getPsInStorageToPdf($src_path)
+    {
+        list($response) = $this->getPsInStorageToPdfWithHttpInfo($src_path);
+        return $response;
+    }
+
+    /**
+     * Operation getPsInStorageToPdfWithHttpInfo
+     *
+     * Convert PS file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPsInStorageToPdfWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPsInStorageToPdfRequest($src_path);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\SplFileObject',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPsInStorageToPdfAsync
+     *
+     * Convert PS file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPsInStorageToPdfAsync($src_path)
+    {
+        return $this->getPsInStorageToPdfAsyncWithHttpInfo($src_path)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPsInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert PS file (located on storage) to PDF format and return resulting file in response.
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPsInStorageToPdfAsyncWithHttpInfo($src_path)
+    {
+        $returnType = '\SplFileObject';
+        $request = $this->getPsInStorageToPdfRequest($src_path);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPsInStorageToPdf'
+     *
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPsInStorageToPdfRequest($src_path)
+    {
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling getPsInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/create/ps';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+
 
         // body params
         $_tempBody = null;
@@ -26062,6 +28245,1614 @@ class PdfApi
     }
 
     /**
+     * Operation putImageInStorageToPdf
+     *
+     * Convert image file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\ImageTemplatesRequest $image_templates Image templates (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putImageInStorageToPdf($name, $image_templates, $dst_folder = null)
+    {
+        list($response) = $this->putImageInStorageToPdfWithHttpInfo($name, $image_templates, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putImageInStorageToPdfWithHttpInfo
+     *
+     * Convert image file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\ImageTemplatesRequest $image_templates Image templates (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putImageInStorageToPdfWithHttpInfo($name, $image_templates, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImageInStorageToPdfRequest($name, $image_templates, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putImageInStorageToPdfAsync
+     *
+     * Convert image file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\ImageTemplatesRequest $image_templates Image templates (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImageInStorageToPdfAsync($name, $image_templates, $dst_folder = null)
+    {
+        return $this->putImageInStorageToPdfAsyncWithHttpInfo($name, $image_templates, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putImageInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert image file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\ImageTemplatesRequest $image_templates Image templates (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImageInStorageToPdfAsyncWithHttpInfo($name, $image_templates, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImageInStorageToPdfRequest($name, $image_templates, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putImageInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  \Aspose\PDF\Model\ImageTemplatesRequest $image_templates Image templates (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putImageInStorageToPdfRequest($name, $image_templates, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putImageInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'image_templates' is set
+        if ($image_templates === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $image_templates when calling putImageInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/images';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($image_templates)) {
+            $_tempBody = $image_templates;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putImagesExtractAsGif
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putImagesExtractAsGif($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        list($response) = $this->putImagesExtractAsGifWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putImagesExtractAsGifWithHttpInfo
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putImagesExtractAsGifWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImagesExtractAsGifRequest($name, $page_number, $width, $height, $folder, $dest_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putImagesExtractAsGifAsync
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImagesExtractAsGifAsync($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        return $this->putImagesExtractAsGifAsyncWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putImagesExtractAsGifAsyncWithHttpInfo
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImagesExtractAsGifAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImagesExtractAsGifRequest($name, $page_number, $width, $height, $folder, $dest_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putImagesExtractAsGif'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putImagesExtractAsGifRequest($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putImagesExtractAsGif'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putImagesExtractAsGif'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/images/extract/gif';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+        // query params
+        if ($dest_folder !== null) {
+            $queryParams['destFolder'] = ObjectSerializer::toQueryValue($dest_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putImagesExtractAsJpeg
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putImagesExtractAsJpeg($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        list($response) = $this->putImagesExtractAsJpegWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putImagesExtractAsJpegWithHttpInfo
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putImagesExtractAsJpegWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImagesExtractAsJpegRequest($name, $page_number, $width, $height, $folder, $dest_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putImagesExtractAsJpegAsync
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImagesExtractAsJpegAsync($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        return $this->putImagesExtractAsJpegAsyncWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putImagesExtractAsJpegAsyncWithHttpInfo
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImagesExtractAsJpegAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImagesExtractAsJpegRequest($name, $page_number, $width, $height, $folder, $dest_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putImagesExtractAsJpeg'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putImagesExtractAsJpegRequest($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putImagesExtractAsJpeg'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putImagesExtractAsJpeg'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/images/extract/jpeg';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+        // query params
+        if ($dest_folder !== null) {
+            $queryParams['destFolder'] = ObjectSerializer::toQueryValue($dest_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putImagesExtractAsPng
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putImagesExtractAsPng($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        list($response) = $this->putImagesExtractAsPngWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putImagesExtractAsPngWithHttpInfo
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putImagesExtractAsPngWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImagesExtractAsPngRequest($name, $page_number, $width, $height, $folder, $dest_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putImagesExtractAsPngAsync
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImagesExtractAsPngAsync($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        return $this->putImagesExtractAsPngAsyncWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putImagesExtractAsPngAsyncWithHttpInfo
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImagesExtractAsPngAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImagesExtractAsPngRequest($name, $page_number, $width, $height, $folder, $dest_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putImagesExtractAsPng'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putImagesExtractAsPngRequest($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putImagesExtractAsPng'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putImagesExtractAsPng'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/images/extract/png';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+        // query params
+        if ($dest_folder !== null) {
+            $queryParams['destFolder'] = ObjectSerializer::toQueryValue($dest_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putImagesExtractAsTiff
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putImagesExtractAsTiff($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        list($response) = $this->putImagesExtractAsTiffWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putImagesExtractAsTiffWithHttpInfo
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putImagesExtractAsTiffWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImagesExtractAsTiffRequest($name, $page_number, $width, $height, $folder, $dest_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putImagesExtractAsTiffAsync
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImagesExtractAsTiffAsync($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        return $this->putImagesExtractAsTiffAsyncWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putImagesExtractAsTiffAsyncWithHttpInfo
+     *
+     * Extract document images in format specified to folder.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putImagesExtractAsTiffAsyncWithHttpInfo($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putImagesExtractAsTiffRequest($name, $page_number, $width, $height, $folder, $dest_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putImagesExtractAsTiff'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     * @param  string $dest_folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putImagesExtractAsTiffRequest($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putImagesExtractAsTiff'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putImagesExtractAsTiff'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/images/extract/tiff';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+        // query params
+        if ($dest_folder !== null) {
+            $queryParams['destFolder'] = ObjectSerializer::toQueryValue($dest_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation putLaTeXInStorageToPdf
      *
      * Convert LaTeX file (located on storage) to PDF format and upload resulting file to storage.
@@ -27205,6 +30996,2010 @@ class PdfApi
         if (isset($stamp)) {
             $_tempBody = $stamp;
         }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPageConvertToBmp
+     *
+     * Convert document page to bmp image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPageConvertToBmp($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->putPageConvertToBmpWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPageConvertToBmpWithHttpInfo
+     *
+     * Convert document page to bmp image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPageConvertToBmpWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToBmpRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPageConvertToBmpAsync
+     *
+     * Convert document page to bmp image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToBmpAsync($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        return $this->putPageConvertToBmpAsyncWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPageConvertToBmpAsyncWithHttpInfo
+     *
+     * Convert document page to bmp image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToBmpAsyncWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToBmpRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPageConvertToBmp'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPageConvertToBmpRequest($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPageConvertToBmp'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putPageConvertToBmp'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPageConvertToBmp'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/bmp';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPageConvertToEmf
+     *
+     * Convert document page to emf image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPageConvertToEmf($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->putPageConvertToEmfWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPageConvertToEmfWithHttpInfo
+     *
+     * Convert document page to emf image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPageConvertToEmfWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToEmfRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPageConvertToEmfAsync
+     *
+     * Convert document page to emf image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToEmfAsync($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        return $this->putPageConvertToEmfAsyncWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPageConvertToEmfAsyncWithHttpInfo
+     *
+     * Convert document page to emf image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToEmfAsyncWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToEmfRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPageConvertToEmf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPageConvertToEmfRequest($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPageConvertToEmf'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putPageConvertToEmf'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPageConvertToEmf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/emf';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPageConvertToGif
+     *
+     * Convert document page to gif image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPageConvertToGif($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->putPageConvertToGifWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPageConvertToGifWithHttpInfo
+     *
+     * Convert document page to gif image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPageConvertToGifWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToGifRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPageConvertToGifAsync
+     *
+     * Convert document page to gif image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToGifAsync($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        return $this->putPageConvertToGifAsyncWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPageConvertToGifAsyncWithHttpInfo
+     *
+     * Convert document page to gif image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToGifAsyncWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToGifRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPageConvertToGif'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPageConvertToGifRequest($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPageConvertToGif'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putPageConvertToGif'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPageConvertToGif'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/gif';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPageConvertToJpeg
+     *
+     * Convert document page to Jpeg image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPageConvertToJpeg($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->putPageConvertToJpegWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPageConvertToJpegWithHttpInfo
+     *
+     * Convert document page to Jpeg image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPageConvertToJpegWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToJpegRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPageConvertToJpegAsync
+     *
+     * Convert document page to Jpeg image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToJpegAsync($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        return $this->putPageConvertToJpegAsyncWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPageConvertToJpegAsyncWithHttpInfo
+     *
+     * Convert document page to Jpeg image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToJpegAsyncWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToJpegRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPageConvertToJpeg'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPageConvertToJpegRequest($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPageConvertToJpeg'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putPageConvertToJpeg'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPageConvertToJpeg'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/jpeg';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPageConvertToPng
+     *
+     * Convert document page to png image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPageConvertToPng($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->putPageConvertToPngWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPageConvertToPngWithHttpInfo
+     *
+     * Convert document page to png image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPageConvertToPngWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToPngRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPageConvertToPngAsync
+     *
+     * Convert document page to png image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToPngAsync($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        return $this->putPageConvertToPngAsyncWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPageConvertToPngAsyncWithHttpInfo
+     *
+     * Convert document page to png image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToPngAsyncWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToPngRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPageConvertToPng'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPageConvertToPngRequest($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPageConvertToPng'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putPageConvertToPng'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPageConvertToPng'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/png';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPageConvertToTiff
+     *
+     * Convert document page to Tiff image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPageConvertToTiff($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        list($response) = $this->putPageConvertToTiffWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPageConvertToTiffWithHttpInfo
+     *
+     * Convert document page to Tiff image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPageConvertToTiffWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToTiffRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPageConvertToTiffAsync
+     *
+     * Convert document page to Tiff image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToTiffAsync($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        return $this->putPageConvertToTiffAsyncWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPageConvertToTiffAsyncWithHttpInfo
+     *
+     * Convert document page to Tiff image and save in storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPageConvertToTiffAsyncWithHttpInfo($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPageConvertToTiffRequest($name, $page_number, $out_path, $width, $height, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPageConvertToTiff'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $out_path The out path of result image. (required)
+     * @param  int $width The converted image width. (optional)
+     * @param  int $height The converted image height. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPageConvertToTiffRequest($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPageConvertToTiff'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling putPageConvertToTiff'
+            );
+        }
+        // verify the required parameter 'out_path' is set
+        if ($out_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $out_path when calling putPageConvertToTiff'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/convert/tiff';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($out_path !== null) {
+            $queryParams['outPath'] = ObjectSerializer::toQueryValue($out_path);
+        }
+        // query params
+        if ($width !== null) {
+            $queryParams['width'] = ObjectSerializer::toQueryValue($width);
+        }
+        // query params
+        if ($height !== null) {
+            $queryParams['height'] = ObjectSerializer::toQueryValue($height);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -35868,6 +41663,303 @@ class PdfApi
         if (isset($privileges)) {
             $_tempBody = $privileges;
         }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putPsInStorageToPdf
+     *
+     * Convert PS file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\SaaSposeResponse
+     */
+    public function putPsInStorageToPdf($name, $src_path, $dst_folder = null)
+    {
+        list($response) = $this->putPsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        return $response;
+    }
+
+    /**
+     * Operation putPsInStorageToPdfWithHttpInfo
+     *
+     * Convert PS file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\SaaSposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putPsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPsInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\SaaSposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putPsInStorageToPdfAsync
+     *
+     * Convert PS file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPsInStorageToPdfAsync($name, $src_path, $dst_folder = null)
+    {
+        return $this->putPsInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putPsInStorageToPdfAsyncWithHttpInfo
+     *
+     * Convert PS file (located on storage) to PDF format and upload resulting file to storage.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putPsInStorageToPdfAsyncWithHttpInfo($name, $src_path, $dst_folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\SaaSposeResponse';
+        $request = $this->putPsInStorageToPdfRequest($name, $src_path, $dst_folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putPsInStorageToPdf'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $src_path Full source filename (ex. /folder1/folder2/template.ps) (required)
+     * @param  string $dst_folder The destination document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putPsInStorageToPdfRequest($name, $src_path, $dst_folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putPsInStorageToPdf'
+            );
+        }
+        // verify the required parameter 'src_path' is set
+        if ($src_path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src_path when calling putPsInStorageToPdf'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/create/ps';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src_path !== null) {
+            $queryParams['srcPath'] = ObjectSerializer::toQueryValue($src_path);
+        }
+        // query params
+        if ($dst_folder !== null) {
+            $queryParams['dstFolder'] = ObjectSerializer::toQueryValue($dst_folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(

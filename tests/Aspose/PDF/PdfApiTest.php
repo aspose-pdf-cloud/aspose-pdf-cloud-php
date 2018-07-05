@@ -590,6 +590,55 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(HttpStatusCode::OK, $response->getCode());
     }
 
+    public function testPutImagesExtractAsJpeg()
+    {
+        $name = "PdfWithImages2.pdf";
+        $this->uploadFile($name);
+
+        $page_number = 1;
+        $dest_folder = "$this->tempFolder/extract_jpg";
+
+        $response = $this->pdfApi->putImagesExtractAsJpeg($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder, $dest_folder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    
+    public function testPutImagesExtractAsTiff()
+    {
+        $name = "PdfWithImages2.pdf";
+        $this->uploadFile($name);
+
+        $page_number = 1;
+        $dest_folder = "$this->tempFolder/extract_tiff";
+
+        $response = $this->pdfApi->putImagesExtractAsTiff($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder, $dest_folder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    public function testPutImagesExtractAsGif()
+    {
+        $name = "PdfWithImages2.pdf";
+        $this->uploadFile($name);
+
+        $page_number = 1;
+        $dest_folder = "$this->tempFolder/extract_gif";
+
+        $response = $this->pdfApi->putImagesExtractAsGif($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder, $dest_folder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    public function testPutImagesExtractAsPng()
+    {
+        $name = "PdfWithImages2.pdf";
+        $this->uploadFile($name);
+
+        $page_number = 1;
+        $dest_folder = "$this->tempFolder/extract_png";
+
+        $response = $this->pdfApi->putImagesExtractAsPng($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder, $dest_folder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+    
     // Links Tests
 
     public function testGetPageLinkAnnotationByIndex()
@@ -2070,4 +2119,162 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
     }
 
+    public function testGetPsInStorageToPdf()
+    {
+        $name = "Typography.PS";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getPsInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPsInStorageToPdf()
+    {
+        $name = "Typography.PS";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromPs.pdf";
+
+        $response = $this->pdfApi->putPsInStorageToPdf($resultName, $src_path, $xsl_file_path = null, $dst_folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+    public function testPutImageInStorageToPdf()
+    {
+        $dataFile1 = "33539.jpg";
+        $this->uploadFile($dataFile1);
+        
+        $dataFile2 = "44781.jpg";
+        $this->uploadFile($dataFile2);
+
+        $resultName = "result.pdf";
+
+        
+        
+        $imageTemplatesRequest = new Aspose\PDF\Model\ImageTemplatesRequest();
+        $imageTemplatesRequest->setIsOcr(true);
+        $imageTemplatesRequest->setOcrLangs("eng");
+        $imageTemplatesRequest->setImagesList(
+            [
+                new Aspose\PDF\Model\ImageTemplate(['image_path' => "$this->tempFolder/$dataFile1", 'image_src_type' => Aspose\PDF\Model\ImageSrcType::COMMON]), 
+                new Aspose\PDF\Model\ImageTemplate(['image_path' => "$this->tempFolder/$dataFile2", 'image_src_type' => Aspose\PDF\Model\ImageSrcType::COMMON])
+            ]
+        );
+
+        $response = $this->pdfApi->putImageInStorageToPdf($resultName, $imageTemplatesRequest, $dst_folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::CREATED, $response->getCode());
+    }
+
+    // Page Convert To Image Tests
+
+    public function testGetPageConvertToTiff()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $response = $this->pdfApi->getPageConvertToTiff($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPageConvertToTiff()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $result_file = "page.tiff";
+        $out_path = "$this->tempFolder/$result_file";
+        $response = $this->pdfApi->putPageConvertToTiff($name, $page_number, $out_path, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    public function testGetPageConvertToJpeg()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $response = $this->pdfApi->getPageConvertToJpeg($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPageConvertToJpeg()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $result_file = "page.jpeg";
+        $out_path = "$this->tempFolder/$result_file";
+        $response = $this->pdfApi->putPageConvertToJpeg($name, $page_number, $out_path, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    public function testGetPageConvertToPng()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $response = $this->pdfApi->getPageConvertToPng($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPageConvertToPng()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $result_file = "page.png";
+        $out_path = "$this->tempFolder/$result_file";
+        $response = $this->pdfApi->putPageConvertToPng($name, $page_number, $out_path, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    public function testGetPageConvertToEmf()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $response = $this->pdfApi->getPageConvertToEmf($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPageConvertToEmf()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $result_file = "page.emf";
+        $out_path = "$this->tempFolder/$result_file";
+        $response = $this->pdfApi->putPageConvertToEmf($name, $page_number, $out_path, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    public function testGetPageConvertToBmp()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $response = $this->pdfApi->getPageConvertToBmp($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPageConvertToBmp()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $result_file = "page.bmp";
+        $out_path = "$this->tempFolder/$result_file";
+        $response = $this->pdfApi->putPageConvertToBmp($name, $page_number, $out_path, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
+
+    public function testGetPageConvertToGif()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $response = $this->pdfApi->getPageConvertToGif($name, $page_number, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPageConvertToGif()
+    {
+        $name = "4pages.pdf";
+        $page_number = 2;
+        $result_file = "page.gif";
+        $out_path = "$this->tempFolder/$result_file";
+        $response = $this->pdfApi->putPageConvertToGif($name, $page_number, $out_path, $width = null, $height = null, $folder = $this->tempFolder);
+        $this->assertEquals(HttpStatusCode::OK, $response->getCode());
+    }
 }
