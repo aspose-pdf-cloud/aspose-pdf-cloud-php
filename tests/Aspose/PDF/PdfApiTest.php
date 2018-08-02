@@ -1548,7 +1548,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->uploadFile($name);
 
         $folder = $this->tempFolder;
-        $resFileName = "result.html";
+        $resFileName = "result.zip";
         
         $response = $this->pdfApi->putPdfInStorageToHtml(
             $name, 
@@ -1589,7 +1589,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     {
         $name = '4pages.pdf';
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
-        $resFileName = "result.html";
+        $resFileName = "result.zip";
 
         $response = $this->pdfApi->putPdfInRequestToHtml(
             $this->tempFolder . '/' . $resFileName, 
