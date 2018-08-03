@@ -11,7 +11,7 @@
 
 /**
  *
- *   Copyright (c) 2018 Aspose.Pdf for Cloud
+ *   Copyright (c) 2018 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -48,6 +48,7 @@ use Aspose\PDF\ApiException;
 use Aspose\PDF\Configuration;
 use Aspose\PDF\HeaderSelector;
 use Aspose\PDF\ObjectSerializer;
+use Aspose\PDF\Model\HttpStatusCode;
 
 /**
  * PdfApi Class Doc Comment
@@ -108,7 +109,18 @@ class PdfApi
      */
     public function deleteField($name, $field_name, $storage = null, $folder = null)
     {
-        list($response) = $this->deleteFieldWithHttpInfo($name, $field_name, $storage, $folder);
+        try
+        {
+            list($response) = $this->deleteFieldWithHttpInfo($name, $field_name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deleteFieldWithHttpInfo($name, $field_name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -418,7 +430,18 @@ class PdfApi
      */
     public function deletePage($name, $page_number, $storage = null, $folder = null)
     {
-        list($response) = $this->deletePageWithHttpInfo($name, $page_number, $storage, $folder);
+        try
+        {
+            list($response) = $this->deletePageWithHttpInfo($name, $page_number, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deletePageWithHttpInfo($name, $page_number, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -727,7 +750,18 @@ class PdfApi
      */
     public function deleteProperties($name, $storage = null, $folder = null)
     {
-        list($response) = $this->deletePropertiesWithHttpInfo($name, $storage, $folder);
+        try
+        {
+            list($response) = $this->deletePropertiesWithHttpInfo($name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deletePropertiesWithHttpInfo($name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -1019,7 +1053,18 @@ class PdfApi
      */
     public function deleteProperty($name, $property_name, $storage = null, $folder = null)
     {
-        list($response) = $this->deletePropertyWithHttpInfo($name, $property_name, $storage, $folder);
+        try
+        {
+            list($response) = $this->deletePropertyWithHttpInfo($name, $property_name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deletePropertyWithHttpInfo($name, $property_name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -1330,7 +1375,18 @@ class PdfApi
      */
     public function getDocument($name, $format = null, $storage = null, $folder = null, $out_path = null)
     {
-        list($response) = $this->getDocumentWithHttpInfo($name, $format, $storage, $folder, $out_path);
+        try
+        {
+            list($response) = $this->getDocumentWithHttpInfo($name, $format, $storage, $folder, $out_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentWithHttpInfo($name, $format, $storage, $folder, $out_path);
+            }
+        }
         return $response;
     }
 
@@ -1638,7 +1694,18 @@ class PdfApi
      */
     public function getDocumentAttachmentByIndex($name, $attachment_index, $storage = null, $folder = null)
     {
-        list($response) = $this->getDocumentAttachmentByIndexWithHttpInfo($name, $attachment_index, $storage, $folder);
+        try
+        {
+            list($response) = $this->getDocumentAttachmentByIndexWithHttpInfo($name, $attachment_index, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentAttachmentByIndexWithHttpInfo($name, $attachment_index, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -1947,7 +2014,18 @@ class PdfApi
      */
     public function getDocumentAttachments($name, $storage = null, $folder = null)
     {
-        list($response) = $this->getDocumentAttachmentsWithHttpInfo($name, $storage, $folder);
+        try
+        {
+            list($response) = $this->getDocumentAttachmentsWithHttpInfo($name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentAttachmentsWithHttpInfo($name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -2239,7 +2317,18 @@ class PdfApi
      */
     public function getDocumentBookmarks($name, $bookmark_path = null, $storage = null, $folder = null)
     {
-        list($response) = $this->getDocumentBookmarksWithHttpInfo($name, $bookmark_path, $storage, $folder);
+        try
+        {
+            list($response) = $this->getDocumentBookmarksWithHttpInfo($name, $bookmark_path, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentBookmarksWithHttpInfo($name, $bookmark_path, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -2538,7 +2627,18 @@ class PdfApi
      */
     public function getDocumentProperties($name, $storage = null, $folder = null)
     {
-        list($response) = $this->getDocumentPropertiesWithHttpInfo($name, $storage, $folder);
+        try
+        {
+            list($response) = $this->getDocumentPropertiesWithHttpInfo($name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentPropertiesWithHttpInfo($name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -2830,7 +2930,18 @@ class PdfApi
      */
     public function getDocumentProperty($name, $property_name, $storage = null, $folder = null)
     {
-        list($response) = $this->getDocumentPropertyWithHttpInfo($name, $property_name, $storage, $folder);
+        try
+        {
+            list($response) = $this->getDocumentPropertyWithHttpInfo($name, $property_name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentPropertyWithHttpInfo($name, $property_name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -3139,7 +3250,18 @@ class PdfApi
      */
     public function getDownload($path, $version_id = null, $storage = null)
     {
-        list($response) = $this->getDownloadWithHttpInfo($path, $version_id, $storage);
+        try
+        {
+            list($response) = $this->getDownloadWithHttpInfo($path, $version_id, $storage);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDownloadWithHttpInfo($path, $version_id, $storage);
+            }
+        }
         return $response;
     }
 
@@ -3443,7 +3565,18 @@ class PdfApi
      */
     public function getDownloadDocumentAttachmentByIndex($name, $attachment_index, $storage = null, $folder = null)
     {
-        list($response) = $this->getDownloadDocumentAttachmentByIndexWithHttpInfo($name, $attachment_index, $storage, $folder);
+        try
+        {
+            list($response) = $this->getDownloadDocumentAttachmentByIndexWithHttpInfo($name, $attachment_index, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDownloadDocumentAttachmentByIndexWithHttpInfo($name, $attachment_index, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -3750,7 +3883,18 @@ class PdfApi
      */
     public function getEpubInStorageToPdf($src_path)
     {
-        list($response) = $this->getEpubInStorageToPdfWithHttpInfo($src_path);
+        try
+        {
+            list($response) = $this->getEpubInStorageToPdfWithHttpInfo($src_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getEpubInStorageToPdfWithHttpInfo($src_path);
+            }
+        }
         return $response;
     }
 
@@ -4022,7 +4166,18 @@ class PdfApi
      */
     public function getField($name, $field_name, $storage = null, $folder = null)
     {
-        list($response) = $this->getFieldWithHttpInfo($name, $field_name, $storage, $folder);
+        try
+        {
+            list($response) = $this->getFieldWithHttpInfo($name, $field_name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getFieldWithHttpInfo($name, $field_name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -4331,7 +4486,18 @@ class PdfApi
      */
     public function getFields($name, $storage = null, $folder = null)
     {
-        list($response) = $this->getFieldsWithHttpInfo($name, $storage, $folder);
+        try
+        {
+            list($response) = $this->getFieldsWithHttpInfo($name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getFieldsWithHttpInfo($name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -4625,7 +4791,18 @@ class PdfApi
      */
     public function getFragment($name, $page_number, $fragment_number, $with_empty = null, $storage = null, $folder = null)
     {
-        list($response) = $this->getFragmentWithHttpInfo($name, $page_number, $fragment_number, $with_empty, $storage, $folder);
+        try
+        {
+            list($response) = $this->getFragmentWithHttpInfo($name, $page_number, $fragment_number, $with_empty, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getFragmentWithHttpInfo($name, $page_number, $fragment_number, $with_empty, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -4962,7 +5139,18 @@ class PdfApi
      */
     public function getFragmentTextFormat($name, $page_number, $fragment_number, $storage = null, $folder = null)
     {
-        list($response) = $this->getFragmentTextFormatWithHttpInfo($name, $page_number, $fragment_number, $storage, $folder);
+        try
+        {
+            list($response) = $this->getFragmentTextFormatWithHttpInfo($name, $page_number, $fragment_number, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getFragmentTextFormatWithHttpInfo($name, $page_number, $fragment_number, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -5291,7 +5479,18 @@ class PdfApi
      */
     public function getFragments($name, $page_number, $with_empty = null, $storage = null, $folder = null)
     {
-        list($response) = $this->getFragmentsWithHttpInfo($name, $page_number, $with_empty, $storage, $folder);
+        try
+        {
+            list($response) = $this->getFragmentsWithHttpInfo($name, $page_number, $with_empty, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getFragmentsWithHttpInfo($name, $page_number, $with_empty, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -5614,7 +5813,18 @@ class PdfApi
      */
     public function getHtmlInStorageToPdf($src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
     {
-        list($response) = $this->getHtmlInStorageToPdfWithHttpInfo($src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        try
+        {
+            list($response) = $this->getHtmlInStorageToPdfWithHttpInfo($src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getHtmlInStorageToPdfWithHttpInfo($src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+            }
+        }
         return $response;
     }
 
@@ -5960,7 +6170,18 @@ class PdfApi
      */
     public function getImage($name, $page_number, $image_number, $format = null, $width = '0', $height = '0', $storage = null, $folder = null)
     {
-        list($response) = $this->getImageWithHttpInfo($name, $page_number, $image_number, $format, $width, $height, $storage, $folder);
+        try
+        {
+            list($response) = $this->getImageWithHttpInfo($name, $page_number, $image_number, $format, $width, $height, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getImageWithHttpInfo($name, $page_number, $image_number, $format, $width, $height, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -6312,7 +6533,18 @@ class PdfApi
      */
     public function getImages($name, $page_number, $storage = null, $folder = null)
     {
-        list($response) = $this->getImagesWithHttpInfo($name, $page_number, $storage, $folder);
+        try
+        {
+            list($response) = $this->getImagesWithHttpInfo($name, $page_number, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getImagesWithHttpInfo($name, $page_number, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -6619,7 +6851,18 @@ class PdfApi
      */
     public function getLaTeXInStorageToPdf($src_path)
     {
-        list($response) = $this->getLaTeXInStorageToPdfWithHttpInfo($src_path);
+        try
+        {
+            list($response) = $this->getLaTeXInStorageToPdfWithHttpInfo($src_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getLaTeXInStorageToPdfWithHttpInfo($src_path);
+            }
+        }
         return $response;
     }
 
@@ -6888,7 +7131,18 @@ class PdfApi
      */
     public function getMhtInStorageToPdf($src_path)
     {
-        list($response) = $this->getMhtInStorageToPdfWithHttpInfo($src_path);
+        try
+        {
+            list($response) = $this->getMhtInStorageToPdfWithHttpInfo($src_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getMhtInStorageToPdfWithHttpInfo($src_path);
+            }
+        }
         return $response;
     }
 
@@ -7163,7 +7417,18 @@ class PdfApi
      */
     public function getPage($name, $page_number, $format = null, $width = '0', $height = '0', $storage = null, $folder = null)
     {
-        list($response) = $this->getPageWithHttpInfo($name, $page_number, $format, $width, $height, $storage, $folder);
+        try
+        {
+            list($response) = $this->getPageWithHttpInfo($name, $page_number, $format, $width, $height, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageWithHttpInfo($name, $page_number, $format, $width, $height, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -7498,7 +7763,18 @@ class PdfApi
      */
     public function getPageAnnotation($name, $page_number, $annotation_number, $storage = null, $folder = null)
     {
-        list($response) = $this->getPageAnnotationWithHttpInfo($name, $page_number, $annotation_number, $storage, $folder);
+        try
+        {
+            list($response) = $this->getPageAnnotationWithHttpInfo($name, $page_number, $annotation_number, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageAnnotationWithHttpInfo($name, $page_number, $annotation_number, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -7826,7 +8102,18 @@ class PdfApi
      */
     public function getPageAnnotations($name, $page_number, $storage = null, $folder = null)
     {
-        list($response) = $this->getPageAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+        try
+        {
+            list($response) = $this->getPageAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -8137,7 +8424,18 @@ class PdfApi
      */
     public function getPageConvertToBmp($name, $page_number, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->getPageConvertToBmpWithHttpInfo($name, $page_number, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->getPageConvertToBmpWithHttpInfo($name, $page_number, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageConvertToBmpWithHttpInfo($name, $page_number, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -8456,7 +8754,18 @@ class PdfApi
      */
     public function getPageConvertToEmf($name, $page_number, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->getPageConvertToEmfWithHttpInfo($name, $page_number, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->getPageConvertToEmfWithHttpInfo($name, $page_number, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageConvertToEmfWithHttpInfo($name, $page_number, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -8775,7 +9084,18 @@ class PdfApi
      */
     public function getPageConvertToGif($name, $page_number, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->getPageConvertToGifWithHttpInfo($name, $page_number, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->getPageConvertToGifWithHttpInfo($name, $page_number, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageConvertToGifWithHttpInfo($name, $page_number, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -9094,7 +9414,18 @@ class PdfApi
      */
     public function getPageConvertToJpeg($name, $page_number, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->getPageConvertToJpegWithHttpInfo($name, $page_number, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->getPageConvertToJpegWithHttpInfo($name, $page_number, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageConvertToJpegWithHttpInfo($name, $page_number, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -9413,7 +9744,18 @@ class PdfApi
      */
     public function getPageConvertToPng($name, $page_number, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->getPageConvertToPngWithHttpInfo($name, $page_number, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->getPageConvertToPngWithHttpInfo($name, $page_number, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageConvertToPngWithHttpInfo($name, $page_number, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -9732,7 +10074,18 @@ class PdfApi
      */
     public function getPageConvertToTiff($name, $page_number, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->getPageConvertToTiffWithHttpInfo($name, $page_number, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->getPageConvertToTiffWithHttpInfo($name, $page_number, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageConvertToTiffWithHttpInfo($name, $page_number, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -10051,7 +10404,18 @@ class PdfApi
      */
     public function getPageLinkAnnotationByIndex($name, $page_number, $link_index, $storage = null, $folder = null)
     {
-        list($response) = $this->getPageLinkAnnotationByIndexWithHttpInfo($name, $page_number, $link_index, $storage, $folder);
+        try
+        {
+            list($response) = $this->getPageLinkAnnotationByIndexWithHttpInfo($name, $page_number, $link_index, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageLinkAnnotationByIndexWithHttpInfo($name, $page_number, $link_index, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -10379,7 +10743,18 @@ class PdfApi
      */
     public function getPageLinkAnnotations($name, $page_number, $storage = null, $folder = null)
     {
-        list($response) = $this->getPageLinkAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+        try
+        {
+            list($response) = $this->getPageLinkAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageLinkAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -10695,7 +11070,18 @@ class PdfApi
      */
     public function getPageText($name, $page_number, $x, $y, $width, $height, $format = null, $regex = null, $split_rects = null, $folder = null)
     {
-        list($response) = $this->getPageTextWithHttpInfo($name, $page_number, $x, $y, $width, $height, $format, $regex, $split_rects, $folder);
+        try
+        {
+            list($response) = $this->getPageTextWithHttpInfo($name, $page_number, $x, $y, $width, $height, $format, $regex, $split_rects, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageTextWithHttpInfo($name, $page_number, $x, $y, $width, $height, $format, $regex, $split_rects, $folder);
+            }
+        }
         return $response;
     }
 
@@ -11081,7 +11467,18 @@ class PdfApi
      */
     public function getPageTextItems($name, $page_number, $with_empty = null, $storage = null, $folder = null)
     {
-        list($response) = $this->getPageTextItemsWithHttpInfo($name, $page_number, $with_empty, $storage, $folder);
+        try
+        {
+            list($response) = $this->getPageTextItemsWithHttpInfo($name, $page_number, $with_empty, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageTextItemsWithHttpInfo($name, $page_number, $with_empty, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -11398,7 +11795,18 @@ class PdfApi
      */
     public function getPages($name, $storage = null, $folder = null)
     {
-        list($response) = $this->getPagesWithHttpInfo($name, $storage, $folder);
+        try
+        {
+            list($response) = $this->getPagesWithHttpInfo($name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPagesWithHttpInfo($name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -11687,7 +12095,18 @@ class PdfApi
      */
     public function getPclInStorageToPdf($src_path)
     {
-        list($response) = $this->getPclInStorageToPdfWithHttpInfo($src_path);
+        try
+        {
+            list($response) = $this->getPclInStorageToPdfWithHttpInfo($src_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPclInStorageToPdfWithHttpInfo($src_path);
+            }
+        }
         return $response;
     }
 
@@ -11965,7 +12384,18 @@ class PdfApi
      */
     public function getPdfInStorageToDoc($name, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToDocWithHttpInfo($name, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToDocWithHttpInfo($name, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToDocWithHttpInfo($name, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder);
+            }
+        }
         return $response;
     }
 
@@ -12312,7 +12742,18 @@ class PdfApi
      */
     public function getPdfInStorageToEpub($name, $content_recognition_mode = null, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToEpubWithHttpInfo($name, $content_recognition_mode, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToEpubWithHttpInfo($name, $content_recognition_mode, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToEpubWithHttpInfo($name, $content_recognition_mode, $folder);
+            }
+        }
         return $response;
     }
 
@@ -12630,7 +13071,18 @@ class PdfApi
      */
     public function getPdfInStorageToHtml($name, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToHtmlWithHttpInfo($name, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToHtmlWithHttpInfo($name, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToHtmlWithHttpInfo($name, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+            }
+        }
         return $response;
     }
 
@@ -13140,7 +13592,18 @@ class PdfApi
      */
     public function getPdfInStorageToLaTeX($name, $pages_count = null, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToLaTeXWithHttpInfo($name, $pages_count, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToLaTeXWithHttpInfo($name, $pages_count, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToLaTeXWithHttpInfo($name, $pages_count, $folder);
+            }
+        }
         return $response;
     }
 
@@ -13430,7 +13893,18 @@ class PdfApi
      */
     public function getPdfInStorageToMobiXml($name, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToMobiXmlWithHttpInfo($name, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToMobiXmlWithHttpInfo($name, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToMobiXmlWithHttpInfo($name, $folder);
+            }
+        }
         return $response;
     }
 
@@ -13713,7 +14187,18 @@ class PdfApi
      */
     public function getPdfInStorageToPdfA($name, $type, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToPdfAWithHttpInfo($name, $type, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToPdfAWithHttpInfo($name, $type, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToPdfAWithHttpInfo($name, $type, $folder);
+            }
+        }
         return $response;
     }
 
@@ -14011,7 +14496,18 @@ class PdfApi
      */
     public function getPdfInStorageToPptx($name, $separate_images = null, $slides_as_images = null, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToPptxWithHttpInfo($name, $separate_images, $slides_as_images, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToPptxWithHttpInfo($name, $separate_images, $slides_as_images, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToPptxWithHttpInfo($name, $separate_images, $slides_as_images, $folder);
+            }
+        }
         return $response;
     }
 
@@ -14310,7 +14806,18 @@ class PdfApi
      */
     public function getPdfInStorageToSvg($name, $compress_output_to_zip_archive = null, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToSvgWithHttpInfo($name, $compress_output_to_zip_archive, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToSvgWithHttpInfo($name, $compress_output_to_zip_archive, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToSvgWithHttpInfo($name, $compress_output_to_zip_archive, $folder);
+            }
+        }
         return $response;
     }
 
@@ -14615,7 +15122,18 @@ class PdfApi
      */
     public function getPdfInStorageToTiff($name, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToTiffWithHttpInfo($name, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToTiffWithHttpInfo($name, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToTiffWithHttpInfo($name, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder);
+            }
+        }
         return $response;
     }
 
@@ -15021,7 +15539,18 @@ class PdfApi
      */
     public function getPdfInStorageToXls($name, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToXlsWithHttpInfo($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToXlsWithHttpInfo($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToXlsWithHttpInfo($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder);
+            }
+        }
         return $response;
     }
 
@@ -15335,7 +15864,18 @@ class PdfApi
      */
     public function getPdfInStorageToXml($name, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToXmlWithHttpInfo($name, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToXmlWithHttpInfo($name, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToXmlWithHttpInfo($name, $folder);
+            }
+        }
         return $response;
     }
 
@@ -15617,7 +16157,18 @@ class PdfApi
      */
     public function getPdfInStorageToXps($name, $folder = null)
     {
-        list($response) = $this->getPdfInStorageToXpsWithHttpInfo($name, $folder);
+        try
+        {
+            list($response) = $this->getPdfInStorageToXpsWithHttpInfo($name, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPdfInStorageToXpsWithHttpInfo($name, $folder);
+            }
+        }
         return $response;
     }
 
@@ -15898,7 +16449,18 @@ class PdfApi
      */
     public function getPsInStorageToPdf($src_path)
     {
-        list($response) = $this->getPsInStorageToPdfWithHttpInfo($src_path);
+        try
+        {
+            list($response) = $this->getPsInStorageToPdfWithHttpInfo($src_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPsInStorageToPdfWithHttpInfo($src_path);
+            }
+        }
         return $response;
     }
 
@@ -16172,7 +16734,18 @@ class PdfApi
      */
     public function getSegment($name, $page_number, $fragment_number, $segment_number, $storage = null, $folder = null)
     {
-        list($response) = $this->getSegmentWithHttpInfo($name, $page_number, $fragment_number, $segment_number, $storage, $folder);
+        try
+        {
+            list($response) = $this->getSegmentWithHttpInfo($name, $page_number, $fragment_number, $segment_number, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getSegmentWithHttpInfo($name, $page_number, $fragment_number, $segment_number, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -16520,7 +17093,18 @@ class PdfApi
      */
     public function getSegmentTextFormat($name, $page_number, $fragment_number, $segment_number, $storage = null, $folder = null)
     {
-        list($response) = $this->getSegmentTextFormatWithHttpInfo($name, $page_number, $fragment_number, $segment_number, $storage, $folder);
+        try
+        {
+            list($response) = $this->getSegmentTextFormatWithHttpInfo($name, $page_number, $fragment_number, $segment_number, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getSegmentTextFormatWithHttpInfo($name, $page_number, $fragment_number, $segment_number, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -16868,7 +17452,18 @@ class PdfApi
      */
     public function getSegments($name, $page_number, $fragment_number, $with_empty = null, $storage = null, $folder = null)
     {
-        list($response) = $this->getSegmentsWithHttpInfo($name, $page_number, $fragment_number, $with_empty, $storage, $folder);
+        try
+        {
+            list($response) = $this->getSegmentsWithHttpInfo($name, $page_number, $fragment_number, $with_empty, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getSegmentsWithHttpInfo($name, $page_number, $fragment_number, $with_empty, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -17209,7 +17804,18 @@ class PdfApi
      */
     public function getSvgInStorageToPdf($src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
     {
-        list($response) = $this->getSvgInStorageToPdfWithHttpInfo($src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        try
+        {
+            list($response) = $this->getSvgInStorageToPdfWithHttpInfo($src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getSvgInStorageToPdfWithHttpInfo($src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+            }
+        }
         return $response;
     }
 
@@ -17550,7 +18156,18 @@ class PdfApi
      */
     public function getText($name, $x, $y, $width, $height, $format = null, $regex = null, $split_rects = null, $folder = null)
     {
-        list($response) = $this->getTextWithHttpInfo($name, $x, $y, $width, $height, $format, $regex, $split_rects, $folder);
+        try
+        {
+            list($response) = $this->getTextWithHttpInfo($name, $x, $y, $width, $height, $format, $regex, $split_rects, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getTextWithHttpInfo($name, $x, $y, $width, $height, $format, $regex, $split_rects, $folder);
+            }
+        }
         return $response;
     }
 
@@ -17917,7 +18534,18 @@ class PdfApi
      */
     public function getTextItems($name, $with_empty = null, $storage = null, $folder = null)
     {
-        list($response) = $this->getTextItemsWithHttpInfo($name, $with_empty, $storage, $folder);
+        try
+        {
+            list($response) = $this->getTextItemsWithHttpInfo($name, $with_empty, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getTextItemsWithHttpInfo($name, $with_empty, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -18216,7 +18844,18 @@ class PdfApi
      */
     public function getVerifySignature($name, $sign_name, $folder = null)
     {
-        list($response) = $this->getVerifySignatureWithHttpInfo($name, $sign_name, $folder);
+        try
+        {
+            list($response) = $this->getVerifySignatureWithHttpInfo($name, $sign_name, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getVerifySignatureWithHttpInfo($name, $sign_name, $folder);
+            }
+        }
         return $response;
     }
 
@@ -18518,7 +19157,18 @@ class PdfApi
      */
     public function getWebInStorageToPdf($url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null)
     {
-        list($response) = $this->getWebInStorageToPdfWithHttpInfo($url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        try
+        {
+            list($response) = $this->getWebInStorageToPdfWithHttpInfo($url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getWebInStorageToPdfWithHttpInfo($url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top);
+            }
+        }
         return $response;
     }
 
@@ -18845,7 +19495,18 @@ class PdfApi
      */
     public function getWordsPerPage($name, $storage = null, $folder = null)
     {
-        list($response) = $this->getWordsPerPageWithHttpInfo($name, $storage, $folder);
+        try
+        {
+            list($response) = $this->getWordsPerPageWithHttpInfo($name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getWordsPerPageWithHttpInfo($name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -19135,7 +19796,18 @@ class PdfApi
      */
     public function getXfaPdfInStorageToAcroForm($name, $folder = null)
     {
-        list($response) = $this->getXfaPdfInStorageToAcroFormWithHttpInfo($name, $folder);
+        try
+        {
+            list($response) = $this->getXfaPdfInStorageToAcroFormWithHttpInfo($name, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getXfaPdfInStorageToAcroFormWithHttpInfo($name, $folder);
+            }
+        }
         return $response;
     }
 
@@ -19417,7 +20089,18 @@ class PdfApi
      */
     public function getXmlInStorageToPdf($src_path, $xsl_file_path = null)
     {
-        list($response) = $this->getXmlInStorageToPdfWithHttpInfo($src_path, $xsl_file_path);
+        try
+        {
+            list($response) = $this->getXmlInStorageToPdfWithHttpInfo($src_path, $xsl_file_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getXmlInStorageToPdfWithHttpInfo($src_path, $xsl_file_path);
+            }
+        }
         return $response;
     }
 
@@ -19694,7 +20377,18 @@ class PdfApi
      */
     public function getXpsInStorageToPdf($src_path)
     {
-        list($response) = $this->getXpsInStorageToPdfWithHttpInfo($src_path);
+        try
+        {
+            list($response) = $this->getXpsInStorageToPdfWithHttpInfo($src_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getXpsInStorageToPdfWithHttpInfo($src_path);
+            }
+        }
         return $response;
     }
 
@@ -19963,7 +20657,18 @@ class PdfApi
      */
     public function getXslFoInStorageToPdf($src_path)
     {
-        list($response) = $this->getXslFoInStorageToPdfWithHttpInfo($src_path);
+        try
+        {
+            list($response) = $this->getXslFoInStorageToPdfWithHttpInfo($src_path);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getXslFoInStorageToPdfWithHttpInfo($src_path);
+            }
+        }
         return $response;
     }
 
@@ -20238,7 +20943,18 @@ class PdfApi
      */
     public function postAppendDocument($name, $append_document = null, $append_file = null, $start_page = '0', $end_page = '0', $storage = null, $folder = null)
     {
-        list($response) = $this->postAppendDocumentWithHttpInfo($name, $append_document, $append_file, $start_page, $end_page, $storage, $folder);
+        try
+        {
+            list($response) = $this->postAppendDocumentWithHttpInfo($name, $append_document, $append_file, $start_page, $end_page, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postAppendDocumentWithHttpInfo($name, $append_document, $append_file, $start_page, $end_page, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -20562,7 +21278,18 @@ class PdfApi
      */
     public function postCreateField($name, $page, $field = null, $storage = null, $folder = null)
     {
-        list($response) = $this->postCreateFieldWithHttpInfo($name, $page, $field, $storage, $folder);
+        try
+        {
+            list($response) = $this->postCreateFieldWithHttpInfo($name, $page, $field, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postCreateFieldWithHttpInfo($name, $page, $field, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -20875,7 +21602,18 @@ class PdfApi
      */
     public function postDocumentReplaceText($name, $text_replace, $storage = null, $folder = null)
     {
-        list($response) = $this->postDocumentReplaceTextWithHttpInfo($name, $text_replace, $storage, $folder);
+        try
+        {
+            list($response) = $this->postDocumentReplaceTextWithHttpInfo($name, $text_replace, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postDocumentReplaceTextWithHttpInfo($name, $text_replace, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -21180,7 +21918,18 @@ class PdfApi
      */
     public function postDocumentReplaceTextList($name, $text_replace_list_request, $storage = null, $folder = null)
     {
-        list($response) = $this->postDocumentReplaceTextListWithHttpInfo($name, $text_replace_list_request, $storage, $folder);
+        try
+        {
+            list($response) = $this->postDocumentReplaceTextListWithHttpInfo($name, $text_replace_list_request, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postDocumentReplaceTextListWithHttpInfo($name, $text_replace_list_request, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -21485,7 +22234,18 @@ class PdfApi
      */
     public function postDocumentTextReplace($name, $text_replace, $storage = null, $folder = null)
     {
-        list($response) = $this->postDocumentTextReplaceWithHttpInfo($name, $text_replace, $storage, $folder);
+        try
+        {
+            list($response) = $this->postDocumentTextReplaceWithHttpInfo($name, $text_replace, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postDocumentTextReplaceWithHttpInfo($name, $text_replace, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -21791,7 +22551,18 @@ class PdfApi
      */
     public function postMovePage($name, $page_number, $new_index, $storage = null, $folder = null)
     {
-        list($response) = $this->postMovePageWithHttpInfo($name, $page_number, $new_index, $storage, $folder);
+        try
+        {
+            list($response) = $this->postMovePageWithHttpInfo($name, $page_number, $new_index, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postMovePageWithHttpInfo($name, $page_number, $new_index, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -22115,7 +22886,18 @@ class PdfApi
      */
     public function postOptimizeDocument($name, $options = null, $storage = null, $folder = null)
     {
-        list($response) = $this->postOptimizeDocumentWithHttpInfo($name, $options, $storage, $folder);
+        try
+        {
+            list($response) = $this->postOptimizeDocumentWithHttpInfo($name, $options, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postOptimizeDocumentWithHttpInfo($name, $options, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -22415,7 +23197,18 @@ class PdfApi
      */
     public function postPageReplaceText($name, $page_number, $text_replace, $storage = null, $folder = null)
     {
-        list($response) = $this->postPageReplaceTextWithHttpInfo($name, $page_number, $text_replace, $storage, $folder);
+        try
+        {
+            list($response) = $this->postPageReplaceTextWithHttpInfo($name, $page_number, $text_replace, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postPageReplaceTextWithHttpInfo($name, $page_number, $text_replace, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -22739,7 +23532,18 @@ class PdfApi
      */
     public function postPageReplaceTextList($name, $page_number, $text_replace_list_request, $storage = null, $folder = null)
     {
-        list($response) = $this->postPageReplaceTextListWithHttpInfo($name, $page_number, $text_replace_list_request, $storage, $folder);
+        try
+        {
+            list($response) = $this->postPageReplaceTextListWithHttpInfo($name, $page_number, $text_replace_list_request, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postPageReplaceTextListWithHttpInfo($name, $page_number, $text_replace_list_request, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -23063,7 +23867,18 @@ class PdfApi
      */
     public function postPageTextReplace($name, $page_number, $text_replace_list_request, $storage = null, $folder = null)
     {
-        list($response) = $this->postPageTextReplaceWithHttpInfo($name, $page_number, $text_replace_list_request, $storage, $folder);
+        try
+        {
+            list($response) = $this->postPageTextReplaceWithHttpInfo($name, $page_number, $text_replace_list_request, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postPageTextReplaceWithHttpInfo($name, $page_number, $text_replace_list_request, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -23389,7 +24204,18 @@ class PdfApi
      */
     public function postReplaceImage($name, $page_number, $image_number, $image_file = null, $storage = null, $folder = null, $image = null)
     {
-        list($response) = $this->postReplaceImageWithHttpInfo($name, $page_number, $image_number, $image_file, $storage, $folder, $image);
+        try
+        {
+            list($response) = $this->postReplaceImageWithHttpInfo($name, $page_number, $image_number, $image_file, $storage, $folder, $image);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postReplaceImageWithHttpInfo($name, $page_number, $image_number, $image_file, $storage, $folder, $image);
+            }
+        }
         return $response;
     }
 
@@ -23738,7 +24564,18 @@ class PdfApi
      */
     public function postSignDocument($name, $signature = null, $storage = null, $folder = null)
     {
-        list($response) = $this->postSignDocumentWithHttpInfo($name, $signature, $storage, $folder);
+        try
+        {
+            list($response) = $this->postSignDocumentWithHttpInfo($name, $signature, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postSignDocumentWithHttpInfo($name, $signature, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -24038,7 +24875,18 @@ class PdfApi
      */
     public function postSignPage($name, $page_number, $signature = null, $storage = null, $folder = null)
     {
-        list($response) = $this->postSignPageWithHttpInfo($name, $page_number, $signature, $storage, $folder);
+        try
+        {
+            list($response) = $this->postSignPageWithHttpInfo($name, $page_number, $signature, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postSignPageWithHttpInfo($name, $page_number, $signature, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -24357,7 +25205,18 @@ class PdfApi
      */
     public function postSplitDocument($name, $format = null, $from = null, $to = null, $storage = null, $folder = null)
     {
-        list($response) = $this->postSplitDocumentWithHttpInfo($name, $format, $from, $to, $storage, $folder);
+        try
+        {
+            list($response) = $this->postSplitDocumentWithHttpInfo($name, $format, $from, $to, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postSplitDocumentWithHttpInfo($name, $format, $from, $to, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -24672,7 +25531,18 @@ class PdfApi
      */
     public function putAddNewPage($name, $storage = null, $folder = null)
     {
-        list($response) = $this->putAddNewPageWithHttpInfo($name, $storage, $folder);
+        try
+        {
+            list($response) = $this->putAddNewPageWithHttpInfo($name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putAddNewPageWithHttpInfo($name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -24965,7 +25835,18 @@ class PdfApi
      */
     public function putAddParagraph($name, $page_number, $paragraph = null, $storage = null, $folder = null)
     {
-        list($response) = $this->putAddParagraphWithHttpInfo($name, $page_number, $paragraph, $storage, $folder);
+        try
+        {
+            list($response) = $this->putAddParagraphWithHttpInfo($name, $page_number, $paragraph, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putAddParagraphWithHttpInfo($name, $page_number, $paragraph, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -25282,7 +26163,18 @@ class PdfApi
      */
     public function putAddText($name, $page_number, $paragraph = null, $folder = null)
     {
-        list($response) = $this->putAddTextWithHttpInfo($name, $page_number, $paragraph, $folder);
+        try
+        {
+            list($response) = $this->putAddTextWithHttpInfo($name, $page_number, $paragraph, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putAddTextWithHttpInfo($name, $page_number, $paragraph, $folder);
+            }
+        }
         return $response;
     }
 
@@ -25591,7 +26483,18 @@ class PdfApi
      */
     public function putConvertDocument($format = null, $url = null, $out_path = null, $file = null)
     {
-        list($response) = $this->putConvertDocumentWithHttpInfo($format, $url, $out_path, $file);
+        try
+        {
+            list($response) = $this->putConvertDocumentWithHttpInfo($format, $url, $out_path, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putConvertDocumentWithHttpInfo($format, $url, $out_path, $file);
+            }
+        }
         return $response;
     }
 
@@ -25886,7 +26789,18 @@ class PdfApi
      */
     public function putCreate($path, $file, $version_id = null, $storage = null)
     {
-        list($response) = $this->putCreateWithHttpInfo($path, $file, $version_id, $storage);
+        try
+        {
+            list($response) = $this->putCreateWithHttpInfo($path, $file, $version_id, $storage);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putCreateWithHttpInfo($path, $file, $version_id, $storage);
+            }
+        }
         return $response;
     }
 
@@ -26205,7 +27119,18 @@ class PdfApi
      */
     public function putCreateDocument($name, $template_file = null, $data_file = null, $template_type = null, $storage = null, $folder = null, $url = null, $fit_size = 'false')
     {
-        list($response) = $this->putCreateDocumentWithHttpInfo($name, $template_file, $data_file, $template_type, $storage, $folder, $url, $fit_size);
+        try
+        {
+            list($response) = $this->putCreateDocumentWithHttpInfo($name, $template_file, $data_file, $template_type, $storage, $folder, $url, $fit_size);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putCreateDocumentWithHttpInfo($name, $template_file, $data_file, $template_type, $storage, $folder, $url, $fit_size);
+            }
+        }
         return $response;
     }
 
@@ -26539,7 +27464,18 @@ class PdfApi
      */
     public function putCreateDocumentFromImages($name, $images = null, $ocr = 'false', $ocr_lang = 'eng', $storage = null, $folder = null)
     {
-        list($response) = $this->putCreateDocumentFromImagesWithHttpInfo($name, $images, $ocr, $ocr_lang, $storage, $folder);
+        try
+        {
+            list($response) = $this->putCreateDocumentFromImagesWithHttpInfo($name, $images, $ocr, $ocr_lang, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putCreateDocumentFromImagesWithHttpInfo($name, $images, $ocr, $ocr_lang, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -26870,7 +27806,18 @@ class PdfApi
      */
     public function putDocumentSaveAsTiff($name, $export_options = null, $result_file = null, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $storage = null, $folder = null)
     {
-        list($response) = $this->putDocumentSaveAsTiffWithHttpInfo($name, $export_options, $result_file, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $storage, $folder);
+        try
+        {
+            list($response) = $this->putDocumentSaveAsTiffWithHttpInfo($name, $export_options, $result_file, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putDocumentSaveAsTiffWithHttpInfo($name, $export_options, $result_file, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -27296,7 +28243,18 @@ class PdfApi
      */
     public function putEpubInStorageToPdf($name, $src_path, $dst_folder = null)
     {
-        list($response) = $this->putEpubInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        try
+        {
+            list($response) = $this->putEpubInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putEpubInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -27593,7 +28551,18 @@ class PdfApi
      */
     public function putFieldsFlatten($name, $storage = null, $folder = null)
     {
-        list($response) = $this->putFieldsFlattenWithHttpInfo($name, $storage, $folder);
+        try
+        {
+            list($response) = $this->putFieldsFlattenWithHttpInfo($name, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putFieldsFlattenWithHttpInfo($name, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -27892,7 +28861,18 @@ class PdfApi
      */
     public function putHtmlInStorageToPdf($name, $src_path, $html_file_name, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
     {
-        list($response) = $this->putHtmlInStorageToPdfWithHttpInfo($name, $src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        try
+        {
+            list($response) = $this->putHtmlInStorageToPdfWithHttpInfo($name, $src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putHtmlInStorageToPdfWithHttpInfo($name, $src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -28259,7 +29239,18 @@ class PdfApi
      */
     public function putImageInStorageToPdf($name, $image_templates, $dst_folder = null)
     {
-        list($response) = $this->putImageInStorageToPdfWithHttpInfo($name, $image_templates, $dst_folder);
+        try
+        {
+            list($response) = $this->putImageInStorageToPdfWithHttpInfo($name, $image_templates, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putImageInStorageToPdfWithHttpInfo($name, $image_templates, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -28558,7 +29549,18 @@ class PdfApi
      */
     public function putImagesExtractAsGif($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
     {
-        list($response) = $this->putImagesExtractAsGifWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        try
+        {
+            list($response) = $this->putImagesExtractAsGifWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putImagesExtractAsGifWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+            }
+        }
         return $response;
     }
 
@@ -28886,7 +29888,18 @@ class PdfApi
      */
     public function putImagesExtractAsJpeg($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
     {
-        list($response) = $this->putImagesExtractAsJpegWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        try
+        {
+            list($response) = $this->putImagesExtractAsJpegWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putImagesExtractAsJpegWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+            }
+        }
         return $response;
     }
 
@@ -29214,7 +30227,18 @@ class PdfApi
      */
     public function putImagesExtractAsPng($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
     {
-        list($response) = $this->putImagesExtractAsPngWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        try
+        {
+            list($response) = $this->putImagesExtractAsPngWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putImagesExtractAsPngWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+            }
+        }
         return $response;
     }
 
@@ -29542,7 +30566,18 @@ class PdfApi
      */
     public function putImagesExtractAsTiff($name, $page_number, $width = null, $height = null, $folder = null, $dest_folder = null)
     {
-        list($response) = $this->putImagesExtractAsTiffWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        try
+        {
+            list($response) = $this->putImagesExtractAsTiffWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putImagesExtractAsTiffWithHttpInfo($name, $page_number, $width, $height, $folder, $dest_folder);
+            }
+        }
         return $response;
     }
 
@@ -29867,7 +30902,18 @@ class PdfApi
      */
     public function putLaTeXInStorageToPdf($name, $src_path, $dst_folder = null)
     {
-        list($response) = $this->putLaTeXInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        try
+        {
+            list($response) = $this->putLaTeXInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putLaTeXInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -30165,7 +31211,18 @@ class PdfApi
      */
     public function putMergeDocuments($name, $merge_documents = null, $storage = null, $folder = null)
     {
-        list($response) = $this->putMergeDocumentsWithHttpInfo($name, $merge_documents, $storage, $folder);
+        try
+        {
+            list($response) = $this->putMergeDocumentsWithHttpInfo($name, $merge_documents, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putMergeDocumentsWithHttpInfo($name, $merge_documents, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -30463,7 +31520,18 @@ class PdfApi
      */
     public function putMhtInStorageToPdf($name, $src_path, $dst_folder = null)
     {
-        list($response) = $this->putMhtInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        try
+        {
+            list($response) = $this->putMhtInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putMhtInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -30762,7 +31830,18 @@ class PdfApi
      */
     public function putPageAddStamp($name, $page_number, $stamp, $storage = null, $folder = null)
     {
-        list($response) = $this->putPageAddStampWithHttpInfo($name, $page_number, $stamp, $storage, $folder);
+        try
+        {
+            list($response) = $this->putPageAddStampWithHttpInfo($name, $page_number, $stamp, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPageAddStampWithHttpInfo($name, $page_number, $stamp, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -31087,7 +32166,18 @@ class PdfApi
      */
     public function putPageConvertToBmp($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->putPageConvertToBmpWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->putPageConvertToBmpWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPageConvertToBmpWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -31421,7 +32511,18 @@ class PdfApi
      */
     public function putPageConvertToEmf($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->putPageConvertToEmfWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->putPageConvertToEmfWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPageConvertToEmfWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -31755,7 +32856,18 @@ class PdfApi
      */
     public function putPageConvertToGif($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->putPageConvertToGifWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->putPageConvertToGifWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPageConvertToGifWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -32089,7 +33201,18 @@ class PdfApi
      */
     public function putPageConvertToJpeg($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->putPageConvertToJpegWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->putPageConvertToJpegWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPageConvertToJpegWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -32423,7 +33546,18 @@ class PdfApi
      */
     public function putPageConvertToPng($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->putPageConvertToPngWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->putPageConvertToPngWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPageConvertToPngWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -32757,7 +33891,18 @@ class PdfApi
      */
     public function putPageConvertToTiff($name, $page_number, $out_path, $width = null, $height = null, $folder = null)
     {
-        list($response) = $this->putPageConvertToTiffWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        try
+        {
+            list($response) = $this->putPageConvertToTiffWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPageConvertToTiffWithHttpInfo($name, $page_number, $out_path, $width, $height, $folder);
+            }
+        }
         return $response;
     }
 
@@ -33088,7 +34233,18 @@ class PdfApi
      */
     public function putPclInStorageToPdf($name, $src_path, $dst_folder = null)
     {
-        list($response) = $this->putPclInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        try
+        {
+            list($response) = $this->putPclInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPclInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -33392,7 +34548,18 @@ class PdfApi
      */
     public function putPdfInRequestToDoc($out_path, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $file = null)
     {
-        list($response) = $this->putPdfInRequestToDocWithHttpInfo($out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToDocWithHttpInfo($out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToDocWithHttpInfo($out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $file);
+            }
+        }
         return $response;
     }
 
@@ -33740,7 +34907,18 @@ class PdfApi
      */
     public function putPdfInRequestToEpub($out_path, $content_recognition_mode = null, $file = null)
     {
-        list($response) = $this->putPdfInRequestToEpubWithHttpInfo($out_path, $content_recognition_mode, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToEpubWithHttpInfo($out_path, $content_recognition_mode, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToEpubWithHttpInfo($out_path, $content_recognition_mode, $file);
+            }
+        }
         return $response;
     }
 
@@ -34059,7 +35237,18 @@ class PdfApi
      */
     public function putPdfInRequestToHtml($out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $file = null)
     {
-        list($response) = $this->putPdfInRequestToHtmlWithHttpInfo($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToHtmlWithHttpInfo($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToHtmlWithHttpInfo($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $file);
+            }
+        }
         return $response;
     }
 
@@ -34570,7 +35759,18 @@ class PdfApi
      */
     public function putPdfInRequestToLaTeX($out_path, $pages_count = null, $file = null)
     {
-        list($response) = $this->putPdfInRequestToLaTeXWithHttpInfo($out_path, $pages_count, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToLaTeXWithHttpInfo($out_path, $pages_count, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToLaTeXWithHttpInfo($out_path, $pages_count, $file);
+            }
+        }
         return $response;
     }
 
@@ -34861,7 +36061,18 @@ class PdfApi
      */
     public function putPdfInRequestToMobiXml($out_path, $file = null)
     {
-        list($response) = $this->putPdfInRequestToMobiXmlWithHttpInfo($out_path, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToMobiXmlWithHttpInfo($out_path, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToMobiXmlWithHttpInfo($out_path, $file);
+            }
+        }
         return $response;
     }
 
@@ -35145,7 +36356,18 @@ class PdfApi
      */
     public function putPdfInRequestToPdfA($out_path, $type, $file = null)
     {
-        list($response) = $this->putPdfInRequestToPdfAWithHttpInfo($out_path, $type, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToPdfAWithHttpInfo($out_path, $type, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToPdfAWithHttpInfo($out_path, $type, $file);
+            }
+        }
         return $response;
     }
 
@@ -35444,7 +36666,18 @@ class PdfApi
      */
     public function putPdfInRequestToPptx($out_path, $separate_images = null, $slides_as_images = null, $file = null)
     {
-        list($response) = $this->putPdfInRequestToPptxWithHttpInfo($out_path, $separate_images, $slides_as_images, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToPptxWithHttpInfo($out_path, $separate_images, $slides_as_images, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToPptxWithHttpInfo($out_path, $separate_images, $slides_as_images, $file);
+            }
+        }
         return $response;
     }
 
@@ -35744,7 +36977,18 @@ class PdfApi
      */
     public function putPdfInRequestToSvg($out_path, $compress_output_to_zip_archive = null, $file = null)
     {
-        list($response) = $this->putPdfInRequestToSvgWithHttpInfo($out_path, $compress_output_to_zip_archive, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToSvgWithHttpInfo($out_path, $compress_output_to_zip_archive, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToSvgWithHttpInfo($out_path, $compress_output_to_zip_archive, $file);
+            }
+        }
         return $response;
     }
 
@@ -36050,7 +37294,18 @@ class PdfApi
      */
     public function putPdfInRequestToTiff($out_path, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $file = null)
     {
-        list($response) = $this->putPdfInRequestToTiffWithHttpInfo($out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToTiffWithHttpInfo($out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToTiffWithHttpInfo($out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $file);
+            }
+        }
         return $response;
     }
 
@@ -36457,7 +37712,18 @@ class PdfApi
      */
     public function putPdfInRequestToXls($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $file = null)
     {
-        list($response) = $this->putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $file);
+            }
+        }
         return $response;
     }
 
@@ -36772,7 +38038,18 @@ class PdfApi
      */
     public function putPdfInRequestToXml($out_path, $file = null)
     {
-        list($response) = $this->putPdfInRequestToXmlWithHttpInfo($out_path, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToXmlWithHttpInfo($out_path, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToXmlWithHttpInfo($out_path, $file);
+            }
+        }
         return $response;
     }
 
@@ -37055,7 +38332,18 @@ class PdfApi
      */
     public function putPdfInRequestToXps($out_path, $file = null)
     {
-        list($response) = $this->putPdfInRequestToXpsWithHttpInfo($out_path, $file);
+        try
+        {
+            list($response) = $this->putPdfInRequestToXpsWithHttpInfo($out_path, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInRequestToXpsWithHttpInfo($out_path, $file);
+            }
+        }
         return $response;
     }
 
@@ -37347,7 +38635,18 @@ class PdfApi
      */
     public function putPdfInStorageToDoc($name, $out_path, $add_return_to_line_end = null, $format = null, $image_resolution_x = null, $image_resolution_y = null, $max_distance_between_text_lines = null, $mode = null, $recognize_bullets = null, $relative_horizontal_proximity = null, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToDocWithHttpInfo($name, $out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToDocWithHttpInfo($name, $out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToDocWithHttpInfo($name, $out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder);
+            }
+        }
         return $response;
     }
 
@@ -37709,7 +39008,18 @@ class PdfApi
      */
     public function putPdfInStorageToEpub($name, $out_path, $content_recognition_mode = null, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToEpubWithHttpInfo($name, $out_path, $content_recognition_mode, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToEpubWithHttpInfo($name, $out_path, $content_recognition_mode, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToEpubWithHttpInfo($name, $out_path, $content_recognition_mode, $folder);
+            }
+        }
         return $response;
     }
 
@@ -38042,7 +39352,18 @@ class PdfApi
      */
     public function putPdfInStorageToHtml($name, $out_path, $additional_margin_width_in_points = null, $compress_svg_graphics_if_any = null, $convert_marked_content_to_layers = null, $default_font_name = null, $document_type = null, $fixed_layout = null, $image_resolution = null, $minimal_line_width = null, $prevent_glyphs_grouping = null, $split_css_into_pages = null, $split_into_pages = null, $use_z_order = null, $antialiasing_processing = null, $css_class_names_prefix = null, $explicit_list_of_saved_pages = null, $font_encoding_strategy = null, $font_saving_mode = null, $html_markup_generation_mode = null, $letters_positioning_method = null, $pages_flow_type_depends_on_viewers_screen_size = null, $parts_embedding_mode = null, $raster_images_saving_mode = null, $remove_empty_areas_on_top_and_bottom = null, $save_shadowed_texts_as_transparent_texts = null, $save_transparent_texts = null, $special_folder_for_all_images = null, $special_folder_for_svg_images = null, $try_save_text_underlining_and_strikeouting_in_css = null, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToHtmlWithHttpInfo($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToHtmlWithHttpInfo($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToHtmlWithHttpInfo($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder);
+            }
+        }
         return $response;
     }
 
@@ -38567,7 +39888,18 @@ class PdfApi
      */
     public function putPdfInStorageToLaTeX($name, $out_path, $pages_count = null, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToLaTeXWithHttpInfo($name, $out_path, $pages_count, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToLaTeXWithHttpInfo($name, $out_path, $pages_count, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToLaTeXWithHttpInfo($name, $out_path, $pages_count, $folder);
+            }
+        }
         return $response;
     }
 
@@ -38872,7 +40204,18 @@ class PdfApi
      */
     public function putPdfInStorageToMobiXml($name, $out_path, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToMobiXmlWithHttpInfo($name, $out_path, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToMobiXmlWithHttpInfo($name, $out_path, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToMobiXmlWithHttpInfo($name, $out_path, $folder);
+            }
+        }
         return $response;
     }
 
@@ -39170,7 +40513,18 @@ class PdfApi
      */
     public function putPdfInStorageToPdfA($name, $out_path, $type, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToPdfAWithHttpInfo($name, $out_path, $type, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToPdfAWithHttpInfo($name, $out_path, $type, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToPdfAWithHttpInfo($name, $out_path, $type, $folder);
+            }
+        }
         return $response;
     }
 
@@ -39483,7 +40837,18 @@ class PdfApi
      */
     public function putPdfInStorageToPptx($name, $out_path, $separate_images = null, $slides_as_images = null, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToPptxWithHttpInfo($name, $out_path, $separate_images, $slides_as_images, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToPptxWithHttpInfo($name, $out_path, $separate_images, $slides_as_images, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToPptxWithHttpInfo($name, $out_path, $separate_images, $slides_as_images, $folder);
+            }
+        }
         return $response;
     }
 
@@ -39797,7 +41162,18 @@ class PdfApi
      */
     public function putPdfInStorageToSvg($name, $out_path, $compress_output_to_zip_archive = null, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToSvgWithHttpInfo($name, $out_path, $compress_output_to_zip_archive, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToSvgWithHttpInfo($name, $out_path, $compress_output_to_zip_archive, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToSvgWithHttpInfo($name, $out_path, $compress_output_to_zip_archive, $folder);
+            }
+        }
         return $response;
     }
 
@@ -40117,7 +41493,18 @@ class PdfApi
      */
     public function putPdfInStorageToTiff($name, $out_path, $brightness = null, $compression = null, $color_depth = null, $left_margin = null, $right_margin = null, $top_margin = null, $bottom_margin = null, $orientation = null, $skip_blank_pages = null, $width = null, $height = null, $x_resolution = null, $y_resolution = null, $page_index = null, $page_count = null, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToTiffWithHttpInfo($name, $out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToTiffWithHttpInfo($name, $out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToTiffWithHttpInfo($name, $out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder);
+            }
+        }
         return $response;
     }
 
@@ -40538,7 +41925,18 @@ class PdfApi
      */
     public function putPdfInStorageToXls($name, $out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToXlsWithHttpInfo($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToXlsWithHttpInfo($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToXlsWithHttpInfo($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder);
+            }
+        }
         return $response;
     }
 
@@ -40867,7 +42265,18 @@ class PdfApi
      */
     public function putPdfInStorageToXml($name, $out_path, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToXmlWithHttpInfo($name, $out_path, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToXmlWithHttpInfo($name, $out_path, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToXmlWithHttpInfo($name, $out_path, $folder);
+            }
+        }
         return $response;
     }
 
@@ -41164,7 +42573,18 @@ class PdfApi
      */
     public function putPdfInStorageToXps($name, $out_path, $folder = null)
     {
-        list($response) = $this->putPdfInStorageToXpsWithHttpInfo($name, $out_path, $folder);
+        try
+        {
+            list($response) = $this->putPdfInStorageToXpsWithHttpInfo($name, $out_path, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPdfInStorageToXpsWithHttpInfo($name, $out_path, $folder);
+            }
+        }
         return $response;
     }
 
@@ -41461,7 +42881,18 @@ class PdfApi
      */
     public function putPrivileges($name, $privileges = null, $folder = null)
     {
-        list($response) = $this->putPrivilegesWithHttpInfo($name, $privileges, $folder);
+        try
+        {
+            list($response) = $this->putPrivilegesWithHttpInfo($name, $privileges, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPrivilegesWithHttpInfo($name, $privileges, $folder);
+            }
+        }
         return $response;
     }
 
@@ -41751,7 +43182,18 @@ class PdfApi
      */
     public function putPsInStorageToPdf($name, $src_path, $dst_folder = null)
     {
-        list($response) = $this->putPsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        try
+        {
+            list($response) = $this->putPsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putPsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -42049,7 +43491,18 @@ class PdfApi
      */
     public function putSearchableDocument($name, $storage = null, $folder = null, $lang = null)
     {
-        list($response) = $this->putSearchableDocumentWithHttpInfo($name, $storage, $folder, $lang);
+        try
+        {
+            list($response) = $this->putSearchableDocumentWithHttpInfo($name, $storage, $folder, $lang);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putSearchableDocumentWithHttpInfo($name, $storage, $folder, $lang);
+            }
+        }
         return $response;
     }
 
@@ -42350,7 +43803,18 @@ class PdfApi
      */
     public function putSetProperty($name, $property_name, $property = null, $storage = null, $folder = null)
     {
-        list($response) = $this->putSetPropertyWithHttpInfo($name, $property_name, $property, $storage, $folder);
+        try
+        {
+            list($response) = $this->putSetPropertyWithHttpInfo($name, $property_name, $property, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putSetPropertyWithHttpInfo($name, $property_name, $property, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -42674,7 +44138,18 @@ class PdfApi
      */
     public function putSvgInStorageToPdf($name, $src_path, $adjust_page_size = null, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
     {
-        list($response) = $this->putSvgInStorageToPdfWithHttpInfo($name, $src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        try
+        {
+            list($response) = $this->putSvgInStorageToPdfWithHttpInfo($name, $src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putSvgInStorageToPdfWithHttpInfo($name, $src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -43037,7 +44512,18 @@ class PdfApi
      */
     public function putUpdateField($name, $field_name, $field = null, $storage = null, $folder = null)
     {
-        list($response) = $this->putUpdateFieldWithHttpInfo($name, $field_name, $field, $storage, $folder);
+        try
+        {
+            list($response) = $this->putUpdateFieldWithHttpInfo($name, $field_name, $field, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putUpdateFieldWithHttpInfo($name, $field_name, $field, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -43354,7 +44840,18 @@ class PdfApi
      */
     public function putUpdateFields($name, $fields = null, $storage = null, $folder = null)
     {
-        list($response) = $this->putUpdateFieldsWithHttpInfo($name, $fields, $storage, $folder);
+        try
+        {
+            list($response) = $this->putUpdateFieldsWithHttpInfo($name, $fields, $storage, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putUpdateFieldsWithHttpInfo($name, $fields, $storage, $folder);
+            }
+        }
         return $response;
     }
 
@@ -43659,7 +45156,18 @@ class PdfApi
      */
     public function putWebInStorageToPdf($name, $url, $height = null, $width = null, $is_landscape = null, $margin_left = null, $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = null)
     {
-        list($response) = $this->putWebInStorageToPdfWithHttpInfo($name, $url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        try
+        {
+            list($response) = $this->putWebInStorageToPdfWithHttpInfo($name, $url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putWebInStorageToPdfWithHttpInfo($name, $url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -44011,7 +45519,18 @@ class PdfApi
      */
     public function putXfaPdfInRequestToAcroForm($out_path, $file = null)
     {
-        list($response) = $this->putXfaPdfInRequestToAcroFormWithHttpInfo($out_path, $file);
+        try
+        {
+            list($response) = $this->putXfaPdfInRequestToAcroFormWithHttpInfo($out_path, $file);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putXfaPdfInRequestToAcroFormWithHttpInfo($out_path, $file);
+            }
+        }
         return $response;
     }
 
@@ -44295,7 +45814,18 @@ class PdfApi
      */
     public function putXfaPdfInStorageToAcroForm($name, $out_path, $folder = null)
     {
-        list($response) = $this->putXfaPdfInStorageToAcroFormWithHttpInfo($name, $out_path, $folder);
+        try
+        {
+            list($response) = $this->putXfaPdfInStorageToAcroFormWithHttpInfo($name, $out_path, $folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putXfaPdfInStorageToAcroFormWithHttpInfo($name, $out_path, $folder);
+            }
+        }
         return $response;
     }
 
@@ -44593,7 +46123,18 @@ class PdfApi
      */
     public function putXmlInStorageToPdf($name, $src_path, $xsl_file_path = null, $dst_folder = null)
     {
-        list($response) = $this->putXmlInStorageToPdfWithHttpInfo($name, $src_path, $xsl_file_path, $dst_folder);
+        try
+        {
+            list($response) = $this->putXmlInStorageToPdfWithHttpInfo($name, $src_path, $xsl_file_path, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putXmlInStorageToPdfWithHttpInfo($name, $src_path, $xsl_file_path, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -44898,7 +46439,18 @@ class PdfApi
      */
     public function putXpsInStorageToPdf($name, $src_path, $dst_folder = null)
     {
-        list($response) = $this->putXpsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        try
+        {
+            list($response) = $this->putXpsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putXpsInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+            }
+        }
         return $response;
     }
 
@@ -45195,7 +46747,18 @@ class PdfApi
      */
     public function putXslFoInStorageToPdf($name, $src_path, $dst_folder = null)
     {
-        list($response) = $this->putXslFoInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        try
+        {
+            list($response) = $this->putXslFoInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == HttpStatusCode::UNAUTHORIZED)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putXslFoInStorageToPdfWithHttpInfo($name, $src_path, $dst_folder);
+            }
+        }
         return $response;
     }
 
