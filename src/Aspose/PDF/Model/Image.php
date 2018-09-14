@@ -67,7 +67,10 @@ class Image extends LinkElement
       */
     protected static $swaggerTypes = [
         'width' => 'int',
-        'height' => 'int'
+        'height' => 'int',
+        'id' => 'string',
+        'rectangle' => '\Aspose\PDF\Model\RectanglePdf',
+        'page_number' => 'int'
     ];
 
     /**
@@ -77,7 +80,10 @@ class Image extends LinkElement
       */
     protected static $swaggerFormats = [
         'width' => 'int32',
-        'height' => 'int32'
+        'height' => 'int32',
+        'id' => null,
+        'rectangle' => null,
+        'page_number' => 'int32'
     ];
 
     /**
@@ -108,7 +114,10 @@ class Image extends LinkElement
      */
     protected static $attributeMap = [
         'width' => 'Width',
-        'height' => 'Height'
+        'height' => 'Height',
+        'id' => 'Id',
+        'rectangle' => 'Rectangle',
+        'page_number' => 'PageNumber'
     ];
 
     /**
@@ -118,7 +127,10 @@ class Image extends LinkElement
      */
     protected static $setters = [
         'width' => 'setWidth',
-        'height' => 'setHeight'
+        'height' => 'setHeight',
+        'id' => 'setId',
+        'rectangle' => 'setRectangle',
+        'page_number' => 'setPageNumber'
     ];
 
     /**
@@ -128,7 +140,10 @@ class Image extends LinkElement
      */
     protected static $getters = [
         'width' => 'getWidth',
-        'height' => 'getHeight'
+        'height' => 'getHeight',
+        'id' => 'getId',
+        'rectangle' => 'getRectangle',
+        'page_number' => 'getPageNumber'
     ];
 
     /**
@@ -189,6 +204,9 @@ class Image extends LinkElement
 
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
         $this->container['height'] = isset($data['height']) ? $data['height'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['rectangle'] = isset($data['rectangle']) ? $data['rectangle'] : null;
+        $this->container['page_number'] = isset($data['page_number']) ? $data['page_number'] : null;
     }
 
     /**
@@ -263,6 +281,78 @@ class Image extends LinkElement
     public function setHeight($height)
     {
         $this->container['height'] = $height;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string $id Gets ID of the image.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets rectangle
+     *
+     * @return \Aspose\PDF\Model\RectanglePdf
+     */
+    public function getRectangle()
+    {
+        return $this->container['rectangle'];
+    }
+
+    /**
+     * Sets rectangle
+     *
+     * @param \Aspose\PDF\Model\RectanglePdf $rectangle Gets rectangle of the image.
+     *
+     * @return $this
+     */
+    public function setRectangle($rectangle)
+    {
+        $this->container['rectangle'] = $rectangle;
+
+        return $this;
+    }
+
+    /**
+     * Gets page_number
+     *
+     * @return int
+     */
+    public function getPageNumber()
+    {
+        return $this->container['page_number'];
+    }
+
+    /**
+     * Sets page_number
+     *
+     * @param int $page_number Gets page number.
+     *
+     * @return $this
+     */
+    public function setPageNumber($page_number)
+    {
+        $this->container['page_number'] = $page_number;
 
         return $this;
     }

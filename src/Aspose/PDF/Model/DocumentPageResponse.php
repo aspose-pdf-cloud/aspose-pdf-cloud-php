@@ -1,6 +1,6 @@
 <?php
 /**
- * TextItem
+ * DocumentPageResponse
  *
  * PHP version 5
  *
@@ -41,15 +41,14 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * TextItem Class Doc Comment
+ * DocumentPageResponse Class Doc Comment
  *
  * @category Class
- * @description Represents text DTO.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class TextItem extends LinkElement 
+class DocumentPageResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
@@ -58,7 +57,7 @@ class TextItem extends LinkElement
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TextItem';
+    protected static $swaggerModelName = 'DocumentPageResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -66,8 +65,7 @@ class TextItem extends LinkElement
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'text' => 'string',
-        'format' => '\Aspose\PDF\Model\TextFormat'
+        'page' => '\Aspose\PDF\Model\Page'
     ];
 
     /**
@@ -76,8 +74,7 @@ class TextItem extends LinkElement
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'text' => null,
-        'format' => null
+        'page' => null
     ];
 
     /**
@@ -107,8 +104,7 @@ class TextItem extends LinkElement
      * @var string[]
      */
     protected static $attributeMap = [
-        'text' => 'Text',
-        'format' => 'Format'
+        'page' => 'Page'
     ];
 
     /**
@@ -117,8 +113,7 @@ class TextItem extends LinkElement
      * @var string[]
      */
     protected static $setters = [
-        'text' => 'setText',
-        'format' => 'setFormat'
+        'page' => 'setPage'
     ];
 
     /**
@@ -127,8 +122,7 @@ class TextItem extends LinkElement
      * @var string[]
      */
     protected static $getters = [
-        'text' => 'getText',
-        'format' => 'getFormat'
+        'page' => 'getPage'
     ];
 
     /**
@@ -187,8 +181,7 @@ class TextItem extends LinkElement
     {
         parent::__construct($data);
 
-        $this->container['text'] = isset($data['text']) ? $data['text'] : null;
-        $this->container['format'] = isset($data['format']) ? $data['format'] : null;
+        $this->container['page'] = isset($data['page']) ? $data['page'] : null;
     }
 
     /**
@@ -220,49 +213,25 @@ class TextItem extends LinkElement
 
 
     /**
-     * Gets text
+     * Gets page
      *
-     * @return string
+     * @return \Aspose\PDF\Model\Page
      */
-    public function getText()
+    public function getPage()
     {
-        return $this->container['text'];
+        return $this->container['page'];
     }
 
     /**
-     * Sets text
+     * Sets page
      *
-     * @param string $text text
+     * @param \Aspose\PDF\Model\Page $page page
      *
      * @return $this
      */
-    public function setText($text)
+    public function setPage($page)
     {
-        $this->container['text'] = $text;
-
-        return $this;
-    }
-
-    /**
-     * Gets format
-     *
-     * @return \Aspose\PDF\Model\TextFormat
-     */
-    public function getFormat()
-    {
-        return $this->container['format'];
-    }
-
-    /**
-     * Sets format
-     *
-     * @param \Aspose\PDF\Model\TextFormat $format format
-     *
-     * @return $this
-     */
-    public function setFormat($format)
-    {
-        $this->container['format'] = $format;
+        $this->container['page'] = $page;
 
         return $this;
     }

@@ -200,6 +200,9 @@ class MergeDocuments implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['list'] === null) {
+            $invalidProperties[] = "'list' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -212,6 +215,9 @@ class MergeDocuments implements ModelInterface, ArrayAccess
     public function valid()
     {
 
+        if ($this->container['list'] === null) {
+            return false;
+        }
         return true;
     }
 

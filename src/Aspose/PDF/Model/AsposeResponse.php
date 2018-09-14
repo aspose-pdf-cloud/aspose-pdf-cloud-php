@@ -1,6 +1,6 @@
 <?php
 /**
- * SaaSposeResponse
+ * AsposeResponse
  *
  * PHP version 5
  *
@@ -43,7 +43,7 @@ use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * SaaSposeResponse Class Doc Comment
+ * AsposeResponse Class Doc Comment
  *
  * @category Class
  * @description Base class for all responses.
@@ -51,7 +51,7 @@ use \Aspose\PDF\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class SaaSposeResponse implements ModelInterface, ArrayAccess
+class AsposeResponse implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = 'Type';
 
@@ -60,7 +60,7 @@ class SaaSposeResponse implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'SaaSposeResponse';
+    protected static $swaggerModelName = 'AsposeResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -68,7 +68,7 @@ class SaaSposeResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'code' => '\Aspose\PDF\Model\HttpStatusCode',
+        'code' => 'int',
         'status' => 'string'
     ];
 
@@ -78,7 +78,7 @@ class SaaSposeResponse implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'code' => null,
+        'code' => 'int32',
         'status' => null
     ];
 
@@ -235,7 +235,7 @@ class SaaSposeResponse implements ModelInterface, ArrayAccess
     /**
      * Gets code
      *
-     * @return \Aspose\PDF\Model\HttpStatusCode
+     * @return int
      */
     public function getCode()
     {
@@ -245,7 +245,7 @@ class SaaSposeResponse implements ModelInterface, ArrayAccess
     /**
      * Sets code
      *
-     * @param \Aspose\PDF\Model\HttpStatusCode $code Response status code.
+     * @param int $code Response status code.
      *
      * @return $this
      */

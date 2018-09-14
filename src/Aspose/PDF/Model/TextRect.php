@@ -70,7 +70,7 @@ class TextRect implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'text' => 'string',
         'page' => 'int',
-        'rect' => '\Aspose\PDF\Model\Rectangle'
+        'rect' => '\Aspose\PDF\Model\RectanglePdf'
     ];
 
     /**
@@ -285,7 +285,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Gets rect
      *
-     * @return \Aspose\PDF\Model\Rectangle
+     * @return \Aspose\PDF\Model\RectanglePdf
      */
     public function getRect()
     {
@@ -295,7 +295,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Sets rect
      *
-     * @param \Aspose\PDF\Model\Rectangle $rect rect
+     * @param \Aspose\PDF\Model\RectanglePdf $rect rect
      *
      * @return $this
      */

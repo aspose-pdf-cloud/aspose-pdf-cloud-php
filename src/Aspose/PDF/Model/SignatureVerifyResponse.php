@@ -49,7 +49,7 @@ use \Aspose\PDF\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class SignatureVerifyResponse extends SaaSposeResponse 
+class SignatureVerifyResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 

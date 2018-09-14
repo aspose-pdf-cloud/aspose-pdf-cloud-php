@@ -75,7 +75,7 @@ class Signature implements ModelInterface, ArrayAccess
         'contact' => 'string',
         'location' => 'string',
         'visible' => 'bool',
-        'rectangle' => '\Aspose\PDF\Model\Rectangle',
+        'rectangle' => '\Aspose\PDF\Model\RectanglePdf',
         'form_field_name' => 'string',
         'authority' => 'string',
         'date' => 'string',
@@ -271,6 +271,9 @@ class Signature implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['signature_path'] === null) {
+            $invalidProperties[] = "'signature_path' can't be null";
+        }
         if ($this->container['signature_type'] === null) {
             $invalidProperties[] = "'signature_type' can't be null";
         }
@@ -292,6 +295,9 @@ class Signature implements ModelInterface, ArrayAccess
     public function valid()
     {
 
+        if ($this->container['signature_path'] === null) {
+            return false;
+        }
         if ($this->container['signature_type'] === null) {
             return false;
         }
@@ -500,7 +506,7 @@ class Signature implements ModelInterface, ArrayAccess
     /**
      * Gets rectangle
      *
-     * @return \Aspose\PDF\Model\Rectangle
+     * @return \Aspose\PDF\Model\RectanglePdf
      */
     public function getRectangle()
     {
@@ -510,7 +516,7 @@ class Signature implements ModelInterface, ArrayAccess
     /**
      * Sets rectangle
      *
-     * @param \Aspose\PDF\Model\Rectangle $rectangle Gets or sets the visible rectangle of the signature. Supports only when signing particular page.
+     * @param \Aspose\PDF\Model\RectanglePdf $rectangle Gets or sets the visible rectangle of the signature. Supports only when signing particular page.
      *
      * @return $this
      */

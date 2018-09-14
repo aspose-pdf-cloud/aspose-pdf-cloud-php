@@ -212,6 +212,9 @@ class AppendDocument implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['document'] === null) {
+            $invalidProperties[] = "'document' can't be null";
+        }
         if ($this->container['start_page'] === null) {
             $invalidProperties[] = "'start_page' can't be null";
         }
@@ -230,6 +233,9 @@ class AppendDocument implements ModelInterface, ArrayAccess
     public function valid()
     {
 
+        if ($this->container['document'] === null) {
+            return false;
+        }
         if ($this->container['start_page'] === null) {
             return false;
         }

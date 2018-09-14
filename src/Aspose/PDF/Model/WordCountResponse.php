@@ -49,7 +49,7 @@ use \Aspose\PDF\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class WordCountResponse extends SaaSposeResponse 
+class WordCountResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
