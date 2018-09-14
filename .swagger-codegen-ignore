@@ -29,21 +29,5 @@ SwaggerClient-php/*.md
 SwaggerClient-php/docs/**
 SwaggerClient-php/test/**
 
-#Ignore enums that are not properly generated. We have good ones in sources already.
-
-SwaggerClient-php/src/Aspose/PDF/Model/FieldType.php
-SwaggerClient-php/src/Aspose/PDF/Model/FontStyles.php
-SwaggerClient-php/src/Aspose/PDF/Model/HorizontalAlignment.php
-SwaggerClient-php/src/Aspose/PDF/Model/HttpStatusCode.php
-#SwaggerClient-php/src/Aspose/PDF/Model/LineSpacing.php
-SwaggerClient-php/src/Aspose/PDF/Model/LinkHighlightingMode.php
-SwaggerClient-php/src/Aspose/PDF/Model/Rotation.php
-#SwaggerClient-php/src/Aspose/PDF/Model/TextHorizontalAlignment.php
-SwaggerClient-php/src/Aspose/PDF/Model/StampType.php
-#SwaggerClient-php/src/Aspose/PDF/Model/VerticalAlignment.php
-#SwaggerClient-php/src/Aspose/PDF/Model/WrapMode.php
-SwaggerClient-php/src/Aspose/PDF/Model/LinkActionType.php
-SwaggerClient-php/src/Aspose/PDF/Model/SignatureType.php
-
 # Ignore other files and folders
 SwaggerClient-php/.php_cs
