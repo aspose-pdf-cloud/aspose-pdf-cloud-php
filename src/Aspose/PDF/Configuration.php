@@ -70,14 +70,14 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://api.aspose.cloud/v1.1';
+    protected $host = 'https://api.aspose.cloud/v2.0';
     
     /*
-     * The base path, set to '/v1.1' by default
+     * The base path, set to '/v2.0' by default
      *
      * @var string
      */
-    protected $basePath = '/v1.1';
+    protected $basePath = '/v2.0';
 
     /*
      * AppKey for API
@@ -396,8 +396,8 @@ class Configuration
         $report  = 'PHP SDK (Aspose\PDF) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    OpenAPI Spec Version: 1.1' . PHP_EOL;
-        $report .= '    SDK Package Version: 18.7.0' . PHP_EOL;
+        $report .= '    OpenAPI Spec Version: 2.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 18.8.0' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;
