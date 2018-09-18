@@ -71,13 +71,6 @@ class Configuration
      * @var string
      */
     protected $host = 'https://api.aspose.cloud/v2.0';
-    
-    /*
-     * The base path, set to '/v2.0' by default
-     *
-     * @var string
-     */
-    protected $basePath = '/v2.0';
 
     /*
      * AppKey for API
@@ -238,29 +231,6 @@ class Configuration
     public function getHost()
     {
         return $this->host;
-    }
-
-    /*
-     * Sets the BasePath
-     *
-     * @param string $basePath
-     *
-     * @return $this
-     */
-    public function setBasePath($basePath)
-    {
-        $this->basePath = $basePath;
-        return $this;
-    }
-
-    /*
-     * Gets the basePath
-     *
-     * @return string BasePath
-     */
-    public function getBasePath()
-    {
-        return $this->basePath;
     }
 
     /**

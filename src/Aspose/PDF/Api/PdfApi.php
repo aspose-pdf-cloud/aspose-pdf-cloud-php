@@ -48418,7 +48418,7 @@ class PdfApi
     private function _requestToken()
     {
         $requestUrl = $this->config->getHost() . "/oauth2/token";
-        $requestUrl = str_replace($this->config->getBasePath(), '', $requestUrl);
+        $requestUrl = str_replace('/v2.0', '', $requestUrl);
         $postData = "grant_type=client_credentials" . "&client_id=" . $this->config->getAppSid() . "&client_secret=" . $this->config->getAppKey();
         $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
         $result = json_decode($response->getBody()->getContents(), true);
@@ -48431,7 +48431,7 @@ class PdfApi
     private function _refreshToken()
     {
         $requestUrl = $this->config->getHost() . "/oauth2/token";
-        $requestUrl = str_replace($this->config->getBasePath(), '', $requestUrl);
+        $requestUrl = str_replace('/v2.0', '', $requestUrl);
         $postData = "grant_type=refresh_token&refresh_token=" . $this->config->getRefreshToken();
         $response = $this->client->send(new Request('POST', $requestUrl, [], $postData));
         $result = json_decode($response->getBody()->getContents(), true);
