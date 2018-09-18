@@ -39,6 +39,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $appKey = '';
         $host = 'http://billing.cloud.saltov.dynabic.com/v2.0';
 
+
         $this->tempFolder = 'TempPdfCloud';
         
         $this->config = new Configuration();
