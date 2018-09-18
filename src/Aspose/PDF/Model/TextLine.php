@@ -206,6 +206,9 @@ class TextLine implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['segments'] === null) {
+            $invalidProperties[] = "'segments' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -218,6 +221,9 @@ class TextLine implements ModelInterface, ArrayAccess
     public function valid()
     {
 
+        if ($this->container['segments'] === null) {
+            return false;
+        }
         return true;
     }
 

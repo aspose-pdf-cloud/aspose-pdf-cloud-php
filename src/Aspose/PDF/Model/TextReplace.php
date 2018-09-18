@@ -53,7 +53,7 @@ use \Aspose\PDF\ObjectSerializer;
  */
 class TextReplace implements ModelInterface, ArrayAccess
 {
-    const DISCRIMINATOR = 'Type';
+    const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
@@ -72,7 +72,7 @@ class TextReplace implements ModelInterface, ArrayAccess
         'new_value' => 'string',
         'regex' => 'bool',
         'text_state' => '\Aspose\PDF\Model\TextState',
-        'rect' => '\Aspose\PDF\Model\Rectangle'
+        'rect' => '\Aspose\PDF\Model\RectanglePdf'
     ];
 
     /**
@@ -213,10 +213,6 @@ class TextReplace implements ModelInterface, ArrayAccess
         $this->container['regex'] = isset($data['regex']) ? $data['regex'] : null;
         $this->container['text_state'] = isset($data['text_state']) ? $data['text_state'] : null;
         $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
-
-        // Initialize discriminator property with the model name.
-        $discriminator = array_search('Type', self::$attributeMap);
-        $this->container[$discriminator] = static::$swaggerModelName;
     }
 
     /**
@@ -361,7 +357,7 @@ class TextReplace implements ModelInterface, ArrayAccess
     /**
      * Gets rect
      *
-     * @return \Aspose\PDF\Model\Rectangle
+     * @return \Aspose\PDF\Model\RectanglePdf
      */
     public function getRect()
     {
@@ -371,7 +367,7 @@ class TextReplace implements ModelInterface, ArrayAccess
     /**
      * Sets rect
      *
-     * @param \Aspose\PDF\Model\Rectangle $rect Rectangle area where searched original text.
+     * @param \Aspose\PDF\Model\RectanglePdf $rect Rectangle area where searched original text.
      *
      * @return $this
      */

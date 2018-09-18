@@ -1,6 +1,6 @@
 <?php
 /**
- * TextItemsResponse
+ * RectanglePdf
  *
  * PHP version 5
  *
@@ -38,17 +38,20 @@
  */
 
 namespace Aspose\PDF\Model;
+
+use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * TextItemsResponse Class Doc Comment
+ * RectanglePdf Class Doc Comment
  *
  * @category Class
+ * @description Represents rectangle DTO.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class TextItemsResponse extends SaaSposeResponse 
+class RectanglePdf implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -57,7 +60,7 @@ class TextItemsResponse extends SaaSposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TextItemsResponse';
+    protected static $swaggerModelName = 'RectanglePdf';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -65,7 +68,10 @@ class TextItemsResponse extends SaaSposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'text_items' => '\Aspose\PDF\Model\TextItems'
+        'llx' => 'double',
+        'lly' => 'double',
+        'urx' => 'double',
+        'ury' => 'double'
     ];
 
     /**
@@ -74,7 +80,10 @@ class TextItemsResponse extends SaaSposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'text_items' => null
+        'llx' => 'double',
+        'lly' => 'double',
+        'urx' => 'double',
+        'ury' => 'double'
     ];
 
     /**
@@ -84,7 +93,7 @@ class TextItemsResponse extends SaaSposeResponse
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -94,7 +103,7 @@ class TextItemsResponse extends SaaSposeResponse
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /**
@@ -104,7 +113,10 @@ class TextItemsResponse extends SaaSposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'text_items' => 'TextItems'
+        'llx' => 'LLX',
+        'lly' => 'LLY',
+        'urx' => 'URX',
+        'ury' => 'URY'
     ];
 
     /**
@@ -113,7 +125,10 @@ class TextItemsResponse extends SaaSposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'text_items' => 'setTextItems'
+        'llx' => 'setLlx',
+        'lly' => 'setLly',
+        'urx' => 'setUrx',
+        'ury' => 'setUry'
     ];
 
     /**
@@ -122,7 +137,10 @@ class TextItemsResponse extends SaaSposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'text_items' => 'getTextItems'
+        'llx' => 'getLlx',
+        'lly' => 'getLly',
+        'urx' => 'getUrx',
+        'ury' => 'getUry'
     ];
 
     /**
@@ -133,7 +151,7 @@ class TextItemsResponse extends SaaSposeResponse
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -143,7 +161,7 @@ class TextItemsResponse extends SaaSposeResponse
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -153,7 +171,7 @@ class TextItemsResponse extends SaaSposeResponse
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -170,6 +188,12 @@ class TextItemsResponse extends SaaSposeResponse
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -179,9 +203,10 @@ class TextItemsResponse extends SaaSposeResponse
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['text_items'] = isset($data['text_items']) ? $data['text_items'] : null;
+        $this->container['llx'] = isset($data['llx']) ? $data['llx'] : null;
+        $this->container['lly'] = isset($data['lly']) ? $data['lly'] : null;
+        $this->container['urx'] = isset($data['urx']) ? $data['urx'] : null;
+        $this->container['ury'] = isset($data['ury']) ? $data['ury'] : null;
     }
 
     /**
@@ -191,8 +216,20 @@ class TextItemsResponse extends SaaSposeResponse
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
+        if ($this->container['llx'] === null) {
+            $invalidProperties[] = "'llx' can't be null";
+        }
+        if ($this->container['lly'] === null) {
+            $invalidProperties[] = "'lly' can't be null";
+        }
+        if ($this->container['urx'] === null) {
+            $invalidProperties[] = "'urx' can't be null";
+        }
+        if ($this->container['ury'] === null) {
+            $invalidProperties[] = "'ury' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -204,34 +241,115 @@ class TextItemsResponse extends SaaSposeResponse
      */
     public function valid()
     {
-        if (!parent::valid()) {
+
+        if ($this->container['llx'] === null) {
             return false;
         }
-
+        if ($this->container['lly'] === null) {
+            return false;
+        }
+        if ($this->container['urx'] === null) {
+            return false;
+        }
+        if ($this->container['ury'] === null) {
+            return false;
+        }
         return true;
     }
 
 
     /**
-     * Gets text_items
+     * Gets llx
      *
-     * @return \Aspose\PDF\Model\TextItems
+     * @return double
      */
-    public function getTextItems()
+    public function getLlx()
     {
-        return $this->container['text_items'];
+        return $this->container['llx'];
     }
 
     /**
-     * Sets text_items
+     * Sets llx
      *
-     * @param \Aspose\PDF\Model\TextItems $text_items text_items
+     * @param double $llx llx
      *
      * @return $this
      */
-    public function setTextItems($text_items)
+    public function setLlx($llx)
     {
-        $this->container['text_items'] = $text_items;
+        $this->container['llx'] = $llx;
+
+        return $this;
+    }
+
+    /**
+     * Gets lly
+     *
+     * @return double
+     */
+    public function getLly()
+    {
+        return $this->container['lly'];
+    }
+
+    /**
+     * Sets lly
+     *
+     * @param double $lly lly
+     *
+     * @return $this
+     */
+    public function setLly($lly)
+    {
+        $this->container['lly'] = $lly;
+
+        return $this;
+    }
+
+    /**
+     * Gets urx
+     *
+     * @return double
+     */
+    public function getUrx()
+    {
+        return $this->container['urx'];
+    }
+
+    /**
+     * Sets urx
+     *
+     * @param double $urx urx
+     *
+     * @return $this
+     */
+    public function setUrx($urx)
+    {
+        $this->container['urx'] = $urx;
+
+        return $this;
+    }
+
+    /**
+     * Gets ury
+     *
+     * @return double
+     */
+    public function getUry()
+    {
+        return $this->container['ury'];
+    }
+
+    /**
+     * Sets ury
+     *
+     * @param double $ury ury
+     *
+     * @return $this
+     */
+    public function setUry($ury)
+    {
+        $this->container['ury'] = $ury;
 
         return $this;
     }

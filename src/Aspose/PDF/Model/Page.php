@@ -68,7 +68,7 @@ class Page extends LinkElement
     protected static $swaggerTypes = [
         'id' => 'int',
         'images' => '\Aspose\PDF\Model\Images',
-        'rectangle' => '\Aspose\PDF\Model\Rectangle'
+        'rectangle' => '\Aspose\PDF\Model\RectanglePdf'
     ];
 
     /**
@@ -276,7 +276,7 @@ class Page extends LinkElement
     /**
      * Gets rectangle
      *
-     * @return \Aspose\PDF\Model\Rectangle
+     * @return \Aspose\PDF\Model\RectanglePdf
      */
     public function getRectangle()
     {
@@ -286,7 +286,7 @@ class Page extends LinkElement
     /**
      * Sets rectangle
      *
-     * @param \Aspose\PDF\Model\Rectangle $rectangle rectangle
+     * @param \Aspose\PDF\Model\RectanglePdf $rectangle rectangle
      *
      * @return $this
      */

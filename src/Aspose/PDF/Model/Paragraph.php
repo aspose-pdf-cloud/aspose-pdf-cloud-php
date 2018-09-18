@@ -75,7 +75,7 @@ class Paragraph implements ModelInterface, ArrayAccess
         'right_margin' => 'double',
         'top_margin' => 'double',
         'bottom_margin' => 'double',
-        'rectangle' => '\Aspose\PDF\Model\Rectangle',
+        'rectangle' => '\Aspose\PDF\Model\RectanglePdf',
         'rotation' => 'double',
         'subsequent_lines_indent' => 'double',
         'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
@@ -459,7 +459,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Gets rectangle
      *
-     * @return \Aspose\PDF\Model\Rectangle
+     * @return \Aspose\PDF\Model\RectanglePdf
      */
     public function getRectangle()
     {
@@ -469,7 +469,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets rectangle
      *
-     * @param \Aspose\PDF\Model\Rectangle $rectangle rectangle
+     * @param \Aspose\PDF\Model\RectanglePdf $rectangle rectangle
      *
      * @return $this
      */

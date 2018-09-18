@@ -66,7 +66,7 @@ class LinkAnnotations extends LinkElement
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'list' => '\Aspose\PDF\Model\LinkElement[]'
+        'list' => '\Aspose\PDF\Model\LinkAnnotation[]'
     ];
 
     /**
@@ -216,7 +216,7 @@ class LinkAnnotations extends LinkElement
     /**
      * Gets list
      *
-     * @return \Aspose\PDF\Model\LinkElement[]
+     * @return \Aspose\PDF\Model\LinkAnnotation[]
      */
     public function getList()
     {
@@ -226,7 +226,7 @@ class LinkAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\LinkElement[] $list list
+     * @param \Aspose\PDF\Model\LinkAnnotation[] $list list
      *
      * @return $this
      */

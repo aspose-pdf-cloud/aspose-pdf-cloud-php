@@ -205,6 +205,9 @@ class Segment implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
+        if ($this->container['value'] === null) {
+            $invalidProperties[] = "'value' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -217,6 +220,9 @@ class Segment implements ModelInterface, ArrayAccess
     public function valid()
     {
 
+        if ($this->container['value'] === null) {
+            return false;
+        }
         return true;
     }
 

@@ -69,7 +69,9 @@ class LinkAnnotation extends LinkElement
         'action_type' => '\Aspose\PDF\Model\LinkActionType',
         'action' => 'string',
         'highlighting' => '\Aspose\PDF\Model\LinkHighlightingMode',
-        'color' => '\Aspose\PDF\Model\Color'
+        'color' => '\Aspose\PDF\Model\Color',
+        'rect' => '\Aspose\PDF\Model\RectanglePdf',
+        'id' => 'string'
     ];
 
     /**
@@ -81,7 +83,9 @@ class LinkAnnotation extends LinkElement
         'action_type' => null,
         'action' => null,
         'highlighting' => null,
-        'color' => null
+        'color' => null,
+        'rect' => null,
+        'id' => null
     ];
 
     /**
@@ -114,7 +118,9 @@ class LinkAnnotation extends LinkElement
         'action_type' => 'ActionType',
         'action' => 'Action',
         'highlighting' => 'Highlighting',
-        'color' => 'Color'
+        'color' => 'Color',
+        'rect' => 'Rect',
+        'id' => 'Id'
     ];
 
     /**
@@ -126,7 +132,9 @@ class LinkAnnotation extends LinkElement
         'action_type' => 'setActionType',
         'action' => 'setAction',
         'highlighting' => 'setHighlighting',
-        'color' => 'setColor'
+        'color' => 'setColor',
+        'rect' => 'setRect',
+        'id' => 'setId'
     ];
 
     /**
@@ -138,7 +146,9 @@ class LinkAnnotation extends LinkElement
         'action_type' => 'getActionType',
         'action' => 'getAction',
         'highlighting' => 'getHighlighting',
-        'color' => 'getColor'
+        'color' => 'getColor',
+        'rect' => 'getRect',
+        'id' => 'getId'
     ];
 
     /**
@@ -201,6 +211,8 @@ class LinkAnnotation extends LinkElement
         $this->container['action'] = isset($data['action']) ? $data['action'] : null;
         $this->container['highlighting'] = isset($data['highlighting']) ? $data['highlighting'] : null;
         $this->container['color'] = isset($data['color']) ? $data['color'] : null;
+        $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
     }
 
     /**
@@ -323,6 +335,54 @@ class LinkAnnotation extends LinkElement
     public function setColor($color)
     {
         $this->container['color'] = $color;
+
+        return $this;
+    }
+
+    /**
+     * Gets rect
+     *
+     * @return \Aspose\PDF\Model\RectanglePdf
+     */
+    public function getRect()
+    {
+        return $this->container['rect'];
+    }
+
+    /**
+     * Sets rect
+     *
+     * @param \Aspose\PDF\Model\RectanglePdf $rect rect
+     *
+     * @return $this
+     */
+    public function setRect($rect)
+    {
+        $this->container['rect'] = $rect;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string $id id
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
 
         return $this;
     }

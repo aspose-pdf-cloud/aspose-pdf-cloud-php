@@ -48,7 +48,7 @@ use \Aspose\PDF\ObjectSerializer;
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class TextReplaceResponse extends SaaSposeResponse 
+class TextReplaceResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
