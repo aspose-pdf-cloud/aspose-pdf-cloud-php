@@ -1,6 +1,6 @@
 <?php
 /**
- * Field
+ * TextAnnotation
  *
  * PHP version 5
  *
@@ -41,15 +41,15 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * Field Class Doc Comment
+ * TextAnnotation Class Doc Comment
  *
  * @category Class
- * @description Represents form field.
+ * @description Provides TextAnnotation.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Field extends LinkElement 
+class TextAnnotation extends MarkupAnnotation 
 {
     const DISCRIMINATOR = null;
 
@@ -58,7 +58,7 @@ class Field extends LinkElement
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Field';
+    protected static $swaggerModelName = 'TextAnnotation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -66,11 +66,10 @@ class Field extends LinkElement
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'name' => 'string',
-        'selected_items' => 'int[]',
-        'type' => '\Aspose\PDF\Model\FieldType',
-        'rect' => '\Aspose\PDF\Model\RectanglePdf',
-        'values' => 'string[]'
+        'state' => '\Aspose\PDF\Model\AnnotationState',
+        'open' => 'bool',
+        'color' => '\Aspose\PDF\Model\Color',
+        'icon' => '\Aspose\PDF\Model\TextIcon'
     ];
 
     /**
@@ -79,11 +78,10 @@ class Field extends LinkElement
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'name' => null,
-        'selected_items' => 'int32',
-        'type' => null,
-        'rect' => null,
-        'values' => null
+        'state' => null,
+        'open' => null,
+        'color' => null,
+        'icon' => null
     ];
 
     /**
@@ -113,11 +111,10 @@ class Field extends LinkElement
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name',
-        'selected_items' => 'SelectedItems',
-        'type' => 'Type',
-        'rect' => 'Rect',
-        'values' => 'Values'
+        'state' => 'State',
+        'open' => 'Open',
+        'color' => 'Color',
+        'icon' => 'Icon'
     ];
 
     /**
@@ -126,11 +123,10 @@ class Field extends LinkElement
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'selected_items' => 'setSelectedItems',
-        'type' => 'setType',
-        'rect' => 'setRect',
-        'values' => 'setValues'
+        'state' => 'setState',
+        'open' => 'setOpen',
+        'color' => 'setColor',
+        'icon' => 'setIcon'
     ];
 
     /**
@@ -139,11 +135,10 @@ class Field extends LinkElement
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'selected_items' => 'getSelectedItems',
-        'type' => 'getType',
-        'rect' => 'getRect',
-        'values' => 'getValues'
+        'state' => 'getState',
+        'open' => 'getOpen',
+        'color' => 'getColor',
+        'icon' => 'getIcon'
     ];
 
     /**
@@ -202,11 +197,10 @@ class Field extends LinkElement
     {
         parent::__construct($data);
 
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['selected_items'] = isset($data['selected_items']) ? $data['selected_items'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
-        $this->container['values'] = isset($data['values']) ? $data['values'] : null;
+        $this->container['state'] = isset($data['state']) ? $data['state'] : null;
+        $this->container['open'] = isset($data['open']) ? $data['open'] : null;
+        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
+        $this->container['icon'] = isset($data['icon']) ? $data['icon'] : null;
     }
 
     /**
@@ -238,121 +232,97 @@ class Field extends LinkElement
 
 
     /**
-     * Gets name
+     * Gets state
      *
-     * @return string
+     * @return \Aspose\PDF\Model\AnnotationState
      */
-    public function getName()
+    public function getState()
     {
-        return $this->container['name'];
+        return $this->container['state'];
     }
 
     /**
-     * Sets name
+     * Sets state
      *
-     * @param string $name Field name.
+     * @param \Aspose\PDF\Model\AnnotationState $state Gets or sets the state to which the original annotation should be set.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setState($state)
     {
-        $this->container['name'] = $name;
+        $this->container['state'] = $state;
 
         return $this;
     }
 
     /**
-     * Gets selected_items
+     * Gets open
      *
-     * @return int[]
+     * @return bool
      */
-    public function getSelectedItems()
+    public function getOpen()
     {
-        return $this->container['selected_items'];
+        return $this->container['open'];
     }
 
     /**
-     * Sets selected_items
+     * Sets open
      *
-     * @param int[] $selected_items Selected items.
+     * @param bool $open Gets or sets is the annotation open.
      *
      * @return $this
      */
-    public function setSelectedItems($selected_items)
+    public function setOpen($open)
     {
-        $this->container['selected_items'] = $selected_items;
+        $this->container['open'] = $open;
 
         return $this;
     }
 
     /**
-     * Gets type
+     * Gets color
      *
-     * @return \Aspose\PDF\Model\FieldType
+     * @return \Aspose\PDF\Model\Color
      */
-    public function getType()
+    public function getColor()
     {
-        return $this->container['type'];
+        return $this->container['color'];
     }
 
     /**
-     * Sets type
+     * Sets color
      *
-     * @param \Aspose\PDF\Model\FieldType $type Field type.
+     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
      *
      * @return $this
      */
-    public function setType($type)
+    public function setColor($color)
     {
-        $this->container['type'] = $type;
+        $this->container['color'] = $color;
 
         return $this;
     }
 
     /**
-     * Gets rect
+     * Gets icon
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\TextIcon
      */
-    public function getRect()
+    public function getIcon()
     {
-        return $this->container['rect'];
+        return $this->container['icon'];
     }
 
     /**
-     * Sets rect
+     * Sets icon
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rect Field rectangle.
+     * @param \Aspose\PDF\Model\TextIcon $icon Gets or sets an icon to be used in displaying the annotation.
      *
      * @return $this
      */
-    public function setRect($rect)
+    public function setIcon($icon)
     {
-        $this->container['rect'] = $rect;
-
-        return $this;
-    }
-
-    /**
-     * Gets values
-     *
-     * @return string[]
-     */
-    public function getValues()
-    {
-        return $this->container['values'];
-    }
-
-    /**
-     * Sets values
-     *
-     * @param string[] $values Field values.
-     *
-     * @return $this
-     */
-    public function setValues($values)
-    {
-        $this->container['values'] = $values;
+        $this->container['icon'] = $icon;
 
         return $this;
     }

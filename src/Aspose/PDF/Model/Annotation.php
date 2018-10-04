@@ -66,12 +66,19 @@ class Annotation extends LinkElement
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'color' => '\Aspose\PDF\Model\Color',
         'contents' => 'string',
         'creation_date' => 'string',
         'subject' => 'string',
         'title' => 'string',
-        'modified' => 'string'
+        'modified' => 'string',
+        'id' => 'string',
+        'flags' => '\Aspose\PDF\Model\AnnotationFlags[]',
+        'name' => 'string',
+        'rect' => '\Aspose\PDF\Model\RectanglePdf',
+        'page_index' => 'int',
+        'z_index' => 'int',
+        'horizontal_alignment' => '\Aspose\PDF\Model\HorizontalAlignment',
+        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment'
     ];
 
     /**
@@ -80,12 +87,19 @@ class Annotation extends LinkElement
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'color' => null,
         'contents' => null,
         'creation_date' => null,
         'subject' => null,
         'title' => null,
-        'modified' => null
+        'modified' => null,
+        'id' => null,
+        'flags' => null,
+        'name' => null,
+        'rect' => null,
+        'page_index' => 'int32',
+        'z_index' => 'int32',
+        'horizontal_alignment' => null,
+        'vertical_alignment' => null
     ];
 
     /**
@@ -115,12 +129,19 @@ class Annotation extends LinkElement
      * @var string[]
      */
     protected static $attributeMap = [
-        'color' => 'Color',
         'contents' => 'Contents',
         'creation_date' => 'CreationDate',
         'subject' => 'Subject',
         'title' => 'Title',
-        'modified' => 'Modified'
+        'modified' => 'Modified',
+        'id' => 'Id',
+        'flags' => 'Flags',
+        'name' => 'Name',
+        'rect' => 'Rect',
+        'page_index' => 'PageIndex',
+        'z_index' => 'ZIndex',
+        'horizontal_alignment' => 'HorizontalAlignment',
+        'vertical_alignment' => 'VerticalAlignment'
     ];
 
     /**
@@ -129,12 +150,19 @@ class Annotation extends LinkElement
      * @var string[]
      */
     protected static $setters = [
-        'color' => 'setColor',
         'contents' => 'setContents',
         'creation_date' => 'setCreationDate',
         'subject' => 'setSubject',
         'title' => 'setTitle',
-        'modified' => 'setModified'
+        'modified' => 'setModified',
+        'id' => 'setId',
+        'flags' => 'setFlags',
+        'name' => 'setName',
+        'rect' => 'setRect',
+        'page_index' => 'setPageIndex',
+        'z_index' => 'setZIndex',
+        'horizontal_alignment' => 'setHorizontalAlignment',
+        'vertical_alignment' => 'setVerticalAlignment'
     ];
 
     /**
@@ -143,12 +171,19 @@ class Annotation extends LinkElement
      * @var string[]
      */
     protected static $getters = [
-        'color' => 'getColor',
         'contents' => 'getContents',
         'creation_date' => 'getCreationDate',
         'subject' => 'getSubject',
         'title' => 'getTitle',
-        'modified' => 'getModified'
+        'modified' => 'getModified',
+        'id' => 'getId',
+        'flags' => 'getFlags',
+        'name' => 'getName',
+        'rect' => 'getRect',
+        'page_index' => 'getPageIndex',
+        'z_index' => 'getZIndex',
+        'horizontal_alignment' => 'getHorizontalAlignment',
+        'vertical_alignment' => 'getVerticalAlignment'
     ];
 
     /**
@@ -207,12 +242,19 @@ class Annotation extends LinkElement
     {
         parent::__construct($data);
 
-        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['contents'] = isset($data['contents']) ? $data['contents'] : null;
         $this->container['creation_date'] = isset($data['creation_date']) ? $data['creation_date'] : null;
         $this->container['subject'] = isset($data['subject']) ? $data['subject'] : null;
         $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['modified'] = isset($data['modified']) ? $data['modified'] : null;
+        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
+        $this->container['flags'] = isset($data['flags']) ? $data['flags'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
+        $this->container['page_index'] = isset($data['page_index']) ? $data['page_index'] : null;
+        $this->container['z_index'] = isset($data['z_index']) ? $data['z_index'] : null;
+        $this->container['horizontal_alignment'] = isset($data['horizontal_alignment']) ? $data['horizontal_alignment'] : null;
+        $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
     }
 
     /**
@@ -242,30 +284,6 @@ class Annotation extends LinkElement
         return true;
     }
 
-
-    /**
-     * Gets color
-     *
-     * @return \Aspose\PDF\Model\Color
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param \Aspose\PDF\Model\Color $color Get the annotation color.
-     *
-     * @return $this
-     */
-    public function setColor($color)
-    {
-        $this->container['color'] = $color;
-
-        return $this;
-    }
 
     /**
      * Gets contents
@@ -383,6 +401,198 @@ class Annotation extends LinkElement
     public function setModified($modified)
     {
         $this->container['modified'] = $modified;
+
+        return $this;
+    }
+
+    /**
+     * Gets id
+     *
+     * @return string
+     */
+    public function getId()
+    {
+        return $this->container['id'];
+    }
+
+    /**
+     * Sets id
+     *
+     * @param string $id Gets ID of the annotation.
+     *
+     * @return $this
+     */
+    public function setId($id)
+    {
+        $this->container['id'] = $id;
+
+        return $this;
+    }
+
+    /**
+     * Gets flags
+     *
+     * @return \Aspose\PDF\Model\AnnotationFlags[]
+     */
+    public function getFlags()
+    {
+        return $this->container['flags'];
+    }
+
+    /**
+     * Sets flags
+     *
+     * @param \Aspose\PDF\Model\AnnotationFlags[] $flags Gets Flags of the annotation.
+     *
+     * @return $this
+     */
+    public function setFlags($flags)
+    {
+        $this->container['flags'] = $flags;
+
+        return $this;
+    }
+
+    /**
+     * Gets name
+     *
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->container['name'];
+    }
+
+    /**
+     * Sets name
+     *
+     * @param string $name Gets Name of the annotation.
+     *
+     * @return $this
+     */
+    public function setName($name)
+    {
+        $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets rect
+     *
+     * @return \Aspose\PDF\Model\RectanglePdf
+     */
+    public function getRect()
+    {
+        return $this->container['rect'];
+    }
+
+    /**
+     * Sets rect
+     *
+     * @param \Aspose\PDF\Model\RectanglePdf $rect Gets Rect of the annotation.
+     *
+     * @return $this
+     */
+    public function setRect($rect)
+    {
+        $this->container['rect'] = $rect;
+
+        return $this;
+    }
+
+    /**
+     * Gets page_index
+     *
+     * @return int
+     */
+    public function getPageIndex()
+    {
+        return $this->container['page_index'];
+    }
+
+    /**
+     * Sets page_index
+     *
+     * @param int $page_index Gets PageIndex of the annotation.
+     *
+     * @return $this
+     */
+    public function setPageIndex($page_index)
+    {
+        $this->container['page_index'] = $page_index;
+
+        return $this;
+    }
+
+    /**
+     * Gets z_index
+     *
+     * @return int
+     */
+    public function getZIndex()
+    {
+        return $this->container['z_index'];
+    }
+
+    /**
+     * Sets z_index
+     *
+     * @param int $z_index Gets ZIndex of the annotation.
+     *
+     * @return $this
+     */
+    public function setZIndex($z_index)
+    {
+        $this->container['z_index'] = $z_index;
+
+        return $this;
+    }
+
+    /**
+     * Gets horizontal_alignment
+     *
+     * @return \Aspose\PDF\Model\HorizontalAlignment
+     */
+    public function getHorizontalAlignment()
+    {
+        return $this->container['horizontal_alignment'];
+    }
+
+    /**
+     * Sets horizontal_alignment
+     *
+     * @param \Aspose\PDF\Model\HorizontalAlignment $horizontal_alignment Gets HorizontalAlignment of the annotation.
+     *
+     * @return $this
+     */
+    public function setHorizontalAlignment($horizontal_alignment)
+    {
+        $this->container['horizontal_alignment'] = $horizontal_alignment;
+
+        return $this;
+    }
+
+    /**
+     * Gets vertical_alignment
+     *
+     * @return \Aspose\PDF\Model\VerticalAlignment
+     */
+    public function getVerticalAlignment()
+    {
+        return $this->container['vertical_alignment'];
+    }
+
+    /**
+     * Sets vertical_alignment
+     *
+     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Gets VerticalAlignment of the annotation.
+     *
+     * @return $this
+     */
+    public function setVerticalAlignment($vertical_alignment)
+    {
+        $this->container['vertical_alignment'] = $vertical_alignment;
 
         return $this;
     }

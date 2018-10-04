@@ -1,6 +1,6 @@
 <?php
 /**
- * Annotations
+ * TextStyle
  *
  * PHP version 5
  *
@@ -38,18 +38,20 @@
  */
 
 namespace Aspose\PDF\Model;
+
+use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * Annotations Class Doc Comment
+ * TextStyle Class Doc Comment
  *
  * @category Class
- * @description List of annotations.
+ * @description Represents a text style of a text
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Annotations extends LinkElement 
+class TextStyle implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -58,7 +60,7 @@ class Annotations extends LinkElement
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Annotations';
+    protected static $swaggerModelName = 'TextStyle';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -66,7 +68,10 @@ class Annotations extends LinkElement
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'list' => '\Aspose\PDF\Model\LinkElement[]'
+        'font_size' => 'double',
+        'font' => 'string',
+        'foreground_color' => '\Aspose\PDF\Model\Color',
+        'background_color' => '\Aspose\PDF\Model\Color'
     ];
 
     /**
@@ -75,7 +80,10 @@ class Annotations extends LinkElement
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'list' => null
+        'font_size' => 'double',
+        'font' => null,
+        'foreground_color' => null,
+        'background_color' => null
     ];
 
     /**
@@ -85,7 +93,7 @@ class Annotations extends LinkElement
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -95,7 +103,7 @@ class Annotations extends LinkElement
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /**
@@ -105,7 +113,10 @@ class Annotations extends LinkElement
      * @var string[]
      */
     protected static $attributeMap = [
-        'list' => 'List'
+        'font_size' => 'FontSize',
+        'font' => 'Font',
+        'foreground_color' => 'ForegroundColor',
+        'background_color' => 'BackgroundColor'
     ];
 
     /**
@@ -114,7 +125,10 @@ class Annotations extends LinkElement
      * @var string[]
      */
     protected static $setters = [
-        'list' => 'setList'
+        'font_size' => 'setFontSize',
+        'font' => 'setFont',
+        'foreground_color' => 'setForegroundColor',
+        'background_color' => 'setBackgroundColor'
     ];
 
     /**
@@ -123,7 +137,10 @@ class Annotations extends LinkElement
      * @var string[]
      */
     protected static $getters = [
-        'list' => 'getList'
+        'font_size' => 'getFontSize',
+        'font' => 'getFont',
+        'foreground_color' => 'getForegroundColor',
+        'background_color' => 'getBackgroundColor'
     ];
 
     /**
@@ -134,7 +151,7 @@ class Annotations extends LinkElement
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -144,7 +161,7 @@ class Annotations extends LinkElement
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -154,7 +171,7 @@ class Annotations extends LinkElement
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -171,6 +188,12 @@ class Annotations extends LinkElement
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -180,9 +203,10 @@ class Annotations extends LinkElement
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['list'] = isset($data['list']) ? $data['list'] : null;
+        $this->container['font_size'] = isset($data['font_size']) ? $data['font_size'] : null;
+        $this->container['font'] = isset($data['font']) ? $data['font'] : null;
+        $this->container['foreground_color'] = isset($data['foreground_color']) ? $data['foreground_color'] : null;
+        $this->container['background_color'] = isset($data['background_color']) ? $data['background_color'] : null;
     }
 
     /**
@@ -192,8 +216,11 @@ class Annotations extends LinkElement
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
+        if ($this->container['font_size'] === null) {
+            $invalidProperties[] = "'font_size' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -205,34 +232,106 @@ class Annotations extends LinkElement
      */
     public function valid()
     {
-        if (!parent::valid()) {
+
+        if ($this->container['font_size'] === null) {
             return false;
         }
-
         return true;
     }
 
 
     /**
-     * Gets list
+     * Gets font_size
      *
-     * @return \Aspose\PDF\Model\LinkElement[]
+     * @return double
      */
-    public function getList()
+    public function getFontSize()
     {
-        return $this->container['list'];
+        return $this->container['font_size'];
     }
 
     /**
-     * Sets list
+     * Sets font_size
      *
-     * @param \Aspose\PDF\Model\LinkElement[] $list list
+     * @param double $font_size Gets or sets font size of the text.
      *
      * @return $this
      */
-    public function setList($list)
+    public function setFontSize($font_size)
     {
-        $this->container['list'] = $list;
+        $this->container['font_size'] = $font_size;
+
+        return $this;
+    }
+
+    /**
+     * Gets font
+     *
+     * @return string
+     */
+    public function getFont()
+    {
+        return $this->container['font'];
+    }
+
+    /**
+     * Sets font
+     *
+     * @param string $font Gets or sets font of the text.
+     *
+     * @return $this
+     */
+    public function setFont($font)
+    {
+        $this->container['font'] = $font;
+
+        return $this;
+    }
+
+    /**
+     * Gets foreground_color
+     *
+     * @return \Aspose\PDF\Model\Color
+     */
+    public function getForegroundColor()
+    {
+        return $this->container['foreground_color'];
+    }
+
+    /**
+     * Sets foreground_color
+     *
+     * @param \Aspose\PDF\Model\Color $foreground_color Gets or sets foreground color of the text.
+     *
+     * @return $this
+     */
+    public function setForegroundColor($foreground_color)
+    {
+        $this->container['foreground_color'] = $foreground_color;
+
+        return $this;
+    }
+
+    /**
+     * Gets background_color
+     *
+     * @return \Aspose\PDF\Model\Color
+     */
+    public function getBackgroundColor()
+    {
+        return $this->container['background_color'];
+    }
+
+    /**
+     * Sets background_color
+     *
+     * @param \Aspose\PDF\Model\Color $background_color Sets background color of the text.
+     *
+     * @return $this
+     */
+    public function setBackgroundColor($background_color)
+    {
+        $this->container['background_color'] = $background_color;
 
         return $this;
     }

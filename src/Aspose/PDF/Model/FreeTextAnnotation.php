@@ -1,6 +1,6 @@
 <?php
 /**
- * AnnotationResponse
+ * FreeTextAnnotation
  *
  * PHP version 5
  *
@@ -41,14 +41,15 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * AnnotationResponse Class Doc Comment
+ * FreeTextAnnotation Class Doc Comment
  *
  * @category Class
+ * @description Provides FreeTextAnnotation.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class AnnotationResponse extends AsposeResponse 
+class FreeTextAnnotation extends MarkupAnnotation 
 {
     const DISCRIMINATOR = null;
 
@@ -57,7 +58,7 @@ class AnnotationResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'AnnotationResponse';
+    protected static $swaggerModelName = 'FreeTextAnnotation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -65,7 +66,10 @@ class AnnotationResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'annotation' => '\Aspose\PDF\Model\Annotation'
+        'justification' => '\Aspose\PDF\Model\Justification',
+        'intent' => '\Aspose\PDF\Model\FreeTextIntent',
+        'rotate' => '\Aspose\PDF\Model\Rotation',
+        'text_style' => '\Aspose\PDF\Model\TextStyle'
     ];
 
     /**
@@ -74,7 +78,10 @@ class AnnotationResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'annotation' => null
+        'justification' => null,
+        'intent' => null,
+        'rotate' => null,
+        'text_style' => null
     ];
 
     /**
@@ -104,7 +111,10 @@ class AnnotationResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'annotation' => 'Annotation'
+        'justification' => 'Justification',
+        'intent' => 'Intent',
+        'rotate' => 'Rotate',
+        'text_style' => 'TextStyle'
     ];
 
     /**
@@ -113,7 +123,10 @@ class AnnotationResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'annotation' => 'setAnnotation'
+        'justification' => 'setJustification',
+        'intent' => 'setIntent',
+        'rotate' => 'setRotate',
+        'text_style' => 'setTextStyle'
     ];
 
     /**
@@ -122,7 +135,10 @@ class AnnotationResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'annotation' => 'getAnnotation'
+        'justification' => 'getJustification',
+        'intent' => 'getIntent',
+        'rotate' => 'getRotate',
+        'text_style' => 'getTextStyle'
     ];
 
     /**
@@ -181,7 +197,10 @@ class AnnotationResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['annotation'] = isset($data['annotation']) ? $data['annotation'] : null;
+        $this->container['justification'] = isset($data['justification']) ? $data['justification'] : null;
+        $this->container['intent'] = isset($data['intent']) ? $data['intent'] : null;
+        $this->container['rotate'] = isset($data['rotate']) ? $data['rotate'] : null;
+        $this->container['text_style'] = isset($data['text_style']) ? $data['text_style'] : null;
     }
 
     /**
@@ -213,25 +232,97 @@ class AnnotationResponse extends AsposeResponse
 
 
     /**
-     * Gets annotation
+     * Gets justification
      *
-     * @return \Aspose\PDF\Model\Annotation
+     * @return \Aspose\PDF\Model\Justification
      */
-    public function getAnnotation()
+    public function getJustification()
     {
-        return $this->container['annotation'];
+        return $this->container['justification'];
     }
 
     /**
-     * Sets annotation
+     * Sets justification
      *
-     * @param \Aspose\PDF\Model\Annotation $annotation annotation
+     * @param \Aspose\PDF\Model\Justification $justification Gets Justification of the annotation.
      *
      * @return $this
      */
-    public function setAnnotation($annotation)
+    public function setJustification($justification)
     {
-        $this->container['annotation'] = $annotation;
+        $this->container['justification'] = $justification;
+
+        return $this;
+    }
+
+    /**
+     * Gets intent
+     *
+     * @return \Aspose\PDF\Model\FreeTextIntent
+     */
+    public function getIntent()
+    {
+        return $this->container['intent'];
+    }
+
+    /**
+     * Sets intent
+     *
+     * @param \Aspose\PDF\Model\FreeTextIntent $intent Gets or sets the intent of the free text annotation.
+     *
+     * @return $this
+     */
+    public function setIntent($intent)
+    {
+        $this->container['intent'] = $intent;
+
+        return $this;
+    }
+
+    /**
+     * Gets rotate
+     *
+     * @return \Aspose\PDF\Model\Rotation
+     */
+    public function getRotate()
+    {
+        return $this->container['rotate'];
+    }
+
+    /**
+     * Sets rotate
+     *
+     * @param \Aspose\PDF\Model\Rotation $rotate Angle of annotation rotation.
+     *
+     * @return $this
+     */
+    public function setRotate($rotate)
+    {
+        $this->container['rotate'] = $rotate;
+
+        return $this;
+    }
+
+    /**
+     * Gets text_style
+     *
+     * @return \Aspose\PDF\Model\TextStyle
+     */
+    public function getTextStyle()
+    {
+        return $this->container['text_style'];
+    }
+
+    /**
+     * Sets text_style
+     *
+     * @param \Aspose\PDF\Model\TextStyle $text_style Text style of the annotation.
+     *
+     * @return $this
+     */
+    public function setTextStyle($text_style)
+    {
+        $this->container['text_style'] = $text_style;
 
         return $this;
     }
