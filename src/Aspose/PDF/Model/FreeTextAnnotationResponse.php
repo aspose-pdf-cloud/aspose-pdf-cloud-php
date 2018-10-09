@@ -1,6 +1,6 @@
 <?php
 /**
- * Field
+ * FreeTextAnnotationResponse
  *
  * PHP version 5
  *
@@ -41,15 +41,14 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * Field Class Doc Comment
+ * FreeTextAnnotationResponse Class Doc Comment
  *
  * @category Class
- * @description Represents form field.
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class Field extends LinkElement 
+class FreeTextAnnotationResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
@@ -58,7 +57,7 @@ class Field extends LinkElement
       *
       * @var string
       */
-    protected static $swaggerModelName = 'Field';
+    protected static $swaggerModelName = 'FreeTextAnnotationResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -66,11 +65,7 @@ class Field extends LinkElement
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'name' => 'string',
-        'selected_items' => 'int[]',
-        'type' => '\Aspose\PDF\Model\FieldType',
-        'rect' => '\Aspose\PDF\Model\RectanglePdf',
-        'values' => 'string[]'
+        'annotation' => '\Aspose\PDF\Model\FreeTextAnnotation'
     ];
 
     /**
@@ -79,11 +74,7 @@ class Field extends LinkElement
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'name' => null,
-        'selected_items' => 'int32',
-        'type' => null,
-        'rect' => null,
-        'values' => null
+        'annotation' => null
     ];
 
     /**
@@ -113,11 +104,7 @@ class Field extends LinkElement
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name',
-        'selected_items' => 'SelectedItems',
-        'type' => 'Type',
-        'rect' => 'Rect',
-        'values' => 'Values'
+        'annotation' => 'Annotation'
     ];
 
     /**
@@ -126,11 +113,7 @@ class Field extends LinkElement
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'selected_items' => 'setSelectedItems',
-        'type' => 'setType',
-        'rect' => 'setRect',
-        'values' => 'setValues'
+        'annotation' => 'setAnnotation'
     ];
 
     /**
@@ -139,11 +122,7 @@ class Field extends LinkElement
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'selected_items' => 'getSelectedItems',
-        'type' => 'getType',
-        'rect' => 'getRect',
-        'values' => 'getValues'
+        'annotation' => 'getAnnotation'
     ];
 
     /**
@@ -202,11 +181,7 @@ class Field extends LinkElement
     {
         parent::__construct($data);
 
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['selected_items'] = isset($data['selected_items']) ? $data['selected_items'] : null;
-        $this->container['type'] = isset($data['type']) ? $data['type'] : null;
-        $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
-        $this->container['values'] = isset($data['values']) ? $data['values'] : null;
+        $this->container['annotation'] = isset($data['annotation']) ? $data['annotation'] : null;
     }
 
     /**
@@ -238,121 +213,25 @@ class Field extends LinkElement
 
 
     /**
-     * Gets name
+     * Gets annotation
      *
-     * @return string
+     * @return \Aspose\PDF\Model\FreeTextAnnotation
      */
-    public function getName()
+    public function getAnnotation()
     {
-        return $this->container['name'];
+        return $this->container['annotation'];
     }
 
     /**
-     * Sets name
+     * Sets annotation
      *
-     * @param string $name Field name.
+     * @param \Aspose\PDF\Model\FreeTextAnnotation $annotation annotation
      *
      * @return $this
      */
-    public function setName($name)
+    public function setAnnotation($annotation)
     {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets selected_items
-     *
-     * @return int[]
-     */
-    public function getSelectedItems()
-    {
-        return $this->container['selected_items'];
-    }
-
-    /**
-     * Sets selected_items
-     *
-     * @param int[] $selected_items Selected items.
-     *
-     * @return $this
-     */
-    public function setSelectedItems($selected_items)
-    {
-        $this->container['selected_items'] = $selected_items;
-
-        return $this;
-    }
-
-    /**
-     * Gets type
-     *
-     * @return \Aspose\PDF\Model\FieldType
-     */
-    public function getType()
-    {
-        return $this->container['type'];
-    }
-
-    /**
-     * Sets type
-     *
-     * @param \Aspose\PDF\Model\FieldType $type Field type.
-     *
-     * @return $this
-     */
-    public function setType($type)
-    {
-        $this->container['type'] = $type;
-
-        return $this;
-    }
-
-    /**
-     * Gets rect
-     *
-     * @return \Aspose\PDF\Model\RectanglePdf
-     */
-    public function getRect()
-    {
-        return $this->container['rect'];
-    }
-
-    /**
-     * Sets rect
-     *
-     * @param \Aspose\PDF\Model\RectanglePdf $rect Field rectangle.
-     *
-     * @return $this
-     */
-    public function setRect($rect)
-    {
-        $this->container['rect'] = $rect;
-
-        return $this;
-    }
-
-    /**
-     * Gets values
-     *
-     * @return string[]
-     */
-    public function getValues()
-    {
-        return $this->container['values'];
-    }
-
-    /**
-     * Sets values
-     *
-     * @param string[] $values Field values.
-     *
-     * @return $this
-     */
-    public function setValues($values)
-    {
-        $this->container['values'] = $values;
+        $this->container['annotation'] = $annotation;
 
         return $this;
     }

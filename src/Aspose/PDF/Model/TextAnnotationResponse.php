@@ -1,6 +1,6 @@
 <?php
 /**
- * AnnotationsResponse
+ * TextAnnotationResponse
  *
  * PHP version 5
  *
@@ -41,14 +41,14 @@ namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
 /**
- * AnnotationsResponse Class Doc Comment
+ * TextAnnotationResponse Class Doc Comment
  *
  * @category Class
  * @package  Aspose\PDF
  * @author   Swagger Codegen team
  * @link     https://github.com/swagger-api/swagger-codegen
  */
-class AnnotationsResponse extends AsposeResponse 
+class TextAnnotationResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
@@ -57,7 +57,7 @@ class AnnotationsResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'AnnotationsResponse';
+    protected static $swaggerModelName = 'TextAnnotationResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -65,7 +65,7 @@ class AnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'annotations' => '\Aspose\PDF\Model\Annotations'
+        'annotation' => '\Aspose\PDF\Model\TextAnnotation'
     ];
 
     /**
@@ -74,7 +74,7 @@ class AnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'annotations' => null
+        'annotation' => null
     ];
 
     /**
@@ -104,7 +104,7 @@ class AnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'annotations' => 'Annotations'
+        'annotation' => 'Annotation'
     ];
 
     /**
@@ -113,7 +113,7 @@ class AnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'annotations' => 'setAnnotations'
+        'annotation' => 'setAnnotation'
     ];
 
     /**
@@ -122,7 +122,7 @@ class AnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'annotations' => 'getAnnotations'
+        'annotation' => 'getAnnotation'
     ];
 
     /**
@@ -181,7 +181,7 @@ class AnnotationsResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['annotations'] = isset($data['annotations']) ? $data['annotations'] : null;
+        $this->container['annotation'] = isset($data['annotation']) ? $data['annotation'] : null;
     }
 
     /**
@@ -213,25 +213,25 @@ class AnnotationsResponse extends AsposeResponse
 
 
     /**
-     * Gets annotations
+     * Gets annotation
      *
-     * @return \Aspose\PDF\Model\Annotations
+     * @return \Aspose\PDF\Model\TextAnnotation
      */
-    public function getAnnotations()
+    public function getAnnotation()
     {
-        return $this->container['annotations'];
+        return $this->container['annotation'];
     }
 
     /**
-     * Sets annotations
+     * Sets annotation
      *
-     * @param \Aspose\PDF\Model\Annotations $annotations annotations
+     * @param \Aspose\PDF\Model\TextAnnotation $annotation annotation
      *
      * @return $this
      */
-    public function setAnnotations($annotations)
+    public function setAnnotation($annotation)
     {
-        $this->container['annotations'] = $annotations;
+        $this->container['annotation'] = $annotation;
 
         return $this;
     }

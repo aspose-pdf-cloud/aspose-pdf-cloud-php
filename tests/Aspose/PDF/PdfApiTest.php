@@ -66,6 +66,24 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
     //Annotations Tests
 
+    public function testGetDocumentAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeleteDocumentAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->deleteDocumentAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
     public function testGetPageAnnotations()
     {
         $name = 'PdfWithAnnotations.pdf';
@@ -77,17 +95,211 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
-    public function testGetPageAnnotation()
+    public function testDeletePageAnnotations()
     {
         $name = 'PdfWithAnnotations.pdf';
         $this->uploadFile($name);
 
         $pageNumber = 2;
-        $annotationNumber = 2;
 
-        $response = $this->pdfApi->getPageAnnotation($name, $pageNumber, $annotationNumber, null, $this->tempFolder);
+        $response = $this->pdfApi->deletePageAnnotations($name, $pageNumber, null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
+
+    public function testDeleteAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->deleteAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    //Free Text Annotations Tests
+
+    public function testGetDocumentFreeTextAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentFreeTextAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageFreeTextAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageFreeTextAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetFreeTextAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentFreeTextAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getFreeTextAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageFreeTextAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $textStyle = new Aspose\PDF\Model\TextStyle();
+        $textStyle->setFontSize(12); 
+        $textStyle->setFont("Arial");
+        $textStyle->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $textStyle->setBackgroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0]));
+
+        $freeTextAnnotation = new Aspose\PDF\Model\FreeTextAnnotation();
+        $freeTextAnnotation->setName("Test Free Text");
+        $freeTextAnnotation->setTextStyle($textStyle);
+        $freeTextAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $freeTextAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $freeTextAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $freeTextAnnotation->setIntent(Aspose\PDF\Model\FreeTextIntent::FREE_TEXT_TYPE_WRITER);
+        $freeTextAnnotation->setRichText("Rich Text");
+        $freeTextAnnotation->setSubject("Text Box Subj");
+        $freeTextAnnotation->setZIndex(1);
+        $freeTextAnnotation->setJustification(Aspose\PDF\Model\Justification::CENTER);
+        $freeTextAnnotation->setTitle("Title");
+
+        $response = $this->pdfApi->postPageFreeTextAnnotations($name, $pageNumber, [$freeTextAnnotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutFreeTextAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $textStyle = new Aspose\PDF\Model\TextStyle();
+        $textStyle->setFontSize(12); 
+        $textStyle->setFont("Arial");
+        $textStyle->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $textStyle->setBackgroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0]));
+
+        $freeTextAnnotation = new Aspose\PDF\Model\FreeTextAnnotation();
+        $freeTextAnnotation->setName("Test Free Text");
+        $freeTextAnnotation->setTextStyle($textStyle);
+        $freeTextAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $freeTextAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $freeTextAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $freeTextAnnotation->setIntent(Aspose\PDF\Model\FreeTextIntent::FREE_TEXT_TYPE_WRITER);
+        $freeTextAnnotation->setRichText("Rich Text");
+        $freeTextAnnotation->setSubject("Text Box Subj");
+        $freeTextAnnotation->setZIndex(1);
+        $freeTextAnnotation->setJustification(Aspose\PDF\Model\Justification::CENTER);
+        $freeTextAnnotation->setTitle("Title");
+
+        $responseAnnotations = $this->pdfApi->getDocumentFreeTextAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putFreeTextAnnotation($name, $annotationId, $freeTextAnnotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    // Text Annotations Tests
+
+    public function testGetDocumentTextAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentTextAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageTextAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageTextAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetTextAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentTextAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getTextAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageTextAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $textAnnotation = new Aspose\PDF\Model\TextAnnotation();
+        $textAnnotation->setName("Test Free Text");
+        $textAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $textAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $textAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $textAnnotation->setRichText("Rich Text");
+        $textAnnotation->setSubject("Text Box Subj");
+        $textAnnotation->setZIndex(1);
+        $textAnnotation->setState(Aspose\PDF\Model\AnnotationState::UNDEFINED);
+
+        $response = $this->pdfApi->postPageTextAnnotations($name, $pageNumber, [$textAnnotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+
+    public function testPutTextAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $textAnnotation = new Aspose\PDF\Model\TextAnnotation();
+        $textAnnotation->setName("Test Free Text");
+        $textAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $textAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $textAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $textAnnotation->setRichText("Rich Text");
+        $textAnnotation->setSubject("Text Box Subj");
+        $textAnnotation->setZIndex(1);
+        $textAnnotation->setState(Aspose\PDF\Model\AnnotationState::UNDEFINED);
+        $responseAnnotations = $this->pdfApi->getDocumentTextAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putTextAnnotation($name, $annotationId, $textAnnotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
 
     //Append Tests
 
@@ -1541,6 +1753,21 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testGetLinkAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $responseAnnotations = $this->pdfApi->getPageLinkAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getLinks()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getLinkAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
     // Merge Tests
 
     public function testPutMergeDocuments()
@@ -1567,7 +1794,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $folder = $this->tempFolder;
 
         $response = $this->pdfApi->putMergeDocuments($resultName, $mergeDocuments, $storage = null, $folder);
-        $this->assertEquals(200, $response->getCode());
+        $this->assertNotNull($response);
     }
 
     // OCR Tests

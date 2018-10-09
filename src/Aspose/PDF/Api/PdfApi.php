@@ -93,6 +93,645 @@ class PdfApi
     }
 
     /**
+     * Operation deleteAnnotation
+     *
+     * Delete document annotation by ID
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function deleteAnnotation($name, $annotation_id, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->deleteAnnotationWithHttpInfo($name, $annotation_id, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deleteAnnotationWithHttpInfo($name, $annotation_id, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation deleteAnnotationWithHttpInfo
+     *
+     * Delete document annotation by ID
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteAnnotationWithHttpInfo($name, $annotation_id, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deleteAnnotationRequest($name, $annotation_id, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteAnnotationAsync
+     *
+     * Delete document annotation by ID
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteAnnotationAsync($name, $annotation_id, $storage = null, $folder = null)
+    {
+        return $this->deleteAnnotationAsyncWithHttpInfo($name, $annotation_id, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteAnnotationAsyncWithHttpInfo
+     *
+     * Delete document annotation by ID
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteAnnotationAsyncWithHttpInfo($name, $annotation_id, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deleteAnnotationRequest($name, $annotation_id, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteAnnotation'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function deleteAnnotationRequest($name, $annotation_id, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling deleteAnnotation'
+            );
+        }
+        // verify the required parameter 'annotation_id' is set
+        if ($annotation_id === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotation_id when calling deleteAnnotation'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations/{annotationId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($annotation_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'annotationId' . '}',
+                ObjectSerializer::toPathValue($annotation_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'DELETE',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteDocumentAnnotations
+     *
+     * Delete all annotations from the document
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function deleteDocumentAnnotations($name, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->deleteDocumentAnnotationsWithHttpInfo($name, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deleteDocumentAnnotationsWithHttpInfo($name, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation deleteDocumentAnnotationsWithHttpInfo
+     *
+     * Delete all annotations from the document
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteDocumentAnnotationsWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deleteDocumentAnnotationsRequest($name, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteDocumentAnnotationsAsync
+     *
+     * Delete all annotations from the document
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteDocumentAnnotationsAsync($name, $storage = null, $folder = null)
+    {
+        return $this->deleteDocumentAnnotationsAsyncWithHttpInfo($name, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteDocumentAnnotationsAsyncWithHttpInfo
+     *
+     * Delete all annotations from the document
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteDocumentAnnotationsAsyncWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deleteDocumentAnnotationsRequest($name, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteDocumentAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function deleteDocumentAnnotationsRequest($name, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling deleteDocumentAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'DELETE',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation deleteDocumentLinkAnnotations
      *
      * Delete all link annotations from the document
@@ -1719,6 +2358,335 @@ class PdfApi
     }
 
     /**
+     * Operation deletePageAnnotations
+     *
+     * Delete all annotations from the page
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function deletePageAnnotations($name, $page_number, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->deletePageAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deletePageAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation deletePageAnnotationsWithHttpInfo
+     *
+     * Delete all annotations from the page
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deletePageAnnotationsWithHttpInfo($name, $page_number, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deletePageAnnotationsRequest($name, $page_number, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deletePageAnnotationsAsync
+     *
+     * Delete all annotations from the page
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deletePageAnnotationsAsync($name, $page_number, $storage = null, $folder = null)
+    {
+        return $this->deletePageAnnotationsAsyncWithHttpInfo($name, $page_number, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deletePageAnnotationsAsyncWithHttpInfo
+     *
+     * Delete all annotations from the page
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deletePageAnnotationsAsyncWithHttpInfo($name, $page_number, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deletePageAnnotationsRequest($name, $page_number, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deletePageAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function deletePageAnnotationsRequest($name, $page_number, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling deletePageAnnotations'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling deletePageAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/annotations';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'DELETE',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation deletePageLinkAnnotations
      *
      * Delete all link annotations from the page
@@ -2997,6 +3965,316 @@ class PdfApi
     }
 
     /**
+     * Operation getDocumentAnnotations
+     *
+     * Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AnnotationsInfoResponse
+     */
+    public function getDocumentAnnotations($name, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->getDocumentAnnotationsWithHttpInfo($name, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentAnnotationsWithHttpInfo($name, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getDocumentAnnotationsWithHttpInfo
+     *
+     * Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AnnotationsInfoResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getDocumentAnnotationsWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AnnotationsInfoResponse';
+        $request = $this->getDocumentAnnotationsRequest($name, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AnnotationsInfoResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getDocumentAnnotationsAsync
+     *
+     * Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getDocumentAnnotationsAsync($name, $storage = null, $folder = null)
+    {
+        return $this->getDocumentAnnotationsAsyncWithHttpInfo($name, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getDocumentAnnotationsAsyncWithHttpInfo
+     *
+     * Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getDocumentAnnotationsAsyncWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AnnotationsInfoResponse';
+        $request = $this->getDocumentAnnotationsRequest($name, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getDocumentAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getDocumentAnnotationsRequest($name, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getDocumentAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getDocumentAttachmentByIndex
      *
      * Read document attachment info by its index.
@@ -3955,6 +5233,316 @@ class PdfApi
     }
 
     /**
+     * Operation getDocumentFreeTextAnnotations
+     *
+     * Read document free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\FreeTextAnnotationsResponse
+     */
+    public function getDocumentFreeTextAnnotations($name, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->getDocumentFreeTextAnnotationsWithHttpInfo($name, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentFreeTextAnnotationsWithHttpInfo($name, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getDocumentFreeTextAnnotationsWithHttpInfo
+     *
+     * Read document free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\FreeTextAnnotationsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getDocumentFreeTextAnnotationsWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FreeTextAnnotationsResponse';
+        $request = $this->getDocumentFreeTextAnnotationsRequest($name, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\FreeTextAnnotationsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getDocumentFreeTextAnnotationsAsync
+     *
+     * Read document free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getDocumentFreeTextAnnotationsAsync($name, $storage = null, $folder = null)
+    {
+        return $this->getDocumentFreeTextAnnotationsAsyncWithHttpInfo($name, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getDocumentFreeTextAnnotationsAsyncWithHttpInfo
+     *
+     * Read document free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getDocumentFreeTextAnnotationsAsyncWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FreeTextAnnotationsResponse';
+        $request = $this->getDocumentFreeTextAnnotationsRequest($name, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getDocumentFreeTextAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getDocumentFreeTextAnnotationsRequest($name, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getDocumentFreeTextAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations/freetext';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getDocumentProperties
      *
      * Read document properties.
@@ -4511,6 +6099,316 @@ class PdfApi
             $resourcePath = str_replace(
                 '{' . 'propertyName' . '}',
                 ObjectSerializer::toPathValue($property_name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getDocumentTextAnnotations
+     *
+     * Read document text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\TextAnnotationsResponse
+     */
+    public function getDocumentTextAnnotations($name, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->getDocumentTextAnnotationsWithHttpInfo($name, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDocumentTextAnnotationsWithHttpInfo($name, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getDocumentTextAnnotationsWithHttpInfo
+     *
+     * Read document text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\TextAnnotationsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getDocumentTextAnnotationsWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\TextAnnotationsResponse';
+        $request = $this->getDocumentTextAnnotationsRequest($name, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\TextAnnotationsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getDocumentTextAnnotationsAsync
+     *
+     * Read document text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getDocumentTextAnnotationsAsync($name, $storage = null, $folder = null)
+    {
+        return $this->getDocumentTextAnnotationsAsyncWithHttpInfo($name, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getDocumentTextAnnotationsAsyncWithHttpInfo
+     *
+     * Read document text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getDocumentTextAnnotationsAsyncWithHttpInfo($name, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\TextAnnotationsResponse';
+        $request = $this->getDocumentTextAnnotationsRequest($name, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getDocumentTextAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getDocumentTextAnnotationsRequest($name, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getDocumentTextAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations/text';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
                 $resourcePath
             );
         }
@@ -6098,6 +7996,335 @@ class PdfApi
             $resourcePath = str_replace(
                 '{' . 'name' . '}',
                 ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getFreeTextAnnotation
+     *
+     * Read document page free text annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\FreeTextAnnotationResponse
+     */
+    public function getFreeTextAnnotation($name, $annotation_id, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->getFreeTextAnnotationWithHttpInfo($name, $annotation_id, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getFreeTextAnnotationWithHttpInfo($name, $annotation_id, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getFreeTextAnnotationWithHttpInfo
+     *
+     * Read document page free text annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\FreeTextAnnotationResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getFreeTextAnnotationWithHttpInfo($name, $annotation_id, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FreeTextAnnotationResponse';
+        $request = $this->getFreeTextAnnotationRequest($name, $annotation_id, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\FreeTextAnnotationResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getFreeTextAnnotationAsync
+     *
+     * Read document page free text annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFreeTextAnnotationAsync($name, $annotation_id, $storage = null, $folder = null)
+    {
+        return $this->getFreeTextAnnotationAsyncWithHttpInfo($name, $annotation_id, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getFreeTextAnnotationAsyncWithHttpInfo
+     *
+     * Read document page free text annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getFreeTextAnnotationAsyncWithHttpInfo($name, $annotation_id, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FreeTextAnnotationResponse';
+        $request = $this->getFreeTextAnnotationRequest($name, $annotation_id, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getFreeTextAnnotation'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getFreeTextAnnotationRequest($name, $annotation_id, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getFreeTextAnnotation'
+            );
+        }
+        // verify the required parameter 'annotation_id' is set
+        if ($annotation_id === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotation_id when calling getFreeTextAnnotation'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations/freetext/{annotationId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($annotation_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'annotationId' . '}',
+                ObjectSerializer::toPathValue($annotation_id),
                 $resourcePath
             );
         }
@@ -8899,6 +11126,335 @@ class PdfApi
     }
 
     /**
+     * Operation getLinkAnnotation
+     *
+     * Read document link annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $link_id The link ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\LinkAnnotationResponse
+     */
+    public function getLinkAnnotation($name, $link_id, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->getLinkAnnotationWithHttpInfo($name, $link_id, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getLinkAnnotationWithHttpInfo($name, $link_id, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getLinkAnnotationWithHttpInfo
+     *
+     * Read document link annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $link_id The link ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\LinkAnnotationResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getLinkAnnotationWithHttpInfo($name, $link_id, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\LinkAnnotationResponse';
+        $request = $this->getLinkAnnotationRequest($name, $link_id, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\LinkAnnotationResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getLinkAnnotationAsync
+     *
+     * Read document link annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $link_id The link ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getLinkAnnotationAsync($name, $link_id, $storage = null, $folder = null)
+    {
+        return $this->getLinkAnnotationAsyncWithHttpInfo($name, $link_id, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getLinkAnnotationAsyncWithHttpInfo
+     *
+     * Read document link annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $link_id The link ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getLinkAnnotationAsyncWithHttpInfo($name, $link_id, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\LinkAnnotationResponse';
+        $request = $this->getLinkAnnotationRequest($name, $link_id, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getLinkAnnotation'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $link_id The link ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getLinkAnnotationRequest($name, $link_id, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getLinkAnnotation'
+            );
+        }
+        // verify the required parameter 'link_id' is set
+        if ($link_id === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $link_id when calling getLinkAnnotation'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/links/{linkId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($link_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'linkId' . '}',
+                ObjectSerializer::toPathValue($link_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getMhtInStorageToPdf
      *
      * Convert MHT file (located on storage) to PDF format and return resulting file in response.
@@ -9525,357 +12081,9 @@ class PdfApi
     }
 
     /**
-     * Operation getPageAnnotation
-     *
-     * Read document page annotation by its number.
-     *
-     * @param  string $name The document name. (required)
-     * @param  int $page_number The page number. (required)
-     * @param  int $annotation_number The annotation number. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
-     *
-     * @throws \Aspose\PDF\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return \Aspose\PDF\Model\AnnotationResponse
-     */
-    public function getPageAnnotation($name, $page_number, $annotation_number, $storage = null, $folder = null)
-    {
-        try
-        {
-            list($response) = $this->getPageAnnotationWithHttpInfo($name, $page_number, $annotation_number, $storage, $folder);
-            return $response;
-        }
-        catch (ApiException $ex)
-        {
-            if ($ex->getCode() == 401)
-            {
-                $this->_refreshToken();
-                list($response) = $this->getPageAnnotationWithHttpInfo($name, $page_number, $annotation_number, $storage, $folder);
-                return $response;
-            }
-            else
-            {
-                throw $ex;
-            }
-        }
-    }
-
-    /**
-     * Operation getPageAnnotationWithHttpInfo
-     *
-     * Read document page annotation by its number.
-     *
-     * @param  string $name The document name. (required)
-     * @param  int $page_number The page number. (required)
-     * @param  int $annotation_number The annotation number. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
-     *
-     * @throws \Aspose\PDF\ApiException on non-2xx response
-     * @throws \InvalidArgumentException
-     * @return array of \Aspose\PDF\Model\AnnotationResponse, HTTP status code, HTTP response headers (array of strings)
-     */
-    public function getPageAnnotationWithHttpInfo($name, $page_number, $annotation_number, $storage = null, $folder = null)
-    {
-        $returnType = '\Aspose\PDF\Model\AnnotationResponse';
-        $request = $this->getPageAnnotationRequest($name, $page_number, $annotation_number, $storage, $folder);
-
-        try {
-            $options = $this->createHttpClientOption();
-            try {
-                $response = $this->client->send($request, $options);
-            } catch (RequestException $e) {
-                throw new ApiException(
-                    "[{$e->getCode()}] {$e->getMessage()}",
-                    $e->getCode(),
-                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
-                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
-                );
-            }
-
-            $statusCode = $response->getStatusCode();
-
-            if ($statusCode < 200 || $statusCode > 299) {
-                throw new ApiException(
-                    sprintf(
-                        '[%d] Error connecting to the API (%s)',
-                        $statusCode,
-                        $request->getUri()
-                    ),
-                    $statusCode,
-                    $response->getHeaders(),
-                    $response->getBody()
-                );
-            }
-
-            $responseBody = $response->getBody();
-            if ($returnType === '\SplFileObject') {
-                $content = $responseBody; //stream goes to serializer
-            } else {
-                $content = $responseBody->getContents();
-                if ($returnType !== 'string') {
-                    $content = json_decode($content);
-                }
-            }
-
-            return [
-                ObjectSerializer::deserialize($content, $returnType, []),
-                $response->getStatusCode(),
-                $response->getHeaders()
-            ];
-
-        } catch (ApiException $e) {
-            switch ($e->getCode()) {
-                case 200:
-                    $data = ObjectSerializer::deserialize(
-                        $e->getResponseBody(),
-                        '\Aspose\PDF\Model\AnnotationResponse',
-                        $e->getResponseHeaders()
-                    );
-                    $e->setResponseObject($data);
-                    break;
-            }
-            throw $e;
-        }
-    }
-
-    /**
-     * Operation getPageAnnotationAsync
-     *
-     * Read document page annotation by its number.
-     *
-     * @param  string $name The document name. (required)
-     * @param  int $page_number The page number. (required)
-     * @param  int $annotation_number The annotation number. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getPageAnnotationAsync($name, $page_number, $annotation_number, $storage = null, $folder = null)
-    {
-        return $this->getPageAnnotationAsyncWithHttpInfo($name, $page_number, $annotation_number, $storage, $folder)
-            ->then(
-                function ($response) {
-                    return $response[0];
-                }
-            );
-    }
-
-    /**
-     * Operation getPageAnnotationAsyncWithHttpInfo
-     *
-     * Read document page annotation by its number.
-     *
-     * @param  string $name The document name. (required)
-     * @param  int $page_number The page number. (required)
-     * @param  int $annotation_number The annotation number. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Promise\PromiseInterface
-     */
-    public function getPageAnnotationAsyncWithHttpInfo($name, $page_number, $annotation_number, $storage = null, $folder = null)
-    {
-        $returnType = '\Aspose\PDF\Model\AnnotationResponse';
-        $request = $this->getPageAnnotationRequest($name, $page_number, $annotation_number, $storage, $folder);
-
-        return $this->client
-            ->sendAsync($request, $this->createHttpClientOption())
-            ->then(
-                function ($response) use ($returnType) {
-                    $responseBody = $response->getBody();
-                    if ($returnType === '\SplFileObject') {
-                        $content = $responseBody; //stream goes to serializer
-                    } else {
-                        $content = $responseBody->getContents();
-                        if ($returnType !== 'string') {
-                            $content = json_decode($content);
-                        }
-                    }
-
-                    return [
-                        ObjectSerializer::deserialize($content, $returnType, []),
-                        $response->getStatusCode(),
-                        $response->getHeaders()
-                    ];
-                },
-                function ($exception) {
-                    $response = $exception->getResponse();
-                    $statusCode = $response->getStatusCode();
-                    throw new ApiException(
-                        sprintf(
-                            '[%d] Error connecting to the API (%s)',
-                            $statusCode,
-                            $exception->getRequest()->getUri()
-                        ),
-                        $statusCode,
-                        $response->getHeaders(),
-                        $response->getBody()
-                    );
-                }
-            );
-    }
-
-    /**
-     * Create request for operation 'getPageAnnotation'
-     *
-     * @param  string $name The document name. (required)
-     * @param  int $page_number The page number. (required)
-     * @param  int $annotation_number The annotation number. (required)
-     * @param  string $storage The document storage. (optional)
-     * @param  string $folder The document folder. (optional)
-     *
-     * @throws \InvalidArgumentException
-     * @return \GuzzleHttp\Psr7\Request
-     */
-    protected function getPageAnnotationRequest($name, $page_number, $annotation_number, $storage = null, $folder = null)
-    {
-        // verify the required parameter 'name' is set
-        if ($name === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $name when calling getPageAnnotation'
-            );
-        }
-        // verify the required parameter 'page_number' is set
-        if ($page_number === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $page_number when calling getPageAnnotation'
-            );
-        }
-        // verify the required parameter 'annotation_number' is set
-        if ($annotation_number === null) {
-            throw new \InvalidArgumentException(
-                'Missing the required parameter $annotation_number when calling getPageAnnotation'
-            );
-        }
-
-        $resourcePath = '/pdf/{name}/pages/{pageNumber}/annotations/{annotationNumber}';
-        $formParams = [];
-        $queryParams = [];
-        $headerParams = [];
-        $httpBody = '';
-        $multipart = false;
-
-        // query params
-        if ($storage !== null) {
-            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
-        }
-        // query params
-        if ($folder !== null) {
-            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
-        }
-
-        // path params
-        if ($name !== null) {
-            $resourcePath = str_replace(
-                '{' . 'name' . '}',
-                ObjectSerializer::toPathValue($name),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($page_number !== null) {
-            $resourcePath = str_replace(
-                '{' . 'pageNumber' . '}',
-                ObjectSerializer::toPathValue($page_number),
-                $resourcePath
-            );
-        }
-        // path params
-        if ($annotation_number !== null) {
-            $resourcePath = str_replace(
-                '{' . 'annotationNumber' . '}',
-                ObjectSerializer::toPathValue($annotation_number),
-                $resourcePath
-            );
-        }
-
-        // body params
-        $_tempBody = null;
-
-        if ($multipart) {
-            $headers = $this->headerSelector->selectHeadersForMultipart(
-                ['application/json']
-            );
-        } else {
-            $headers = $this->headerSelector->selectHeaders(
-                ['application/json'],
-                ['application/json']
-            );
-        }
-
-        // for model (json/xml)
-        if (isset($_tempBody)) {
-            // $_tempBody is the method argument, if present
-            $httpBody = $_tempBody;
-            // \stdClass has no __toString(), so we should encode it manually
-            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($httpBody);
-            // array of objects
-            } elseif (is_array($httpBody)) {
-                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
-            }
-        } elseif (count($formParams) > 0) {
-            if ($multipart) {
-                $multipartContents = [];
-                foreach ($formParams as $formParamName => $formParamValue) {
-                    $multipartContents[] = [
-                        'name' => $formParamName,
-                        'contents' => $formParamValue
-                    ];
-                }
-                // for HTTP post (form)
-                //$httpBody = new MultipartStream($multipartContents);
-                $httpBody = $formParams[''];
-
-            } elseif ($headers['Content-Type'] === 'application/json') {
-                $httpBody = \GuzzleHttp\json_encode($formParams);
-
-            } else {
-                // for HTTP post (form)
-                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
-            }
-        }
-
-        //ASPOSE_PDF_CLOUD
-        if (!$this->config->getAccessToken()) 
-        {
-            $this->_requestToken();
-        }
-        if ($this->config->getAccessToken() !== null) 
-        {
-            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
-        }
-        //ASPOSE_PDF_CLOUD
-
-        $defaultHeaders = [];
-        if ($this->config->getUserAgent()) {
-            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
-        }
-
-        $headers = array_merge(
-            $defaultHeaders,
-            $headerParams,
-            $headers
-        );
-
-        $query = \GuzzleHttp\Psr7\build_query($queryParams);
-        return new Request(
-            'GET',
-            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
-            $headers,
-            $httpBody
-        );
-    }
-
-    /**
      * Operation getPageAnnotations
      *
-     * Read documant page annotations.
+     * Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number The page number. (required)
@@ -9884,7 +12092,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Aspose\PDF\Model\AnnotationsResponse
+     * @return \Aspose\PDF\Model\AnnotationsInfoResponse
      */
     public function getPageAnnotations($name, $page_number, $storage = null, $folder = null)
     {
@@ -9911,7 +12119,7 @@ class PdfApi
     /**
      * Operation getPageAnnotationsWithHttpInfo
      *
-     * Read documant page annotations.
+     * Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number The page number. (required)
@@ -9920,11 +12128,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Aspose\PDF\Model\AnnotationsResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \Aspose\PDF\Model\AnnotationsInfoResponse, HTTP status code, HTTP response headers (array of strings)
      */
     public function getPageAnnotationsWithHttpInfo($name, $page_number, $storage = null, $folder = null)
     {
-        $returnType = '\Aspose\PDF\Model\AnnotationsResponse';
+        $returnType = '\Aspose\PDF\Model\AnnotationsInfoResponse';
         $request = $this->getPageAnnotationsRequest($name, $page_number, $storage, $folder);
 
         try {
@@ -9976,7 +12184,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Aspose\PDF\Model\AnnotationsResponse',
+                        '\Aspose\PDF\Model\AnnotationsInfoResponse',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -9989,7 +12197,7 @@ class PdfApi
     /**
      * Operation getPageAnnotationsAsync
      *
-     * Read documant page annotations.
+     * Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number The page number. (required)
@@ -10012,7 +12220,7 @@ class PdfApi
     /**
      * Operation getPageAnnotationsAsyncWithHttpInfo
      *
-     * Read documant page annotations.
+     * Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number The page number. (required)
@@ -10024,7 +12232,7 @@ class PdfApi
      */
     public function getPageAnnotationsAsyncWithHttpInfo($name, $page_number, $storage = null, $folder = null)
     {
-        $returnType = '\Aspose\PDF\Model\AnnotationsResponse';
+        $returnType = '\Aspose\PDF\Model\AnnotationsInfoResponse';
         $request = $this->getPageAnnotationsRequest($name, $page_number, $storage, $folder);
 
         return $this->client
@@ -12284,6 +14492,335 @@ class PdfApi
     }
 
     /**
+     * Operation getPageFreeTextAnnotations
+     *
+     * Read document page free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\FreeTextAnnotationsResponse
+     */
+    public function getPageFreeTextAnnotations($name, $page_number, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->getPageFreeTextAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageFreeTextAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getPageFreeTextAnnotationsWithHttpInfo
+     *
+     * Read document page free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\FreeTextAnnotationsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPageFreeTextAnnotationsWithHttpInfo($name, $page_number, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FreeTextAnnotationsResponse';
+        $request = $this->getPageFreeTextAnnotationsRequest($name, $page_number, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\FreeTextAnnotationsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPageFreeTextAnnotationsAsync
+     *
+     * Read document page free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageFreeTextAnnotationsAsync($name, $page_number, $storage = null, $folder = null)
+    {
+        return $this->getPageFreeTextAnnotationsAsyncWithHttpInfo($name, $page_number, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPageFreeTextAnnotationsAsyncWithHttpInfo
+     *
+     * Read document page free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageFreeTextAnnotationsAsyncWithHttpInfo($name, $page_number, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FreeTextAnnotationsResponse';
+        $request = $this->getPageFreeTextAnnotationsRequest($name, $page_number, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPageFreeTextAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPageFreeTextAnnotationsRequest($name, $page_number, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPageFreeTextAnnotations'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling getPageFreeTextAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/annotations/freetext';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getPageLinkAnnotation
      *
      * Read document page link annotation by ID.
@@ -13282,6 +15819,335 @@ class PdfApi
         // query params
         if ($storage !== null) {
             $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getPageTextAnnotations
+     *
+     * Read document page text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\TextAnnotationsResponse
+     */
+    public function getPageTextAnnotations($name, $page_number, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->getPageTextAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getPageTextAnnotationsWithHttpInfo($name, $page_number, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getPageTextAnnotationsWithHttpInfo
+     *
+     * Read document page text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\TextAnnotationsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getPageTextAnnotationsWithHttpInfo($name, $page_number, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\TextAnnotationsResponse';
+        $request = $this->getPageTextAnnotationsRequest($name, $page_number, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\TextAnnotationsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getPageTextAnnotationsAsync
+     *
+     * Read document page text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageTextAnnotationsAsync($name, $page_number, $storage = null, $folder = null)
+    {
+        return $this->getPageTextAnnotationsAsyncWithHttpInfo($name, $page_number, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getPageTextAnnotationsAsyncWithHttpInfo
+     *
+     * Read document page text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getPageTextAnnotationsAsyncWithHttpInfo($name, $page_number, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\TextAnnotationsResponse';
+        $request = $this->getPageTextAnnotationsRequest($name, $page_number, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getPageTextAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getPageTextAnnotationsRequest($name, $page_number, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getPageTextAnnotations'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling getPageTextAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/annotations/text';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
         }
 
         // path params
@@ -19331,6 +22197,335 @@ class PdfApi
     }
 
     /**
+     * Operation getTextAnnotation
+     *
+     * Read document page text annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\TextAnnotationResponse
+     */
+    public function getTextAnnotation($name, $annotation_id, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->getTextAnnotationWithHttpInfo($name, $annotation_id, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getTextAnnotationWithHttpInfo($name, $annotation_id, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getTextAnnotationWithHttpInfo
+     *
+     * Read document page text annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\TextAnnotationResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getTextAnnotationWithHttpInfo($name, $annotation_id, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\TextAnnotationResponse';
+        $request = $this->getTextAnnotationRequest($name, $annotation_id, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\TextAnnotationResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getTextAnnotationAsync
+     *
+     * Read document page text annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getTextAnnotationAsync($name, $annotation_id, $storage = null, $folder = null)
+    {
+        return $this->getTextAnnotationAsyncWithHttpInfo($name, $annotation_id, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getTextAnnotationAsyncWithHttpInfo
+     *
+     * Read document page text annotation by ID.
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getTextAnnotationAsyncWithHttpInfo($name, $annotation_id, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\TextAnnotationResponse';
+        $request = $this->getTextAnnotationRequest($name, $annotation_id, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getTextAnnotation'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getTextAnnotationRequest($name, $annotation_id, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getTextAnnotation'
+            );
+        }
+        // verify the required parameter 'annotation_id' is set
+        if ($annotation_id === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotation_id when calling getTextAnnotation'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations/text/{annotationId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($annotation_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'annotationId' . '}',
+                ObjectSerializer::toPathValue($annotation_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getVerifySignature
      *
      * Verify signature document.
@@ -23612,6 +26807,349 @@ class PdfApi
     }
 
     /**
+     * Operation postPageFreeTextAnnotations
+     *
+     * Add document page free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function postPageFreeTextAnnotations($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->postPageFreeTextAnnotationsWithHttpInfo($name, $page_number, $annotations, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postPageFreeTextAnnotationsWithHttpInfo($name, $page_number, $annotations, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation postPageFreeTextAnnotationsWithHttpInfo
+     *
+     * Add document page free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPageFreeTextAnnotationsWithHttpInfo($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postPageFreeTextAnnotationsRequest($name, $page_number, $annotations, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation postPageFreeTextAnnotationsAsync
+     *
+     * Add document page free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postPageFreeTextAnnotationsAsync($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        return $this->postPageFreeTextAnnotationsAsyncWithHttpInfo($name, $page_number, $annotations, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation postPageFreeTextAnnotationsAsyncWithHttpInfo
+     *
+     * Add document page free text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postPageFreeTextAnnotationsAsyncWithHttpInfo($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postPageFreeTextAnnotationsRequest($name, $page_number, $annotations, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'postPageFreeTextAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function postPageFreeTextAnnotationsRequest($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling postPageFreeTextAnnotations'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling postPageFreeTextAnnotations'
+            );
+        }
+        // verify the required parameter 'annotations' is set
+        if ($annotations === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotations when calling postPageFreeTextAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/annotations/freetext';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($annotations)) {
+            $_tempBody = $annotations;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation postPageLinkAnnotations
      *
      * Add document page link annotations.
@@ -23877,6 +27415,349 @@ class PdfApi
         $_tempBody = null;
         if (isset($links)) {
             $_tempBody = $links;
+        }
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postPageTextAnnotations
+     *
+     * Add document page text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function postPageTextAnnotations($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->postPageTextAnnotationsWithHttpInfo($name, $page_number, $annotations, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postPageTextAnnotationsWithHttpInfo($name, $page_number, $annotations, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation postPageTextAnnotationsWithHttpInfo
+     *
+     * Add document page text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postPageTextAnnotationsWithHttpInfo($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postPageTextAnnotationsRequest($name, $page_number, $annotations, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation postPageTextAnnotationsAsync
+     *
+     * Add document page text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postPageTextAnnotationsAsync($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        return $this->postPageTextAnnotationsAsyncWithHttpInfo($name, $page_number, $annotations, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation postPageTextAnnotationsAsyncWithHttpInfo
+     *
+     * Add document page text annotations.
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postPageTextAnnotationsAsyncWithHttpInfo($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postPageTextAnnotationsRequest($name, $page_number, $annotations, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'postPageTextAnnotations'
+     *
+     * @param  string $name The document name. (required)
+     * @param  int $page_number The page number. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation[] $annotations The array of annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function postPageTextAnnotationsRequest($name, $page_number, $annotations, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling postPageTextAnnotations'
+            );
+        }
+        // verify the required parameter 'page_number' is set
+        if ($page_number === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $page_number when calling postPageTextAnnotations'
+            );
+        }
+        // verify the required parameter 'annotations' is set
+        if ($annotations === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotations when calling postPageTextAnnotations'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/pages/{pageNumber}/annotations/text';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($page_number !== null) {
+            $resourcePath = str_replace(
+                '{' . 'pageNumber' . '}',
+                ObjectSerializer::toPathValue($page_number),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($annotations)) {
+            $_tempBody = $annotations;
         }
 
         if ($multipart) {
@@ -27139,6 +31020,349 @@ class PdfApi
 
         // body params
         $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putFreeTextAnnotation
+     *
+     * Replace document free text annotation
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\FreeTextAnnotationResponse
+     */
+    public function putFreeTextAnnotation($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->putFreeTextAnnotationWithHttpInfo($name, $annotation_id, $annotation, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putFreeTextAnnotationWithHttpInfo($name, $annotation_id, $annotation, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation putFreeTextAnnotationWithHttpInfo
+     *
+     * Replace document free text annotation
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\FreeTextAnnotationResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putFreeTextAnnotationWithHttpInfo($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FreeTextAnnotationResponse';
+        $request = $this->putFreeTextAnnotationRequest($name, $annotation_id, $annotation, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\FreeTextAnnotationResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putFreeTextAnnotationAsync
+     *
+     * Replace document free text annotation
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putFreeTextAnnotationAsync($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        return $this->putFreeTextAnnotationAsyncWithHttpInfo($name, $annotation_id, $annotation, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putFreeTextAnnotationAsyncWithHttpInfo
+     *
+     * Replace document free text annotation
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putFreeTextAnnotationAsyncWithHttpInfo($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FreeTextAnnotationResponse';
+        $request = $this->putFreeTextAnnotationRequest($name, $annotation_id, $annotation, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putFreeTextAnnotation'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\FreeTextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putFreeTextAnnotationRequest($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putFreeTextAnnotation'
+            );
+        }
+        // verify the required parameter 'annotation_id' is set
+        if ($annotation_id === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotation_id when calling putFreeTextAnnotation'
+            );
+        }
+        // verify the required parameter 'annotation' is set
+        if ($annotation === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotation when calling putFreeTextAnnotation'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations/freetext/{annotationId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($annotation_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'annotationId' . '}',
+                ObjectSerializer::toPathValue($annotation_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($annotation)) {
+            $_tempBody = $annotation;
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
@@ -31470,7 +35694,7 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return \Aspose\PDF\Model\DocumentResponse
+     * @return \SplFileObject
      */
     public function putMergeDocuments($name, $merge_documents = null, $storage = null, $folder = null)
     {
@@ -31506,11 +35730,11 @@ class PdfApi
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
-     * @return array of \Aspose\PDF\Model\DocumentResponse, HTTP status code, HTTP response headers (array of strings)
+     * @return array of \SplFileObject, HTTP status code, HTTP response headers (array of strings)
      */
     public function putMergeDocumentsWithHttpInfo($name, $merge_documents = null, $storage = null, $folder = null)
     {
-        $returnType = '\Aspose\PDF\Model\DocumentResponse';
+        $returnType = '\SplFileObject';
         $request = $this->putMergeDocumentsRequest($name, $merge_documents, $storage, $folder);
 
         try {
@@ -31562,7 +35786,7 @@ class PdfApi
                 case 200:
                     $data = ObjectSerializer::deserialize(
                         $e->getResponseBody(),
-                        '\Aspose\PDF\Model\DocumentResponse',
+                        '\SplFileObject',
                         $e->getResponseHeaders()
                     );
                     $e->setResponseObject($data);
@@ -31610,7 +35834,7 @@ class PdfApi
      */
     public function putMergeDocumentsAsyncWithHttpInfo($name, $merge_documents = null, $storage = null, $folder = null)
     {
-        $returnType = '\Aspose\PDF\Model\DocumentResponse';
+        $returnType = '\SplFileObject';
         $request = $this->putMergeDocumentsRequest($name, $merge_documents, $storage, $folder);
 
         return $this->client
@@ -45650,6 +49874,349 @@ class PdfApi
 
         // body params
         $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putTextAnnotation
+     *
+     * Replace document text annotation
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\TextAnnotationResponse
+     */
+    public function putTextAnnotation($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->putTextAnnotationWithHttpInfo($name, $annotation_id, $annotation, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putTextAnnotationWithHttpInfo($name, $annotation_id, $annotation, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation putTextAnnotationWithHttpInfo
+     *
+     * Replace document text annotation
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\TextAnnotationResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putTextAnnotationWithHttpInfo($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\TextAnnotationResponse';
+        $request = $this->putTextAnnotationRequest($name, $annotation_id, $annotation, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\TextAnnotationResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putTextAnnotationAsync
+     *
+     * Replace document text annotation
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putTextAnnotationAsync($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        return $this->putTextAnnotationAsyncWithHttpInfo($name, $annotation_id, $annotation, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putTextAnnotationAsyncWithHttpInfo
+     *
+     * Replace document text annotation
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putTextAnnotationAsyncWithHttpInfo($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\TextAnnotationResponse';
+        $request = $this->putTextAnnotationRequest($name, $annotation_id, $annotation, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putTextAnnotation'
+     *
+     * @param  string $name The document name. (required)
+     * @param  string $annotation_id The annotation ID. (required)
+     * @param  \Aspose\PDF\Model\TextAnnotation $annotation Annotation. (required)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putTextAnnotationRequest($name, $annotation_id, $annotation, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling putTextAnnotation'
+            );
+        }
+        // verify the required parameter 'annotation_id' is set
+        if ($annotation_id === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotation_id when calling putTextAnnotation'
+            );
+        }
+        // verify the required parameter 'annotation' is set
+        if ($annotation === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $annotation when calling putTextAnnotation'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/annotations/text/{annotationId}';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+        // path params
+        if ($annotation_id !== null) {
+            $resourcePath = str_replace(
+                '{' . 'annotationId' . '}',
+                ObjectSerializer::toPathValue($annotation_id),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+        if (isset($annotation)) {
+            $_tempBody = $annotation;
+        }
 
         if ($multipart) {
             $headers = $this->headerSelector->selectHeadersForMultipart(
