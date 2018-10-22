@@ -3,7 +3,7 @@
 ## Enum
 Name | Type | Value
 ------------ | ------------- | -------------
-**DEFAULT** | **string** | 'Default'
+**_DEFAULT** | **string** | 'Default'
 **FORMAT8BPP** | **string** | 'Format8bpp'
 **FORMAT4BPP** | **string** | 'Format4bpp'
 **FORMAT1BPP** | **string** | 'Format1bpp'

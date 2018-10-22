@@ -3,10 +3,10 @@
 ## Enum
 Name | Type | Value
 ------------ | ------------- | -------------
-**DEFAULT** | **string** | 'Default'
+**_DEFAULT** | **string** | 'Default'
 **INVISIBLE** | **string** | 'Invisible'
 **HIDDEN** | **string** | 'Hidden'
-**PRINT** | **string** | 'Print'
+**_PRINT** | **string** | 'Print'
 **NO_ZOOM** | **string** | 'NoZoom'
 **NO_ROTATE** | **string** | 'NoRotate'
 **NO_VIEW** | **string** | 'NoView'

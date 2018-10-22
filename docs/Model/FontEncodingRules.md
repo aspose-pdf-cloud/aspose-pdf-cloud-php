@@ -3,7 +3,7 @@
 ## Enum
 Name | Type | Value
 ------------ | ------------- | -------------
-**DEFAULT** | **string** | 'Default'
+**_DEFAULT** | **string** | 'Default'
 **DECREASE_TO_UNICODE_PRIORITY_LEVEL** | **string** | 'DecreaseToUnicodePriorityLevel'
 
 
