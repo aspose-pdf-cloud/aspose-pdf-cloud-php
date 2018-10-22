@@ -161,6 +161,7 @@ Method | HTTP request | Description
 [**putXslFoInStorageToPdf**](PdfApi.md#putXslFoInStorageToPdf) | **PUT** /pdf/\{name}/create/xslfo | Convert XslFo file (located on storage) to PDF format and upload resulting file to storage.
 
 
+<a name="deleteAnnotation"></a>
 # **deleteAnnotation**
 > \Aspose\PDF\Model\AsposeResponse deleteAnnotation($name, $annotation_id, $storage, $folder)
 
@@ -186,6 +187,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deleteDocumentAnnotations"></a>
 # **deleteDocumentAnnotations**
 > \Aspose\PDF\Model\AsposeResponse deleteDocumentAnnotations($name, $storage, $folder)
 
@@ -210,6 +212,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deleteDocumentLinkAnnotations"></a>
 # **deleteDocumentLinkAnnotations**
 > \Aspose\PDF\Model\AsposeResponse deleteDocumentLinkAnnotations($name, $storage, $folder)
 
@@ -234,6 +237,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deleteField"></a>
 # **deleteField**
 > \Aspose\PDF\Model\AsposeResponse deleteField($name, $field_name, $storage, $folder)
 
@@ -259,6 +263,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deleteImage"></a>
 # **deleteImage**
 > \Aspose\PDF\Model\AsposeResponse deleteImage($name, $image_id, $storage, $folder)
 
@@ -284,6 +289,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deleteLinkAnnotation"></a>
 # **deleteLinkAnnotation**
 > \Aspose\PDF\Model\AsposeResponse deleteLinkAnnotation($name, $link_id, $storage, $folder)
 
@@ -309,6 +315,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deletePage"></a>
 # **deletePage**
 > \Aspose\PDF\Model\AsposeResponse deletePage($name, $page_number, $storage, $folder)
 
@@ -334,6 +341,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deletePageAnnotations"></a>
 # **deletePageAnnotations**
 > \Aspose\PDF\Model\AsposeResponse deletePageAnnotations($name, $page_number, $storage, $folder)
 
@@ -359,6 +367,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deletePageLinkAnnotations"></a>
 # **deletePageLinkAnnotations**
 > \Aspose\PDF\Model\AsposeResponse deletePageLinkAnnotations($name, $page_number, $storage, $folder)
 
@@ -384,6 +393,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deleteProperties"></a>
 # **deleteProperties**
 > \Aspose\PDF\Model\AsposeResponse deleteProperties($name, $storage, $folder)
 
@@ -408,6 +418,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="deleteProperty"></a>
 # **deleteProperty**
 > \Aspose\PDF\Model\AsposeResponse deleteProperty($name, $property_name, $storage, $folder)
 
@@ -433,6 +444,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocument"></a>
 # **getDocument**
 > \Aspose\PDF\Model\DocumentResponse getDocument($name, $storage, $folder)
 
@@ -457,6 +469,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocumentAnnotations"></a>
 # **getDocumentAnnotations**
 > \Aspose\PDF\Model\AnnotationsInfoResponse getDocumentAnnotations($name, $storage, $folder)
 
@@ -481,6 +494,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocumentAttachmentByIndex"></a>
 # **getDocumentAttachmentByIndex**
 > \Aspose\PDF\Model\AttachmentResponse getDocumentAttachmentByIndex($name, $attachment_index, $storage, $folder)
 
@@ -506,6 +520,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocumentAttachments"></a>
 # **getDocumentAttachments**
 > \Aspose\PDF\Model\AttachmentsResponse getDocumentAttachments($name, $storage, $folder)
 
@@ -530,6 +545,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocumentBookmarks"></a>
 # **getDocumentBookmarks**
 > \SplFileObject getDocumentBookmarks($name, $bookmark_path, $storage, $folder)
 
@@ -555,6 +571,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocumentFreeTextAnnotations"></a>
 # **getDocumentFreeTextAnnotations**
 > \Aspose\PDF\Model\FreeTextAnnotationsResponse getDocumentFreeTextAnnotations($name, $storage, $folder)
 
@@ -579,6 +596,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocumentProperties"></a>
 # **getDocumentProperties**
 > \Aspose\PDF\Model\DocumentPropertiesResponse getDocumentProperties($name, $storage, $folder)
 
@@ -603,6 +621,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocumentProperty"></a>
 # **getDocumentProperty**
 > \Aspose\PDF\Model\DocumentPropertyResponse getDocumentProperty($name, $property_name, $storage, $folder)
 
@@ -628,6 +647,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDocumentTextAnnotations"></a>
 # **getDocumentTextAnnotations**
 > \Aspose\PDF\Model\TextAnnotationsResponse getDocumentTextAnnotations($name, $storage, $folder)
 
@@ -652,6 +672,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDownload"></a>
 # **getDownload**
 > \SplFileObject getDownload($path, $version_id, $storage)
 
@@ -676,6 +697,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getDownloadDocumentAttachmentByIndex"></a>
 # **getDownloadDocumentAttachmentByIndex**
 > \SplFileObject getDownloadDocumentAttachmentByIndex($name, $attachment_index, $storage, $folder)
 
@@ -701,6 +723,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getEpubInStorageToPdf"></a>
 # **getEpubInStorageToPdf**
 > \SplFileObject getEpubInStorageToPdf($src_path, $storage)
 
@@ -724,6 +747,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getField"></a>
 # **getField**
 > \Aspose\PDF\Model\FieldResponse getField($name, $field_name, $storage, $folder)
 
@@ -749,6 +773,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getFields"></a>
 # **getFields**
 > \Aspose\PDF\Model\FieldsResponse getFields($name, $storage, $folder)
 
@@ -773,6 +798,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getFreeTextAnnotation"></a>
 # **getFreeTextAnnotation**
 > \Aspose\PDF\Model\FreeTextAnnotationResponse getFreeTextAnnotation($name, $annotation_id, $storage, $folder)
 
@@ -798,6 +824,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getHtmlInStorageToPdf"></a>
 # **getHtmlInStorageToPdf**
 > \SplFileObject getHtmlInStorageToPdf($src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $storage)
 
@@ -829,6 +856,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getImage"></a>
 # **getImage**
 > \Aspose\PDF\Model\ImageResponse getImage($name, $image_id, $storage, $folder)
 
@@ -854,6 +882,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getImageExtractAsGif"></a>
 # **getImageExtractAsGif**
 > \SplFileObject getImageExtractAsGif($name, $image_id, $width, $height, $storage, $folder)
 
@@ -881,6 +910,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getImageExtractAsJpeg"></a>
 # **getImageExtractAsJpeg**
 > \SplFileObject getImageExtractAsJpeg($name, $image_id, $width, $height, $storage, $folder)
 
@@ -908,6 +938,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getImageExtractAsPng"></a>
 # **getImageExtractAsPng**
 > \SplFileObject getImageExtractAsPng($name, $image_id, $width, $height, $storage, $folder)
 
@@ -935,6 +966,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getImageExtractAsTiff"></a>
 # **getImageExtractAsTiff**
 > \SplFileObject getImageExtractAsTiff($name, $image_id, $width, $height, $storage, $folder)
 
@@ -962,6 +994,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getImages"></a>
 # **getImages**
 > \Aspose\PDF\Model\ImagesResponse getImages($name, $page_number, $storage, $folder)
 
@@ -987,6 +1020,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getLaTeXInStorageToPdf"></a>
 # **getLaTeXInStorageToPdf**
 > \SplFileObject getLaTeXInStorageToPdf($src_path, $storage)
 
@@ -1010,6 +1044,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getLinkAnnotation"></a>
 # **getLinkAnnotation**
 > \Aspose\PDF\Model\LinkAnnotationResponse getLinkAnnotation($name, $link_id, $storage, $folder)
 
@@ -1035,6 +1070,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getMhtInStorageToPdf"></a>
 # **getMhtInStorageToPdf**
 > \SplFileObject getMhtInStorageToPdf($src_path, $storage)
 
@@ -1058,6 +1094,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPage"></a>
 # **getPage**
 > \Aspose\PDF\Model\DocumentPageResponse getPage($name, $page_number, $storage, $folder)
 
@@ -1083,6 +1120,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageAnnotations"></a>
 # **getPageAnnotations**
 > \Aspose\PDF\Model\AnnotationsInfoResponse getPageAnnotations($name, $page_number, $storage, $folder)
 
@@ -1108,6 +1146,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageConvertToBmp"></a>
 # **getPageConvertToBmp**
 > \SplFileObject getPageConvertToBmp($name, $page_number, $width, $height, $folder, $storage)
 
@@ -1135,6 +1174,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageConvertToEmf"></a>
 # **getPageConvertToEmf**
 > \SplFileObject getPageConvertToEmf($name, $page_number, $width, $height, $folder, $storage)
 
@@ -1162,6 +1202,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageConvertToGif"></a>
 # **getPageConvertToGif**
 > \SplFileObject getPageConvertToGif($name, $page_number, $width, $height, $folder, $storage)
 
@@ -1189,6 +1230,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageConvertToJpeg"></a>
 # **getPageConvertToJpeg**
 > \SplFileObject getPageConvertToJpeg($name, $page_number, $width, $height, $folder, $storage)
 
@@ -1216,6 +1258,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageConvertToPng"></a>
 # **getPageConvertToPng**
 > \SplFileObject getPageConvertToPng($name, $page_number, $width, $height, $folder, $storage)
 
@@ -1243,6 +1286,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageConvertToTiff"></a>
 # **getPageConvertToTiff**
 > \SplFileObject getPageConvertToTiff($name, $page_number, $width, $height, $folder, $storage)
 
@@ -1270,6 +1314,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageFreeTextAnnotations"></a>
 # **getPageFreeTextAnnotations**
 > \Aspose\PDF\Model\FreeTextAnnotationsResponse getPageFreeTextAnnotations($name, $page_number, $storage, $folder)
 
@@ -1295,6 +1340,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageLinkAnnotation"></a>
 # **getPageLinkAnnotation**
 > \Aspose\PDF\Model\LinkAnnotationResponse getPageLinkAnnotation($name, $page_number, $link_id, $storage, $folder)
 
@@ -1321,6 +1367,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageLinkAnnotations"></a>
 # **getPageLinkAnnotations**
 > \Aspose\PDF\Model\LinkAnnotationsResponse getPageLinkAnnotations($name, $page_number, $storage, $folder)
 
@@ -1346,6 +1393,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageText"></a>
 # **getPageText**
 > \Aspose\PDF\Model\TextRectsResponse getPageText($name, $page_number, $llx, $lly, $urx, $ury, $format, $regex, $split_rects, $folder, $storage)
 
@@ -1378,6 +1426,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPageTextAnnotations"></a>
 # **getPageTextAnnotations**
 > \Aspose\PDF\Model\TextAnnotationsResponse getPageTextAnnotations($name, $page_number, $storage, $folder)
 
@@ -1403,6 +1452,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPages"></a>
 # **getPages**
 > \Aspose\PDF\Model\DocumentPagesResponse getPages($name, $storage, $folder)
 
@@ -1427,6 +1477,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPclInStorageToPdf"></a>
 # **getPclInStorageToPdf**
 > \SplFileObject getPclInStorageToPdf($src_path, $storage)
 
@@ -1450,6 +1501,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToDoc"></a>
 # **getPdfInStorageToDoc**
 > \SplFileObject getPdfInStorageToDoc($name, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder, $storage)
 
@@ -1482,6 +1534,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToEpub"></a>
 # **getPdfInStorageToEpub**
 > \SplFileObject getPdfInStorageToEpub($name, $content_recognition_mode, $folder, $storage)
 
@@ -1507,6 +1560,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToHtml"></a>
 # **getPdfInStorageToHtml**
 > \SplFileObject getPdfInStorageToHtml($name, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder, $storage)
 
@@ -1559,6 +1613,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToLaTeX"></a>
 # **getPdfInStorageToLaTeX**
 > \SplFileObject getPdfInStorageToLaTeX($name, $pages_count, $folder, $storage)
 
@@ -1584,6 +1639,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToMobiXml"></a>
 # **getPdfInStorageToMobiXml**
 > \SplFileObject getPdfInStorageToMobiXml($name, $folder, $storage)
 
@@ -1608,6 +1664,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToPdfA"></a>
 # **getPdfInStorageToPdfA**
 > \SplFileObject getPdfInStorageToPdfA($name, $type, $folder, $storage)
 
@@ -1633,6 +1690,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToPptx"></a>
 # **getPdfInStorageToPptx**
 > \SplFileObject getPdfInStorageToPptx($name, $separate_images, $slides_as_images, $folder, $storage)
 
@@ -1659,6 +1717,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToSvg"></a>
 # **getPdfInStorageToSvg**
 > \SplFileObject getPdfInStorageToSvg($name, $compress_output_to_zip_archive, $folder, $storage)
 
@@ -1684,6 +1743,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToTiff"></a>
 # **getPdfInStorageToTiff**
 > \SplFileObject getPdfInStorageToTiff($name, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder, $storage)
 
@@ -1723,6 +1783,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToXls"></a>
 # **getPdfInStorageToXls**
 > \SplFileObject getPdfInStorageToXls($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage)
 
@@ -1751,6 +1812,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToXml"></a>
 # **getPdfInStorageToXml**
 > \SplFileObject getPdfInStorageToXml($name, $folder, $storage)
 
@@ -1775,6 +1837,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPdfInStorageToXps"></a>
 # **getPdfInStorageToXps**
 > \SplFileObject getPdfInStorageToXps($name, $folder, $storage)
 
@@ -1799,6 +1862,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getPsInStorageToPdf"></a>
 # **getPsInStorageToPdf**
 > \SplFileObject getPsInStorageToPdf($src_path, $storage)
 
@@ -1822,6 +1886,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getSvgInStorageToPdf"></a>
 # **getSvgInStorageToPdf**
 > \SplFileObject getSvgInStorageToPdf($src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $storage)
 
@@ -1853,6 +1918,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getText"></a>
 # **getText**
 > \Aspose\PDF\Model\TextRectsResponse getText($name, $llx, $lly, $urx, $ury, $format, $regex, $split_rects, $folder, $storage)
 
@@ -1884,6 +1950,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getTextAnnotation"></a>
 # **getTextAnnotation**
 > \Aspose\PDF\Model\TextAnnotationResponse getTextAnnotation($name, $annotation_id, $storage, $folder)
 
@@ -1909,6 +1976,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getVerifySignature"></a>
 # **getVerifySignature**
 > \Aspose\PDF\Model\SignatureVerifyResponse getVerifySignature($name, $sign_name, $storage, $folder)
 
@@ -1934,6 +2002,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getWebInStorageToPdf"></a>
 # **getWebInStorageToPdf**
 > \SplFileObject getWebInStorageToPdf($url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $storage)
 
@@ -1964,6 +2033,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getWordsPerPage"></a>
 # **getWordsPerPage**
 > \Aspose\PDF\Model\WordCountResponse getWordsPerPage($name, $storage, $folder)
 
@@ -1988,6 +2058,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getXfaPdfInStorageToAcroForm"></a>
 # **getXfaPdfInStorageToAcroForm**
 > \SplFileObject getXfaPdfInStorageToAcroForm($name, $folder, $storage)
 
@@ -2012,6 +2083,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getXmlInStorageToPdf"></a>
 # **getXmlInStorageToPdf**
 > \SplFileObject getXmlInStorageToPdf($src_path, $xsl_file_path, $storage)
 
@@ -2036,6 +2108,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getXpsInStorageToPdf"></a>
 # **getXpsInStorageToPdf**
 > \SplFileObject getXpsInStorageToPdf($src_path, $storage)
 
@@ -2059,6 +2132,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getXslFoInStorageToPdf"></a>
 # **getXslFoInStorageToPdf**
 > \SplFileObject getXslFoInStorageToPdf($src_path, $storage)
 
@@ -2082,6 +2156,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postAppendDocument"></a>
 # **postAppendDocument**
 > \Aspose\PDF\Model\DocumentResponse postAppendDocument($name, $append_document, $append_file, $start_page, $end_page, $storage, $folder)
 
@@ -2110,6 +2185,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postCreateField"></a>
 # **postCreateField**
 > \Aspose\PDF\Model\AsposeResponse postCreateField($name, $page, $field, $storage, $folder)
 
@@ -2136,6 +2212,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postDocumentTextReplace"></a>
 # **postDocumentTextReplace**
 > \Aspose\PDF\Model\TextReplaceResponse postDocumentTextReplace($name, $text_replace, $storage, $folder)
 
@@ -2161,6 +2238,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postInsertImage"></a>
 # **postInsertImage**
 > \Aspose\PDF\Model\AsposeResponse postInsertImage($name, $page_number, $llx, $lly, $urx, $ury, $image_file_path, $storage, $folder, $image)
 
@@ -2192,6 +2270,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postMovePage"></a>
 # **postMovePage**
 > \Aspose\PDF\Model\AsposeResponse postMovePage($name, $page_number, $new_index, $storage, $folder)
 
@@ -2218,6 +2297,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postOptimizeDocument"></a>
 # **postOptimizeDocument**
 > \Aspose\PDF\Model\AsposeResponse postOptimizeDocument($name, $options, $storage, $folder)
 
@@ -2243,6 +2323,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postPageFreeTextAnnotations"></a>
 # **postPageFreeTextAnnotations**
 > \Aspose\PDF\Model\AsposeResponse postPageFreeTextAnnotations($name, $page_number, $annotations, $storage, $folder)
 
@@ -2269,6 +2350,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postPageLinkAnnotations"></a>
 # **postPageLinkAnnotations**
 > \Aspose\PDF\Model\AsposeResponse postPageLinkAnnotations($name, $page_number, $links, $storage, $folder)
 
@@ -2295,6 +2377,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postPageTextAnnotations"></a>
 # **postPageTextAnnotations**
 > \Aspose\PDF\Model\AsposeResponse postPageTextAnnotations($name, $page_number, $annotations, $storage, $folder)
 
@@ -2321,6 +2404,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postPageTextReplace"></a>
 # **postPageTextReplace**
 > \Aspose\PDF\Model\TextReplaceResponse postPageTextReplace($name, $page_number, $text_replace_list_request, $storage, $folder)
 
@@ -2347,6 +2431,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postSignDocument"></a>
 # **postSignDocument**
 > \Aspose\PDF\Model\AsposeResponse postSignDocument($name, $signature, $storage, $folder)
 
@@ -2372,6 +2457,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postSignPage"></a>
 # **postSignPage**
 > \Aspose\PDF\Model\AsposeResponse postSignPage($name, $page_number, $signature, $storage, $folder)
 
@@ -2398,6 +2484,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postSplitDocument"></a>
 # **postSplitDocument**
 > \Aspose\PDF\Model\SplitResultResponse postSplitDocument($name, $format, $from, $to, $storage, $folder)
 
@@ -2425,6 +2512,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putAddNewPage"></a>
 # **putAddNewPage**
 > \Aspose\PDF\Model\DocumentPagesResponse putAddNewPage($name, $storage, $folder)
 
@@ -2449,6 +2537,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putAddText"></a>
 # **putAddText**
 > \Aspose\PDF\Model\AsposeResponse putAddText($name, $page_number, $paragraph, $folder, $storage)
 
@@ -2475,6 +2564,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putCreate"></a>
 # **putCreate**
 > \Aspose\PDF\Model\AsposeResponse putCreate($path, $file, $version_id, $storage)
 
@@ -2500,6 +2590,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putCreateDocument"></a>
 # **putCreateDocument**
 > \Aspose\PDF\Model\DocumentResponse putCreateDocument($name, $storage, $folder)
 
@@ -2524,6 +2615,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putEpubInStorageToPdf"></a>
 # **putEpubInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putEpubInStorageToPdf($name, $src_path, $storage, $dst_folder)
 
@@ -2549,6 +2641,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putFieldsFlatten"></a>
 # **putFieldsFlatten**
 > \Aspose\PDF\Model\AsposeResponse putFieldsFlatten($name, $storage, $folder)
 
@@ -2573,6 +2666,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putFreeTextAnnotation"></a>
 # **putFreeTextAnnotation**
 > \Aspose\PDF\Model\FreeTextAnnotationResponse putFreeTextAnnotation($name, $annotation_id, $annotation, $storage, $folder)
 
@@ -2599,6 +2693,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putHtmlInStorageToPdf"></a>
 # **putHtmlInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putHtmlInStorageToPdf($name, $src_path, $html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder, $storage)
 
@@ -2632,6 +2727,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImageExtractAsGif"></a>
 # **putImageExtractAsGif**
 > \Aspose\PDF\Model\AsposeResponse putImageExtractAsGif($name, $image_id, $width, $height, $storage, $folder, $dest_folder)
 
@@ -2660,6 +2756,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImageExtractAsJpeg"></a>
 # **putImageExtractAsJpeg**
 > \Aspose\PDF\Model\AsposeResponse putImageExtractAsJpeg($name, $image_id, $width, $height, $storage, $folder, $dest_folder)
 
@@ -2688,6 +2785,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImageExtractAsPng"></a>
 # **putImageExtractAsPng**
 > \Aspose\PDF\Model\AsposeResponse putImageExtractAsPng($name, $image_id, $width, $height, $storage, $folder, $dest_folder)
 
@@ -2716,6 +2814,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImageExtractAsTiff"></a>
 # **putImageExtractAsTiff**
 > \Aspose\PDF\Model\AsposeResponse putImageExtractAsTiff($name, $image_id, $width, $height, $storage, $folder, $dest_folder)
 
@@ -2744,6 +2843,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImageInStorageToPdf"></a>
 # **putImageInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putImageInStorageToPdf($name, $image_templates, $dst_folder, $storage)
 
@@ -2769,6 +2869,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImagesExtractAsGif"></a>
 # **putImagesExtractAsGif**
 > \Aspose\PDF\Model\AsposeResponse putImagesExtractAsGif($name, $page_number, $width, $height, $storage, $folder, $dest_folder)
 
@@ -2797,6 +2898,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImagesExtractAsJpeg"></a>
 # **putImagesExtractAsJpeg**
 > \Aspose\PDF\Model\AsposeResponse putImagesExtractAsJpeg($name, $page_number, $width, $height, $storage, $folder, $dest_folder)
 
@@ -2825,6 +2927,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImagesExtractAsPng"></a>
 # **putImagesExtractAsPng**
 > \Aspose\PDF\Model\AsposeResponse putImagesExtractAsPng($name, $page_number, $width, $height, $storage, $folder, $dest_folder)
 
@@ -2853,6 +2956,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putImagesExtractAsTiff"></a>
 # **putImagesExtractAsTiff**
 > \Aspose\PDF\Model\AsposeResponse putImagesExtractAsTiff($name, $page_number, $width, $height, $storage, $folder, $dest_folder)
 
@@ -2881,6 +2985,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putLaTeXInStorageToPdf"></a>
 # **putLaTeXInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putLaTeXInStorageToPdf($name, $src_path, $dst_folder, $storage)
 
@@ -2906,6 +3011,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putLinkAnnotation"></a>
 # **putLinkAnnotation**
 > \Aspose\PDF\Model\LinkAnnotationResponse putLinkAnnotation($name, $link_id, $link, $storage, $folder)
 
@@ -2932,6 +3038,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putMergeDocuments"></a>
 # **putMergeDocuments**
 > \SplFileObject putMergeDocuments($name, $merge_documents, $storage, $folder)
 
@@ -2957,6 +3064,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putMhtInStorageToPdf"></a>
 # **putMhtInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putMhtInStorageToPdf($name, $src_path, $dst_folder, $storage)
 
@@ -2982,6 +3090,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPageAddStamp"></a>
 # **putPageAddStamp**
 > \Aspose\PDF\Model\AsposeResponse putPageAddStamp($name, $page_number, $stamp, $storage, $folder)
 
@@ -3008,6 +3117,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPageConvertToBmp"></a>
 # **putPageConvertToBmp**
 > \Aspose\PDF\Model\AsposeResponse putPageConvertToBmp($name, $page_number, $out_path, $width, $height, $folder, $storage)
 
@@ -3036,6 +3146,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPageConvertToEmf"></a>
 # **putPageConvertToEmf**
 > \Aspose\PDF\Model\AsposeResponse putPageConvertToEmf($name, $page_number, $out_path, $width, $height, $folder, $storage)
 
@@ -3064,6 +3175,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPageConvertToGif"></a>
 # **putPageConvertToGif**
 > \Aspose\PDF\Model\AsposeResponse putPageConvertToGif($name, $page_number, $out_path, $width, $height, $folder, $storage)
 
@@ -3092,6 +3204,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPageConvertToJpeg"></a>
 # **putPageConvertToJpeg**
 > \Aspose\PDF\Model\AsposeResponse putPageConvertToJpeg($name, $page_number, $out_path, $width, $height, $folder, $storage)
 
@@ -3120,6 +3233,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPageConvertToPng"></a>
 # **putPageConvertToPng**
 > \Aspose\PDF\Model\AsposeResponse putPageConvertToPng($name, $page_number, $out_path, $width, $height, $folder, $storage)
 
@@ -3148,6 +3262,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPageConvertToTiff"></a>
 # **putPageConvertToTiff**
 > \Aspose\PDF\Model\AsposeResponse putPageConvertToTiff($name, $page_number, $out_path, $width, $height, $folder, $storage)
 
@@ -3176,6 +3291,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPclInStorageToPdf"></a>
 # **putPclInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putPclInStorageToPdf($name, $src_path, $dst_folder, $storage)
 
@@ -3201,6 +3317,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToDoc"></a>
 # **putPdfInRequestToDoc**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToDoc($out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $storage, $file)
 
@@ -3233,6 +3350,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToEpub"></a>
 # **putPdfInRequestToEpub**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToEpub($out_path, $content_recognition_mode, $storage, $file)
 
@@ -3258,6 +3376,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToHtml"></a>
 # **putPdfInRequestToHtml**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToHtml($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $storage, $file)
 
@@ -3310,6 +3429,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToLaTeX"></a>
 # **putPdfInRequestToLaTeX**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToLaTeX($out_path, $pages_count, $storage, $file)
 
@@ -3335,6 +3455,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToMobiXml"></a>
 # **putPdfInRequestToMobiXml**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToMobiXml($out_path, $storage, $file)
 
@@ -3359,6 +3480,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToPdfA"></a>
 # **putPdfInRequestToPdfA**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToPdfA($out_path, $type, $storage, $file)
 
@@ -3384,6 +3506,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToPptx"></a>
 # **putPdfInRequestToPptx**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToPptx($out_path, $separate_images, $slides_as_images, $storage, $file)
 
@@ -3410,6 +3533,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToSvg"></a>
 # **putPdfInRequestToSvg**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToSvg($out_path, $storage, $file)
 
@@ -3434,6 +3558,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToTiff"></a>
 # **putPdfInRequestToTiff**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToTiff($out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $storage, $file)
 
@@ -3473,6 +3598,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToXls"></a>
 # **putPdfInRequestToXls**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXls($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file)
 
@@ -3501,6 +3627,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToXml"></a>
 # **putPdfInRequestToXml**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXml($out_path, $storage, $file)
 
@@ -3525,6 +3652,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInRequestToXps"></a>
 # **putPdfInRequestToXps**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXps($out_path, $storage, $file)
 
@@ -3549,6 +3677,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToDoc"></a>
 # **putPdfInStorageToDoc**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToDoc($name, $out_path, $add_return_to_line_end, $format, $image_resolution_x, $image_resolution_y, $max_distance_between_text_lines, $mode, $recognize_bullets, $relative_horizontal_proximity, $folder, $storage)
 
@@ -3582,6 +3711,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToEpub"></a>
 # **putPdfInStorageToEpub**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToEpub($name, $out_path, $content_recognition_mode, $folder, $storage)
 
@@ -3608,6 +3738,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToHtml"></a>
 # **putPdfInStorageToHtml**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToHtml($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder, $storage)
 
@@ -3661,6 +3792,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToLaTeX"></a>
 # **putPdfInStorageToLaTeX**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToLaTeX($name, $out_path, $pages_count, $folder, $storage)
 
@@ -3687,6 +3819,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToMobiXml"></a>
 # **putPdfInStorageToMobiXml**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToMobiXml($name, $out_path, $folder, $storage)
 
@@ -3712,6 +3845,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToPdfA"></a>
 # **putPdfInStorageToPdfA**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToPdfA($name, $out_path, $type, $folder, $storage)
 
@@ -3738,6 +3872,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToPptx"></a>
 # **putPdfInStorageToPptx**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToPptx($name, $out_path, $separate_images, $slides_as_images, $folder, $storage)
 
@@ -3765,6 +3900,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToSvg"></a>
 # **putPdfInStorageToSvg**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToSvg($name, $out_path, $folder, $storage)
 
@@ -3790,6 +3926,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToTiff"></a>
 # **putPdfInStorageToTiff**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToTiff($name, $out_path, $brightness, $compression, $color_depth, $left_margin, $right_margin, $top_margin, $bottom_margin, $orientation, $skip_blank_pages, $width, $height, $x_resolution, $y_resolution, $page_index, $page_count, $folder, $storage)
 
@@ -3830,6 +3967,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToXls"></a>
 # **putPdfInStorageToXls**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToXls($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage)
 
@@ -3859,6 +3997,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToXml"></a>
 # **putPdfInStorageToXml**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToXml($name, $out_path, $folder, $storage)
 
@@ -3884,6 +4023,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPdfInStorageToXps"></a>
 # **putPdfInStorageToXps**
 > \Aspose\PDF\Model\AsposeResponse putPdfInStorageToXps($name, $out_path, $folder, $storage)
 
@@ -3909,6 +4049,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPrivileges"></a>
 # **putPrivileges**
 > \Aspose\PDF\Model\AsposeResponse putPrivileges($name, $privileges, $storage, $folder)
 
@@ -3934,6 +4075,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putPsInStorageToPdf"></a>
 # **putPsInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putPsInStorageToPdf($name, $src_path, $dst_folder, $storage)
 
@@ -3959,6 +4101,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putReplaceImage"></a>
 # **putReplaceImage**
 > \Aspose\PDF\Model\ImageResponse putReplaceImage($name, $image_id, $image_file_path, $storage, $folder, $image)
 
@@ -3986,6 +4129,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putSearchableDocument"></a>
 # **putSearchableDocument**
 > \Aspose\PDF\Model\AsposeResponse putSearchableDocument($name, $storage, $folder, $lang)
 
@@ -4011,6 +4155,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putSetProperty"></a>
 # **putSetProperty**
 > \Aspose\PDF\Model\DocumentPropertyResponse putSetProperty($name, $property_name, $value, $storage, $folder)
 
@@ -4037,6 +4182,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putSvgInStorageToPdf"></a>
 # **putSvgInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putSvgInStorageToPdf($name, $src_path, $adjust_page_size, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder, $storage)
 
@@ -4070,6 +4216,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putTextAnnotation"></a>
 # **putTextAnnotation**
 > \Aspose\PDF\Model\TextAnnotationResponse putTextAnnotation($name, $annotation_id, $annotation, $storage, $folder)
 
@@ -4096,6 +4243,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putUpdateField"></a>
 # **putUpdateField**
 > \Aspose\PDF\Model\FieldResponse putUpdateField($name, $field_name, $field, $storage, $folder)
 
@@ -4122,6 +4270,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putUpdateFields"></a>
 # **putUpdateFields**
 > \Aspose\PDF\Model\FieldsResponse putUpdateFields($name, $fields, $storage, $folder)
 
@@ -4147,6 +4296,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putWebInStorageToPdf"></a>
 # **putWebInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putWebInStorageToPdf($name, $url, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top, $dst_folder, $storage)
 
@@ -4179,6 +4329,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putXfaPdfInRequestToAcroForm"></a>
 # **putXfaPdfInRequestToAcroForm**
 > \Aspose\PDF\Model\AsposeResponse putXfaPdfInRequestToAcroForm($out_path, $storage, $file)
 
@@ -4203,6 +4354,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putXfaPdfInStorageToAcroForm"></a>
 # **putXfaPdfInStorageToAcroForm**
 > \Aspose\PDF\Model\AsposeResponse putXfaPdfInStorageToAcroForm($name, $out_path, $folder, $storage)
 
@@ -4228,6 +4380,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putXmlInStorageToPdf"></a>
 # **putXmlInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putXmlInStorageToPdf($name, $src_path, $xsl_file_path, $dst_folder, $storage)
 
@@ -4254,6 +4407,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putXpsInStorageToPdf"></a>
 # **putXpsInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putXpsInStorageToPdf($name, $src_path, $dst_folder, $storage)
 
@@ -4279,6 +4433,7 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putXslFoInStorageToPdf"></a>
 # **putXslFoInStorageToPdf**
 > \Aspose\PDF\Model\AsposeResponse putXslFoInStorageToPdf($name, $src_path, $dst_folder, $storage)
 
