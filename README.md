@@ -28,7 +28,6 @@ APIs of this SDK can be called as follows:
 ```php
 <?php
 use Aspose\PDF\Api\PdfApi;
-use Aspose\PDF\Model\HttpStatusCode;
 use Aspose\PDF\Configuration;
 
 class PdfApiUsage
