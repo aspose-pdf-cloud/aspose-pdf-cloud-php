@@ -1,6 +1,6 @@
 # Aspose.PDF Cloud
 - API version: 2.0
-- Package version: 18.9.0
+- Package version: 18.10.0
 
 [Aspose.PDF Cloud](https://products.aspose.cloud/pdf) is a true REST API that enables you to perform a wide range of document processing operations including creation, manipulation, conversion and rendering of Pdf documents in the cloud.
 
@@ -90,14 +90,20 @@ Class | Method | HTTP request | Description
 *PdfApi* | [**deletePageLinkAnnotations**](docs/Api/PdfApi.md#deletepagelinkannotations) | **DELETE** /pdf/\{name}/pages/\{pageNumber}/links | Delete all link annotations from the page
 *PdfApi* | [**deleteProperties**](docs/Api/PdfApi.md#deleteproperties) | **DELETE** /pdf/\{name}/documentproperties | Delete custom document properties.
 *PdfApi* | [**deleteProperty**](docs/Api/PdfApi.md#deleteproperty) | **DELETE** /pdf/\{name}/documentproperties/\{propertyName} | Delete document property.
+*PdfApi* | [**getCircleAnnotation**](docs/Api/PdfApi.md#getcircleannotation) | **GET** /pdf/\{name}/annotations/circle/\{annotationId} | Read document page circle annotation by ID.
 *PdfApi* | [**getDocument**](docs/Api/PdfApi.md#getdocument) | **GET** /pdf/\{name} | Read common document info.
 *PdfApi* | [**getDocumentAnnotations**](docs/Api/PdfApi.md#getdocumentannotations) | **GET** /pdf/\{name}/annotations | Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
 *PdfApi* | [**getDocumentAttachmentByIndex**](docs/Api/PdfApi.md#getdocumentattachmentbyindex) | **GET** /pdf/\{name}/attachments/\{attachmentIndex} | Read document attachment info by its index.
 *PdfApi* | [**getDocumentAttachments**](docs/Api/PdfApi.md#getdocumentattachments) | **GET** /pdf/\{name}/attachments | Read document attachments info.
 *PdfApi* | [**getDocumentBookmarks**](docs/Api/PdfApi.md#getdocumentbookmarks) | **GET** /pdf/\{name}/bookmarks | Read document bookmark/bookmarks (including children).
+*PdfApi* | [**getDocumentCircleAnnotations**](docs/Api/PdfApi.md#getdocumentcircleannotations) | **GET** /pdf/\{name}/annotations/circle | Read document circle annotations.
 *PdfApi* | [**getDocumentFreeTextAnnotations**](docs/Api/PdfApi.md#getdocumentfreetextannotations) | **GET** /pdf/\{name}/annotations/freetext | Read document free text annotations.
+*PdfApi* | [**getDocumentLineAnnotations**](docs/Api/PdfApi.md#getdocumentlineannotations) | **GET** /pdf/\{name}/annotations/line | Read document line annotations.
+*PdfApi* | [**getDocumentPolyLineAnnotations**](docs/Api/PdfApi.md#getdocumentpolylineannotations) | **GET** /pdf/\{name}/annotations/polyline | Read document polyline annotations.
+*PdfApi* | [**getDocumentPolygonAnnotations**](docs/Api/PdfApi.md#getdocumentpolygonannotations) | **GET** /pdf/\{name}/annotations/polygon | Read document polygon annotations.
 *PdfApi* | [**getDocumentProperties**](docs/Api/PdfApi.md#getdocumentproperties) | **GET** /pdf/\{name}/documentproperties | Read document properties.
 *PdfApi* | [**getDocumentProperty**](docs/Api/PdfApi.md#getdocumentproperty) | **GET** /pdf/\{name}/documentproperties/\{propertyName} | Read document property by name.
+*PdfApi* | [**getDocumentSquareAnnotations**](docs/Api/PdfApi.md#getdocumentsquareannotations) | **GET** /pdf/\{name}/annotations/square | Read document square annotations.
 *PdfApi* | [**getDocumentTextAnnotations**](docs/Api/PdfApi.md#getdocumenttextannotations) | **GET** /pdf/\{name}/annotations/text | Read document text annotations.
 *PdfApi* | [**getDownload**](docs/Api/PdfApi.md#getdownload) | **GET** /storage/file | Download a specific file
 *PdfApi* | [**getDownloadDocumentAttachmentByIndex**](docs/Api/PdfApi.md#getdownloaddocumentattachmentbyindex) | **GET** /pdf/\{name}/attachments/\{attachmentIndex}/download | Download document attachment content by its index.
@@ -113,10 +119,12 @@ Class | Method | HTTP request | Description
 *PdfApi* | [**getImageExtractAsTiff**](docs/Api/PdfApi.md#getimageextractastiff) | **GET** /pdf/\{name}/images/\{imageId}/extract/tiff | Extract document image in TIFF format
 *PdfApi* | [**getImages**](docs/Api/PdfApi.md#getimages) | **GET** /pdf/\{name}/pages/\{pageNumber}/images | Read document images.
 *PdfApi* | [**getLaTeXInStorageToPdf**](docs/Api/PdfApi.md#getlatexinstoragetopdf) | **GET** /pdf/create/latex | Convert LaTeX file (located on storage) to PDF format and return resulting file in response.
+*PdfApi* | [**getLineAnnotation**](docs/Api/PdfApi.md#getlineannotation) | **GET** /pdf/\{name}/annotations/line/\{annotationId} | Read document page line annotation by ID.
 *PdfApi* | [**getLinkAnnotation**](docs/Api/PdfApi.md#getlinkannotation) | **GET** /pdf/\{name}/links/\{linkId} | Read document link annotation by ID.
 *PdfApi* | [**getMhtInStorageToPdf**](docs/Api/PdfApi.md#getmhtinstoragetopdf) | **GET** /pdf/create/mht | Convert MHT file (located on storage) to PDF format and return resulting file in response.
 *PdfApi* | [**getPage**](docs/Api/PdfApi.md#getpage) | **GET** /pdf/\{name}/pages/\{pageNumber} | Read document page info.
 *PdfApi* | [**getPageAnnotations**](docs/Api/PdfApi.md#getpageannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations | Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
+*PdfApi* | [**getPageCircleAnnotations**](docs/Api/PdfApi.md#getpagecircleannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/circle | Read document page circle annotations.
 *PdfApi* | [**getPageConvertToBmp**](docs/Api/PdfApi.md#getpageconverttobmp) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/bmp | Convert document page to Bmp image and return resulting file in response.
 *PdfApi* | [**getPageConvertToEmf**](docs/Api/PdfApi.md#getpageconverttoemf) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/emf | Convert document page to Emf image and return resulting file in response.
 *PdfApi* | [**getPageConvertToGif**](docs/Api/PdfApi.md#getpageconverttogif) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/gif | Convert document page to Gif image and return resulting file in response.
@@ -124,8 +132,12 @@ Class | Method | HTTP request | Description
 *PdfApi* | [**getPageConvertToPng**](docs/Api/PdfApi.md#getpageconverttopng) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/png | Convert document page to Png image and return resulting file in response.
 *PdfApi* | [**getPageConvertToTiff**](docs/Api/PdfApi.md#getpageconverttotiff) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/tiff | Convert document page to Tiff image  and return resulting file in response.
 *PdfApi* | [**getPageFreeTextAnnotations**](docs/Api/PdfApi.md#getpagefreetextannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/freetext | Read document page free text annotations.
+*PdfApi* | [**getPageLineAnnotations**](docs/Api/PdfApi.md#getpagelineannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/line | Read document page line annotations.
 *PdfApi* | [**getPageLinkAnnotation**](docs/Api/PdfApi.md#getpagelinkannotation) | **GET** /pdf/\{name}/pages/\{pageNumber}/links/\{linkId} | Read document page link annotation by ID.
 *PdfApi* | [**getPageLinkAnnotations**](docs/Api/PdfApi.md#getpagelinkannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/links | Read document page link annotations.
+*PdfApi* | [**getPagePolyLineAnnotations**](docs/Api/PdfApi.md#getpagepolylineannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/polyline | Read document page polyline annotations.
+*PdfApi* | [**getPagePolygonAnnotations**](docs/Api/PdfApi.md#getpagepolygonannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/polygon | Read document page polygon annotations.
+*PdfApi* | [**getPageSquareAnnotations**](docs/Api/PdfApi.md#getpagesquareannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/square | Read document page square annotations.
 *PdfApi* | [**getPageText**](docs/Api/PdfApi.md#getpagetext) | **GET** /pdf/\{name}/pages/\{pageNumber}/text | Read page text items.
 *PdfApi* | [**getPageTextAnnotations**](docs/Api/PdfApi.md#getpagetextannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/text | Read document page text annotations.
 *PdfApi* | [**getPages**](docs/Api/PdfApi.md#getpages) | **GET** /pdf/\{name}/pages | Read document pages info.
@@ -142,7 +154,10 @@ Class | Method | HTTP request | Description
 *PdfApi* | [**getPdfInStorageToXls**](docs/Api/PdfApi.md#getpdfinstoragetoxls) | **GET** /pdf/\{name}/convert/xls | Converts PDF document (located on storage) to XLS format and returns resulting file in response content
 *PdfApi* | [**getPdfInStorageToXml**](docs/Api/PdfApi.md#getpdfinstoragetoxml) | **GET** /pdf/\{name}/convert/xml | Converts PDF document (located on storage) to XML format and returns resulting file in response content
 *PdfApi* | [**getPdfInStorageToXps**](docs/Api/PdfApi.md#getpdfinstoragetoxps) | **GET** /pdf/\{name}/convert/xps | Converts PDF document (located on storage) to XPS format and returns resulting file in response content
+*PdfApi* | [**getPolyLineAnnotation**](docs/Api/PdfApi.md#getpolylineannotation) | **GET** /pdf/\{name}/annotations/polyline/\{annotationId} | Read document page polyline annotation by ID.
+*PdfApi* | [**getPolygonAnnotation**](docs/Api/PdfApi.md#getpolygonannotation) | **GET** /pdf/\{name}/annotations/polygon/\{annotationId} | Read document page polygon annotation by ID.
 *PdfApi* | [**getPsInStorageToPdf**](docs/Api/PdfApi.md#getpsinstoragetopdf) | **GET** /pdf/create/ps | Convert PS file (located on storage) to PDF format and return resulting file in response.
+*PdfApi* | [**getSquareAnnotation**](docs/Api/PdfApi.md#getsquareannotation) | **GET** /pdf/\{name}/annotations/square/\{annotationId} | Read document page square annotation by ID.
 *PdfApi* | [**getSvgInStorageToPdf**](docs/Api/PdfApi.md#getsvginstoragetopdf) | **GET** /pdf/create/svg | Convert SVG file (located on storage) to PDF format and return resulting file in response.
 *PdfApi* | [**getText**](docs/Api/PdfApi.md#gettext) | **GET** /pdf/\{name}/text | Read document text.
 *PdfApi* | [**getTextAnnotation**](docs/Api/PdfApi.md#gettextannotation) | **GET** /pdf/\{name}/annotations/text/\{annotationId} | Read document page text annotation by ID.
@@ -159,8 +174,13 @@ Class | Method | HTTP request | Description
 *PdfApi* | [**postInsertImage**](docs/Api/PdfApi.md#postinsertimage) | **POST** /pdf/\{name}/pages/\{pageNumber}/images | Insert image to document page.
 *PdfApi* | [**postMovePage**](docs/Api/PdfApi.md#postmovepage) | **POST** /pdf/\{name}/pages/\{pageNumber}/movePage | Move page to new position.
 *PdfApi* | [**postOptimizeDocument**](docs/Api/PdfApi.md#postoptimizedocument) | **POST** /pdf/\{name}/optimize | Optimize document.
+*PdfApi* | [**postPageCircleAnnotations**](docs/Api/PdfApi.md#postpagecircleannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/circle | Add document page circle annotations.
 *PdfApi* | [**postPageFreeTextAnnotations**](docs/Api/PdfApi.md#postpagefreetextannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/freetext | Add document page free text annotations.
+*PdfApi* | [**postPageLineAnnotations**](docs/Api/PdfApi.md#postpagelineannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/line | Add document page line annotations.
 *PdfApi* | [**postPageLinkAnnotations**](docs/Api/PdfApi.md#postpagelinkannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/links | Add document page link annotations.
+*PdfApi* | [**postPagePolyLineAnnotations**](docs/Api/PdfApi.md#postpagepolylineannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/polyline | Add document page polyline annotations.
+*PdfApi* | [**postPagePolygonAnnotations**](docs/Api/PdfApi.md#postpagepolygonannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/polygon | Add document page polygon annotations.
+*PdfApi* | [**postPageSquareAnnotations**](docs/Api/PdfApi.md#postpagesquareannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/square | Add document page square annotations.
 *PdfApi* | [**postPageTextAnnotations**](docs/Api/PdfApi.md#postpagetextannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/text | Add document page text annotations.
 *PdfApi* | [**postPageTextReplace**](docs/Api/PdfApi.md#postpagetextreplace) | **POST** /pdf/\{name}/pages/\{pageNumber}/text/replace | Page&#39;s replace text method.
 *PdfApi* | [**postSignDocument**](docs/Api/PdfApi.md#postsigndocument) | **POST** /pdf/\{name}/sign | Sign document.
@@ -168,6 +188,7 @@ Class | Method | HTTP request | Description
 *PdfApi* | [**postSplitDocument**](docs/Api/PdfApi.md#postsplitdocument) | **POST** /pdf/\{name}/split | Split document to parts.
 *PdfApi* | [**putAddNewPage**](docs/Api/PdfApi.md#putaddnewpage) | **PUT** /pdf/\{name}/pages | Add new page to end of the document.
 *PdfApi* | [**putAddText**](docs/Api/PdfApi.md#putaddtext) | **PUT** /pdf/\{name}/pages/\{pageNumber}/text | Add text to PDF document page.
+*PdfApi* | [**putCircleAnnotation**](docs/Api/PdfApi.md#putcircleannotation) | **PUT** /pdf/\{name}/annotations/circle/\{annotationId} | Replace document circle annotation
 *PdfApi* | [**putCreate**](docs/Api/PdfApi.md#putcreate) | **PUT** /storage/file | Upload a specific file
 *PdfApi* | [**putCreateDocument**](docs/Api/PdfApi.md#putcreatedocument) | **PUT** /pdf/\{name} | Create empty document.
 *PdfApi* | [**putEpubInStorageToPdf**](docs/Api/PdfApi.md#putepubinstoragetopdf) | **PUT** /pdf/\{name}/create/epub | Convert EPUB file (located on storage) to PDF format and upload resulting file to storage.
@@ -184,6 +205,7 @@ Class | Method | HTTP request | Description
 *PdfApi* | [**putImagesExtractAsPng**](docs/Api/PdfApi.md#putimagesextractaspng) | **PUT** /pdf/\{name}/pages/\{pageNumber}/images/extract/png | Extract document images in PNG format to folder.
 *PdfApi* | [**putImagesExtractAsTiff**](docs/Api/PdfApi.md#putimagesextractastiff) | **PUT** /pdf/\{name}/pages/\{pageNumber}/images/extract/tiff | Extract document images in TIFF format to folder.
 *PdfApi* | [**putLaTeXInStorageToPdf**](docs/Api/PdfApi.md#putlatexinstoragetopdf) | **PUT** /pdf/\{name}/create/latex | Convert LaTeX file (located on storage) to PDF format and upload resulting file to storage.
+*PdfApi* | [**putLineAnnotation**](docs/Api/PdfApi.md#putlineannotation) | **PUT** /pdf/\{name}/annotations/line/\{annotationId} | Replace document line annotation
 *PdfApi* | [**putLinkAnnotation**](docs/Api/PdfApi.md#putlinkannotation) | **PUT** /pdf/\{name}/links/\{linkId} | Replace document page link annotations
 *PdfApi* | [**putMergeDocuments**](docs/Api/PdfApi.md#putmergedocuments) | **PUT** /pdf/\{name}/merge | Merge a list of documents.
 *PdfApi* | [**putMhtInStorageToPdf**](docs/Api/PdfApi.md#putmhtinstoragetopdf) | **PUT** /pdf/\{name}/create/mht | Convert MHT file (located on storage) to PDF format and upload resulting file to storage.
@@ -219,11 +241,14 @@ Class | Method | HTTP request | Description
 *PdfApi* | [**putPdfInStorageToXls**](docs/Api/PdfApi.md#putpdfinstoragetoxls) | **PUT** /pdf/\{name}/convert/xls | Converts PDF document (located on storage) to XLS format and uploads resulting file to storage
 *PdfApi* | [**putPdfInStorageToXml**](docs/Api/PdfApi.md#putpdfinstoragetoxml) | **PUT** /pdf/\{name}/convert/xml | Converts PDF document (located on storage) to XML format and uploads resulting file to storage
 *PdfApi* | [**putPdfInStorageToXps**](docs/Api/PdfApi.md#putpdfinstoragetoxps) | **PUT** /pdf/\{name}/convert/xps | Converts PDF document (located on storage) to XPS format and uploads resulting file to storage
+*PdfApi* | [**putPolyLineAnnotation**](docs/Api/PdfApi.md#putpolylineannotation) | **PUT** /pdf/\{name}/annotations/polyline/\{annotationId} | Replace document polyline annotation
+*PdfApi* | [**putPolygonAnnotation**](docs/Api/PdfApi.md#putpolygonannotation) | **PUT** /pdf/\{name}/annotations/polygon/\{annotationId} | Replace document polygon annotation
 *PdfApi* | [**putPrivileges**](docs/Api/PdfApi.md#putprivileges) | **PUT** /pdf/\{name}/privileges | Update privilege document.
 *PdfApi* | [**putPsInStorageToPdf**](docs/Api/PdfApi.md#putpsinstoragetopdf) | **PUT** /pdf/\{name}/create/ps | Convert PS file (located on storage) to PDF format and upload resulting file to storage.
 *PdfApi* | [**putReplaceImage**](docs/Api/PdfApi.md#putreplaceimage) | **PUT** /pdf/\{name}/images/\{imageId} | Replace document image.
 *PdfApi* | [**putSearchableDocument**](docs/Api/PdfApi.md#putsearchabledocument) | **PUT** /pdf/\{name}/ocr | Create searchable PDF document. Generate OCR layer for images in input PDF document.
 *PdfApi* | [**putSetProperty**](docs/Api/PdfApi.md#putsetproperty) | **PUT** /pdf/\{name}/documentproperties/\{propertyName} | Add/update document property.
+*PdfApi* | [**putSquareAnnotation**](docs/Api/PdfApi.md#putsquareannotation) | **PUT** /pdf/\{name}/annotations/square/\{annotationId} | Replace document square annotation
 *PdfApi* | [**putSvgInStorageToPdf**](docs/Api/PdfApi.md#putsvginstoragetopdf) | **PUT** /pdf/\{name}/create/svg | Convert SVG file (located on storage) to PDF format and upload resulting file to storage.
 *PdfApi* | [**putTextAnnotation**](docs/Api/PdfApi.md#puttextannotation) | **PUT** /pdf/\{name}/annotations/text/\{annotationId} | Replace document text annotation
 *PdfApi* | [**putUpdateField**](docs/Api/PdfApi.md#putupdatefield) | **PUT** /pdf/\{name}/fields/\{fieldName} | Update field.
@@ -244,6 +269,7 @@ Class | Method | HTTP request | Description
  - [AntialiasingProcessingType](docs/Model/AntialiasingProcessingType.md)
  - [AppendDocument](docs/Model/AppendDocument.md)
  - [AsposeResponse](docs/Model/AsposeResponse.md)
+ - [CaptionPosition](docs/Model/CaptionPosition.md)
  - [Color](docs/Model/Color.md)
  - [ColorDepth](docs/Model/ColorDepth.md)
  - [CompressionType](docs/Model/CompressionType.md)
@@ -264,6 +290,8 @@ Class | Method | HTTP request | Description
  - [ImageTemplatesRequest](docs/Model/ImageTemplatesRequest.md)
  - [Justification](docs/Model/Justification.md)
  - [LettersPositioningMethods](docs/Model/LettersPositioningMethods.md)
+ - [LineEnding](docs/Model/LineEnding.md)
+ - [LineIntent](docs/Model/LineIntent.md)
  - [LineSpacing](docs/Model/LineSpacing.md)
  - [Link](docs/Model/Link.md)
  - [LinkActionType](docs/Model/LinkActionType.md)
@@ -276,6 +304,8 @@ Class | Method | HTTP request | Description
  - [Paragraph](docs/Model/Paragraph.md)
  - [PartsEmbeddingModes](docs/Model/PartsEmbeddingModes.md)
  - [PdfAType](docs/Model/PdfAType.md)
+ - [Point](docs/Model/Point.md)
+ - [PolyIntent](docs/Model/PolyIntent.md)
  - [RasterImagesSavingModes](docs/Model/RasterImagesSavingModes.md)
  - [RectanglePdf](docs/Model/RectanglePdf.md)
  - [Rotation](docs/Model/Rotation.md)
@@ -305,6 +335,9 @@ Class | Method | HTTP request | Description
  - [AttachmentResponse](docs/Model/AttachmentResponse.md)
  - [Attachments](docs/Model/Attachments.md)
  - [AttachmentsResponse](docs/Model/AttachmentsResponse.md)
+ - [CircleAnnotationResponse](docs/Model/CircleAnnotationResponse.md)
+ - [CircleAnnotations](docs/Model/CircleAnnotations.md)
+ - [CircleAnnotationsResponse](docs/Model/CircleAnnotationsResponse.md)
  - [Document](docs/Model/Document.md)
  - [DocumentPageResponse](docs/Model/DocumentPageResponse.md)
  - [DocumentPagesResponse](docs/Model/DocumentPagesResponse.md)
@@ -324,15 +357,27 @@ Class | Method | HTTP request | Description
  - [ImageResponse](docs/Model/ImageResponse.md)
  - [Images](docs/Model/Images.md)
  - [ImagesResponse](docs/Model/ImagesResponse.md)
+ - [LineAnnotationResponse](docs/Model/LineAnnotationResponse.md)
+ - [LineAnnotations](docs/Model/LineAnnotations.md)
+ - [LineAnnotationsResponse](docs/Model/LineAnnotationsResponse.md)
  - [LinkAnnotation](docs/Model/LinkAnnotation.md)
  - [LinkAnnotationResponse](docs/Model/LinkAnnotationResponse.md)
  - [LinkAnnotations](docs/Model/LinkAnnotations.md)
  - [LinkAnnotationsResponse](docs/Model/LinkAnnotationsResponse.md)
  - [Page](docs/Model/Page.md)
  - [Pages](docs/Model/Pages.md)
+ - [PolyLineAnnotationResponse](docs/Model/PolyLineAnnotationResponse.md)
+ - [PolyLineAnnotations](docs/Model/PolyLineAnnotations.md)
+ - [PolyLineAnnotationsResponse](docs/Model/PolyLineAnnotationsResponse.md)
+ - [PolygonAnnotationResponse](docs/Model/PolygonAnnotationResponse.md)
+ - [PolygonAnnotations](docs/Model/PolygonAnnotations.md)
+ - [PolygonAnnotationsResponse](docs/Model/PolygonAnnotationsResponse.md)
  - [SignatureVerifyResponse](docs/Model/SignatureVerifyResponse.md)
  - [SplitResultDocument](docs/Model/SplitResultDocument.md)
  - [SplitResultResponse](docs/Model/SplitResultResponse.md)
+ - [SquareAnnotationResponse](docs/Model/SquareAnnotationResponse.md)
+ - [SquareAnnotations](docs/Model/SquareAnnotations.md)
+ - [SquareAnnotationsResponse](docs/Model/SquareAnnotationsResponse.md)
  - [TextAnnotationResponse](docs/Model/TextAnnotationResponse.md)
  - [TextAnnotations](docs/Model/TextAnnotations.md)
  - [TextAnnotationsResponse](docs/Model/TextAnnotationsResponse.md)
@@ -341,6 +386,13 @@ Class | Method | HTTP request | Description
  - [WordCountResponse](docs/Model/WordCountResponse.md)
  - [AnnotationInfo](docs/Model/AnnotationInfo.md)
  - [MarkupAnnotation](docs/Model/MarkupAnnotation.md)
+ - [CommonFigureAnnotation](docs/Model/CommonFigureAnnotation.md)
  - [FreeTextAnnotation](docs/Model/FreeTextAnnotation.md)
+ - [LineAnnotation](docs/Model/LineAnnotation.md)
+ - [PolyAnnotation](docs/Model/PolyAnnotation.md)
  - [TextAnnotation](docs/Model/TextAnnotation.md)
+ - [CircleAnnotation](docs/Model/CircleAnnotation.md)
+ - [PolyLineAnnotation](docs/Model/PolyLineAnnotation.md)
+ - [PolygonAnnotation](docs/Model/PolygonAnnotation.md)
+ - [SquareAnnotation](docs/Model/SquareAnnotation.md)
 
