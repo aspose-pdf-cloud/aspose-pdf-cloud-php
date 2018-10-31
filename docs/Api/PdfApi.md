@@ -15,14 +15,20 @@ Method | HTTP request | Description
 [**deletePageLinkAnnotations**](PdfApi.md#deletepagelinkannotations) | **DELETE** /pdf/\{name}/pages/\{pageNumber}/links | Delete all link annotations from the page
 [**deleteProperties**](PdfApi.md#deleteproperties) | **DELETE** /pdf/\{name}/documentproperties | Delete custom document properties.
 [**deleteProperty**](PdfApi.md#deleteproperty) | **DELETE** /pdf/\{name}/documentproperties/\{propertyName} | Delete document property.
+[**getCircleAnnotation**](PdfApi.md#getcircleannotation) | **GET** /pdf/\{name}/annotations/circle/\{annotationId} | Read document page circle annotation by ID.
 [**getDocument**](PdfApi.md#getdocument) | **GET** /pdf/\{name} | Read common document info.
 [**getDocumentAnnotations**](PdfApi.md#getdocumentannotations) | **GET** /pdf/\{name}/annotations | Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
 [**getDocumentAttachmentByIndex**](PdfApi.md#getdocumentattachmentbyindex) | **GET** /pdf/\{name}/attachments/\{attachmentIndex} | Read document attachment info by its index.
 [**getDocumentAttachments**](PdfApi.md#getdocumentattachments) | **GET** /pdf/\{name}/attachments | Read document attachments info.
 [**getDocumentBookmarks**](PdfApi.md#getdocumentbookmarks) | **GET** /pdf/\{name}/bookmarks | Read document bookmark/bookmarks (including children).
+[**getDocumentCircleAnnotations**](PdfApi.md#getdocumentcircleannotations) | **GET** /pdf/\{name}/annotations/circle | Read document circle annotations.
 [**getDocumentFreeTextAnnotations**](PdfApi.md#getdocumentfreetextannotations) | **GET** /pdf/\{name}/annotations/freetext | Read document free text annotations.
+[**getDocumentLineAnnotations**](PdfApi.md#getdocumentlineannotations) | **GET** /pdf/\{name}/annotations/line | Read document line annotations.
+[**getDocumentPolyLineAnnotations**](PdfApi.md#getdocumentpolylineannotations) | **GET** /pdf/\{name}/annotations/polyline | Read document polyline annotations.
+[**getDocumentPolygonAnnotations**](PdfApi.md#getdocumentpolygonannotations) | **GET** /pdf/\{name}/annotations/polygon | Read document polygon annotations.
 [**getDocumentProperties**](PdfApi.md#getdocumentproperties) | **GET** /pdf/\{name}/documentproperties | Read document properties.
 [**getDocumentProperty**](PdfApi.md#getdocumentproperty) | **GET** /pdf/\{name}/documentproperties/\{propertyName} | Read document property by name.
+[**getDocumentSquareAnnotations**](PdfApi.md#getdocumentsquareannotations) | **GET** /pdf/\{name}/annotations/square | Read document square annotations.
 [**getDocumentTextAnnotations**](PdfApi.md#getdocumenttextannotations) | **GET** /pdf/\{name}/annotations/text | Read document text annotations.
 [**getDownload**](PdfApi.md#getdownload) | **GET** /storage/file | Download a specific file
 [**getDownloadDocumentAttachmentByIndex**](PdfApi.md#getdownloaddocumentattachmentbyindex) | **GET** /pdf/\{name}/attachments/\{attachmentIndex}/download | Download document attachment content by its index.
@@ -38,10 +44,12 @@ Method | HTTP request | Description
 [**getImageExtractAsTiff**](PdfApi.md#getimageextractastiff) | **GET** /pdf/\{name}/images/\{imageId}/extract/tiff | Extract document image in TIFF format
 [**getImages**](PdfApi.md#getimages) | **GET** /pdf/\{name}/pages/\{pageNumber}/images | Read document images.
 [**getLaTeXInStorageToPdf**](PdfApi.md#getlatexinstoragetopdf) | **GET** /pdf/create/latex | Convert LaTeX file (located on storage) to PDF format and return resulting file in response.
+[**getLineAnnotation**](PdfApi.md#getlineannotation) | **GET** /pdf/\{name}/annotations/line/\{annotationId} | Read document page line annotation by ID.
 [**getLinkAnnotation**](PdfApi.md#getlinkannotation) | **GET** /pdf/\{name}/links/\{linkId} | Read document link annotation by ID.
 [**getMhtInStorageToPdf**](PdfApi.md#getmhtinstoragetopdf) | **GET** /pdf/create/mht | Convert MHT file (located on storage) to PDF format and return resulting file in response.
 [**getPage**](PdfApi.md#getpage) | **GET** /pdf/\{name}/pages/\{pageNumber} | Read document page info.
 [**getPageAnnotations**](PdfApi.md#getpageannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations | Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
+[**getPageCircleAnnotations**](PdfApi.md#getpagecircleannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/circle | Read document page circle annotations.
 [**getPageConvertToBmp**](PdfApi.md#getpageconverttobmp) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/bmp | Convert document page to Bmp image and return resulting file in response.
 [**getPageConvertToEmf**](PdfApi.md#getpageconverttoemf) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/emf | Convert document page to Emf image and return resulting file in response.
 [**getPageConvertToGif**](PdfApi.md#getpageconverttogif) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/gif | Convert document page to Gif image and return resulting file in response.
@@ -49,8 +57,12 @@ Method | HTTP request | Description
 [**getPageConvertToPng**](PdfApi.md#getpageconverttopng) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/png | Convert document page to Png image and return resulting file in response.
 [**getPageConvertToTiff**](PdfApi.md#getpageconverttotiff) | **GET** /pdf/\{name}/pages/\{pageNumber}/convert/tiff | Convert document page to Tiff image  and return resulting file in response.
 [**getPageFreeTextAnnotations**](PdfApi.md#getpagefreetextannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/freetext | Read document page free text annotations.
+[**getPageLineAnnotations**](PdfApi.md#getpagelineannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/line | Read document page line annotations.
 [**getPageLinkAnnotation**](PdfApi.md#getpagelinkannotation) | **GET** /pdf/\{name}/pages/\{pageNumber}/links/\{linkId} | Read document page link annotation by ID.
 [**getPageLinkAnnotations**](PdfApi.md#getpagelinkannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/links | Read document page link annotations.
+[**getPagePolyLineAnnotations**](PdfApi.md#getpagepolylineannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/polyline | Read document page polyline annotations.
+[**getPagePolygonAnnotations**](PdfApi.md#getpagepolygonannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/polygon | Read document page polygon annotations.
+[**getPageSquareAnnotations**](PdfApi.md#getpagesquareannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/square | Read document page square annotations.
 [**getPageText**](PdfApi.md#getpagetext) | **GET** /pdf/\{name}/pages/\{pageNumber}/text | Read page text items.
 [**getPageTextAnnotations**](PdfApi.md#getpagetextannotations) | **GET** /pdf/\{name}/pages/\{pageNumber}/annotations/text | Read document page text annotations.
 [**getPages**](PdfApi.md#getpages) | **GET** /pdf/\{name}/pages | Read document pages info.
@@ -67,7 +79,10 @@ Method | HTTP request | Description
 [**getPdfInStorageToXls**](PdfApi.md#getpdfinstoragetoxls) | **GET** /pdf/\{name}/convert/xls | Converts PDF document (located on storage) to XLS format and returns resulting file in response content
 [**getPdfInStorageToXml**](PdfApi.md#getpdfinstoragetoxml) | **GET** /pdf/\{name}/convert/xml | Converts PDF document (located on storage) to XML format and returns resulting file in response content
 [**getPdfInStorageToXps**](PdfApi.md#getpdfinstoragetoxps) | **GET** /pdf/\{name}/convert/xps | Converts PDF document (located on storage) to XPS format and returns resulting file in response content
+[**getPolyLineAnnotation**](PdfApi.md#getpolylineannotation) | **GET** /pdf/\{name}/annotations/polyline/\{annotationId} | Read document page polyline annotation by ID.
+[**getPolygonAnnotation**](PdfApi.md#getpolygonannotation) | **GET** /pdf/\{name}/annotations/polygon/\{annotationId} | Read document page polygon annotation by ID.
 [**getPsInStorageToPdf**](PdfApi.md#getpsinstoragetopdf) | **GET** /pdf/create/ps | Convert PS file (located on storage) to PDF format and return resulting file in response.
+[**getSquareAnnotation**](PdfApi.md#getsquareannotation) | **GET** /pdf/\{name}/annotations/square/\{annotationId} | Read document page square annotation by ID.
 [**getSvgInStorageToPdf**](PdfApi.md#getsvginstoragetopdf) | **GET** /pdf/create/svg | Convert SVG file (located on storage) to PDF format and return resulting file in response.
 [**getText**](PdfApi.md#gettext) | **GET** /pdf/\{name}/text | Read document text.
 [**getTextAnnotation**](PdfApi.md#gettextannotation) | **GET** /pdf/\{name}/annotations/text/\{annotationId} | Read document page text annotation by ID.
@@ -84,8 +99,13 @@ Method | HTTP request | Description
 [**postInsertImage**](PdfApi.md#postinsertimage) | **POST** /pdf/\{name}/pages/\{pageNumber}/images | Insert image to document page.
 [**postMovePage**](PdfApi.md#postmovepage) | **POST** /pdf/\{name}/pages/\{pageNumber}/movePage | Move page to new position.
 [**postOptimizeDocument**](PdfApi.md#postoptimizedocument) | **POST** /pdf/\{name}/optimize | Optimize document.
+[**postPageCircleAnnotations**](PdfApi.md#postpagecircleannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/circle | Add document page circle annotations.
 [**postPageFreeTextAnnotations**](PdfApi.md#postpagefreetextannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/freetext | Add document page free text annotations.
+[**postPageLineAnnotations**](PdfApi.md#postpagelineannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/line | Add document page line annotations.
 [**postPageLinkAnnotations**](PdfApi.md#postpagelinkannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/links | Add document page link annotations.
+[**postPagePolyLineAnnotations**](PdfApi.md#postpagepolylineannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/polyline | Add document page polyline annotations.
+[**postPagePolygonAnnotations**](PdfApi.md#postpagepolygonannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/polygon | Add document page polygon annotations.
+[**postPageSquareAnnotations**](PdfApi.md#postpagesquareannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/square | Add document page square annotations.
 [**postPageTextAnnotations**](PdfApi.md#postpagetextannotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/text | Add document page text annotations.
 [**postPageTextReplace**](PdfApi.md#postpagetextreplace) | **POST** /pdf/\{name}/pages/\{pageNumber}/text/replace | Page&#39;s replace text method.
 [**postSignDocument**](PdfApi.md#postsigndocument) | **POST** /pdf/\{name}/sign | Sign document.
@@ -93,6 +113,7 @@ Method | HTTP request | Description
 [**postSplitDocument**](PdfApi.md#postsplitdocument) | **POST** /pdf/\{name}/split | Split document to parts.
 [**putAddNewPage**](PdfApi.md#putaddnewpage) | **PUT** /pdf/\{name}/pages | Add new page to end of the document.
 [**putAddText**](PdfApi.md#putaddtext) | **PUT** /pdf/\{name}/pages/\{pageNumber}/text | Add text to PDF document page.
+[**putCircleAnnotation**](PdfApi.md#putcircleannotation) | **PUT** /pdf/\{name}/annotations/circle/\{annotationId} | Replace document circle annotation
 [**putCreate**](PdfApi.md#putcreate) | **PUT** /storage/file | Upload a specific file
 [**putCreateDocument**](PdfApi.md#putcreatedocument) | **PUT** /pdf/\{name} | Create empty document.
 [**putEpubInStorageToPdf**](PdfApi.md#putepubinstoragetopdf) | **PUT** /pdf/\{name}/create/epub | Convert EPUB file (located on storage) to PDF format and upload resulting file to storage.
@@ -109,6 +130,7 @@ Method | HTTP request | Description
 [**putImagesExtractAsPng**](PdfApi.md#putimagesextractaspng) | **PUT** /pdf/\{name}/pages/\{pageNumber}/images/extract/png | Extract document images in PNG format to folder.
 [**putImagesExtractAsTiff**](PdfApi.md#putimagesextractastiff) | **PUT** /pdf/\{name}/pages/\{pageNumber}/images/extract/tiff | Extract document images in TIFF format to folder.
 [**putLaTeXInStorageToPdf**](PdfApi.md#putlatexinstoragetopdf) | **PUT** /pdf/\{name}/create/latex | Convert LaTeX file (located on storage) to PDF format and upload resulting file to storage.
+[**putLineAnnotation**](PdfApi.md#putlineannotation) | **PUT** /pdf/\{name}/annotations/line/\{annotationId} | Replace document line annotation
 [**putLinkAnnotation**](PdfApi.md#putlinkannotation) | **PUT** /pdf/\{name}/links/\{linkId} | Replace document page link annotations
 [**putMergeDocuments**](PdfApi.md#putmergedocuments) | **PUT** /pdf/\{name}/merge | Merge a list of documents.
 [**putMhtInStorageToPdf**](PdfApi.md#putmhtinstoragetopdf) | **PUT** /pdf/\{name}/create/mht | Convert MHT file (located on storage) to PDF format and upload resulting file to storage.
@@ -144,11 +166,14 @@ Method | HTTP request | Description
 [**putPdfInStorageToXls**](PdfApi.md#putpdfinstoragetoxls) | **PUT** /pdf/\{name}/convert/xls | Converts PDF document (located on storage) to XLS format and uploads resulting file to storage
 [**putPdfInStorageToXml**](PdfApi.md#putpdfinstoragetoxml) | **PUT** /pdf/\{name}/convert/xml | Converts PDF document (located on storage) to XML format and uploads resulting file to storage
 [**putPdfInStorageToXps**](PdfApi.md#putpdfinstoragetoxps) | **PUT** /pdf/\{name}/convert/xps | Converts PDF document (located on storage) to XPS format and uploads resulting file to storage
+[**putPolyLineAnnotation**](PdfApi.md#putpolylineannotation) | **PUT** /pdf/\{name}/annotations/polyline/\{annotationId} | Replace document polyline annotation
+[**putPolygonAnnotation**](PdfApi.md#putpolygonannotation) | **PUT** /pdf/\{name}/annotations/polygon/\{annotationId} | Replace document polygon annotation
 [**putPrivileges**](PdfApi.md#putprivileges) | **PUT** /pdf/\{name}/privileges | Update privilege document.
 [**putPsInStorageToPdf**](PdfApi.md#putpsinstoragetopdf) | **PUT** /pdf/\{name}/create/ps | Convert PS file (located on storage) to PDF format and upload resulting file to storage.
 [**putReplaceImage**](PdfApi.md#putreplaceimage) | **PUT** /pdf/\{name}/images/\{imageId} | Replace document image.
 [**putSearchableDocument**](PdfApi.md#putsearchabledocument) | **PUT** /pdf/\{name}/ocr | Create searchable PDF document. Generate OCR layer for images in input PDF document.
 [**putSetProperty**](PdfApi.md#putsetproperty) | **PUT** /pdf/\{name}/documentproperties/\{propertyName} | Add/update document property.
+[**putSquareAnnotation**](PdfApi.md#putsquareannotation) | **PUT** /pdf/\{name}/annotations/square/\{annotationId} | Replace document square annotation
 [**putSvgInStorageToPdf**](PdfApi.md#putsvginstoragetopdf) | **PUT** /pdf/\{name}/create/svg | Convert SVG file (located on storage) to PDF format and upload resulting file to storage.
 [**putTextAnnotation**](PdfApi.md#puttextannotation) | **PUT** /pdf/\{name}/annotations/text/\{annotationId} | Replace document text annotation
 [**putUpdateField**](PdfApi.md#putupdatefield) | **PUT** /pdf/\{name}/fields/\{fieldName} | Update field.
@@ -444,6 +469,32 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getcircleannotation"></a>
+# **getCircleAnnotation**
+> \Aspose\PDF\Model\CircleAnnotationResponse getCircleAnnotation($name, $annotation_id, $storage, $folder)
+
+Read document page circle annotation by ID.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\CircleAnnotationResponse**](../Model/CircleAnnotationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a name="getdocument"></a>
 # **getDocument**
 > \Aspose\PDF\Model\DocumentResponse getDocument($name, $storage, $folder)
@@ -571,6 +622,31 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getdocumentcircleannotations"></a>
+# **getDocumentCircleAnnotations**
+> \Aspose\PDF\Model\CircleAnnotationsResponse getDocumentCircleAnnotations($name, $storage, $folder)
+
+Read document circle annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\CircleAnnotationsResponse**](../Model/CircleAnnotationsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a name="getdocumentfreetextannotations"></a>
 # **getDocumentFreeTextAnnotations**
 > \Aspose\PDF\Model\FreeTextAnnotationsResponse getDocumentFreeTextAnnotations($name, $storage, $folder)
@@ -588,6 +664,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\FreeTextAnnotationsResponse**](../Model/FreeTextAnnotationsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getdocumentlineannotations"></a>
+# **getDocumentLineAnnotations**
+> \Aspose\PDF\Model\LineAnnotationsResponse getDocumentLineAnnotations($name, $storage, $folder)
+
+Read document line annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\LineAnnotationsResponse**](../Model/LineAnnotationsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getdocumentpolylineannotations"></a>
+# **getDocumentPolyLineAnnotations**
+> \Aspose\PDF\Model\PolyLineAnnotationsResponse getDocumentPolyLineAnnotations($name, $storage, $folder)
+
+Read document polyline annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\PolyLineAnnotationsResponse**](../Model/PolyLineAnnotationsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getdocumentpolygonannotations"></a>
+# **getDocumentPolygonAnnotations**
+> \Aspose\PDF\Model\PolygonAnnotationsResponse getDocumentPolygonAnnotations($name, $storage, $folder)
+
+Read document polygon annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\PolygonAnnotationsResponse**](../Model/PolygonAnnotationsResponse.md)
 
 ### HTTP request headers
 
@@ -639,6 +790,31 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\DocumentPropertyResponse**](../Model/DocumentPropertyResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getdocumentsquareannotations"></a>
+# **getDocumentSquareAnnotations**
+> \Aspose\PDF\Model\SquareAnnotationsResponse getDocumentSquareAnnotations($name, $storage, $folder)
+
+Read document square annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\SquareAnnotationsResponse**](../Model/SquareAnnotationsResponse.md)
 
 ### HTTP request headers
 
@@ -1044,6 +1220,32 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getlineannotation"></a>
+# **getLineAnnotation**
+> \Aspose\PDF\Model\LineAnnotationResponse getLineAnnotation($name, $annotation_id, $storage, $folder)
+
+Read document page line annotation by ID.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\LineAnnotationResponse**](../Model/LineAnnotationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a name="getlinkannotation"></a>
 # **getLinkAnnotation**
 > \Aspose\PDF\Model\LinkAnnotationResponse getLinkAnnotation($name, $link_id, $storage, $folder)
@@ -1138,6 +1340,32 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\AnnotationsInfoResponse**](../Model/AnnotationsInfoResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getpagecircleannotations"></a>
+# **getPageCircleAnnotations**
+> \Aspose\PDF\Model\CircleAnnotationsResponse getPageCircleAnnotations($name, $page_number, $storage, $folder)
+
+Read document page circle annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\CircleAnnotationsResponse**](../Model/CircleAnnotationsResponse.md)
 
 ### HTTP request headers
 
@@ -1340,6 +1568,32 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getpagelineannotations"></a>
+# **getPageLineAnnotations**
+> \Aspose\PDF\Model\LineAnnotationsResponse getPageLineAnnotations($name, $page_number, $storage, $folder)
+
+Read document page line annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\LineAnnotationsResponse**](../Model/LineAnnotationsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a name="getpagelinkannotation"></a>
 # **getPageLinkAnnotation**
 > \Aspose\PDF\Model\LinkAnnotationResponse getPageLinkAnnotation($name, $page_number, $link_id, $storage, $folder)
@@ -1385,6 +1639,84 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\LinkAnnotationsResponse**](../Model/LinkAnnotationsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getpagepolylineannotations"></a>
+# **getPagePolyLineAnnotations**
+> \Aspose\PDF\Model\PolyLineAnnotationsResponse getPagePolyLineAnnotations($name, $page_number, $storage, $folder)
+
+Read document page polyline annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\PolyLineAnnotationsResponse**](../Model/PolyLineAnnotationsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getpagepolygonannotations"></a>
+# **getPagePolygonAnnotations**
+> \Aspose\PDF\Model\PolygonAnnotationsResponse getPagePolygonAnnotations($name, $page_number, $storage, $folder)
+
+Read document page polygon annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\PolygonAnnotationsResponse**](../Model/PolygonAnnotationsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getpagesquareannotations"></a>
+# **getPageSquareAnnotations**
+> \Aspose\PDF\Model\SquareAnnotationsResponse getPageSquareAnnotations($name, $page_number, $storage, $folder)
+
+Read document page square annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\SquareAnnotationsResponse**](../Model/SquareAnnotationsResponse.md)
 
 ### HTTP request headers
 
@@ -1862,6 +2194,58 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="getpolylineannotation"></a>
+# **getPolyLineAnnotation**
+> \Aspose\PDF\Model\PolyLineAnnotationResponse getPolyLineAnnotation($name, $annotation_id, $storage, $folder)
+
+Read document page polyline annotation by ID.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\PolyLineAnnotationResponse**](../Model/PolyLineAnnotationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getpolygonannotation"></a>
+# **getPolygonAnnotation**
+> \Aspose\PDF\Model\PolygonAnnotationResponse getPolygonAnnotation($name, $annotation_id, $storage, $folder)
+
+Read document page polygon annotation by ID.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\PolygonAnnotationResponse**](../Model/PolygonAnnotationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a name="getpsinstoragetopdf"></a>
 # **getPsInStorageToPdf**
 > \SplFileObject getPsInStorageToPdf($src_path, $storage)
@@ -1883,6 +2267,32 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: multipart/form-data
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="getsquareannotation"></a>
+# **getSquareAnnotation**
+> \Aspose\PDF\Model\SquareAnnotationResponse getSquareAnnotation($name, $annotation_id, $storage, $folder)
+
+Read document page square annotation by ID.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\SquareAnnotationResponse**](../Model/SquareAnnotationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
@@ -2323,6 +2733,33 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postpagecircleannotations"></a>
+# **postPageCircleAnnotations**
+> \Aspose\PDF\Model\AsposeResponse postPageCircleAnnotations($name, $page_number, $annotations, $storage, $folder)
+
+Add document page circle annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **annotations** | [**\Aspose\PDF\Model\CircleAnnotation[]**](../Model/CircleAnnotation.md)| The array of annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](../Model/AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a name="postpagefreetextannotations"></a>
 # **postPageFreeTextAnnotations**
 > \Aspose\PDF\Model\AsposeResponse postPageFreeTextAnnotations($name, $page_number, $annotations, $storage, $folder)
@@ -2350,6 +2787,33 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="postpagelineannotations"></a>
+# **postPageLineAnnotations**
+> \Aspose\PDF\Model\AsposeResponse postPageLineAnnotations($name, $page_number, $annotations, $storage, $folder)
+
+Add document page line annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **annotations** | [**\Aspose\PDF\Model\LineAnnotation[]**](../Model/LineAnnotation.md)| The array of annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](../Model/AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a name="postpagelinkannotations"></a>
 # **postPageLinkAnnotations**
 > \Aspose\PDF\Model\AsposeResponse postPageLinkAnnotations($name, $page_number, $links, $storage, $folder)
@@ -2363,6 +2827,87 @@ Name | Type | Description  | Notes
  **name** | **string**| The document name. |
  **page_number** | **int**| The page number. |
  **links** | [**\Aspose\PDF\Model\LinkAnnotation[]**](../Model/LinkAnnotation.md)| Array of link anotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](../Model/AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="postpagepolylineannotations"></a>
+# **postPagePolyLineAnnotations**
+> \Aspose\PDF\Model\AsposeResponse postPagePolyLineAnnotations($name, $page_number, $annotations, $storage, $folder)
+
+Add document page polyline annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **annotations** | [**\Aspose\PDF\Model\PolyLineAnnotation[]**](../Model/PolyLineAnnotation.md)| The array of annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](../Model/AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="postpagepolygonannotations"></a>
+# **postPagePolygonAnnotations**
+> \Aspose\PDF\Model\AsposeResponse postPagePolygonAnnotations($name, $page_number, $annotations, $storage, $folder)
+
+Add document page polygon annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **annotations** | [**\Aspose\PDF\Model\PolygonAnnotation[]**](../Model/PolygonAnnotation.md)| The array of annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](../Model/AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="postpagesquareannotations"></a>
+# **postPageSquareAnnotations**
+> \Aspose\PDF\Model\AsposeResponse postPageSquareAnnotations($name, $page_number, $annotations, $storage, $folder)
+
+Add document page square annotations.
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **page_number** | **int**| The page number. |
+ **annotations** | [**\Aspose\PDF\Model\SquareAnnotation[]**](../Model/SquareAnnotation.md)| The array of annotation. |
  **storage** | **string**| The document storage. | [optional]
  **folder** | **string**| The document folder. | [optional]
 
@@ -2556,6 +3101,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\AsposeResponse**](../Model/AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="putcircleannotation"></a>
+# **putCircleAnnotation**
+> \Aspose\PDF\Model\CircleAnnotationResponse putCircleAnnotation($name, $annotation_id, $annotation, $storage, $folder)
+
+Replace document circle annotation
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **annotation** | [**\Aspose\PDF\Model\CircleAnnotation**](../Model/CircleAnnotation.md)| Annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\CircleAnnotationResponse**](../Model/CircleAnnotationResponse.md)
 
 ### HTTP request headers
 
@@ -3003,6 +3575,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\AsposeResponse**](../Model/AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="putlineannotation"></a>
+# **putLineAnnotation**
+> \Aspose\PDF\Model\LineAnnotationResponse putLineAnnotation($name, $annotation_id, $annotation, $storage, $folder)
+
+Replace document line annotation
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **annotation** | [**\Aspose\PDF\Model\LineAnnotation**](../Model/LineAnnotation.md)| Annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\LineAnnotationResponse**](../Model/LineAnnotationResponse.md)
 
 ### HTTP request headers
 
@@ -4049,6 +4648,60 @@ Name | Type | Description  | Notes
 
 [[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
 
+<a name="putpolylineannotation"></a>
+# **putPolyLineAnnotation**
+> \Aspose\PDF\Model\PolyLineAnnotationResponse putPolyLineAnnotation($name, $annotation_id, $annotation, $storage, $folder)
+
+Replace document polyline annotation
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **annotation** | [**\Aspose\PDF\Model\PolyLineAnnotation**](../Model/PolyLineAnnotation.md)| Annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\PolyLineAnnotationResponse**](../Model/PolyLineAnnotationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="putpolygonannotation"></a>
+# **putPolygonAnnotation**
+> \Aspose\PDF\Model\PolygonAnnotationResponse putPolygonAnnotation($name, $annotation_id, $annotation, $storage, $folder)
+
+Replace document polygon annotation
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **annotation** | [**\Aspose\PDF\Model\PolygonAnnotation**](../Model/PolygonAnnotation.md)| Annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\PolygonAnnotationResponse**](../Model/PolygonAnnotationResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
 <a name="putprivileges"></a>
 # **putPrivileges**
 > \Aspose\PDF\Model\AsposeResponse putPrivileges($name, $privileges, $storage, $folder)
@@ -4174,6 +4827,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\DocumentPropertyResponse**](../Model/DocumentPropertyResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../../README.md#documentation-for-api-endpoints) [[Back to Model list]](../../README.md#documentation-for-models) [[Back to README]](../../README.md)
+
+<a name="putsquareannotation"></a>
+# **putSquareAnnotation**
+> \Aspose\PDF\Model\SquareAnnotationResponse putSquareAnnotation($name, $annotation_id, $annotation, $storage, $folder)
+
+Replace document square annotation
+
+### Parameters
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **name** | **string**| The document name. |
+ **annotation_id** | **string**| The annotation ID. |
+ **annotation** | [**\Aspose\PDF\Model\SquareAnnotation**](../Model/SquareAnnotation.md)| Annotation. |
+ **storage** | **string**| The document storage. | [optional]
+ **folder** | **string**| The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\SquareAnnotationResponse**](../Model/SquareAnnotationResponse.md)
 
 ### HTTP request headers
 
