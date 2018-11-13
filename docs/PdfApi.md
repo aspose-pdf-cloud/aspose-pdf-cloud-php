@@ -1675,11 +1675,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$add_return_to_line_end** | **bool** | Add return to line end. | [optional]
-**$format** | [**DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
+**$format** | [**\Aspose\PDF\Model\DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
 **$image_resolution_x** | **int** | Image resolution X. | [optional]
 **$image_resolution_y** | **int** | Image resolution Y. | [optional]
 **$max_distance_between_text_lines** | **double** | Max distance between text lines. | [optional]
-**$mode** | [**DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
+**$mode** | [**\Aspose\PDF\Model\DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
 **$recognize_bullets** | **bool** | Recognize bullets. | [optional]
 **$relative_horizontal_proximity** | **double** | Relative horizontal proximity. | [optional]
 **$folder** | **string** | The document folder. | [optional]
@@ -1704,7 +1704,7 @@ Converts PDF document (located on storage) to EPUB format and returns resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$content_recognition_mode** | [**EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -1731,7 +1731,7 @@ Name | Type | Description  | Notes
 **$compress_svg_graphics_if_any** | **bool** | The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. | [optional]
 **$convert_marked_content_to_layers** | **bool** | If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with "data-pdflayer" attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. | [optional]
 **$default_font_name** | **string** | Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. | [optional]
-**$document_type** | [**HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
+**$document_type** | [**\Aspose\PDF\Model\HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
 **$fixed_layout** | **bool** | The value indicating whether that HTML is created as fixed layout. | [optional]
 **$image_resolution** | **int** | Resolution for image rendering. | [optional]
 **$minimal_line_width** | **int** | This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. | [optional]
@@ -1739,16 +1739,16 @@ Name | Type | Description  | Notes
 **$split_css_into_pages** | **bool** | When multipage-mode selected(i.e 'SplitIntoPages' is 'true'), then this attribute defines whether should be created separate CSS-file for each result HTML page. | [optional]
 **$split_into_pages** | **bool** | The flag that indicates whether each page of source document will be converted into it's own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. | [optional]
 **$use_z_order** | **bool** | If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. | [optional]
-**$antialiasing_processing** | [**AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
+**$antialiasing_processing** | [**\Aspose\PDF\Model\AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
 **$css_class_names_prefix** | **string** | When PDFtoHTML converter generates result CSSs, CSS class names (something like ".stl_01 {}" ... ".stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. | [optional]
 **$explicit_list_of_saved_pages** | **int[]** | With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. | [optional]
-**$font_encoding_strategy** | [**FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
-**$font_saving_mode** | [**FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
-**$html_markup_generation_mode** | [**HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
-**$letters_positioning_method** | [**LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
+**$font_encoding_strategy** | [**\Aspose\PDF\Model\FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
+**$font_saving_mode** | [**\Aspose\PDF\Model\FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
+**$html_markup_generation_mode** | [**\Aspose\PDF\Model\HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
+**$letters_positioning_method** | [**\Aspose\PDF\Model\LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
 **$pages_flow_type_depends_on_viewers_screen_size** | **bool** | If attribute 'SplitOnPages=false', than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. | [optional]
-**$parts_embedding_mode** | [**PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
-**$raster_images_saving_mode** | [**RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
+**$parts_embedding_mode** | [**\Aspose\PDF\Model\PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
+**$raster_images_saving_mode** | [**\Aspose\PDF\Model\RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
 **$remove_empty_areas_on_top_and_bottom** | **bool** | Defines whether in created HTML will be removed top and bottom empty area without any content (if any). | [optional]
 **$save_shadowed_texts_as_transparent_texts** | **bool** | Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). | [optional]
 **$save_transparent_texts** | **bool** | Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. | [optional]
@@ -1822,7 +1822,7 @@ Converts PDF document (located on storage) to PdfA format and returns resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$type** | [**PdfAType**](PdfAType.md) | Type of PdfA format. | 
+**$type** | [**\Aspose\PDF\Model\PdfAType**](PdfAType.md) | Type of PdfA format. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -1893,13 +1893,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$brightness** | **double** | Image brightness. | [optional]
-**$compression** | [**CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
-**$color_depth** | [**ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
+**$compression** | [**\Aspose\PDF\Model\CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
+**$color_depth** | [**\Aspose\PDF\Model\ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
 **$left_margin** | **int** | Left image margin. | [optional]
 **$right_margin** | **int** | Right image margin. | [optional]
 **$top_margin** | **int** | Top image margin. | [optional]
 **$bottom_margin** | **int** | Bottom image margin. | [optional]
-**$orientation** | [**ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
+**$orientation** | [**\Aspose\PDF\Model\ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
 **$skip_blank_pages** | **bool** | Skip blank pages flag. | [optional]
 **$width** | **int** | Image width. | [optional]
 **$height** | **int** | Image height. | [optional]
@@ -2329,7 +2329,7 @@ Append document to existing one.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The original document name. | 
-**$append_document** | [**AppendDocument**](AppendDocument.md) | with the append document data. | [optional]
+**$append_document** | [**\Aspose\PDF\Model\AppendDocument**](AppendDocument.md) | with the append document data. | [optional]
 **$append_file** | **string** | Append file server path. | [optional]
 **$start_page** | **int** | Appending start page. | [optional]
 **$end_page** | **int** | Appending end page. | [optional]
@@ -2356,7 +2356,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page** | **int** | Document page number. | 
-**$field** | [**Field**](Field.md) | with the field data. | [optional]
+**$field** | [**\Aspose\PDF\Model\Field**](Field.md) | with the field data. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2379,7 +2379,7 @@ Document's replace text method.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** |  | 
-**$text_replace** | [**TextReplaceListRequest**](TextReplaceListRequest.md) |  | 
+**$text_replace** | [**\Aspose\PDF\Model\TextReplaceListRequest**](TextReplaceListRequest.md) |  | 
 **$storage** | **string** |  | [optional]
 **$folder** | **string** |  | [optional]
 
@@ -2455,7 +2455,7 @@ Optimize document.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$options** | [**OptimizeOptions**](OptimizeOptions.md) | The optimization options. | [optional]
+**$options** | [**\Aspose\PDF\Model\OptimizeOptions**](OptimizeOptions.md) | The optimization options. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2479,7 +2479,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$annotations** | [**CircleAnnotation[]**](CircleAnnotation.md) | The array of annotation. | 
+**$annotations** | [**\Aspose\PDF\Model\CircleAnnotation[]**](CircleAnnotation.md) | The array of annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2503,7 +2503,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$annotations** | [**FreeTextAnnotation[]**](FreeTextAnnotation.md) | The array of annotation. | 
+**$annotations** | [**\Aspose\PDF\Model\FreeTextAnnotation[]**](FreeTextAnnotation.md) | The array of annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2527,7 +2527,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$annotations** | [**LineAnnotation[]**](LineAnnotation.md) | The array of annotation. | 
+**$annotations** | [**\Aspose\PDF\Model\LineAnnotation[]**](LineAnnotation.md) | The array of annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2551,7 +2551,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$links** | [**LinkAnnotation[]**](LinkAnnotation.md) | Array of link anotation. | 
+**$links** | [**\Aspose\PDF\Model\LinkAnnotation[]**](LinkAnnotation.md) | Array of link anotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2575,7 +2575,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$annotations** | [**PolygonAnnotation[]**](PolygonAnnotation.md) | The array of annotation. | 
+**$annotations** | [**\Aspose\PDF\Model\PolygonAnnotation[]**](PolygonAnnotation.md) | The array of annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2599,7 +2599,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$annotations** | [**PolyLineAnnotation[]**](PolyLineAnnotation.md) | The array of annotation. | 
+**$annotations** | [**\Aspose\PDF\Model\PolyLineAnnotation[]**](PolyLineAnnotation.md) | The array of annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2623,7 +2623,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$annotations** | [**SquareAnnotation[]**](SquareAnnotation.md) | The array of annotation. | 
+**$annotations** | [**\Aspose\PDF\Model\SquareAnnotation[]**](SquareAnnotation.md) | The array of annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2647,7 +2647,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$annotations** | [**TextAnnotation[]**](TextAnnotation.md) | The array of annotation. | 
+**$annotations** | [**\Aspose\PDF\Model\TextAnnotation[]**](TextAnnotation.md) | The array of annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2671,7 +2671,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** |  | 
 **$page_number** | **int** |  | 
-**$text_replace_list_request** | [**TextReplaceListRequest**](TextReplaceListRequest.md) |  | 
+**$text_replace_list_request** | [**\Aspose\PDF\Model\TextReplaceListRequest**](TextReplaceListRequest.md) |  | 
 **$storage** | **string** |  | [optional]
 **$folder** | **string** |  | [optional]
 
@@ -2694,7 +2694,7 @@ Sign document.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$signature** | [**Signature**](Signature.md) | Signature object containing signature data. | [optional]
+**$signature** | [**\Aspose\PDF\Model\Signature**](Signature.md) | Signature object containing signature data. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2718,7 +2718,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$signature** | [**Signature**](Signature.md) | Signature object containing signature data. | [optional]
+**$signature** | [**\Aspose\PDF\Model\Signature**](Signature.md) | Signature object containing signature data. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2789,7 +2789,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | Number of page (starting from 1). | 
-**$paragraph** | [**Paragraph**](Paragraph.md) | Paragraph data. | [optional]
+**$paragraph** | [**\Aspose\PDF\Model\Paragraph**](Paragraph.md) | Paragraph data. | [optional]
 **$folder** | **string** | Document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -2813,7 +2813,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$annotation_id** | **string** | The annotation ID. | 
-**$annotation** | [**CircleAnnotation**](CircleAnnotation.md) | Annotation. | 
+**$annotation** | [**\Aspose\PDF\Model\CircleAnnotation**](CircleAnnotation.md) | Annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -2927,7 +2927,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$annotation_id** | **string** | The annotation ID. | 
-**$annotation** | [**FreeTextAnnotation**](FreeTextAnnotation.md) | Annotation. | 
+**$annotation** | [**\Aspose\PDF\Model\FreeTextAnnotation**](FreeTextAnnotation.md) | Annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -3085,7 +3085,7 @@ Convert image file (located on storage) to PDF format and upload resulting file 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$image_templates** | [**ImageTemplatesRequest**](ImageTemplatesRequest.md) | Image templates | 
+**$image_templates** | [**\Aspose\PDF\Model\ImageTemplatesRequest**](ImageTemplatesRequest.md) | Image templates | 
 **$dst_folder** | **string** | The destination document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -3236,7 +3236,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$annotation_id** | **string** | The annotation ID. | 
-**$annotation** | [**LineAnnotation**](LineAnnotation.md) | Annotation. | 
+**$annotation** | [**\Aspose\PDF\Model\LineAnnotation**](LineAnnotation.md) | Annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -3260,7 +3260,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$link_id** | **string** | The link ID. | 
-**$link** | [**LinkAnnotation**](LinkAnnotation.md) | Link anotation. | 
+**$link** | [**\Aspose\PDF\Model\LinkAnnotation**](LinkAnnotation.md) | Link anotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -3283,7 +3283,7 @@ Merge a list of documents.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | Resulting documen name. | 
-**$merge_documents** | [**MergeDocuments**](MergeDocuments.md) | with a list of documents. | [optional]
+**$merge_documents** | [**\Aspose\PDF\Model\MergeDocuments**](MergeDocuments.md) | with a list of documents. | [optional]
 **$storage** | **string** | Resulting document storage. | [optional]
 **$folder** | **string** | Resulting document folder. | [optional]
 
@@ -3330,7 +3330,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$stamp** | [**Stamp**](Stamp.md) | with data. | 
+**$stamp** | [**\Aspose\PDF\Model\Stamp**](Stamp.md) | with data. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -3533,11 +3533,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.doc) | 
 **$add_return_to_line_end** | **bool** | Add return to line end. | [optional]
-**$format** | [**DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
+**$format** | [**\Aspose\PDF\Model\DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
 **$image_resolution_x** | **int** | Image resolution X. | [optional]
 **$image_resolution_y** | **int** | Image resolution Y. | [optional]
 **$max_distance_between_text_lines** | **double** | Max distance between text lines. | [optional]
-**$mode** | [**DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
+**$mode** | [**\Aspose\PDF\Model\DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
 **$recognize_bullets** | **bool** | Recognize bullets. | [optional]
 **$relative_horizontal_proximity** | **double** | Relative horizontal proximity. | [optional]
 **$storage** | **string** | The document storage. | [optional]
@@ -3562,7 +3562,7 @@ Converts PDF document (in request content) to EPUB format and uploads resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.epub) | 
-**$content_recognition_mode** | [**EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
@@ -3589,7 +3589,7 @@ Name | Type | Description  | Notes
 **$compress_svg_graphics_if_any** | **bool** | The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. | [optional]
 **$convert_marked_content_to_layers** | **bool** | If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with "data-pdflayer" attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. | [optional]
 **$default_font_name** | **string** | Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. | [optional]
-**$document_type** | [**HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
+**$document_type** | [**\Aspose\PDF\Model\HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
 **$fixed_layout** | **bool** | The value indicating whether that HTML is created as fixed layout. | [optional]
 **$image_resolution** | **int** | Resolution for image rendering. | [optional]
 **$minimal_line_width** | **int** | This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. | [optional]
@@ -3597,16 +3597,16 @@ Name | Type | Description  | Notes
 **$split_css_into_pages** | **bool** | When multipage-mode selected(i.e 'SplitIntoPages' is 'true'), then this attribute defines whether should be created separate CSS-file for each result HTML page. | [optional]
 **$split_into_pages** | **bool** | The flag that indicates whether each page of source document will be converted into it's own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. | [optional]
 **$use_z_order** | **bool** | If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. | [optional]
-**$antialiasing_processing** | [**AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
+**$antialiasing_processing** | [**\Aspose\PDF\Model\AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
 **$css_class_names_prefix** | **string** | When PDFtoHTML converter generates result CSSs, CSS class names (something like ".stl_01 {}" ... ".stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. | [optional]
 **$explicit_list_of_saved_pages** | **int[]** | With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. | [optional]
-**$font_encoding_strategy** | [**FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
-**$font_saving_mode** | [**FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
-**$html_markup_generation_mode** | [**HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
-**$letters_positioning_method** | [**LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
+**$font_encoding_strategy** | [**\Aspose\PDF\Model\FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
+**$font_saving_mode** | [**\Aspose\PDF\Model\FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
+**$html_markup_generation_mode** | [**\Aspose\PDF\Model\HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
+**$letters_positioning_method** | [**\Aspose\PDF\Model\LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
 **$pages_flow_type_depends_on_viewers_screen_size** | **bool** | If attribute 'SplitOnPages=false', than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. | [optional]
-**$parts_embedding_mode** | [**PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
-**$raster_images_saving_mode** | [**RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
+**$parts_embedding_mode** | [**\Aspose\PDF\Model\PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
+**$raster_images_saving_mode** | [**\Aspose\PDF\Model\RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
 **$remove_empty_areas_on_top_and_bottom** | **bool** | Defines whether in created HTML will be removed top and bottom empty area without any content (if any). | [optional]
 **$save_shadowed_texts_as_transparent_texts** | **bool** | Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). | [optional]
 **$save_transparent_texts** | **bool** | Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. | [optional]
@@ -3680,7 +3680,7 @@ Converts PDF document (in request content) to PdfA format and uploads resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.pdf) | 
-**$type** | [**PdfAType**](PdfAType.md) | Type of PdfA format. | 
+**$type** | [**\Aspose\PDF\Model\PdfAType**](PdfAType.md) | Type of PdfA format. | 
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
@@ -3750,13 +3750,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.tiff) | 
 **$brightness** | **double** | Image brightness. | [optional]
-**$compression** | [**CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
-**$color_depth** | [**ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
+**$compression** | [**\Aspose\PDF\Model\CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
+**$color_depth** | [**\Aspose\PDF\Model\ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
 **$left_margin** | **int** | Left image margin. | [optional]
 **$right_margin** | **int** | Right image margin. | [optional]
 **$top_margin** | **int** | Top image margin. | [optional]
 **$bottom_margin** | **int** | Bottom image margin. | [optional]
-**$orientation** | [**ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
+**$orientation** | [**\Aspose\PDF\Model\ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
 **$skip_blank_pages** | **bool** | Skip blank pages flag. | [optional]
 **$width** | **int** | Image width. | [optional]
 **$height** | **int** | Image height. | [optional]
@@ -3858,11 +3858,11 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.doc) | 
 **$add_return_to_line_end** | **bool** | Add return to line end. | [optional]
-**$format** | [**DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
+**$format** | [**\Aspose\PDF\Model\DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
 **$image_resolution_x** | **int** | Image resolution X. | [optional]
 **$image_resolution_y** | **int** | Image resolution Y. | [optional]
 **$max_distance_between_text_lines** | **double** | Max distance between text lines. | [optional]
-**$mode** | [**DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
+**$mode** | [**\Aspose\PDF\Model\DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
 **$recognize_bullets** | **bool** | Recognize bullets. | [optional]
 **$relative_horizontal_proximity** | **double** | Relative horizontal proximity. | [optional]
 **$folder** | **string** | The document folder. | [optional]
@@ -3888,7 +3888,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.epub) | 
-**$content_recognition_mode** | [**EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -3916,7 +3916,7 @@ Name | Type | Description  | Notes
 **$compress_svg_graphics_if_any** | **bool** | The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. | [optional]
 **$convert_marked_content_to_layers** | **bool** | If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with "data-pdflayer" attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. | [optional]
 **$default_font_name** | **string** | Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. | [optional]
-**$document_type** | [**HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
+**$document_type** | [**\Aspose\PDF\Model\HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
 **$fixed_layout** | **bool** | The value indicating whether that HTML is created as fixed layout. | [optional]
 **$image_resolution** | **int** | Resolution for image rendering. | [optional]
 **$minimal_line_width** | **int** | This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. | [optional]
@@ -3924,16 +3924,16 @@ Name | Type | Description  | Notes
 **$split_css_into_pages** | **bool** | When multipage-mode selected(i.e 'SplitIntoPages' is 'true'), then this attribute defines whether should be created separate CSS-file for each result HTML page. | [optional]
 **$split_into_pages** | **bool** | The flag that indicates whether each page of source document will be converted into it's own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. | [optional]
 **$use_z_order** | **bool** | If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. | [optional]
-**$antialiasing_processing** | [**AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
+**$antialiasing_processing** | [**\Aspose\PDF\Model\AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
 **$css_class_names_prefix** | **string** | When PDFtoHTML converter generates result CSSs, CSS class names (something like ".stl_01 {}" ... ".stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. | [optional]
 **$explicit_list_of_saved_pages** | **int[]** | With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. | [optional]
-**$font_encoding_strategy** | [**FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
-**$font_saving_mode** | [**FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
-**$html_markup_generation_mode** | [**HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
-**$letters_positioning_method** | [**LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
+**$font_encoding_strategy** | [**\Aspose\PDF\Model\FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
+**$font_saving_mode** | [**\Aspose\PDF\Model\FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
+**$html_markup_generation_mode** | [**\Aspose\PDF\Model\HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
+**$letters_positioning_method** | [**\Aspose\PDF\Model\LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
 **$pages_flow_type_depends_on_viewers_screen_size** | **bool** | If attribute 'SplitOnPages=false', than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. | [optional]
-**$parts_embedding_mode** | [**PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
-**$raster_images_saving_mode** | [**RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
+**$parts_embedding_mode** | [**\Aspose\PDF\Model\PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
+**$raster_images_saving_mode** | [**\Aspose\PDF\Model\RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
 **$remove_empty_areas_on_top_and_bottom** | **bool** | Defines whether in created HTML will be removed top and bottom empty area without any content (if any). | [optional]
 **$save_shadowed_texts_as_transparent_texts** | **bool** | Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). | [optional]
 **$save_transparent_texts** | **bool** | Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. | [optional]
@@ -4010,7 +4010,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.pdf) | 
-**$type** | [**PdfAType**](PdfAType.md) | Type of PdfA format. | 
+**$type** | [**\Aspose\PDF\Model\PdfAType**](PdfAType.md) | Type of PdfA format. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -4083,13 +4083,13 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.tiff) | 
 **$brightness** | **double** | Image brightness. | [optional]
-**$compression** | [**CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
-**$color_depth** | [**ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
+**$compression** | [**\Aspose\PDF\Model\CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
+**$color_depth** | [**\Aspose\PDF\Model\ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
 **$left_margin** | **int** | Left image margin. | [optional]
 **$right_margin** | **int** | Right image margin. | [optional]
 **$top_margin** | **int** | Top image margin. | [optional]
 **$bottom_margin** | **int** | Bottom image margin. | [optional]
-**$orientation** | [**ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
+**$orientation** | [**\Aspose\PDF\Model\ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
 **$skip_blank_pages** | **bool** | Skip blank pages flag. | [optional]
 **$width** | **int** | Image width. | [optional]
 **$height** | **int** | Image height. | [optional]
@@ -4193,7 +4193,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$annotation_id** | **string** | The annotation ID. | 
-**$annotation** | [**PolygonAnnotation**](PolygonAnnotation.md) | Annotation. | 
+**$annotation** | [**\Aspose\PDF\Model\PolygonAnnotation**](PolygonAnnotation.md) | Annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4217,7 +4217,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$annotation_id** | **string** | The annotation ID. | 
-**$annotation** | [**PolyLineAnnotation**](PolyLineAnnotation.md) | Annotation. | 
+**$annotation** | [**\Aspose\PDF\Model\PolyLineAnnotation**](PolyLineAnnotation.md) | Annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4240,7 +4240,7 @@ Update privilege document.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$privileges** | [**DocumentPrivilege**](DocumentPrivilege.md) | Document privileges.  | [optional]
+**$privileges** | [**\Aspose\PDF\Model\DocumentPrivilege**](DocumentPrivilege.md) | Document privileges.  | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4359,7 +4359,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$annotation_id** | **string** | The annotation ID. | 
-**$annotation** | [**SquareAnnotation**](SquareAnnotation.md) | Annotation. | 
+**$annotation** | [**\Aspose\PDF\Model\SquareAnnotation**](SquareAnnotation.md) | Annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4414,7 +4414,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$annotation_id** | **string** | The annotation ID. | 
-**$annotation** | [**TextAnnotation**](TextAnnotation.md) | Annotation. | 
+**$annotation** | [**\Aspose\PDF\Model\TextAnnotation**](TextAnnotation.md) | Annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4438,7 +4438,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$field_name** | **string** | The name of a field to be updated. | 
-**$field** | [**Field**](Field.md) | with the field data. | [optional]
+**$field** | [**\Aspose\PDF\Model\Field**](Field.md) | with the field data. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4461,7 +4461,7 @@ Update fields.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$fields** | [**Fields**](Fields.md) | with the fields data. | [optional]
+**$fields** | [**\Aspose\PDF\Model\Fields**](Fields.md) | with the fields data. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
