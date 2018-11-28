@@ -7,9 +7,6 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **annotation_type** | [**\Aspose\PDF\Model\AnnotationType**](AnnotationType.md) | Gets annotation type. | 
 **contents** | **string** | Get the annotation content.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
-**creation_date** | **string** | The date and time when the annotation was created.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
-**subject** | **string** | Get the annotation subject.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
-**title** | **string** | Get the annotation title.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **modified** | **string** | The date and time when the annotation was last modified.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **id** | **string** | Gets ID of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **flags** | [**\Aspose\PDF\Model\AnnotationFlags[]**](AnnotationFlags.md) | Gets Flags of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]

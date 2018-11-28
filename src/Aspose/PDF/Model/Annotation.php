@@ -52,9 +52,6 @@ class Annotation extends LinkElement
       */
     protected static $swaggerTypes = [
         'contents' => 'string',
-        'creation_date' => 'string',
-        'subject' => 'string',
-        'title' => 'string',
         'modified' => 'string',
         'id' => 'string',
         'flags' => '\Aspose\PDF\Model\AnnotationFlags[]',
@@ -73,9 +70,6 @@ class Annotation extends LinkElement
       */
     protected static $swaggerFormats = [
         'contents' => null,
-        'creation_date' => null,
-        'subject' => null,
-        'title' => null,
         'modified' => null,
         'id' => null,
         'flags' => null,
@@ -115,9 +109,6 @@ class Annotation extends LinkElement
      */
     protected static $attributeMap = [
         'contents' => 'Contents',
-        'creation_date' => 'CreationDate',
-        'subject' => 'Subject',
-        'title' => 'Title',
         'modified' => 'Modified',
         'id' => 'Id',
         'flags' => 'Flags',
@@ -136,9 +127,6 @@ class Annotation extends LinkElement
      */
     protected static $setters = [
         'contents' => 'setContents',
-        'creation_date' => 'setCreationDate',
-        'subject' => 'setSubject',
-        'title' => 'setTitle',
         'modified' => 'setModified',
         'id' => 'setId',
         'flags' => 'setFlags',
@@ -157,9 +145,6 @@ class Annotation extends LinkElement
      */
     protected static $getters = [
         'contents' => 'getContents',
-        'creation_date' => 'getCreationDate',
-        'subject' => 'getSubject',
-        'title' => 'getTitle',
         'modified' => 'getModified',
         'id' => 'getId',
         'flags' => 'getFlags',
@@ -228,9 +213,6 @@ class Annotation extends LinkElement
         parent::__construct($data);
 
         $this->container['contents'] = isset($data['contents']) ? $data['contents'] : null;
-        $this->container['creation_date'] = isset($data['creation_date']) ? $data['creation_date'] : null;
-        $this->container['subject'] = isset($data['subject']) ? $data['subject'] : null;
-        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['modified'] = isset($data['modified']) ? $data['modified'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
         $this->container['flags'] = isset($data['flags']) ? $data['flags'] : null;
@@ -290,78 +272,6 @@ class Annotation extends LinkElement
     public function setContents($contents)
     {
         $this->container['contents'] = $contents;
-
-        return $this;
-    }
-
-    /**
-     * Gets creation_date
-     *
-     * @return string
-     */
-    public function getCreationDate()
-    {
-        return $this->container['creation_date'];
-    }
-
-    /**
-     * Sets creation_date
-     *
-     * @param string $creation_date The date and time when the annotation was created.
-     *
-     * @return $this
-     */
-    public function setCreationDate($creation_date)
-    {
-        $this->container['creation_date'] = $creation_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets subject
-     *
-     * @return string
-     */
-    public function getSubject()
-    {
-        return $this->container['subject'];
-    }
-
-    /**
-     * Sets subject
-     *
-     * @param string $subject Get the annotation subject.
-     *
-     * @return $this
-     */
-    public function setSubject($subject)
-    {
-        $this->container['subject'] = $subject;
-
-        return $this;
-    }
-
-    /**
-     * Gets title
-     *
-     * @return string
-     */
-    public function getTitle()
-    {
-        return $this->container['title'];
-    }
-
-    /**
-     * Sets title
-     *
-     * @param string $title Get the annotation title.
-     *
-     * @return $this
-     */
-    public function setTitle($title)
-    {
-        $this->container['title'] = $title;
 
         return $this;
     }
