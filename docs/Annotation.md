@@ -6,9 +6,6 @@ Provides annotation.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **contents** | **string** | Get the annotation content. | [optional]
-**creation_date** | **string** | The date and time when the annotation was created. | [optional]
-**subject** | **string** | Get the annotation subject. | [optional]
-**title** | **string** | Get the annotation title. | [optional]
 **modified** | **string** | The date and time when the annotation was last modified. | [optional]
 **id** | **string** | Gets ID of the annotation. | [optional]
 **flags** | [**\Aspose\PDF\Model\AnnotationFlags[]**](AnnotationFlags.md) | Gets Flags of the annotation. | [optional]

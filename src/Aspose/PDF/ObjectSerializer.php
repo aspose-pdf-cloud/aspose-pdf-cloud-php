@@ -267,8 +267,8 @@ class ObjectSerializer
             // what is meant. The invalid empty string is probably to
             // be interpreted as a missing field/value. Let's handle
             // this graceful.
-            if (!empty($data)) {
-                return new \DateTime($data);
+            if (!empty($data) && preg_match("/Date\((\d+?)000\+0000\)/", $data, $matches)) {
+                    return new \DateTime('@' . $matches[1]);
             } else {
                 return null;
             }

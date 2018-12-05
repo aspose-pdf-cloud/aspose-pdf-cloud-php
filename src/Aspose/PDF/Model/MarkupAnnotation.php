@@ -51,6 +51,9 @@ class MarkupAnnotation extends Annotation
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'creation_date' => 'string',
+        'subject' => 'string',
+        'title' => 'string',
         'rich_text' => 'string'
     ];
 
@@ -60,6 +63,9 @@ class MarkupAnnotation extends Annotation
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'creation_date' => null,
+        'subject' => null,
+        'title' => null,
         'rich_text' => null
     ];
 
@@ -90,6 +96,9 @@ class MarkupAnnotation extends Annotation
      * @var string[]
      */
     protected static $attributeMap = [
+        'creation_date' => 'CreationDate',
+        'subject' => 'Subject',
+        'title' => 'Title',
         'rich_text' => 'RichText'
     ];
 
@@ -99,6 +108,9 @@ class MarkupAnnotation extends Annotation
      * @var string[]
      */
     protected static $setters = [
+        'creation_date' => 'setCreationDate',
+        'subject' => 'setSubject',
+        'title' => 'setTitle',
         'rich_text' => 'setRichText'
     ];
 
@@ -108,6 +120,9 @@ class MarkupAnnotation extends Annotation
      * @var string[]
      */
     protected static $getters = [
+        'creation_date' => 'getCreationDate',
+        'subject' => 'getSubject',
+        'title' => 'getTitle',
         'rich_text' => 'getRichText'
     ];
 
@@ -167,6 +182,9 @@ class MarkupAnnotation extends Annotation
     {
         parent::__construct($data);
 
+        $this->container['creation_date'] = isset($data['creation_date']) ? $data['creation_date'] : null;
+        $this->container['subject'] = isset($data['subject']) ? $data['subject'] : null;
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
         $this->container['rich_text'] = isset($data['rich_text']) ? $data['rich_text'] : null;
     }
 
@@ -197,6 +215,78 @@ class MarkupAnnotation extends Annotation
         return true;
     }
 
+
+    /**
+     * Gets creation_date
+     *
+     * @return string
+     */
+    public function getCreationDate()
+    {
+        return $this->container['creation_date'];
+    }
+
+    /**
+     * Sets creation_date
+     *
+     * @param string $creation_date The date and time when the annotation was created.
+     *
+     * @return $this
+     */
+    public function setCreationDate($creation_date)
+    {
+        $this->container['creation_date'] = $creation_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets subject
+     *
+     * @return string
+     */
+    public function getSubject()
+    {
+        return $this->container['subject'];
+    }
+
+    /**
+     * Sets subject
+     *
+     * @param string $subject Get the annotation subject.
+     *
+     * @return $this
+     */
+    public function setSubject($subject)
+    {
+        $this->container['subject'] = $subject;
+
+        return $this;
+    }
+
+    /**
+     * Gets title
+     *
+     * @return string
+     */
+    public function getTitle()
+    {
+        return $this->container['title'];
+    }
+
+    /**
+     * Sets title
+     *
+     * @param string $title Get the annotation title.
+     *
+     * @return $this
+     */
+    public function setTitle($title)
+    {
+        $this->container['title'] = $title;
+
+        return $this;
+    }
 
     /**
      * Gets rich_text

@@ -738,6 +738,664 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(201, $response->getCode());
     }
 
+    //Highlight Annotations Tests
+
+    public function testGetDocumentHighlightAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentHighlightAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageHighlightAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageHighlightAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetHighlightAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentHighlightAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getHighlightAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageHighlightAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $annotation = new Aspose\PDF\Model\HighlightAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text");
+        $annotation->setSubject("Subj");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title");
+        $annotation->setQuadPoints([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 20, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10])
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $response = $this->pdfApi->postPageHighlightAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutHighlightAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $annotation = new Aspose\PDF\Model\HighlightAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text Updated");
+        $annotation->setSubject("Subj Updated");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title Updated");
+        $annotation->setQuadPoints([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 20, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10])
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentHighlightAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putHighlightAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    //Squiggly Annotations Tests
+
+    public function testGetDocumentSquigglyAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentSquigglyAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageSquigglyAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageSquigglyAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetSquigglyAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentSquigglyAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getSquigglyAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageSquigglyAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $annotation = new Aspose\PDF\Model\SquigglyAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text");
+        $annotation->setSubject("Subj");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title");
+        $annotation->setQuadPoints([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 20, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10])
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $response = $this->pdfApi->postPageSquigglyAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutSquigglyAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $annotation = new Aspose\PDF\Model\SquigglyAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text Updated");
+        $annotation->setSubject("Subj Updated");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title Updated");
+        $annotation->setQuadPoints([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 20, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10])
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentSquigglyAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putSquigglyAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    //StrikeOut Annotations Tests
+
+    public function testGetDocumentStrikeOutAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentStrikeOutAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageStrikeOutAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageStrikeOutAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetStrikeOutAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentStrikeOutAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getStrikeOutAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageStrikeOutAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $annotation = new Aspose\PDF\Model\StrikeOutAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text");
+        $annotation->setSubject("Subj");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title");
+        $annotation->setQuadPoints([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 20, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10])
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $response = $this->pdfApi->postPageStrikeOutAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutStrikeOutAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $annotation = new Aspose\PDF\Model\StrikeOutAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text Updated");
+        $annotation->setSubject("Subj Updated");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title Updated");
+        $annotation->setQuadPoints([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 20, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10])
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentStrikeOutAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putStrikeOutAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    //Caret Annotations Tests
+
+    public function testGetDocumentCaretAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentCaretAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageCaretAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageCaretAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetCaretAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentCaretAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getCaretAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageCaretAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $annotation = new Aspose\PDF\Model\CaretAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text");
+        $annotation->setSubject("Subj");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title");
+        $annotation->setFrame(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $response = $this->pdfApi->postPageCaretAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutCaretAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $annotation = new Aspose\PDF\Model\CaretAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text Updated");
+        $annotation->setSubject("Subj Updated");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title Updated");
+        $annotation->setFrame(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentCaretAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putCaretAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    //Underline Annotations Tests
+
+    public function testGetDocumentUnderlineAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentUnderlineAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageUnderlineAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageUnderlineAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetUnderlineAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentUnderlineAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getUnderlineAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageUnderlineAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $annotation = new Aspose\PDF\Model\UnderlineAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text");
+        $annotation->setSubject("Subj");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title");
+        $annotation->setQuadPoints([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 20, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10])
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $response = $this->pdfApi->postPageUnderlineAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutUnderlineAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $annotation = new Aspose\PDF\Model\UnderlineAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text Updated");
+        $annotation->setSubject("Subj Updated");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title Updated");
+        $annotation->setQuadPoints([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 20, 'y' => 10]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 10])
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentUnderlineAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putUnderlineAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    //Ink Annotations Tests
+
+    public function testGetDocumentInkAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentInkAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageInkAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageInkAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetInkAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentInkAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getInkAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageInkAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $annotation = new Aspose\PDF\Model\InkAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text");
+        $annotation->setSubject("Subj");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title");
+        $annotation->setInkList([
+            [
+                new Aspose\PDF\Model\Point(['x' => 10, 'y' => 40]),
+                new Aspose\PDF\Model\Point(['x' => 30, 'y' => 40]),
+            ],
+            [
+                new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+                new Aspose\PDF\Model\Point(['x' => 20, 'y' => 20]),
+                new Aspose\PDF\Model\Point(['x' => 30, 'y' => 20]),
+            ]
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $response = $this->pdfApi->postPageInkAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutInkAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $annotation = new Aspose\PDF\Model\InkAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText("Rich Text Updated");
+        $annotation->setSubject("Subj Updated");
+        $annotation->setZIndex(1);
+        $annotation->setTitle("Title Updated");
+        $annotation->setInkList([
+            [
+                new Aspose\PDF\Model\Point(['x' => 10, 'y' => 40]),
+                new Aspose\PDF\Model\Point(['x' => 30, 'y' => 40]),
+            ],
+            [
+                new Aspose\PDF\Model\Point(['x' => 10, 'y' => 20]),
+                new Aspose\PDF\Model\Point(['x' => 20, 'y' => 20]),
+                new Aspose\PDF\Model\Point(['x' => 30, 'y' => 20]),
+            ]
+        ]);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentInkAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putInkAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    //Popup Annotations Tests
+
+    public function testGetDocumentPopupAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentPopupAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetDocumentPopupAnnotationsByParent()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $parentId = 'GI5TAOZRGU3CYNZSGEWDCNZWFQ3TGOI';
+
+        $response = $this->pdfApi->getDocumentPopupAnnotationsByParent($name, $parentId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPagePopupAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPagePopupAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetPopupAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentPopupAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getPopupAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPopupAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $parentId = 'GI5TCMR3GE2TQLBSGM3CYMJYGUWDENRV';
+        $pageNumber = 2;
+
+        $annotation = new Aspose\PDF\Model\PopupAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setZIndex(1);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $response = $this->pdfApi->postPopupAnnotation($name, $parentId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutPopupAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $annotation = new Aspose\PDF\Model\PopupAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setZIndex(1);
+        $annotation->setModified('02/02/2018 00:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentPopupAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putPopupAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
 
     //Append Tests
 
@@ -2871,175 +3529,9 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($response);
     }
 
- //////////////////////////////////////////////////////////////////////////////////////   
-/////////////////////////////////////////////////////////////////////////////////////
-    
-
-    
-
-
-    
-/*
-    // Fragments And Segments Tests
-
-    public function testGetFragment()
+    public function testGetListFiles()
     {
-        $name = '4pages.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 1;
-        $fragmentNumber = 1;
-        $folder = $this->tempFolder;
-
-        $response = $this->pdfApi->getFragment($name, $pageNumber, $fragmentNumber, $with_empty = null, $storage = null, $folder);
+        $response = $this->pdfApi->getListFiles($this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
-
-
-    public function testGetFragmentTextFormat()
-    {
-        $name = '4pages.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 1;
-        $fragmentNumber = 1;
-        $folder = $this->tempFolder;
-
-        $response = $this->pdfApi->getFragmentTextFormat($name, $pageNumber, $fragmentNumber, $storage = null, $folder);
-        $this->assertEquals(200, $response->getCode());
-    }
-
-
-    public function testGetFragments()
-    {
-        $name = '4pages.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 1;
-        $folder = $this->tempFolder;
-
-        $response = $this->pdfApi->getFragments($name, $pageNumber, $with_empty = null, $storage = null, $folder);
-        $this->assertEquals(200, $response->getCode());
-    }
-
-
-    public function testGetSegment()
-    {
-        $name = '4pages.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 1;
-        $fragmentNumber = 1;
-        $segmentNumber = 1;
-        $folder = $this->tempFolder;
-
-        $response = $this->pdfApi->getSegment($name, $pageNumber, $fragmentNumber, $segmentNumber, $storage = null, $folder);
-        $this->assertEquals(200, $response->getCode());
-    }
-
-
-    public function testGetSegmentTextFormat()
-    {
-        $name = '4pages.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 1;
-        $fragmentNumber = 1;
-        $segmentNumber = 1;
-        $folder = $this->tempFolder;
-
-        $response = $this->pdfApi->getSegmentTextFormat($name, $pageNumber, $fragmentNumber, $segmentNumber, $storage = null, $folder);
-        $this->assertEquals(200, $response->getCode());
-    }
-
-
-    public function testGetSegments()
-    {
-        $name = '4pages.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 1;
-        $fragmentNumber = 1;
-        $folder = $this->tempFolder;
-
-        $response = $this->pdfApi->getSegments($name, $pageNumber, $fragmentNumber, $with_empty = null, $storage = null, $folder);
-        $this->assertEquals(200, $response->getCode());
-    }
-
-
-    
-    
-    
-
-
-
-
-
-
-
-
-
-    // Paragraphs Tests
-
-
-
-
-
-
-
-
-
-
-
-    
-
-    // Text Items Tests
-
-    public function testGetPageTextItems()
-    {
-        $name = '4pages.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 1;
-        $folder = $this->tempFolder;
-
-        $response = $this->pdfApi->getPageTextItems($name, $pageNumber, $with_empty = null, $storage = null, $folder);
-        $this->assertEquals(200, $response->getCode());
-    }
-
-    public function testGetTextItems()
-    {
-        $name = '4pages.pdf';
-        $this->uploadFile($name);
-
-        $folder = $this->tempFolder;
-
-        $response = $this->pdfApi->getTextItems($name, $with_empty = null, $storage = null, $folder);
-        $this->assertEquals(200, $response->getCode());
-    }
-*/
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-    
-
-    
 }
