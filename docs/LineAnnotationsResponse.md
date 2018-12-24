@@ -1,4 +1,4 @@
-# LineAnnotationsResponse
+﻿# LineAnnotationsResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

@@ -1,4 +1,4 @@
-# Attachment
+﻿# Attachment
 Provides link to attachment.
 
 *Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)*

@@ -1,4 +1,4 @@
-# CaretAnnotationResponse
+﻿# CaretAnnotationResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

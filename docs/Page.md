@@ -1,4 +1,4 @@
-# Page
+﻿# Page
 Provides link to page.
 
 *Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)*

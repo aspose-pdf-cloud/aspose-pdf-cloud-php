@@ -1,4 +1,4 @@
-# PolyLineAnnotationResponse
+﻿# PolyLineAnnotationResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

@@ -235,7 +235,7 @@ class PolyAnnotation extends MarkupAnnotation
     /**
      * Sets interior_color
      *
-     * @param \Aspose\PDF\Model\Color $interior_color Gets or sets the interior color with which to fill the annotation?s line endings.
+     * @param \Aspose\PDF\Model\Color $interior_color Gets or sets the interior color with which to fill the annotation’s line endings.
      *
      * @return $this
      */

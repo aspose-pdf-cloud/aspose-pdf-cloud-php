@@ -1,4 +1,4 @@
-# Document
+﻿# Document
 Represents document DTO.
 
 *Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)*

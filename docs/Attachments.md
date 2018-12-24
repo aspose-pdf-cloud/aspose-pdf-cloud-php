@@ -1,4 +1,4 @@
-# Attachments
+﻿# Attachments
 List of attachment.
 
 *Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)*

@@ -1,4 +1,4 @@
-# SignatureVerifyResponse
+﻿# SignatureVerifyResponse
 Returns also a message.
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

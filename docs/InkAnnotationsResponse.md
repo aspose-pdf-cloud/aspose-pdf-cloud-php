@@ -1,4 +1,4 @@
-# InkAnnotationsResponse
+﻿# InkAnnotationsResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

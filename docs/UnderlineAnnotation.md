@@ -1,4 +1,4 @@
-# UnderlineAnnotation
+﻿# UnderlineAnnotation
 Provides UnderlineAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\MarkupAnnotation](MarkupAnnotation.md)*

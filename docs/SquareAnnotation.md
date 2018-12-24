@@ -1,4 +1,4 @@
-# SquareAnnotation
+﻿# SquareAnnotation
 Provides SquareAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\CommonFigureAnnotation](CommonFigureAnnotation.md)*

@@ -1,4 +1,4 @@
-# PolygonAnnotation
+﻿# PolygonAnnotation
 Provides PolygonAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\PolyAnnotation](PolyAnnotation.md)*
@@ -6,7 +6,7 @@ Provides PolygonAnnotation.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **color** | [**\Aspose\PDF\Model\Color**](Color.md) | Color of the annotation. | [optional]
-**interior_color** | [**\Aspose\PDF\Model\Color**](Color.md) | Gets or sets the interior color with which to fill the annotation?s line endings.<br />*Inherited from [\Aspose\PDF\Model\PolyAnnotation](PolyAnnotation.md)* | [optional]
+**interior_color** | [**\Aspose\PDF\Model\Color**](Color.md) | Gets or sets the interior color with which to fill the annotation’s line endings.<br />*Inherited from [\Aspose\PDF\Model\PolyAnnotation](PolyAnnotation.md)* | [optional]
 **starting_style** | [**\Aspose\PDF\Model\LineEnding**](LineEnding.md) | Gets or sets the style of first line ending.<br />*Inherited from [\Aspose\PDF\Model\PolyAnnotation](PolyAnnotation.md)* | [optional]
 **ending_style** | [**\Aspose\PDF\Model\LineEnding**](LineEnding.md) | Gets or sets the style of second line ending.<br />*Inherited from [\Aspose\PDF\Model\PolyAnnotation](PolyAnnotation.md)* | [optional]
 **intent** | [**\Aspose\PDF\Model\PolyIntent**](PolyIntent.md) | Gets or sets the intent of the polygon or polyline annotation.<br />*Inherited from [\Aspose\PDF\Model\PolyAnnotation](PolyAnnotation.md)* | [optional]

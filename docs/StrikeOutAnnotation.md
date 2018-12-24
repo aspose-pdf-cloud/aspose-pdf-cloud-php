@@ -1,4 +1,4 @@
-# StrikeOutAnnotation
+﻿# StrikeOutAnnotation
 Provides StrikeOutAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\MarkupAnnotation](MarkupAnnotation.md)*

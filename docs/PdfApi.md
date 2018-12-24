@@ -1,4 +1,4 @@
-# PdfApi
+﻿# PdfApi
 
 All URIs are relative to *https://api.aspose.cloud/v2.0/*
 
@@ -2147,7 +2147,7 @@ Converts PDF document (located on storage) to EPUB format and returns resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | Рroperty tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -4337,7 +4337,7 @@ Converts PDF document (in request content) to EPUB format and uploads resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.epub) | 
-**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | Рroperty tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
@@ -4663,7 +4663,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.epub) | 
-**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | ?roperty tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | Рroperty tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 

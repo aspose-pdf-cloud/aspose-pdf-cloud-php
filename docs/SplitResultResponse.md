@@ -1,4 +1,4 @@
-# SplitResultResponse
+﻿# SplitResultResponse
 Represents split result object.
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

@@ -1,4 +1,4 @@
-# CommonFigureAnnotation
+﻿# CommonFigureAnnotation
 Provides CommonFigureAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\MarkupAnnotation](MarkupAnnotation.md)*

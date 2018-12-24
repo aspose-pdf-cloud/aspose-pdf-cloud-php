@@ -1,4 +1,4 @@
-# PopupAnnotationResponse
+﻿# PopupAnnotationResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

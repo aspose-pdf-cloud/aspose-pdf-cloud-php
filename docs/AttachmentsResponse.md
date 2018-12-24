@@ -1,4 +1,4 @@
-# AttachmentsResponse
+﻿# AttachmentsResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

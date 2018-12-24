@@ -1,4 +1,4 @@
-# FreeTextAnnotationsResponse
+﻿# FreeTextAnnotationsResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
