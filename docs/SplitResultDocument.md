@@ -1,4 +1,4 @@
-# SplitResultDocument
+﻿# SplitResultDocument
 Represents split result document,
 
 *Inherited from [\Aspose\PDF\Model\Link](Link.md)*

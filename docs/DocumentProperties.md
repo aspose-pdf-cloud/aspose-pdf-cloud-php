@@ -1,4 +1,4 @@
-# DocumentProperties
+﻿# DocumentProperties
 Pdf document properties.
 
 *Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)*

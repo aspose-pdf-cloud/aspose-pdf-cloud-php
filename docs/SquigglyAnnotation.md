@@ -1,4 +1,4 @@
-# SquigglyAnnotation
+﻿# SquigglyAnnotation
 Provides SquigglyAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\MarkupAnnotation](MarkupAnnotation.md)*

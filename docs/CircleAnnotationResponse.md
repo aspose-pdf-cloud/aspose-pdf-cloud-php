@@ -1,4 +1,4 @@
-# CircleAnnotationResponse
+﻿# CircleAnnotationResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

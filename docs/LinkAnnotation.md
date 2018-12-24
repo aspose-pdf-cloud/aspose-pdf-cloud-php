@@ -1,4 +1,4 @@
-# LinkAnnotation
+﻿# LinkAnnotation
 Provides link to linkAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)*

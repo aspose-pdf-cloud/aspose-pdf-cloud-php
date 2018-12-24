@@ -27138,7 +27138,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -27174,7 +27174,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -27252,7 +27252,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -27275,7 +27275,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -27328,7 +27328,7 @@ class PdfApi
      * Create request for operation 'getPdfInStorageToEpub'
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -57572,7 +57572,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -57608,7 +57608,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -57686,7 +57686,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -57709,7 +57709,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -57762,7 +57762,7 @@ class PdfApi
      * Create request for operation 'putPdfInRequestToEpub'
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -61868,7 +61868,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -61905,7 +61905,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -61984,7 +61984,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -62008,7 +62008,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -62062,7 +62062,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode ?roperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *

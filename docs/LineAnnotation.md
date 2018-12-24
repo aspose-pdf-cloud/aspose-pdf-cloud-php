@@ -1,4 +1,4 @@
-# LineAnnotation
+﻿# LineAnnotation
 Provides LineAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\MarkupAnnotation](MarkupAnnotation.md)*

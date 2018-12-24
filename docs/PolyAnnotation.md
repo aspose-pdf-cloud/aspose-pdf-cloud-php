@@ -1,11 +1,11 @@
-# PolyAnnotation
+﻿# PolyAnnotation
 Provides PolyAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\MarkupAnnotation](MarkupAnnotation.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**interior_color** | [**\Aspose\PDF\Model\Color**](Color.md) | Gets or sets the interior color with which to fill the annotation?s line endings. | [optional]
+**interior_color** | [**\Aspose\PDF\Model\Color**](Color.md) | Gets or sets the interior color with which to fill the annotation’s line endings. | [optional]
 **starting_style** | [**\Aspose\PDF\Model\LineEnding**](LineEnding.md) | Gets or sets the style of first line ending. | [optional]
 **ending_style** | [**\Aspose\PDF\Model\LineEnding**](LineEnding.md) | Gets or sets the style of second line ending. | [optional]
 **intent** | [**\Aspose\PDF\Model\PolyIntent**](PolyIntent.md) | Gets or sets the intent of the polygon or polyline annotation. | [optional]

@@ -1,4 +1,4 @@
-# PopupAnnotationWithParent
+﻿# PopupAnnotationWithParent
 Provides PopupAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\PopupAnnotation](PopupAnnotation.md)*

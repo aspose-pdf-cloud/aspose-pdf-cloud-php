@@ -1,4 +1,4 @@
-# Annotation
+﻿# Annotation
 Provides annotation.
 
 *Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)*

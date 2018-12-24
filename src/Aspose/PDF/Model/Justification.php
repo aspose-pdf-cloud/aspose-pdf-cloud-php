@@ -3,7 +3,7 @@
  * Justification Class 
  *
  * @category Class
- * @description Enumerates the forms of quadding (justification) to be used in displaying the annotation?s text.
+ * @description Enumerates the forms of quadding (justification) to be used in displaying the annotation’s text.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php

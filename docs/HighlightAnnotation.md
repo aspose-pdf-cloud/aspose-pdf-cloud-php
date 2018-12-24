@@ -1,4 +1,4 @@
-# HighlightAnnotation
+﻿# HighlightAnnotation
 Provides HighlightAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\MarkupAnnotation](MarkupAnnotation.md)*

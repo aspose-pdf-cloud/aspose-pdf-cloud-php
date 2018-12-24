@@ -1,4 +1,4 @@
-# WordCountResponse
+﻿# WordCountResponse
 Number of words per document pages.
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

@@ -1,4 +1,4 @@
-# LinkAnnotationsResponse
+﻿# LinkAnnotationsResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

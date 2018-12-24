@@ -1,4 +1,4 @@
-# PolyLineAnnotations
+﻿# PolyLineAnnotations
 List of annotations.
 
 *Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)*

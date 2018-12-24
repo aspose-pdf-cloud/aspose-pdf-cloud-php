@@ -1,4 +1,4 @@
-# SquareAnnotationsResponse
+﻿# SquareAnnotationsResponse
 
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*

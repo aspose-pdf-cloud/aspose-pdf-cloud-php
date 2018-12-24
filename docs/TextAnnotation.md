@@ -1,4 +1,4 @@
-# TextAnnotation
+﻿# TextAnnotation
 Provides TextAnnotation.
 
 *Inherited from [\Aspose\PDF\Model\MarkupAnnotation](MarkupAnnotation.md)*

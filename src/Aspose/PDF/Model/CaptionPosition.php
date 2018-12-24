@@ -3,7 +3,7 @@
  * CaptionPosition Class 
  *
  * @category Class
- * @description Enumeration of the annotation?s caption positioning.
+ * @description Enumeration of the annotation’s caption positioning.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
