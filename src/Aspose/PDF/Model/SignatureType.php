@@ -3,7 +3,7 @@
  * SignatureType Class 
  *
  * @category Class
- * @description 
+ * @description The type of signature.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php

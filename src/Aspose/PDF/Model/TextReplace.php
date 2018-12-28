@@ -57,7 +57,7 @@ class TextReplace implements ModelInterface, ArrayAccess
         'new_value' => 'string',
         'regex' => 'bool',
         'text_state' => '\Aspose\PDF\Model\TextState',
-        'rect' => '\Aspose\PDF\Model\RectanglePdf'
+        'rect' => '\Aspose\PDF\Model\Rectangle'
     ];
 
     /**
@@ -342,7 +342,7 @@ class TextReplace implements ModelInterface, ArrayAccess
     /**
      * Gets rect
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRect()
     {
@@ -352,7 +352,7 @@ class TextReplace implements ModelInterface, ArrayAccess
     /**
      * Sets rect
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rect Rectangle area where searched original text.
+     * @param \Aspose\PDF\Model\Rectangle $rect Rectangle area where searched original text.
      *
      * @return $this
      */

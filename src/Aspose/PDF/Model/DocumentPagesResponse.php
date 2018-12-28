@@ -3,6 +3,7 @@
  * DocumentPagesResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple pages info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class DocumentPagesResponse extends AsposeResponse
     /**
      * Sets pages
      *
-     * @param \Aspose\PDF\Model\Pages $pages pages
+     * @param \Aspose\PDF\Model\Pages $pages Page object
      *
      * @return $this
      */

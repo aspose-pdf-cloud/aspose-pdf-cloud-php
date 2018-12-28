@@ -256,7 +256,7 @@ class Color implements ModelInterface, ArrayAccess
     /**
      * Sets a
      *
-     * @param int $a a
+     * @param int $a Alpha component.
      *
      * @return $this
      */
@@ -280,7 +280,7 @@ class Color implements ModelInterface, ArrayAccess
     /**
      * Sets r
      *
-     * @param int $r r
+     * @param int $r Red component.
      *
      * @return $this
      */
@@ -304,7 +304,7 @@ class Color implements ModelInterface, ArrayAccess
     /**
      * Sets g
      *
-     * @param int $g g
+     * @param int $g Green component.
      *
      * @return $this
      */
@@ -328,7 +328,7 @@ class Color implements ModelInterface, ArrayAccess
     /**
      * Sets b
      *
-     * @param int $b b
+     * @param int $b Blue component.
      *
      * @return $this
      */

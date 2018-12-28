@@ -3,7 +3,7 @@
  * Pages Class 
  *
  * @category Class
- * @description List of pages.
+ * @description Represents list of pages.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class Pages extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\Page[] $list list
+     * @param \Aspose\PDF\Model\Page[] $list List of pages.
      *
      * @return $this
      */

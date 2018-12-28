@@ -3,6 +3,7 @@
  * TextRectsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple text occurrences info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -50,7 +51,7 @@ class TextRectsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'text_occurences' => '\Aspose\PDF\Model\TextRects'
+        'text_occurrences' => '\Aspose\PDF\Model\TextRects'
     ];
 
     /**
@@ -59,7 +60,7 @@ class TextRectsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'text_occurences' => null
+        'text_occurrences' => null
     ];
 
     /**
@@ -89,7 +90,7 @@ class TextRectsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'text_occurences' => 'TextOccurences'
+        'text_occurrences' => 'TextOccurrences'
     ];
 
     /**
@@ -98,7 +99,7 @@ class TextRectsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'text_occurences' => 'setTextOccurences'
+        'text_occurrences' => 'setTextOccurrences'
     ];
 
     /**
@@ -107,7 +108,7 @@ class TextRectsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'text_occurences' => 'getTextOccurences'
+        'text_occurrences' => 'getTextOccurrences'
     ];
 
     /**
@@ -166,7 +167,7 @@ class TextRectsResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['text_occurences'] = isset($data['text_occurences']) ? $data['text_occurences'] : null;
+        $this->container['text_occurrences'] = isset($data['text_occurrences']) ? $data['text_occurrences'] : null;
     }
 
     /**
@@ -198,25 +199,25 @@ class TextRectsResponse extends AsposeResponse
 
 
     /**
-     * Gets text_occurences
+     * Gets text_occurrences
      *
      * @return \Aspose\PDF\Model\TextRects
      */
-    public function getTextOccurences()
+    public function getTextOccurrences()
     {
-        return $this->container['text_occurences'];
+        return $this->container['text_occurrences'];
     }
 
     /**
-     * Sets text_occurences
+     * Sets text_occurrences
      *
-     * @param \Aspose\PDF\Model\TextRects $text_occurences text_occurences
+     * @param \Aspose\PDF\Model\TextRects $text_occurrences TextRects object
      *
      * @return $this
      */
-    public function setTextOccurences($text_occurences)
+    public function setTextOccurrences($text_occurrences)
     {
-        $this->container['text_occurences'] = $text_occurences;
+        $this->container['text_occurrences'] = $text_occurrences;
 
         return $this;
     }

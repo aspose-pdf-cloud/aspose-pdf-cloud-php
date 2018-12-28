@@ -3,7 +3,7 @@
  * LinkAnnotations Class 
  *
  * @category Class
- * @description List of LinkAnnotations.
+ * @description Object representing a list of link annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class LinkAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\LinkAnnotation[] $list list
+     * @param \Aspose\PDF\Model\LinkAnnotation[] $list List of link annotations.
      *
      * @return $this
      */

@@ -3,6 +3,7 @@
  * LineAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple line annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class LineAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\LineAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\LineAnnotations $annotations Line annotations object
      *
      * @return $this
      */

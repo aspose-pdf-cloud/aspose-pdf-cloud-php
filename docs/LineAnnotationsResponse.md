@@ -1,11 +1,11 @@
 ﻿# LineAnnotationsResponse
-
+Represents response containing multiple line annotation objects
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**annotations** | [**\Aspose\PDF\Model\LineAnnotations**](LineAnnotations.md) |  | [optional]
+**annotations** | [**\Aspose\PDF\Model\LineAnnotations**](LineAnnotations.md) | Line annotations object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

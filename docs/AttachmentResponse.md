@@ -1,11 +1,11 @@
 ﻿# AttachmentResponse
-
+Represents response containing single attachment info
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**attachment** | [**\Aspose\PDF\Model\Attachment**](Attachment.md) |  | [optional]
+**attachment** | [**\Aspose\PDF\Model\Attachment**](Attachment.md) | Attachment object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

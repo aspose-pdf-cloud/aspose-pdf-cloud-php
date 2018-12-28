@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **action** | **string** |  | 
 **highlighting** | [**\Aspose\PDF\Model\LinkHighlightingMode**](LinkHighlightingMode.md) |  | 
 **color** | [**\Aspose\PDF\Model\Color**](Color.md) |  | [optional]
-**rect** | [**\Aspose\PDF\Model\RectanglePdf**](RectanglePdf.md) |  | 
+**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) |  | 
 **id** | **string** |  | [optional]
 **links** | [**\Aspose\PDF\Model\Link[]**](Link.md) | Link to the document.<br />*Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)* | [optional]
 

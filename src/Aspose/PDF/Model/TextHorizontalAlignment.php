@@ -3,7 +3,7 @@
  * TextHorizontalAlignment Class 
  *
  * @category Class
- * @description 
+ * @description Describes text horizontal alignment.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php

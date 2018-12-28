@@ -1358,6 +1358,618 @@ class PdfApi
     }
 
     /**
+     * Operation deleteFile
+     *
+     * Remove a specific file
+     *
+     * @param  string $path Path of the file including file name and extension e.g. /Folder1/file.ext (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function deleteFile($path, $version_id = null, $storage = null)
+    {
+        try
+        {
+            list($response) = $this->deleteFileWithHttpInfo($path, $version_id, $storage);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deleteFileWithHttpInfo($path, $version_id, $storage);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation deleteFileWithHttpInfo
+     *
+     * Remove a specific file
+     *
+     * @param  string $path Path of the file including file name and extension e.g. /Folder1/file.ext (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteFileWithHttpInfo($path, $version_id = null, $storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deleteFileRequest($path, $version_id, $storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteFileAsync
+     *
+     * Remove a specific file
+     *
+     * @param  string $path Path of the file including file name and extension e.g. /Folder1/file.ext (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteFileAsync($path, $version_id = null, $storage = null)
+    {
+        return $this->deleteFileAsyncWithHttpInfo($path, $version_id, $storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteFileAsyncWithHttpInfo
+     *
+     * Remove a specific file
+     *
+     * @param  string $path Path of the file including file name and extension e.g. /Folder1/file.ext (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteFileAsyncWithHttpInfo($path, $version_id = null, $storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deleteFileRequest($path, $version_id, $storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteFile'
+     *
+     * @param  string $path Path of the file including file name and extension e.g. /Folder1/file.ext (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function deleteFileRequest($path, $version_id = null, $storage = null)
+    {
+        // verify the required parameter 'path' is set
+        if ($path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $path when calling deleteFile'
+            );
+        }
+
+        $resourcePath = '/storage/file';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($path !== null) {
+            $queryParams['path'] = ObjectSerializer::toQueryValue($path);
+        }
+        // query params
+        if ($version_id !== null) {
+            $queryParams['versionId'] = ObjectSerializer::toQueryValue($version_id);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'DELETE',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation deleteFolder
+     *
+     * Remove a specific folder
+     *
+     * @param  string $path Folder path e.g. /Folder1 (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     * @param  bool $recursive Remove recursivelly inner folder/files. If false and folder contains data than exception is raised. (optional, default to false)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function deleteFolder($path, $storage = null, $recursive = 'false')
+    {
+        try
+        {
+            list($response) = $this->deleteFolderWithHttpInfo($path, $storage, $recursive);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->deleteFolderWithHttpInfo($path, $storage, $recursive);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation deleteFolderWithHttpInfo
+     *
+     * Remove a specific folder
+     *
+     * @param  string $path Folder path e.g. /Folder1 (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     * @param  bool $recursive Remove recursivelly inner folder/files. If false and folder contains data than exception is raised. (optional, default to false)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function deleteFolderWithHttpInfo($path, $storage = null, $recursive = 'false')
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deleteFolderRequest($path, $storage, $recursive);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation deleteFolderAsync
+     *
+     * Remove a specific folder
+     *
+     * @param  string $path Folder path e.g. /Folder1 (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     * @param  bool $recursive Remove recursivelly inner folder/files. If false and folder contains data than exception is raised. (optional, default to false)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteFolderAsync($path, $storage = null, $recursive = 'false')
+    {
+        return $this->deleteFolderAsyncWithHttpInfo($path, $storage, $recursive)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation deleteFolderAsyncWithHttpInfo
+     *
+     * Remove a specific folder
+     *
+     * @param  string $path Folder path e.g. /Folder1 (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     * @param  bool $recursive Remove recursivelly inner folder/files. If false and folder contains data than exception is raised. (optional, default to false)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function deleteFolderAsyncWithHttpInfo($path, $storage = null, $recursive = 'false')
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->deleteFolderRequest($path, $storage, $recursive);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'deleteFolder'
+     *
+     * @param  string $path Folder path e.g. /Folder1 (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     * @param  bool $recursive Remove recursivelly inner folder/files. If false and folder contains data than exception is raised. (optional, default to false)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function deleteFolderRequest($path, $storage = null, $recursive = 'false')
+    {
+        // verify the required parameter 'path' is set
+        if ($path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $path when calling deleteFolder'
+            );
+        }
+
+        $resourcePath = '/storage/folder';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($path !== null) {
+            $queryParams['path'] = ObjectSerializer::toQueryValue($path);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($recursive !== null) {
+            $queryParams['recursive'] = ObjectSerializer::toQueryValue($recursive);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'DELETE',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation deleteImage
      *
      * Delete image from document page.
@@ -4220,6 +4832,288 @@ class PdfApi
                 $resourcePath
             );
         }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getDiscUsage
+     *
+     * Check the disk usage of the current account
+     *
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\DiscUsageResponse
+     */
+    public function getDiscUsage($storage = null)
+    {
+        try
+        {
+            list($response) = $this->getDiscUsageWithHttpInfo($storage);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getDiscUsageWithHttpInfo($storage);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getDiscUsageWithHttpInfo
+     *
+     * Check the disk usage of the current account
+     *
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\DiscUsageResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getDiscUsageWithHttpInfo($storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\DiscUsageResponse';
+        $request = $this->getDiscUsageRequest($storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\DiscUsageResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getDiscUsageAsync
+     *
+     * Check the disk usage of the current account
+     *
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getDiscUsageAsync($storage = null)
+    {
+        return $this->getDiscUsageAsyncWithHttpInfo($storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getDiscUsageAsyncWithHttpInfo
+     *
+     * Check the disk usage of the current account
+     *
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getDiscUsageAsyncWithHttpInfo($storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\DiscUsageResponse';
+        $request = $this->getDiscUsageRequest($storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getDiscUsage'
+     *
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getDiscUsageRequest($storage = null)
+    {
+
+        $resourcePath = '/storage/disc';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+
 
         // body params
         $_tempBody = null;
@@ -16159,6 +17053,604 @@ class PdfApi
     }
 
     /**
+     * Operation getIsExist
+     *
+     * Check if a specific file or folder exists
+     *
+     * @param  string $path File or folder path e.g. /file.ext or /Folder1 (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\FileExistResponse
+     */
+    public function getIsExist($path, $version_id = null, $storage = null)
+    {
+        try
+        {
+            list($response) = $this->getIsExistWithHttpInfo($path, $version_id, $storage);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getIsExistWithHttpInfo($path, $version_id, $storage);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getIsExistWithHttpInfo
+     *
+     * Check if a specific file or folder exists
+     *
+     * @param  string $path File or folder path e.g. /file.ext or /Folder1 (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\FileExistResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getIsExistWithHttpInfo($path, $version_id = null, $storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FileExistResponse';
+        $request = $this->getIsExistRequest($path, $version_id, $storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\FileExistResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getIsExistAsync
+     *
+     * Check if a specific file or folder exists
+     *
+     * @param  string $path File or folder path e.g. /file.ext or /Folder1 (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getIsExistAsync($path, $version_id = null, $storage = null)
+    {
+        return $this->getIsExistAsyncWithHttpInfo($path, $version_id, $storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getIsExistAsyncWithHttpInfo
+     *
+     * Check if a specific file or folder exists
+     *
+     * @param  string $path File or folder path e.g. /file.ext or /Folder1 (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getIsExistAsyncWithHttpInfo($path, $version_id = null, $storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FileExistResponse';
+        $request = $this->getIsExistRequest($path, $version_id, $storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getIsExist'
+     *
+     * @param  string $path File or folder path e.g. /file.ext or /Folder1 (required)
+     * @param  string $version_id File&#39;s version (optional)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getIsExistRequest($path, $version_id = null, $storage = null)
+    {
+        // verify the required parameter 'path' is set
+        if ($path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $path when calling getIsExist'
+            );
+        }
+
+        $resourcePath = '/storage/exist';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($path !== null) {
+            $queryParams['path'] = ObjectSerializer::toQueryValue($path);
+        }
+        // query params
+        if ($version_id !== null) {
+            $queryParams['versionId'] = ObjectSerializer::toQueryValue($version_id);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getIsStorageExist
+     *
+     * Check if storage exists
+     *
+     * @param  string $name Storage name (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\StorageExistResponse
+     */
+    public function getIsStorageExist($name)
+    {
+        try
+        {
+            list($response) = $this->getIsStorageExistWithHttpInfo($name);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getIsStorageExistWithHttpInfo($name);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getIsStorageExistWithHttpInfo
+     *
+     * Check if storage exists
+     *
+     * @param  string $name Storage name (required)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\StorageExistResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getIsStorageExistWithHttpInfo($name)
+    {
+        $returnType = '\Aspose\PDF\Model\StorageExistResponse';
+        $request = $this->getIsStorageExistRequest($name);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\StorageExistResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getIsStorageExistAsync
+     *
+     * Check if storage exists
+     *
+     * @param  string $name Storage name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getIsStorageExistAsync($name)
+    {
+        return $this->getIsStorageExistAsyncWithHttpInfo($name)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getIsStorageExistAsyncWithHttpInfo
+     *
+     * Check if storage exists
+     *
+     * @param  string $name Storage name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getIsStorageExistAsyncWithHttpInfo($name)
+    {
+        $returnType = '\Aspose\PDF\Model\StorageExistResponse';
+        $request = $this->getIsStorageExistRequest($name);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getIsStorageExist'
+     *
+     * @param  string $name Storage name (required)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getIsStorageExistRequest($name)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling getIsStorageExist'
+            );
+        }
+
+        $resourcePath = '/storage/{name}/exist';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation getLaTeXInStorageToPdf
      *
      * Convert LaTeX file (located on storage) to PDF format and return resulting file in response.
@@ -17034,6 +18526,303 @@ class PdfApi
                 $resourcePath
             );
         }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'GET',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation getListFileVersions
+     *
+     * Get the file's versions list
+     *
+     * @param  string $path File path e.g. /file.ext or /Folder1/file.ext (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\FileVersionsResponse
+     */
+    public function getListFileVersions($path, $storage = null)
+    {
+        try
+        {
+            list($response) = $this->getListFileVersionsWithHttpInfo($path, $storage);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->getListFileVersionsWithHttpInfo($path, $storage);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation getListFileVersionsWithHttpInfo
+     *
+     * Get the file's versions list
+     *
+     * @param  string $path File path e.g. /file.ext or /Folder1/file.ext (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\FileVersionsResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function getListFileVersionsWithHttpInfo($path, $storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FileVersionsResponse';
+        $request = $this->getListFileVersionsRequest($path, $storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\FileVersionsResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation getListFileVersionsAsync
+     *
+     * Get the file's versions list
+     *
+     * @param  string $path File path e.g. /file.ext or /Folder1/file.ext (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getListFileVersionsAsync($path, $storage = null)
+    {
+        return $this->getListFileVersionsAsyncWithHttpInfo($path, $storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation getListFileVersionsAsyncWithHttpInfo
+     *
+     * Get the file's versions list
+     *
+     * @param  string $path File path e.g. /file.ext or /Folder1/file.ext (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function getListFileVersionsAsyncWithHttpInfo($path, $storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\FileVersionsResponse';
+        $request = $this->getListFileVersionsRequest($path, $storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'getListFileVersions'
+     *
+     * @param  string $path File path e.g. /file.ext or /Folder1/file.ext (required)
+     * @param  string $storage User&#39;s storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function getListFileVersionsRequest($path, $storage = null)
+    {
+        // verify the required parameter 'path' is set
+        if ($path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $path when calling getListFileVersions'
+            );
+        }
+
+        $resourcePath = '/storage/version';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($path !== null) {
+            $queryParams['path'] = ObjectSerializer::toQueryValue($path);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+
 
         // body params
         $_tempBody = null;
@@ -25073,10 +26862,10 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number Number of page (starting from 1). (required)
-     * @param  double $llx llx (required)
-     * @param  double $lly lly (required)
-     * @param  double $urx urx (required)
-     * @param  double $ury ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -25116,10 +26905,10 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number Number of page (starting from 1). (required)
-     * @param  double $llx (required)
-     * @param  double $lly (required)
-     * @param  double $urx (required)
-     * @param  double $ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -25201,10 +26990,10 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number Number of page (starting from 1). (required)
-     * @param  double $llx (required)
-     * @param  double $lly (required)
-     * @param  double $urx (required)
-     * @param  double $ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -25231,10 +27020,10 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number Number of page (starting from 1). (required)
-     * @param  double $llx (required)
-     * @param  double $lly (required)
-     * @param  double $urx (required)
-     * @param  double $ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -25291,10 +27080,10 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  int $page_number Number of page (starting from 1). (required)
-     * @param  double $llx (required)
-     * @param  double $lly (required)
-     * @param  double $urx (required)
-     * @param  double $ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -27138,7 +28927,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -27174,7 +28963,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -27252,7 +29041,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -27275,7 +29064,7 @@ class PdfApi
      * Converts PDF document (located on storage) to EPUB format and returns resulting file in response content
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -27328,7 +29117,7 @@ class PdfApi
      * Create request for operation 'getPdfInStorageToEpub'
      *
      * @param  string $name The document name. (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -33674,10 +35463,10 @@ class PdfApi
      * Read document text.
      *
      * @param  string $name The document name. (required)
-     * @param  double $llx llx (required)
-     * @param  double $lly lly (required)
-     * @param  double $urx urx (required)
-     * @param  double $ury ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -33716,10 +35505,10 @@ class PdfApi
      * Read document text.
      *
      * @param  string $name The document name. (required)
-     * @param  double $llx (required)
-     * @param  double $lly (required)
-     * @param  double $urx (required)
-     * @param  double $ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -33800,10 +35589,10 @@ class PdfApi
      * Read document text.
      *
      * @param  string $name The document name. (required)
-     * @param  double $llx (required)
-     * @param  double $lly (required)
-     * @param  double $urx (required)
-     * @param  double $ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -33829,10 +35618,10 @@ class PdfApi
      * Read document text.
      *
      * @param  string $name The document name. (required)
-     * @param  double $llx (required)
-     * @param  double $lly (required)
-     * @param  double $urx (required)
-     * @param  double $ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -33888,10 +35677,10 @@ class PdfApi
      * Create request for operation 'getText'
      *
      * @param  string $name The document name. (required)
-     * @param  double $llx (required)
-     * @param  double $lly (required)
-     * @param  double $urx (required)
-     * @param  double $ury (required)
+     * @param  double $llx X-coordinate of lower - left corner. (required)
+     * @param  double $lly Y - coordinate of lower-left corner. (required)
+     * @param  double $urx X - coordinate of upper-right corner. (required)
+     * @param  double $ury Y - coordinate of upper-right corner. (required)
      * @param  string[] $format List of formats for search. (optional)
      * @param  string $regex Formats are specified as a regular expression. (optional)
      * @param  bool $split_rects Split result fragments (default is true). (optional)
@@ -37934,6 +39723,343 @@ class PdfApi
     }
 
     /**
+     * Operation postFlattenDocument
+     *
+     * Removes all fields from the document and place their values instead.
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $update_appearances If set, all field appearances will be regenerated before flattening. This option may help if field is incorrectly flattened. This option may decrease performance.. (optional)
+     * @param  bool $call_events If set, formatting and other JavaScript events will be called. (optional)
+     * @param  bool $hide_buttons If set, buttons will be removed from flattened document. (optional)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function postFlattenDocument($name, $update_appearances = null, $call_events = null, $hide_buttons = null, $storage = null, $folder = null)
+    {
+        try
+        {
+            list($response) = $this->postFlattenDocumentWithHttpInfo($name, $update_appearances, $call_events, $hide_buttons, $storage, $folder);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postFlattenDocumentWithHttpInfo($name, $update_appearances, $call_events, $hide_buttons, $storage, $folder);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation postFlattenDocumentWithHttpInfo
+     *
+     * Removes all fields from the document and place their values instead.
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $update_appearances If set, all field appearances will be regenerated before flattening. This option may help if field is incorrectly flattened. This option may decrease performance.. (optional)
+     * @param  bool $call_events If set, formatting and other JavaScript events will be called. (optional)
+     * @param  bool $hide_buttons If set, buttons will be removed from flattened document. (optional)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postFlattenDocumentWithHttpInfo($name, $update_appearances = null, $call_events = null, $hide_buttons = null, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postFlattenDocumentRequest($name, $update_appearances, $call_events, $hide_buttons, $storage, $folder);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation postFlattenDocumentAsync
+     *
+     * Removes all fields from the document and place their values instead.
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $update_appearances If set, all field appearances will be regenerated before flattening. This option may help if field is incorrectly flattened. This option may decrease performance.. (optional)
+     * @param  bool $call_events If set, formatting and other JavaScript events will be called. (optional)
+     * @param  bool $hide_buttons If set, buttons will be removed from flattened document. (optional)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postFlattenDocumentAsync($name, $update_appearances = null, $call_events = null, $hide_buttons = null, $storage = null, $folder = null)
+    {
+        return $this->postFlattenDocumentAsyncWithHttpInfo($name, $update_appearances, $call_events, $hide_buttons, $storage, $folder)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation postFlattenDocumentAsyncWithHttpInfo
+     *
+     * Removes all fields from the document and place their values instead.
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $update_appearances If set, all field appearances will be regenerated before flattening. This option may help if field is incorrectly flattened. This option may decrease performance.. (optional)
+     * @param  bool $call_events If set, formatting and other JavaScript events will be called. (optional)
+     * @param  bool $hide_buttons If set, buttons will be removed from flattened document. (optional)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postFlattenDocumentAsyncWithHttpInfo($name, $update_appearances = null, $call_events = null, $hide_buttons = null, $storage = null, $folder = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postFlattenDocumentRequest($name, $update_appearances, $call_events, $hide_buttons, $storage, $folder);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'postFlattenDocument'
+     *
+     * @param  string $name The document name. (required)
+     * @param  bool $update_appearances If set, all field appearances will be regenerated before flattening. This option may help if field is incorrectly flattened. This option may decrease performance.. (optional)
+     * @param  bool $call_events If set, formatting and other JavaScript events will be called. (optional)
+     * @param  bool $hide_buttons If set, buttons will be removed from flattened document. (optional)
+     * @param  string $storage The document storage. (optional)
+     * @param  string $folder The document folder. (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function postFlattenDocumentRequest($name, $update_appearances = null, $call_events = null, $hide_buttons = null, $storage = null, $folder = null)
+    {
+        // verify the required parameter 'name' is set
+        if ($name === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $name when calling postFlattenDocument'
+            );
+        }
+
+        $resourcePath = '/pdf/{name}/flatten';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($update_appearances !== null) {
+            $queryParams['updateAppearances'] = ObjectSerializer::toQueryValue($update_appearances);
+        }
+        // query params
+        if ($call_events !== null) {
+            $queryParams['callEvents'] = ObjectSerializer::toQueryValue($call_events);
+        }
+        // query params
+        if ($hide_buttons !== null) {
+            $queryParams['hideButtons'] = ObjectSerializer::toQueryValue($hide_buttons);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($folder !== null) {
+            $queryParams['folder'] = ObjectSerializer::toQueryValue($folder);
+        }
+
+        // path params
+        if ($name !== null) {
+            $resourcePath = str_replace(
+                '{' . 'name' . '}',
+                ObjectSerializer::toPathValue($name),
+                $resourcePath
+            );
+        }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
      * Operation postInsertImage
      *
      * Insert image to document page.
@@ -38304,6 +40430,657 @@ class PdfApi
                 // for HTTP post (form)
                 //$httpBody = new MultipartStream($multipartContents);
                 $httpBody = $formParams['image'];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postMoveFile
+     *
+     * Move a specific file
+     *
+     * @param  string $src Source file path e.g. /fileSource.ext (required)
+     * @param  string $dest Destination file path e.g. /fileDestination.ext (required)
+     * @param  string $version_id Source file&#39;s version, (optional)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function postMoveFile($src, $dest, $version_id = null, $storage = null, $dest_storage = null)
+    {
+        try
+        {
+            list($response) = $this->postMoveFileWithHttpInfo($src, $dest, $version_id, $storage, $dest_storage);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postMoveFileWithHttpInfo($src, $dest, $version_id, $storage, $dest_storage);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation postMoveFileWithHttpInfo
+     *
+     * Move a specific file
+     *
+     * @param  string $src Source file path e.g. /fileSource.ext (required)
+     * @param  string $dest Destination file path e.g. /fileDestination.ext (required)
+     * @param  string $version_id Source file&#39;s version, (optional)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postMoveFileWithHttpInfo($src, $dest, $version_id = null, $storage = null, $dest_storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postMoveFileRequest($src, $dest, $version_id, $storage, $dest_storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation postMoveFileAsync
+     *
+     * Move a specific file
+     *
+     * @param  string $src Source file path e.g. /fileSource.ext (required)
+     * @param  string $dest Destination file path e.g. /fileDestination.ext (required)
+     * @param  string $version_id Source file&#39;s version, (optional)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postMoveFileAsync($src, $dest, $version_id = null, $storage = null, $dest_storage = null)
+    {
+        return $this->postMoveFileAsyncWithHttpInfo($src, $dest, $version_id, $storage, $dest_storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation postMoveFileAsyncWithHttpInfo
+     *
+     * Move a specific file
+     *
+     * @param  string $src Source file path e.g. /fileSource.ext (required)
+     * @param  string $dest Destination file path e.g. /fileDestination.ext (required)
+     * @param  string $version_id Source file&#39;s version, (optional)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postMoveFileAsyncWithHttpInfo($src, $dest, $version_id = null, $storage = null, $dest_storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postMoveFileRequest($src, $dest, $version_id, $storage, $dest_storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'postMoveFile'
+     *
+     * @param  string $src Source file path e.g. /fileSource.ext (required)
+     * @param  string $dest Destination file path e.g. /fileDestination.ext (required)
+     * @param  string $version_id Source file&#39;s version, (optional)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function postMoveFileRequest($src, $dest, $version_id = null, $storage = null, $dest_storage = null)
+    {
+        // verify the required parameter 'src' is set
+        if ($src === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src when calling postMoveFile'
+            );
+        }
+        // verify the required parameter 'dest' is set
+        if ($dest === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $dest when calling postMoveFile'
+            );
+        }
+
+        $resourcePath = '/storage/file';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src !== null) {
+            $queryParams['src'] = ObjectSerializer::toQueryValue($src);
+        }
+        // query params
+        if ($dest !== null) {
+            $queryParams['dest'] = ObjectSerializer::toQueryValue($dest);
+        }
+        // query params
+        if ($version_id !== null) {
+            $queryParams['versionId'] = ObjectSerializer::toQueryValue($version_id);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($dest_storage !== null) {
+            $queryParams['destStorage'] = ObjectSerializer::toQueryValue($dest_storage);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['multipart/form-data']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'POST',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation postMoveFolder
+     *
+     * Move a specific folder
+     *
+     * @param  string $src Source folder path e.g. /Folder1 (required)
+     * @param  string $dest Destination folder path e.g. /Folder2 (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function postMoveFolder($src, $dest, $storage = null, $dest_storage = null)
+    {
+        try
+        {
+            list($response) = $this->postMoveFolderWithHttpInfo($src, $dest, $storage, $dest_storage);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->postMoveFolderWithHttpInfo($src, $dest, $storage, $dest_storage);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation postMoveFolderWithHttpInfo
+     *
+     * Move a specific folder
+     *
+     * @param  string $src Source folder path e.g. /Folder1 (required)
+     * @param  string $dest Destination folder path e.g. /Folder2 (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function postMoveFolderWithHttpInfo($src, $dest, $storage = null, $dest_storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postMoveFolderRequest($src, $dest, $storage, $dest_storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation postMoveFolderAsync
+     *
+     * Move a specific folder
+     *
+     * @param  string $src Source folder path e.g. /Folder1 (required)
+     * @param  string $dest Destination folder path e.g. /Folder2 (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postMoveFolderAsync($src, $dest, $storage = null, $dest_storage = null)
+    {
+        return $this->postMoveFolderAsyncWithHttpInfo($src, $dest, $storage, $dest_storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation postMoveFolderAsyncWithHttpInfo
+     *
+     * Move a specific folder
+     *
+     * @param  string $src Source folder path e.g. /Folder1 (required)
+     * @param  string $dest Destination folder path e.g. /Folder2 (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function postMoveFolderAsyncWithHttpInfo($src, $dest, $storage = null, $dest_storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->postMoveFolderRequest($src, $dest, $storage, $dest_storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'postMoveFolder'
+     *
+     * @param  string $src Source folder path e.g. /Folder1 (required)
+     * @param  string $dest Destination folder path e.g. /Folder2 (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function postMoveFolderRequest($src, $dest, $storage = null, $dest_storage = null)
+    {
+        // verify the required parameter 'src' is set
+        if ($src === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $src when calling postMoveFolder'
+            );
+        }
+        // verify the required parameter 'dest' is set
+        if ($dest === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $dest when calling postMoveFolder'
+            );
+        }
+
+        $resourcePath = '/storage/folder';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($src !== null) {
+            $queryParams['src'] = ObjectSerializer::toQueryValue($src);
+        }
+        // query params
+        if ($dest !== null) {
+            $queryParams['dest'] = ObjectSerializer::toQueryValue($dest);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($dest_storage !== null) {
+            $queryParams['destStorage'] = ObjectSerializer::toQueryValue($dest_storage);
+        }
+
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
 
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);
@@ -47377,6 +50154,312 @@ class PdfApi
                 $resourcePath
             );
         }
+
+        // body params
+        $_tempBody = null;
+
+        if ($multipart) {
+            $headers = $this->headerSelector->selectHeadersForMultipart(
+                ['application/json']
+            );
+        } else {
+            $headers = $this->headerSelector->selectHeaders(
+                ['application/json'],
+                ['application/json']
+            );
+        }
+
+        // for model (json/xml)
+        if (isset($_tempBody)) {
+            // $_tempBody is the method argument, if present
+            $httpBody = $_tempBody;
+            // \stdClass has no __toString(), so we should encode it manually
+            if ($httpBody instanceof \stdClass && $headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($httpBody);
+            // array of objects
+            } elseif (is_array($httpBody)) {
+                $httpBody = "[" . ObjectSerializer::serializeCollection($httpBody, "") . "]";
+            }
+        } elseif (count($formParams) > 0) {
+            if ($multipart) {
+                $multipartContents = [];
+                foreach ($formParams as $formParamName => $formParamValue) {
+                    $multipartContents[] = [
+                        'name' => $formParamName,
+                        'contents' => $formParamValue
+                    ];
+                }
+                // for HTTP post (form)
+                //$httpBody = new MultipartStream($multipartContents);
+                $httpBody = $formParams[''];
+
+            } elseif ($headers['Content-Type'] === 'application/json') {
+                $httpBody = \GuzzleHttp\json_encode($formParams);
+
+            } else {
+                // for HTTP post (form)
+                $httpBody = \GuzzleHttp\Psr7\build_query($formParams);
+            }
+        }
+
+        //ASPOSE_PDF_CLOUD
+        if (!$this->config->getAccessToken()) 
+        {
+            $this->_requestToken();
+        }
+        if ($this->config->getAccessToken() !== null) 
+        {
+            $headers['Authorization'] = 'Bearer ' . $this->config->getAccessToken();
+        }
+        //ASPOSE_PDF_CLOUD
+
+        $defaultHeaders = [];
+        if ($this->config->getUserAgent()) {
+            $defaultHeaders['User-Agent'] = $this->config->getUserAgent();
+        }
+
+        $headers = array_merge(
+            $defaultHeaders,
+            $headerParams,
+            $headers
+        );
+
+        $query = \GuzzleHttp\Psr7\build_query($queryParams);
+        return new Request(
+            'PUT',
+            $this->config->getHost() . $resourcePath . ($query ? "?{$query}" : ''),
+            $headers,
+            $httpBody
+        );
+    }
+
+    /**
+     * Operation putCreateFolder
+     *
+     * Create the folder
+     *
+     * @param  string $path Target folder&#39;s path e.g. Folder1/Folder2/. The folders will be created recursively (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return \Aspose\PDF\Model\AsposeResponse
+     */
+    public function putCreateFolder($path, $storage = null, $dest_storage = null)
+    {
+        try
+        {
+            list($response) = $this->putCreateFolderWithHttpInfo($path, $storage, $dest_storage);
+            return $response;
+        }
+        catch (ApiException $ex)
+        {
+            if ($ex->getCode() == 401)
+            {
+                $this->_refreshToken();
+                list($response) = $this->putCreateFolderWithHttpInfo($path, $storage, $dest_storage);
+                return $response;
+            }
+            else
+            {
+                throw $ex;
+            }
+        }
+    }
+
+    /**
+     * Operation putCreateFolderWithHttpInfo
+     *
+     * Create the folder
+     *
+     * @param  string $path Target folder&#39;s path e.g. Folder1/Folder2/. The folders will be created recursively (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \Aspose\PDF\ApiException on non-2xx response
+     * @throws \InvalidArgumentException
+     * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
+     */
+    public function putCreateFolderWithHttpInfo($path, $storage = null, $dest_storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->putCreateFolderRequest($path, $storage, $dest_storage);
+
+        try {
+            $options = $this->createHttpClientOption();
+            try {
+                $response = $this->client->send($request, $options);
+            } catch (RequestException $e) {
+                throw new ApiException(
+                    "[{$e->getCode()}] {$e->getMessage()}",
+                    $e->getCode(),
+                    $e->getResponse() ? $e->getResponse()->getHeaders() : null,
+                    $e->getResponse() ? $e->getResponse()->getBody()->getContents() : null
+                );
+            }
+
+            $statusCode = $response->getStatusCode();
+
+            if ($statusCode < 200 || $statusCode > 299) {
+                throw new ApiException(
+                    sprintf(
+                        '[%d] Error connecting to the API (%s)',
+                        $statusCode,
+                        $request->getUri()
+                    ),
+                    $statusCode,
+                    $response->getHeaders(),
+                    $response->getBody()
+                );
+            }
+
+            $responseBody = $response->getBody();
+            if ($returnType === '\SplFileObject') {
+                $content = $responseBody; //stream goes to serializer
+            } else {
+                $content = $responseBody->getContents();
+                if ($returnType !== 'string') {
+                    $content = json_decode($content);
+                }
+            }
+
+            return [
+                ObjectSerializer::deserialize($content, $returnType, []),
+                $response->getStatusCode(),
+                $response->getHeaders()
+            ];
+
+        } catch (ApiException $e) {
+            switch ($e->getCode()) {
+                case 200:
+                    $data = ObjectSerializer::deserialize(
+                        $e->getResponseBody(),
+                        '\Aspose\PDF\Model\AsposeResponse',
+                        $e->getResponseHeaders()
+                    );
+                    $e->setResponseObject($data);
+                    break;
+            }
+            throw $e;
+        }
+    }
+
+    /**
+     * Operation putCreateFolderAsync
+     *
+     * Create the folder
+     *
+     * @param  string $path Target folder&#39;s path e.g. Folder1/Folder2/. The folders will be created recursively (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putCreateFolderAsync($path, $storage = null, $dest_storage = null)
+    {
+        return $this->putCreateFolderAsyncWithHttpInfo($path, $storage, $dest_storage)
+            ->then(
+                function ($response) {
+                    return $response[0];
+                }
+            );
+    }
+
+    /**
+     * Operation putCreateFolderAsyncWithHttpInfo
+     *
+     * Create the folder
+     *
+     * @param  string $path Target folder&#39;s path e.g. Folder1/Folder2/. The folders will be created recursively (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Promise\PromiseInterface
+     */
+    public function putCreateFolderAsyncWithHttpInfo($path, $storage = null, $dest_storage = null)
+    {
+        $returnType = '\Aspose\PDF\Model\AsposeResponse';
+        $request = $this->putCreateFolderRequest($path, $storage, $dest_storage);
+
+        return $this->client
+            ->sendAsync($request, $this->createHttpClientOption())
+            ->then(
+                function ($response) use ($returnType) {
+                    $responseBody = $response->getBody();
+                    if ($returnType === '\SplFileObject') {
+                        $content = $responseBody; //stream goes to serializer
+                    } else {
+                        $content = $responseBody->getContents();
+                        if ($returnType !== 'string') {
+                            $content = json_decode($content);
+                        }
+                    }
+
+                    return [
+                        ObjectSerializer::deserialize($content, $returnType, []),
+                        $response->getStatusCode(),
+                        $response->getHeaders()
+                    ];
+                },
+                function ($exception) {
+                    $response = $exception->getResponse();
+                    $statusCode = $response->getStatusCode();
+                    throw new ApiException(
+                        sprintf(
+                            '[%d] Error connecting to the API (%s)',
+                            $statusCode,
+                            $exception->getRequest()->getUri()
+                        ),
+                        $statusCode,
+                        $response->getHeaders(),
+                        $response->getBody()
+                    );
+                }
+            );
+    }
+
+    /**
+     * Create request for operation 'putCreateFolder'
+     *
+     * @param  string $path Target folder&#39;s path e.g. Folder1/Folder2/. The folders will be created recursively (required)
+     * @param  string $storage User&#39;s source storage name (optional)
+     * @param  string $dest_storage User&#39;s destination storage name (optional)
+     *
+     * @throws \InvalidArgumentException
+     * @return \GuzzleHttp\Psr7\Request
+     */
+    protected function putCreateFolderRequest($path, $storage = null, $dest_storage = null)
+    {
+        // verify the required parameter 'path' is set
+        if ($path === null) {
+            throw new \InvalidArgumentException(
+                'Missing the required parameter $path when calling putCreateFolder'
+            );
+        }
+
+        $resourcePath = '/storage/folder';
+        $formParams = [];
+        $queryParams = [];
+        $headerParams = [];
+        $httpBody = '';
+        $multipart = false;
+
+        // query params
+        if ($path !== null) {
+            $queryParams['path'] = ObjectSerializer::toQueryValue($path);
+        }
+        // query params
+        if ($storage !== null) {
+            $queryParams['storage'] = ObjectSerializer::toQueryValue($storage);
+        }
+        // query params
+        if ($dest_storage !== null) {
+            $queryParams['destStorage'] = ObjectSerializer::toQueryValue($dest_storage);
+        }
+
 
         // body params
         $_tempBody = null;
@@ -57572,7 +60655,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -57608,7 +60691,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -57686,7 +60769,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -57709,7 +60792,7 @@ class PdfApi
      * Converts PDF document (in request content) to EPUB format and uploads resulting file to storage.
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -57762,7 +60845,7 @@ class PdfApi
      * Create request for operation 'putPdfInRequestToEpub'
      *
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
      *
@@ -61868,7 +64951,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -61905,7 +64988,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -61984,7 +65067,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -62008,7 +65091,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *
@@ -62062,7 +65145,7 @@ class PdfApi
      *
      * @param  string $name The document name. (required)
      * @param  string $out_path Full resulting filename (ex. /folder1/folder2/result.epub) (required)
-     * @param  string $content_recognition_mode Рroperty tunes conversion for this or that desirable method of recognition of content. (optional)
+     * @param  string $content_recognition_mode Property tunes conversion for this or that desirable method of recognition of content. (optional)
      * @param  string $folder The document folder. (optional)
      * @param  string $storage The document storage. (optional)
      *

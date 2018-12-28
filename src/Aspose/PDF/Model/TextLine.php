@@ -3,7 +3,7 @@
  * TextLine Class 
  *
  * @category Class
- * @description A line of text to be inserted into .
+ * @description A line of text to be inserted into paragraph.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php

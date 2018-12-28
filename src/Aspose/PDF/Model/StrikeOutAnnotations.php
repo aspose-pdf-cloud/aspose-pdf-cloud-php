@@ -3,7 +3,7 @@
  * StrikeOutAnnotations Class 
  *
  * @category Class
- * @description List of annotations.
+ * @description Object representing a list of strikeout annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class StrikeOutAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\StrikeOutAnnotation[] $list list
+     * @param \Aspose\PDF\Model\StrikeOutAnnotation[] $list List of strikeout annotations.
      *
      * @return $this
      */

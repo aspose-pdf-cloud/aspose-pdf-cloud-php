@@ -3,7 +3,7 @@
  * FreeTextAnnotations Class 
  *
  * @category Class
- * @description List of annotations.
+ * @description Object representing a list of free text annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class FreeTextAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\FreeTextAnnotation[] $list list
+     * @param \Aspose\PDF\Model\FreeTextAnnotation[] $list List of free text annotations.
      *
      * @return $this
      */

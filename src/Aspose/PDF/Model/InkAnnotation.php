@@ -51,7 +51,6 @@ class InkAnnotation extends MarkupAnnotation
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'color' => '\Aspose\PDF\Model\Color',
         'ink_list' => '\Aspose\PDF\Model\Point[][]',
         'cap_style' => '\Aspose\PDF\Model\CapStyle'
     ];
@@ -62,7 +61,6 @@ class InkAnnotation extends MarkupAnnotation
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'color' => null,
         'ink_list' => null,
         'cap_style' => null
     ];
@@ -94,7 +92,6 @@ class InkAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $attributeMap = [
-        'color' => 'Color',
         'ink_list' => 'InkList',
         'cap_style' => 'CapStyle'
     ];
@@ -105,7 +102,6 @@ class InkAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $setters = [
-        'color' => 'setColor',
         'ink_list' => 'setInkList',
         'cap_style' => 'setCapStyle'
     ];
@@ -116,7 +112,6 @@ class InkAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $getters = [
-        'color' => 'getColor',
         'ink_list' => 'getInkList',
         'cap_style' => 'getCapStyle'
     ];
@@ -177,7 +172,6 @@ class InkAnnotation extends MarkupAnnotation
     {
         parent::__construct($data);
 
-        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['ink_list'] = isset($data['ink_list']) ? $data['ink_list'] : null;
         $this->container['cap_style'] = isset($data['cap_style']) ? $data['cap_style'] : null;
     }
@@ -209,30 +203,6 @@ class InkAnnotation extends MarkupAnnotation
         return true;
     }
 
-
-    /**
-     * Gets color
-     *
-     * @return \Aspose\PDF\Model\Color
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
-     *
-     * @return $this
-     */
-    public function setColor($color)
-    {
-        $this->container['color'] = $color;
-
-        return $this;
-    }
 
     /**
      * Gets ink_list

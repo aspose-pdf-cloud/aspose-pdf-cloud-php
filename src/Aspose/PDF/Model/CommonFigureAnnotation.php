@@ -52,7 +52,7 @@ class CommonFigureAnnotation extends MarkupAnnotation
       */
     protected static $swaggerTypes = [
         'interior_color' => '\Aspose\PDF\Model\Color',
-        'frame' => '\Aspose\PDF\Model\RectanglePdf'
+        'frame' => '\Aspose\PDF\Model\Rectangle'
     ];
 
     /**
@@ -231,7 +231,7 @@ class CommonFigureAnnotation extends MarkupAnnotation
     /**
      * Gets frame
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getFrame()
     {
@@ -241,7 +241,7 @@ class CommonFigureAnnotation extends MarkupAnnotation
     /**
      * Sets frame
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $frame Get or set the annotation Rectangle of frame.
+     * @param \Aspose\PDF\Model\Rectangle $frame Get or set the annotation Rectangle of frame.
      *
      * @return $this
      */

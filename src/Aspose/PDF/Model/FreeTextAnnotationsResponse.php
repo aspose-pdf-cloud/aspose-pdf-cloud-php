@@ -3,6 +3,7 @@
  * FreeTextAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple free text annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class FreeTextAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\FreeTextAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\FreeTextAnnotations $annotations Free text annotations object
      *
      * @return $this
      */

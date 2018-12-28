@@ -3,6 +3,7 @@
  * AttachmentResponse Class 
  *
  * @category Class
+ * @description Represents response containing single attachment info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class AttachmentResponse extends AsposeResponse
     /**
      * Sets attachment
      *
-     * @param \Aspose\PDF\Model\Attachment $attachment attachment
+     * @param \Aspose\PDF\Model\Attachment $attachment Attachment object
      *
      * @return $this
      */

@@ -3,7 +3,7 @@
  * Images Class 
  *
  * @category Class
- * @description List of page images.
+ * @description Represents list of images.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class Images extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\Image[] $list list
+     * @param \Aspose\PDF\Model\Image[] $list List of images.
      *
      * @return $this
      */

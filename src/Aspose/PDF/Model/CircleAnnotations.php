@@ -3,7 +3,7 @@
  * CircleAnnotations Class 
  *
  * @category Class
- * @description List of annotations.
+ * @description Object representing a list of circle annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class CircleAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\CircleAnnotation[] $list list
+     * @param \Aspose\PDF\Model\CircleAnnotation[] $list List of circle annotations.
      *
      * @return $this
      */

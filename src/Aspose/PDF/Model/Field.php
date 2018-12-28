@@ -54,7 +54,7 @@ class Field extends LinkElement
         'name' => 'string',
         'selected_items' => 'int[]',
         'type' => '\Aspose\PDF\Model\FieldType',
-        'rect' => '\Aspose\PDF\Model\RectanglePdf',
+        'rect' => '\Aspose\PDF\Model\Rectangle',
         'values' => 'string[]'
     ];
 
@@ -297,7 +297,7 @@ class Field extends LinkElement
     /**
      * Gets rect
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRect()
     {
@@ -307,7 +307,7 @@ class Field extends LinkElement
     /**
      * Sets rect
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rect Field rectangle.
+     * @param \Aspose\PDF\Model\Rectangle $rect Field rectangle.
      *
      * @return $this
      */

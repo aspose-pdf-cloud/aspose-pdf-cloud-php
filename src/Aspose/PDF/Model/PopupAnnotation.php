@@ -51,7 +51,6 @@ class PopupAnnotation extends Annotation
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'color' => '\Aspose\PDF\Model\Color',
         'open' => 'bool'
     ];
 
@@ -61,7 +60,6 @@ class PopupAnnotation extends Annotation
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'color' => null,
         'open' => null
     ];
 
@@ -92,7 +90,6 @@ class PopupAnnotation extends Annotation
      * @var string[]
      */
     protected static $attributeMap = [
-        'color' => 'Color',
         'open' => 'Open'
     ];
 
@@ -102,7 +99,6 @@ class PopupAnnotation extends Annotation
      * @var string[]
      */
     protected static $setters = [
-        'color' => 'setColor',
         'open' => 'setOpen'
     ];
 
@@ -112,7 +108,6 @@ class PopupAnnotation extends Annotation
      * @var string[]
      */
     protected static $getters = [
-        'color' => 'getColor',
         'open' => 'getOpen'
     ];
 
@@ -172,7 +167,6 @@ class PopupAnnotation extends Annotation
     {
         parent::__construct($data);
 
-        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['open'] = isset($data['open']) ? $data['open'] : null;
     }
 
@@ -203,30 +197,6 @@ class PopupAnnotation extends Annotation
         return true;
     }
 
-
-    /**
-     * Gets color
-     *
-     * @return \Aspose\PDF\Model\Color
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
-     *
-     * @return $this
-     */
-    public function setColor($color)
-    {
-        $this->container['color'] = $color;
-
-        return $this;
-    }
 
     /**
      * Gets open

@@ -3,6 +3,7 @@
  * LinkAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple links info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class LinkAnnotationsResponse extends AsposeResponse
     /**
      * Sets links
      *
-     * @param \Aspose\PDF\Model\LinkAnnotations $links links
+     * @param \Aspose\PDF\Model\LinkAnnotations $links LinkAnnotations object
      *
      * @return $this
      */

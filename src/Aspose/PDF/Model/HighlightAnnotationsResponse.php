@@ -3,6 +3,7 @@
  * HighlightAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple highlight annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class HighlightAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\HighlightAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\HighlightAnnotations $annotations Highlight annotations object
      *
      * @return $this
      */

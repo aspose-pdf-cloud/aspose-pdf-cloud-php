@@ -3,7 +3,7 @@
  * LineAnnotations Class 
  *
  * @category Class
- * @description List of annotations.
+ * @description Object representing a list of line annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class LineAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\LineAnnotation[] $list list
+     * @param \Aspose\PDF\Model\LineAnnotation[] $list List of line annotations.
      *
      * @return $this
      */

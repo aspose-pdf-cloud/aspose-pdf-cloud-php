@@ -3,7 +3,7 @@
  * Fields Class 
  *
  * @category Class
- * @description List of form fields.
+ * @description Represents list of form fields.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class Fields extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\Field[] $list list
+     * @param \Aspose\PDF\Model\Field[] $list List of form fields.
      *
      * @return $this
      */

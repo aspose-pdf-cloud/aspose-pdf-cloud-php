@@ -3,6 +3,7 @@
  * DocumentResponse Class 
  *
  * @category Class
+ * @description Represents response containing document info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -216,7 +217,7 @@ class DocumentResponse extends AsposeResponse
     /**
      * Sets document
      *
-     * @param \Aspose\PDF\Model\Document $document document
+     * @param \Aspose\PDF\Model\Document $document Document object
      *
      * @return $this
      */
@@ -240,7 +241,7 @@ class DocumentResponse extends AsposeResponse
     /**
      * Sets messages
      *
-     * @param string[] $messages messages
+     * @param string[] $messages A list of messages obtained while producing the responce
      *
      * @return $this
      */

@@ -3,7 +3,7 @@
  * TextRect Class 
  *
  * @category Class
- * @description Represents text DTO.
+ * @description Represents text occurrence.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -55,7 +55,7 @@ class TextRect implements ModelInterface, ArrayAccess
     protected static $swaggerTypes = [
         'text' => 'string',
         'page' => 'int',
-        'rect' => '\Aspose\PDF\Model\RectanglePdf'
+        'rect' => '\Aspose\PDF\Model\Rectangle'
     ];
 
     /**
@@ -232,7 +232,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Sets text
      *
-     * @param string $text text
+     * @param string $text Text of the occurrence.
      *
      * @return $this
      */
@@ -256,7 +256,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Sets page
      *
-     * @param int $page page
+     * @param int $page Page on which the occurrence is found.
      *
      * @return $this
      */
@@ -270,7 +270,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Gets rect
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRect()
     {
@@ -280,7 +280,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Sets rect
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rect rect
+     * @param \Aspose\PDF\Model\Rectangle $rect Rectangle of the occurrence.
      *
      * @return $this
      */

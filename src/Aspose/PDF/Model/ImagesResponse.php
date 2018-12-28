@@ -3,6 +3,7 @@
  * ImagesResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple images info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class ImagesResponse extends AsposeResponse
     /**
      * Sets images
      *
-     * @param \Aspose\PDF\Model\Images $images images
+     * @param \Aspose\PDF\Model\Images $images Images object
      *
      * @return $this
      */

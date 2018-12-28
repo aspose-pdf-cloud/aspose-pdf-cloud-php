@@ -3,6 +3,7 @@
  * AnnotationsInfoResponse Class 
  *
  * @category Class
+ * @description Represents multiple annotations info reponse
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class AnnotationsInfoResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\AnnotationsInfo $annotations annotations
+     * @param \Aspose\PDF\Model\AnnotationsInfo $annotations Annotations info
      *
      * @return $this
      */

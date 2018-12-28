@@ -3,7 +3,7 @@
  * SignatureVerifyResponse Class 
  *
  * @category Class
- * @description Returns also a message.
+ * @description Represent responce containing signature verification result
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class SignatureVerifyResponse extends AsposeResponse
     /**
      * Sets valid
      *
-     * @param bool $valid Valid sign.
+     * @param bool $valid True if signature is valid and false if not
      *
      * @return $this
      */

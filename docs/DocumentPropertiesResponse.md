@@ -1,11 +1,11 @@
 ﻿# DocumentPropertiesResponse
-
+Represents response containing multiple document properties info
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**document_properties** | [**\Aspose\PDF\Model\DocumentProperties**](DocumentProperties.md) |  | [optional]
+**document_properties** | [**\Aspose\PDF\Model\DocumentProperties**](DocumentProperties.md) | DocumentProperties object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

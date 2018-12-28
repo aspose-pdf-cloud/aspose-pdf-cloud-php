@@ -3,6 +3,7 @@
  * FieldResponse Class 
  *
  * @category Class
+ * @description Represents response containing single field info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class FieldResponse extends AsposeResponse
     /**
      * Sets field
      *
-     * @param \Aspose\PDF\Model\Field $field field
+     * @param \Aspose\PDF\Model\Field $field Field object
      *
      * @return $this
      */

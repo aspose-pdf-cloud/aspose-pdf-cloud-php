@@ -1,11 +1,11 @@
 ﻿# PopupAnnotationResponse
-
+Represents response containing single popup annotation object
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**annotation** | [**\Aspose\PDF\Model\PopupAnnotationWithParent**](PopupAnnotationWithParent.md) |  | [optional]
+**annotation** | [**\Aspose\PDF\Model\PopupAnnotationWithParent**](PopupAnnotationWithParent.md) | Popup annotation object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

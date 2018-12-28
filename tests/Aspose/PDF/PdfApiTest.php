@@ -165,7 +165,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\PolygonAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -191,7 +191,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\PolygonAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -260,7 +260,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\PolyLineAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -286,7 +286,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\PolyLineAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -356,7 +356,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\CircleAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -375,7 +375,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\CircleAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -438,7 +438,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\SquareAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -457,7 +457,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\SquareAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -519,7 +519,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $lineAnnotation = new Aspose\PDF\Model\LineAnnotation();
         $lineAnnotation->setName("Test Text");
-        $lineAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $lineAnnotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $lineAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $lineAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $lineAnnotation->setRichText("Rich Text");
@@ -540,7 +540,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $lineAnnotation = new Aspose\PDF\Model\LineAnnotation();
         $lineAnnotation->setName("Test Text Updated");
-        $lineAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $lineAnnotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $lineAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $lineAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $lineAnnotation->setRichText("Rich Text Updated");
@@ -611,7 +611,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $freeTextAnnotation = new Aspose\PDF\Model\FreeTextAnnotation();
         $freeTextAnnotation->setName("Test Free Text");
         $freeTextAnnotation->setTextStyle($textStyle);
-        $freeTextAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $freeTextAnnotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $freeTextAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $freeTextAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $freeTextAnnotation->setIntent(Aspose\PDF\Model\FreeTextIntent::FREE_TEXT_TYPE_WRITER);
@@ -639,7 +639,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $freeTextAnnotation = new Aspose\PDF\Model\FreeTextAnnotation();
         $freeTextAnnotation->setName("Test Free Text");
         $freeTextAnnotation->setTextStyle($textStyle);
-        $freeTextAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $freeTextAnnotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $freeTextAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $freeTextAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $freeTextAnnotation->setIntent(Aspose\PDF\Model\FreeTextIntent::FREE_TEXT_TYPE_WRITER);
@@ -703,7 +703,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $textAnnotation = new Aspose\PDF\Model\TextAnnotation();
         $textAnnotation->setName("Test Free Text");
-        $textAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $textAnnotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $textAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $textAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $textAnnotation->setRichText("Rich Text");
@@ -723,7 +723,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $textAnnotation = new Aspose\PDF\Model\TextAnnotation();
         $textAnnotation->setName("Test Free Text");
-        $textAnnotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $textAnnotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $textAnnotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $textAnnotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $textAnnotation->setRichText("Rich Text");
@@ -784,7 +784,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\HighlightAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -810,7 +810,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\HighlightAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -879,7 +879,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\SquigglyAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -905,7 +905,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\SquigglyAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -974,7 +974,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\StrikeOutAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -1000,7 +1000,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\StrikeOutAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -1069,14 +1069,14 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\CaretAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
         $annotation->setSubject("Subj");
         $annotation->setZIndex(1);
         $annotation->setTitle("Title");
-        $annotation->setFrame(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFrame(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $response = $this->pdfApi->postPageCaretAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
@@ -1090,14 +1090,14 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\CaretAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
         $annotation->setSubject("Subj Updated");
         $annotation->setZIndex(1);
         $annotation->setTitle("Title Updated");
-        $annotation->setFrame(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFrame(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $responseAnnotations = $this->pdfApi->getDocumentCaretAnnotations($name, null, $this->tempFolder);
@@ -1154,7 +1154,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\UnderlineAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -1180,7 +1180,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\UnderlineAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -1249,7 +1249,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\InkAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text");
@@ -1280,7 +1280,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\InkAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setRichText("Rich Text Updated");
@@ -1366,7 +1366,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\PopupAnnotation();
         $annotation->setName("Test Text");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setZIndex(1);
@@ -1383,7 +1383,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $annotation = new Aspose\PDF\Model\PopupAnnotation();
         $annotation->setName("Test Text Updated");
-        $annotation->setRect(new Aspose\PDF\Model\RectanglePdf(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
         $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::_DEFAULT]);
         $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
         $annotation->setZIndex(1);
@@ -2369,7 +2369,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $name = 'Hello_world.pdf';
         $this->uploadFile($name);
 
-        $rect = new Aspose\PDF\Model\RectanglePdf();
+        $rect = new Aspose\PDF\Model\Rectangle();
         $rect->setLlx(50);
         $rect->setLly(200);
         $rect->setUrx(200);
@@ -2453,6 +2453,16 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testPostFlattenDocument()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+
+        $response = $this->pdfApi->postFlattenDocument($name, $update_appearances = false, $call_events = null, $hide_buttons = true, $storage = null, $folder);
+        $this->assertEquals(200, $response->getCode());
+    }
 
     // Images Tests
 
@@ -2767,7 +2777,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $name = 'PdfWithLinks.pdf';
         $this->uploadFile($name);
 
-        $rect1 = new \Aspose\PDF\Model\RectanglePdf();
+        $rect1 = new \Aspose\PDF\Model\Rectangle();
         $rect1->setLlx(100);
         $rect1->setLly(100);
         $rect1->setUrx(200);
@@ -2778,7 +2788,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $linkAnnotation1->setAction("https://products.aspose.cloud/pdf");
         $linkAnnotation1->setRect($rect1);
 
-        $rect2 = new \Aspose\PDF\Model\RectanglePdf();
+        $rect2 = new \Aspose\PDF\Model\Rectangle();
         $rect2->setLlx(200);
         $rect2->setLly(200);
         $rect2->setUrx(300);
@@ -2803,7 +2813,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $name = 'PdfWithLinks.pdf';
         $this->uploadFile($name);
 
-        $rect1 = new \Aspose\PDF\Model\RectanglePdf();
+        $rect1 = new \Aspose\PDF\Model\Rectangle();
         $rect1->setLlx(100);
         $rect1->setLly(100);
         $rect1->setUrx(200);
@@ -3257,7 +3267,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $signatureFileName = 'test1234.pfx';
         $this->uploadFile($signatureFileName);
 
-        $rectangle = new Aspose\PDF\Model\RectanglePdf();
+        $rectangle = new Aspose\PDF\Model\Rectangle();
         $rectangle->setLlx(100);
         $rectangle->setLly(100);
         $rectangle->setUrx(500);
@@ -3292,7 +3302,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $signatureFileName = 'test1234.pfx';
         $this->uploadFile($signatureFileName);
 
-        $rectangle = new Aspose\PDF\Model\RectanglePdf();
+        $rectangle = new Aspose\PDF\Model\Rectangle();
         $rectangle->setLlx(100);
         $rectangle->setLly(100);
         $rectangle->setUrx(500);
@@ -3327,7 +3337,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $pageNumber = 1;
 
-        $rectangle = new Aspose\PDF\Model\RectanglePdf();
+        $rectangle = new Aspose\PDF\Model\Rectangle();
         $rectangle->setLlx(100);
         $rectangle->setLly(100);
         $rectangle->setUrx(500);
@@ -3358,7 +3368,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $name = "marketing.pdf";
         $this->uploadFile($name);
 
-        $rect = new Aspose\PDF\Model\RectanglePdf();
+        $rect = new Aspose\PDF\Model\Rectangle();
         $rect->setLlx(100);
         $rect->setLly(100);
         $rect->setUrx(300);
@@ -3388,7 +3398,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->uploadFile($name);
         $pageNumber = 1;
 
-        $rect = new Aspose\PDF\Model\RectanglePdf();
+        $rect = new Aspose\PDF\Model\Rectangle();
         $rect->setLlx(100);
         $rect->setLly(100);
         $rect->setUrx(300);
@@ -3455,7 +3465,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $pageNumber = 1;
         $folder = $this->tempFolder;
 
-        $rectangle = new Aspose\PDF\Model\RectanglePdf();
+        $rectangle = new Aspose\PDF\Model\Rectangle();
         $rectangle->setLlx(100);
         $rectangle->setLly(100);
         $rectangle->setUrx(200);
@@ -3507,7 +3517,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
-    // Upload/Download Tests
+    // Storage Tests
     
     public function testUploadFile()
     {
@@ -3532,6 +3542,98 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     public function testGetListFiles()
     {
         $response = $this->pdfApi->getListFiles($this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostMoveFile()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $src = $this->tempFolder . '/' . $name;
+        $dest = $this->tempFolder . '/4pages_renamed.pdf';
+
+        $response = $this->pdfApi->postMoveFile($src, $dest);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeleteFile()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $path = $this->tempFolder . '/' . $name;
+        
+        $response = $this->pdfApi->deleteFile($path);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutCreateFolder()
+    {
+        $path = $this->tempFolder . '/testFolder';
+        
+        $response = $this->pdfApi->putCreateFolder($path);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostMoveFolder()
+    {
+        $src = $this->tempFolder . '/testFolder';
+        
+        $responseCreateFolder = $this->pdfApi->putCreateFolder($src);
+        $this->assertEquals(200, $responseCreateFolder->getCode());
+
+        $dest = $this->tempFolder . '/testFolderRenamed';
+
+        $response = $this->pdfApi->postMoveFolder($src, $dest);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeleteFolder()
+    {
+        $path = $this->tempFolder . '/testFolder';
+        
+        $responseCreateFolder = $this->pdfApi->putCreateFolder($path);
+        $this->assertEquals(200, $responseCreateFolder->getCode());
+
+
+        $response = $this->pdfApi->deleteFolder($path);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetIsStorageExist()
+    {
+        $name = 'PDF-CI';
+        
+        $response = $this->pdfApi->getIsStorageExist($name);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetIsExist()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $path = $this->tempFolder . '/' . $name; 
+        
+        $response = $this->pdfApi->getIsExist($path);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetDiscUsage()
+    {
+        $response = $this->pdfApi->getDiscUsage();
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetListFileVersions()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $path = $this->tempFolder . '/' . $name; 
+        
+        $response = $this->pdfApi->getListFileVersions($path);
         $this->assertEquals(200, $response->getCode());
     }
 }

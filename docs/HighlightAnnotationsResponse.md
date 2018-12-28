@@ -1,11 +1,11 @@
 ﻿# HighlightAnnotationsResponse
-
+Represents response containing multiple highlight annotation objects
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**annotations** | [**\Aspose\PDF\Model\HighlightAnnotations**](HighlightAnnotations.md) |  | [optional]
+**annotations** | [**\Aspose\PDF\Model\HighlightAnnotations**](HighlightAnnotations.md) | Highlight annotations object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

@@ -51,8 +51,7 @@ class CaretAnnotation extends MarkupAnnotation
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'color' => '\Aspose\PDF\Model\Color',
-        'frame' => '\Aspose\PDF\Model\RectanglePdf',
+        'frame' => '\Aspose\PDF\Model\Rectangle',
         'symbol' => '\Aspose\PDF\Model\CaretSymbol'
     ];
 
@@ -62,7 +61,6 @@ class CaretAnnotation extends MarkupAnnotation
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'color' => null,
         'frame' => null,
         'symbol' => null
     ];
@@ -94,7 +92,6 @@ class CaretAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $attributeMap = [
-        'color' => 'Color',
         'frame' => 'Frame',
         'symbol' => 'Symbol'
     ];
@@ -105,7 +102,6 @@ class CaretAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $setters = [
-        'color' => 'setColor',
         'frame' => 'setFrame',
         'symbol' => 'setSymbol'
     ];
@@ -116,7 +112,6 @@ class CaretAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $getters = [
-        'color' => 'getColor',
         'frame' => 'getFrame',
         'symbol' => 'getSymbol'
     ];
@@ -177,7 +172,6 @@ class CaretAnnotation extends MarkupAnnotation
     {
         parent::__construct($data);
 
-        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['frame'] = isset($data['frame']) ? $data['frame'] : null;
         $this->container['symbol'] = isset($data['symbol']) ? $data['symbol'] : null;
     }
@@ -211,33 +205,9 @@ class CaretAnnotation extends MarkupAnnotation
 
 
     /**
-     * Gets color
-     *
-     * @return \Aspose\PDF\Model\Color
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
-     *
-     * @return $this
-     */
-    public function setColor($color)
-    {
-        $this->container['color'] = $color;
-
-        return $this;
-    }
-
-    /**
      * Gets frame
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getFrame()
     {
@@ -247,7 +217,7 @@ class CaretAnnotation extends MarkupAnnotation
     /**
      * Sets frame
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $frame Gets or sets caret rectangle.
+     * @param \Aspose\PDF\Model\Rectangle $frame Gets or sets caret rectangle.
      *
      * @return $this
      */

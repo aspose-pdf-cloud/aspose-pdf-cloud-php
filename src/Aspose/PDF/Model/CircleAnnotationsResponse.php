@@ -3,6 +3,7 @@
  * CircleAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple circle annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class CircleAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\CircleAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\CircleAnnotations $annotations Circle annotations object
      *
      * @return $this
      */

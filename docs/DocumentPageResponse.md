@@ -1,11 +1,11 @@
 ﻿# DocumentPageResponse
-
+Represents response containing single page info
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**page** | [**\Aspose\PDF\Model\Page**](Page.md) |  | [optional]
+**page** | [**\Aspose\PDF\Model\Page**](Page.md) | Page object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

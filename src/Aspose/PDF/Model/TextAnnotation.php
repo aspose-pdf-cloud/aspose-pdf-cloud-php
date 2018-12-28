@@ -53,7 +53,6 @@ class TextAnnotation extends MarkupAnnotation
     protected static $swaggerTypes = [
         'state' => '\Aspose\PDF\Model\AnnotationState',
         'open' => 'bool',
-        'color' => '\Aspose\PDF\Model\Color',
         'icon' => '\Aspose\PDF\Model\TextIcon'
     ];
 
@@ -65,7 +64,6 @@ class TextAnnotation extends MarkupAnnotation
     protected static $swaggerFormats = [
         'state' => null,
         'open' => null,
-        'color' => null,
         'icon' => null
     ];
 
@@ -98,7 +96,6 @@ class TextAnnotation extends MarkupAnnotation
     protected static $attributeMap = [
         'state' => 'State',
         'open' => 'Open',
-        'color' => 'Color',
         'icon' => 'Icon'
     ];
 
@@ -110,7 +107,6 @@ class TextAnnotation extends MarkupAnnotation
     protected static $setters = [
         'state' => 'setState',
         'open' => 'setOpen',
-        'color' => 'setColor',
         'icon' => 'setIcon'
     ];
 
@@ -122,7 +118,6 @@ class TextAnnotation extends MarkupAnnotation
     protected static $getters = [
         'state' => 'getState',
         'open' => 'getOpen',
-        'color' => 'getColor',
         'icon' => 'getIcon'
     ];
 
@@ -184,7 +179,6 @@ class TextAnnotation extends MarkupAnnotation
 
         $this->container['state'] = isset($data['state']) ? $data['state'] : null;
         $this->container['open'] = isset($data['open']) ? $data['open'] : null;
-        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['icon'] = isset($data['icon']) ? $data['icon'] : null;
     }
 
@@ -260,30 +254,6 @@ class TextAnnotation extends MarkupAnnotation
     public function setOpen($open)
     {
         $this->container['open'] = $open;
-
-        return $this;
-    }
-
-    /**
-     * Gets color
-     *
-     * @return \Aspose\PDF\Model\Color
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
-     *
-     * @return $this
-     */
-    public function setColor($color)
-    {
-        $this->container['color'] = $color;
 
         return $this;
     }

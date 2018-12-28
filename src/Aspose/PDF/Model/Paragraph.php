@@ -3,7 +3,7 @@
  * Paragraph Class 
  *
  * @category Class
- * @description Paragraph DTO for add text functionality.
+ * @description Represents text paragraphs as multiline text object.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -60,7 +60,7 @@ class Paragraph implements ModelInterface, ArrayAccess
         'right_margin' => 'double',
         'top_margin' => 'double',
         'bottom_margin' => 'double',
-        'rectangle' => '\Aspose\PDF\Model\RectanglePdf',
+        'rectangle' => '\Aspose\PDF\Model\Rectangle',
         'rotation' => 'double',
         'subsequent_lines_indent' => 'double',
         'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
@@ -286,7 +286,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets line_spacing
      *
-     * @param \Aspose\PDF\Model\LineSpacing $line_spacing line_spacing
+     * @param \Aspose\PDF\Model\LineSpacing $line_spacing Line spacing mode.
      *
      * @return $this
      */
@@ -310,7 +310,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets wrap_mode
      *
-     * @param \Aspose\PDF\Model\WrapMode $wrap_mode wrap_mode
+     * @param \Aspose\PDF\Model\WrapMode $wrap_mode Word wrap mode.
      *
      * @return $this
      */
@@ -334,7 +334,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets horizontal_alignment
      *
-     * @param \Aspose\PDF\Model\TextHorizontalAlignment $horizontal_alignment horizontal_alignment
+     * @param \Aspose\PDF\Model\TextHorizontalAlignment $horizontal_alignment Horizontal alignment for the text inside paragrph's rectangle.
      *
      * @return $this
      */
@@ -358,7 +358,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets left_margin
      *
-     * @param double $left_margin left_margin
+     * @param double $left_margin Left margin.
      *
      * @return $this
      */
@@ -382,7 +382,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets right_margin
      *
-     * @param double $right_margin right_margin
+     * @param double $right_margin Right margin.
      *
      * @return $this
      */
@@ -406,7 +406,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets top_margin
      *
-     * @param double $top_margin top_margin
+     * @param double $top_margin Top margin.
      *
      * @return $this
      */
@@ -430,7 +430,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets bottom_margin
      *
-     * @param double $bottom_margin bottom_margin
+     * @param double $bottom_margin Bottom margin.
      *
      * @return $this
      */
@@ -444,7 +444,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Gets rectangle
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRectangle()
     {
@@ -454,7 +454,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets rectangle
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rectangle rectangle
+     * @param \Aspose\PDF\Model\Rectangle $rectangle Rectangle of the paragraph.
      *
      * @return $this
      */
@@ -478,7 +478,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets rotation
      *
-     * @param double $rotation rotation
+     * @param double $rotation Rotation angle in degrees.
      *
      * @return $this
      */
@@ -502,7 +502,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets subsequent_lines_indent
      *
-     * @param double $subsequent_lines_indent subsequent_lines_indent
+     * @param double $subsequent_lines_indent Subsequent lines indent value.
      *
      * @return $this
      */
@@ -526,7 +526,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets vertical_alignment
      *
-     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment vertical_alignment
+     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Vertical alignment for the text inside paragrph's rectangle
      *
      * @return $this
      */
@@ -550,7 +550,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets lines
      *
-     * @param \Aspose\PDF\Model\TextLine[] $lines lines
+     * @param \Aspose\PDF\Model\TextLine[] $lines An array of text lines.
      *
      * @return $this
      */

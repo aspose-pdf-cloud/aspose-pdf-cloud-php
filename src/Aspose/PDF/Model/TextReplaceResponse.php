@@ -3,6 +3,7 @@
  * TextReplaceResponse Class 
  *
  * @category Class
+ * @description Represents response containing the result of text replacement
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class TextReplaceResponse extends AsposeResponse
     /**
      * Sets matches
      *
-     * @param int $matches matches
+     * @param int $matches Number of matches
      *
      * @return $this
      */

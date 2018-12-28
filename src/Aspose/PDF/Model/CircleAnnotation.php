@@ -51,7 +51,7 @@ class CircleAnnotation extends CommonFigureAnnotation
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'color' => '\Aspose\PDF\Model\Color'
+        
     ];
 
     /**
@@ -60,7 +60,7 @@ class CircleAnnotation extends CommonFigureAnnotation
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'color' => null
+        
     ];
 
     /**
@@ -90,7 +90,7 @@ class CircleAnnotation extends CommonFigureAnnotation
      * @var string[]
      */
     protected static $attributeMap = [
-        'color' => 'Color'
+        
     ];
 
     /**
@@ -99,7 +99,7 @@ class CircleAnnotation extends CommonFigureAnnotation
      * @var string[]
      */
     protected static $setters = [
-        'color' => 'setColor'
+        
     ];
 
     /**
@@ -108,7 +108,7 @@ class CircleAnnotation extends CommonFigureAnnotation
      * @var string[]
      */
     protected static $getters = [
-        'color' => 'getColor'
+        
     ];
 
     /**
@@ -167,7 +167,6 @@ class CircleAnnotation extends CommonFigureAnnotation
     {
         parent::__construct($data);
 
-        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
     }
 
     /**
@@ -197,30 +196,6 @@ class CircleAnnotation extends CommonFigureAnnotation
         return true;
     }
 
-
-    /**
-     * Gets color
-     *
-     * @return \Aspose\PDF\Model\Color
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
-     *
-     * @return $this
-     */
-    public function setColor($color)
-    {
-        $this->container['color'] = $color;
-
-        return $this;
-    }
     /**
      * Returns true if offset exists. False otherwise.
      *

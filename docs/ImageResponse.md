@@ -1,11 +1,11 @@
 ﻿# ImageResponse
-
+Represents response containing single image info
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**image** | [**\Aspose\PDF\Model\Image**](Image.md) |  | [optional]
+**image** | [**\Aspose\PDF\Model\Image**](Image.md) | Image object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 
