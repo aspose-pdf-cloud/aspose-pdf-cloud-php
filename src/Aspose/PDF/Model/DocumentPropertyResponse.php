@@ -3,6 +3,7 @@
  * DocumentPropertyResponse Class 
  *
  * @category Class
+ * @description Represents response containing single document property info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class DocumentPropertyResponse extends AsposeResponse
     /**
      * Sets document_property
      *
-     * @param \Aspose\PDF\Model\DocumentProperty $document_property document_property
+     * @param \Aspose\PDF\Model\DocumentProperty $document_property DocumentProperty object
      *
      * @return $this
      */

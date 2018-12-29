@@ -1,11 +1,11 @@
 ﻿# LinkAnnotationsResponse
-
+Represents response containing multiple links info
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**links** | [**\Aspose\PDF\Model\LinkAnnotations**](LinkAnnotations.md) |  | [optional]
+**links** | [**\Aspose\PDF\Model\LinkAnnotations**](LinkAnnotations.md) | LinkAnnotations object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

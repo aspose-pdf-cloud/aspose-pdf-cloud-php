@@ -3,6 +3,7 @@
  * DocumentPageResponse Class 
  *
  * @category Class
+ * @description Represents response containing single page info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class DocumentPageResponse extends AsposeResponse
     /**
      * Sets page
      *
-     * @param \Aspose\PDF\Model\Page $page page
+     * @param \Aspose\PDF\Model\Page $page Page object
      *
      * @return $this
      */

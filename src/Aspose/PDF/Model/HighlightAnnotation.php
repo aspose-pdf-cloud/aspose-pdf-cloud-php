@@ -51,7 +51,6 @@ class HighlightAnnotation extends MarkupAnnotation
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'color' => '\Aspose\PDF\Model\Color',
         'quad_points' => '\Aspose\PDF\Model\Point[]'
     ];
 
@@ -61,7 +60,6 @@ class HighlightAnnotation extends MarkupAnnotation
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'color' => null,
         'quad_points' => null
     ];
 
@@ -92,7 +90,6 @@ class HighlightAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $attributeMap = [
-        'color' => 'Color',
         'quad_points' => 'QuadPoints'
     ];
 
@@ -102,7 +99,6 @@ class HighlightAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $setters = [
-        'color' => 'setColor',
         'quad_points' => 'setQuadPoints'
     ];
 
@@ -112,7 +108,6 @@ class HighlightAnnotation extends MarkupAnnotation
      * @var string[]
      */
     protected static $getters = [
-        'color' => 'getColor',
         'quad_points' => 'getQuadPoints'
     ];
 
@@ -172,7 +167,6 @@ class HighlightAnnotation extends MarkupAnnotation
     {
         parent::__construct($data);
 
-        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['quad_points'] = isset($data['quad_points']) ? $data['quad_points'] : null;
     }
 
@@ -203,30 +197,6 @@ class HighlightAnnotation extends MarkupAnnotation
         return true;
     }
 
-
-    /**
-     * Gets color
-     *
-     * @return \Aspose\PDF\Model\Color
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
-     *
-     * @return $this
-     */
-    public function setColor($color)
-    {
-        $this->container['color'] = $color;
-
-        return $this;
-    }
 
     /**
      * Gets quad_points

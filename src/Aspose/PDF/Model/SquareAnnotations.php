@@ -3,7 +3,7 @@
  * SquareAnnotations Class 
  *
  * @category Class
- * @description List of annotations.
+ * @description Object representing a list of square annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class SquareAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\SquareAnnotation[] $list list
+     * @param \Aspose\PDF\Model\SquareAnnotation[] $list List of square annotations.
      *
      * @return $this
      */

@@ -62,7 +62,6 @@ class LineAnnotation extends MarkupAnnotation
         'show_caption' => 'bool',
         'caption_offset' => '\Aspose\PDF\Model\Point',
         'caption_position' => '\Aspose\PDF\Model\CaptionPosition',
-        'color' => '\Aspose\PDF\Model\Color',
         'intent' => '\Aspose\PDF\Model\LineIntent'
     ];
 
@@ -83,7 +82,6 @@ class LineAnnotation extends MarkupAnnotation
         'show_caption' => null,
         'caption_offset' => null,
         'caption_position' => null,
-        'color' => null,
         'intent' => null
     ];
 
@@ -125,7 +123,6 @@ class LineAnnotation extends MarkupAnnotation
         'show_caption' => 'ShowCaption',
         'caption_offset' => 'CaptionOffset',
         'caption_position' => 'CaptionPosition',
-        'color' => 'Color',
         'intent' => 'Intent'
     ];
 
@@ -146,7 +143,6 @@ class LineAnnotation extends MarkupAnnotation
         'show_caption' => 'setShowCaption',
         'caption_offset' => 'setCaptionOffset',
         'caption_position' => 'setCaptionPosition',
-        'color' => 'setColor',
         'intent' => 'setIntent'
     ];
 
@@ -167,7 +163,6 @@ class LineAnnotation extends MarkupAnnotation
         'show_caption' => 'getShowCaption',
         'caption_offset' => 'getCaptionOffset',
         'caption_position' => 'getCaptionPosition',
-        'color' => 'getColor',
         'intent' => 'getIntent'
     ];
 
@@ -238,7 +233,6 @@ class LineAnnotation extends MarkupAnnotation
         $this->container['show_caption'] = isset($data['show_caption']) ? $data['show_caption'] : null;
         $this->container['caption_offset'] = isset($data['caption_offset']) ? $data['caption_offset'] : null;
         $this->container['caption_position'] = isset($data['caption_position']) ? $data['caption_position'] : null;
-        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['intent'] = isset($data['intent']) ? $data['intent'] : null;
     }
 
@@ -530,30 +524,6 @@ class LineAnnotation extends MarkupAnnotation
     public function setCaptionPosition($caption_position)
     {
         $this->container['caption_position'] = $caption_position;
-
-        return $this;
-    }
-
-    /**
-     * Gets color
-     *
-     * @return \Aspose\PDF\Model\Color
-     */
-    public function getColor()
-    {
-        return $this->container['color'];
-    }
-
-    /**
-     * Sets color
-     *
-     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
-     *
-     * @return $this
-     */
-    public function setColor($color)
-    {
-        $this->container['color'] = $color;
 
         return $this;
     }

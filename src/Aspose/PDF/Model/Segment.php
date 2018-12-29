@@ -3,6 +3,7 @@
  * Segment Class 
  *
  * @category Class
+ * @description Represents segment of Pdf text.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -225,7 +226,7 @@ class Segment implements ModelInterface, ArrayAccess
     /**
      * Sets value
      *
-     * @param string $value value
+     * @param string $value Text that the Segment object represents.
      *
      * @return $this
      */
@@ -249,7 +250,7 @@ class Segment implements ModelInterface, ArrayAccess
     /**
      * Sets text_state
      *
-     * @param \Aspose\PDF\Model\TextState $text_state text_state
+     * @param \Aspose\PDF\Model\TextState $text_state Text state for the text that Segment object represents.
      *
      * @return $this
      */

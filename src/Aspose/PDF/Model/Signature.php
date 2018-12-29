@@ -3,6 +3,7 @@
  * Signature Class 
  *
  * @category Class
+ * @description Represents signature.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -60,7 +61,7 @@ class Signature implements ModelInterface, ArrayAccess
         'contact' => 'string',
         'location' => 'string',
         'visible' => 'bool',
-        'rectangle' => '\Aspose\PDF\Model\RectanglePdf',
+        'rectangle' => '\Aspose\PDF\Model\Rectangle',
         'form_field_name' => 'string',
         'authority' => 'string',
         'date' => 'string',
@@ -491,7 +492,7 @@ class Signature implements ModelInterface, ArrayAccess
     /**
      * Gets rectangle
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRectangle()
     {
@@ -501,7 +502,7 @@ class Signature implements ModelInterface, ArrayAccess
     /**
      * Sets rectangle
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rectangle Gets or sets the visible rectangle of the signature. Supports only when signing particular page.
+     * @param \Aspose\PDF\Model\Rectangle $rectangle Gets or sets the visible rectangle of the signature. Supports only when signing particular page.
      *
      * @return $this
      */

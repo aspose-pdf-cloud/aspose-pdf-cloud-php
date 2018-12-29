@@ -3,6 +3,7 @@
  * PolygonAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple polygon annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class PolygonAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\PolygonAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\PolygonAnnotations $annotations Polygon annotations object
      *
      * @return $this
      */

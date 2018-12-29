@@ -3,7 +3,7 @@
  * TextRects Class 
  *
  * @category Class
- * @description Represents text items DTO.
+ * @description Represents multiple text occurrences DTO.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -214,7 +214,7 @@ class TextRects implements ModelInterface, ArrayAccess
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\TextRect[] $list list
+     * @param \Aspose\PDF\Model\TextRect[] $list The list of text occurrences.
      *
      * @return $this
      */

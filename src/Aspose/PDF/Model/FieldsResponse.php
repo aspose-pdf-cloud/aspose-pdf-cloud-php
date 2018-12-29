@@ -3,6 +3,7 @@
  * FieldsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple fields info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class FieldsResponse extends AsposeResponse
     /**
      * Sets fields
      *
-     * @param \Aspose\PDF\Model\Fields $fields fields
+     * @param \Aspose\PDF\Model\Fields $fields Fields object
      *
      * @return $this
      */

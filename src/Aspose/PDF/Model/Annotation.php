@@ -51,12 +51,13 @@ class Annotation extends LinkElement
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'color' => '\Aspose\PDF\Model\Color',
         'contents' => 'string',
         'modified' => 'string',
         'id' => 'string',
         'flags' => '\Aspose\PDF\Model\AnnotationFlags[]',
         'name' => 'string',
-        'rect' => '\Aspose\PDF\Model\RectanglePdf',
+        'rect' => '\Aspose\PDF\Model\Rectangle',
         'page_index' => 'int',
         'z_index' => 'int',
         'horizontal_alignment' => '\Aspose\PDF\Model\HorizontalAlignment',
@@ -69,6 +70,7 @@ class Annotation extends LinkElement
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'color' => null,
         'contents' => null,
         'modified' => null,
         'id' => null,
@@ -108,6 +110,7 @@ class Annotation extends LinkElement
      * @var string[]
      */
     protected static $attributeMap = [
+        'color' => 'Color',
         'contents' => 'Contents',
         'modified' => 'Modified',
         'id' => 'Id',
@@ -126,6 +129,7 @@ class Annotation extends LinkElement
      * @var string[]
      */
     protected static $setters = [
+        'color' => 'setColor',
         'contents' => 'setContents',
         'modified' => 'setModified',
         'id' => 'setId',
@@ -144,6 +148,7 @@ class Annotation extends LinkElement
      * @var string[]
      */
     protected static $getters = [
+        'color' => 'getColor',
         'contents' => 'getContents',
         'modified' => 'getModified',
         'id' => 'getId',
@@ -212,6 +217,7 @@ class Annotation extends LinkElement
     {
         parent::__construct($data);
 
+        $this->container['color'] = isset($data['color']) ? $data['color'] : null;
         $this->container['contents'] = isset($data['contents']) ? $data['contents'] : null;
         $this->container['modified'] = isset($data['modified']) ? $data['modified'] : null;
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
@@ -251,6 +257,30 @@ class Annotation extends LinkElement
         return true;
     }
 
+
+    /**
+     * Gets color
+     *
+     * @return \Aspose\PDF\Model\Color
+     */
+    public function getColor()
+    {
+        return $this->container['color'];
+    }
+
+    /**
+     * Sets color
+     *
+     * @param \Aspose\PDF\Model\Color $color Color of the annotation.
+     *
+     * @return $this
+     */
+    public function setColor($color)
+    {
+        $this->container['color'] = $color;
+
+        return $this;
+    }
 
     /**
      * Gets contents
@@ -375,7 +405,7 @@ class Annotation extends LinkElement
     /**
      * Gets rect
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRect()
     {
@@ -385,7 +415,7 @@ class Annotation extends LinkElement
     /**
      * Sets rect
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rect Gets Rect of the annotation.
+     * @param \Aspose\PDF\Model\Rectangle $rect Gets Rect of the annotation.
      *
      * @return $this
      */

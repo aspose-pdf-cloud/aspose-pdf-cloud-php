@@ -3,6 +3,7 @@
  * StrikeOutAnnotationResponse Class 
  *
  * @category Class
+ * @description Represents response containing single strikeout annotation object
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class StrikeOutAnnotationResponse extends AsposeResponse
     /**
      * Sets annotation
      *
-     * @param \Aspose\PDF\Model\StrikeOutAnnotation $annotation annotation
+     * @param \Aspose\PDF\Model\StrikeOutAnnotation $annotation Strikeout annotation object
      *
      * @return $this
      */

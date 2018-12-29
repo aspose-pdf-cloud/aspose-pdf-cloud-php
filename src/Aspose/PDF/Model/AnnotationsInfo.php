@@ -3,7 +3,7 @@
  * AnnotationsInfo Class 
  *
  * @category Class
- * @description List of annotations.
+ * @description Object representing a list of annotation info objects.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class AnnotationsInfo extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\AnnotationInfo[] $list list
+     * @param \Aspose\PDF\Model\AnnotationInfo[] $list List of annotation info objects.
      *
      * @return $this
      */

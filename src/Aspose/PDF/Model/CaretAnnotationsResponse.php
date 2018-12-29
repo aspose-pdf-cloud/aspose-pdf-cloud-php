@@ -3,6 +3,7 @@
  * CaretAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple caret annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class CaretAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\CaretAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\CaretAnnotations $annotations Caret annotations object
      *
      * @return $this
      */

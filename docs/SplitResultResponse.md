@@ -1,11 +1,11 @@
 ﻿# SplitResultResponse
-Represents split result object.
+Represents responce containing split result.
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**result** | [**\Aspose\PDF\Model\SplitResult**](SplitResult.md) | Gets or sets the splitting result. | [optional]
+**result** | [**\Aspose\PDF\Model\SplitResult**](SplitResult.md) | SplitResult object. | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

@@ -3,7 +3,7 @@
  * WrapMode Class 
  *
  * @category Class
- * @description 
+ * @description Defines word wrapping strategies
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php

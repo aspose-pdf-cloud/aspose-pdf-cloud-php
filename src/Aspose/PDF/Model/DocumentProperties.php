@@ -3,7 +3,7 @@
  * DocumentProperties Class 
  *
  * @category Class
- * @description Pdf document properties.
+ * @description Represents list of PDF document properties.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class DocumentProperties extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\DocumentProperty[] $list list
+     * @param \Aspose\PDF\Model\DocumentProperty[] $list List of PDF document properties.
      *
      * @return $this
      */

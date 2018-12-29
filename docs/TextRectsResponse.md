@@ -1,11 +1,11 @@
 ﻿# TextRectsResponse
-
+Represents response containing multiple text occurrences info
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**text_occurences** | [**\Aspose\PDF\Model\TextRects**](TextRects.md) |  | [optional]
+**text_occurrences** | [**\Aspose\PDF\Model\TextRects**](TextRects.md) | TextRects object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

@@ -1,11 +1,11 @@
 ﻿# AnnotationsInfoResponse
-
+Represents multiple annotations info reponse
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**annotations** | [**\Aspose\PDF\Model\AnnotationsInfo**](AnnotationsInfo.md) |  | [optional]
+**annotations** | [**\Aspose\PDF\Model\AnnotationsInfo**](AnnotationsInfo.md) | Annotations info | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

@@ -3,6 +3,7 @@
  * UnderlineAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple underline annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class UnderlineAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\UnderlineAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\UnderlineAnnotations $annotations Underline annotations object
      *
      * @return $this
      */

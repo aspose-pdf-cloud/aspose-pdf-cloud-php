@@ -1,6 +1,6 @@
 <?php
 /**
- * RectanglePdf Class 
+ * Rectangle Class 
  *
  * @category Class
  * @description Represents rectangle DTO.
@@ -36,7 +36,7 @@ namespace Aspose\PDF\Model;
 use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class RectanglePdf implements ModelInterface, ArrayAccess
+class Rectangle implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class RectanglePdf implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RectanglePdf';
+    protected static $swaggerModelName = 'Rectangle';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -256,7 +256,7 @@ class RectanglePdf implements ModelInterface, ArrayAccess
     /**
      * Sets llx
      *
-     * @param double $llx llx
+     * @param double $llx X-coordinate of lower - left corner.
      *
      * @return $this
      */
@@ -280,7 +280,7 @@ class RectanglePdf implements ModelInterface, ArrayAccess
     /**
      * Sets lly
      *
-     * @param double $lly lly
+     * @param double $lly Y - coordinate of lower-left corner.
      *
      * @return $this
      */
@@ -304,7 +304,7 @@ class RectanglePdf implements ModelInterface, ArrayAccess
     /**
      * Sets urx
      *
-     * @param double $urx urx
+     * @param double $urx X - coordinate of upper-right corner.
      *
      * @return $this
      */
@@ -328,7 +328,7 @@ class RectanglePdf implements ModelInterface, ArrayAccess
     /**
      * Sets ury
      *
-     * @param double $ury ury
+     * @param double $ury Y - coordinate of upper-right corner.
      *
      * @return $this
      */

@@ -3,7 +3,7 @@
  * Attachments Class 
  *
  * @category Class
- * @description List of attachment.
+ * @description Represents list of attachment.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class Attachments extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\LinkElement[] $list list
+     * @param \Aspose\PDF\Model\LinkElement[] $list List of annotations.
      *
      * @return $this
      */

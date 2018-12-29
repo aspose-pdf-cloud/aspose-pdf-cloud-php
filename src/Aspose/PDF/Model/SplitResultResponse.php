@@ -3,7 +3,7 @@
  * SplitResultResponse Class 
  *
  * @category Class
- * @description Represents split result object.
+ * @description Represents responce containing split result.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class SplitResultResponse extends AsposeResponse
     /**
      * Sets result
      *
-     * @param \Aspose\PDF\Model\SplitResult $result Gets or sets the splitting result.
+     * @param \Aspose\PDF\Model\SplitResult $result SplitResult object.
      *
      * @return $this
      */

@@ -3,6 +3,7 @@
  * SquareAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple square annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class SquareAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\SquareAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\SquareAnnotations $annotations Square annotations object
      *
      * @return $this
      */

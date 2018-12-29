@@ -3,6 +3,7 @@
  * SquigglyAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple squiggly-underline annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class SquigglyAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\SquigglyAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\SquigglyAnnotations $annotations Squiggly-underline annotations object
      *
      * @return $this
      */

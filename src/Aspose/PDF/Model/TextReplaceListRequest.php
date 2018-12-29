@@ -286,7 +286,7 @@ class TextReplaceListRequest implements ModelInterface, ArrayAccess
     /**
      * Sets start_index
      *
-     * @param int $start_index start_index
+     * @param int $start_index The index of first match to be replaced.
      *
      * @return $this
      */
@@ -310,7 +310,7 @@ class TextReplaceListRequest implements ModelInterface, ArrayAccess
     /**
      * Sets count_replace
      *
-     * @param int $count_replace count_replace
+     * @param int $count_replace The number of matches to be replaced.
      *
      * @return $this
      */

@@ -223,7 +223,7 @@ class DocumentProperty extends LinkElement
     /**
      * Sets name
      *
-     * @param string $name name
+     * @param string $name Pame of the property.
      *
      * @return $this
      */
@@ -247,7 +247,7 @@ class DocumentProperty extends LinkElement
     /**
      * Sets value
      *
-     * @param string $value value
+     * @param string $value Property value.
      *
      * @return $this
      */
@@ -271,7 +271,7 @@ class DocumentProperty extends LinkElement
     /**
      * Sets built_in
      *
-     * @param bool $built_in built_in
+     * @param bool $built_in Value indicating whether it is a built-in property.
      *
      * @return $this
      */

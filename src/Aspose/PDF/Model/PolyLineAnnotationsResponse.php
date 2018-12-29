@@ -3,6 +3,7 @@
  * PolyLineAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple polyline annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class PolyLineAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\PolyLineAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\PolyLineAnnotations $annotations Polyline annotations object
      *
      * @return $this
      */

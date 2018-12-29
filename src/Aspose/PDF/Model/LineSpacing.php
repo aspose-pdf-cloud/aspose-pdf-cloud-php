@@ -3,7 +3,7 @@
  * LineSpacing Class 
  *
  * @category Class
- * @description 
+ * @description Defines line spacing specifics
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php

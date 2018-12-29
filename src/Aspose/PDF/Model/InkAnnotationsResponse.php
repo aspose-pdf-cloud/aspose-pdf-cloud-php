@@ -3,6 +3,7 @@
  * InkAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple ink annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class InkAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\InkAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\InkAnnotations $annotations Ink annotations object
      *
      * @return $this
      */

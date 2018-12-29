@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **width** | **int** | Gets width of the image. | 
 **height** | **int** | Gets height of the image. | 
 **id** | **string** | Gets ID of the image. | [optional]
-**rectangle** | [**\Aspose\PDF\Model\RectanglePdf**](RectanglePdf.md) | Gets rectangle of the image. | [optional]
+**rectangle** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Gets rectangle of the image. | [optional]
 **page_number** | **int** | Gets page number. | 
 **links** | [**\Aspose\PDF\Model\Link[]**](Link.md) | Link to the document.<br />*Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)* | [optional]
 

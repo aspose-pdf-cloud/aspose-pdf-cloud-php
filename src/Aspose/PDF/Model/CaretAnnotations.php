@@ -3,7 +3,7 @@
  * CaretAnnotations Class 
  *
  * @category Class
- * @description List of annotations.
+ * @description Object representing a list of caret annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class CaretAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\CaretAnnotation[] $list list
+     * @param \Aspose\PDF\Model\CaretAnnotation[] $list List of caret annotations.
      *
      * @return $this
      */

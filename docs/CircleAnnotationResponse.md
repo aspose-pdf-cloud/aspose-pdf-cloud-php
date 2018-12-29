@@ -1,11 +1,11 @@
 ﻿# CircleAnnotationResponse
-
+Represents response containing single circle annotation object
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**annotation** | [**\Aspose\PDF\Model\CircleAnnotation**](CircleAnnotation.md) |  | [optional]
+**annotation** | [**\Aspose\PDF\Model\CircleAnnotation**](CircleAnnotation.md) | Circle annotation object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

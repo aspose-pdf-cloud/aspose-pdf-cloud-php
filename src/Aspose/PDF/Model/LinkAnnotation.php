@@ -55,7 +55,7 @@ class LinkAnnotation extends LinkElement
         'action' => 'string',
         'highlighting' => '\Aspose\PDF\Model\LinkHighlightingMode',
         'color' => '\Aspose\PDF\Model\Color',
-        'rect' => '\Aspose\PDF\Model\RectanglePdf',
+        'rect' => '\Aspose\PDF\Model\Rectangle',
         'id' => 'string'
     ];
 
@@ -327,7 +327,7 @@ class LinkAnnotation extends LinkElement
     /**
      * Gets rect
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRect()
     {
@@ -337,7 +337,7 @@ class LinkAnnotation extends LinkElement
     /**
      * Sets rect
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rect rect
+     * @param \Aspose\PDF\Model\Rectangle $rect rect
      *
      * @return $this
      */

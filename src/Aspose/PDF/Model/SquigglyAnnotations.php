@@ -3,7 +3,7 @@
  * SquigglyAnnotations Class 
  *
  * @category Class
- * @description List of annotations.
+ * @description Object representing a list of squiggly-underline annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -211,7 +211,7 @@ class SquigglyAnnotations extends LinkElement
     /**
      * Sets list
      *
-     * @param \Aspose\PDF\Model\SquigglyAnnotation[] $list list
+     * @param \Aspose\PDF\Model\SquigglyAnnotation[] $list List of squiggly-underline annotations.
      *
      * @return $this
      */

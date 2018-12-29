@@ -3,6 +3,7 @@
  * PopupAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple popup annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class PopupAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\PopupAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\PopupAnnotations $annotations Popup annotations object
      *
      * @return $this
      */

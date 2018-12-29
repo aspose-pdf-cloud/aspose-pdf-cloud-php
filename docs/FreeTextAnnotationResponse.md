@@ -1,11 +1,11 @@
 ﻿# FreeTextAnnotationResponse
-
+Represents response containing single free text annotation object
 
 *Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**annotation** | [**\Aspose\PDF\Model\FreeTextAnnotation**](FreeTextAnnotation.md) |  | [optional]
+**annotation** | [**\Aspose\PDF\Model\FreeTextAnnotation**](FreeTextAnnotation.md) | Free text annotation object | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

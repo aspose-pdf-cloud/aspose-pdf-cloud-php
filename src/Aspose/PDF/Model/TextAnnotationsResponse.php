@@ -3,6 +3,7 @@
  * TextAnnotationsResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple text annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -210,7 +211,7 @@ class TextAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\TextAnnotations $annotations annotations
+     * @param \Aspose\PDF\Model\TextAnnotations $annotations Text annotations object
      *
      * @return $this
      */

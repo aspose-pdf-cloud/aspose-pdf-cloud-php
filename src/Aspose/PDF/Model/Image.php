@@ -54,7 +54,7 @@ class Image extends LinkElement
         'width' => 'int',
         'height' => 'int',
         'id' => 'string',
-        'rectangle' => '\Aspose\PDF\Model\RectanglePdf',
+        'rectangle' => '\Aspose\PDF\Model\Rectangle',
         'page_number' => 'int'
     ];
 
@@ -297,7 +297,7 @@ class Image extends LinkElement
     /**
      * Gets rectangle
      *
-     * @return \Aspose\PDF\Model\RectanglePdf
+     * @return \Aspose\PDF\Model\Rectangle
      */
     public function getRectangle()
     {
@@ -307,7 +307,7 @@ class Image extends LinkElement
     /**
      * Sets rectangle
      *
-     * @param \Aspose\PDF\Model\RectanglePdf $rectangle Gets rectangle of the image.
+     * @param \Aspose\PDF\Model\Rectangle $rectangle Gets rectangle of the image.
      *
      * @return $this
      */
