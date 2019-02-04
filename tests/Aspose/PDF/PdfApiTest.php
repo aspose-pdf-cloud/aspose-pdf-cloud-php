@@ -2,7 +2,7 @@
 
 /**
  *
- *   Copyright (c) 2018 Aspose.PDF Cloud
+ *   Copyright (c) 2019 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -654,6 +654,416 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putFreeTextAnnotation($name, $annotationId, $freeTextAnnotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    // Sound Annotations Tests
+
+    public function testGetDocumentSoundAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentSoundAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageSoundAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageSoundAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetSoundAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentSoundAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getSoundAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageSoundAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $attachmentFile = '4pages.pdf';
+        $this->uploadFile($attachmentFile);
+        
+        $pageNumber = 1;
+
+        $annotation = new Aspose\PDF\Model\SoundAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText('Rich Text');
+        $annotation->setSubject('Subj');
+        $annotation->setZIndex(1);
+        $annotation->setTitle('Title');
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
+
+        $response = $this->pdfApi->postPageSoundAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutSoundAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+        
+        $attachmentFile = '4pages.pdf';
+        $this->uploadFile($attachmentFile);
+
+        $annotation = new Aspose\PDF\Model\SoundAnnotation();
+        $annotation->setName('Test Text Updated');
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText('Rich Text Updated');
+        $annotation->setSubject('Subj Updated');
+        $annotation->setZIndex(1);
+        $annotation->setTitle('Title');
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
+
+        $responseAnnotations = $this->pdfApi->getDocumentSoundAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putSoundAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testGetSoundAnnotationData()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentSoundAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getSoundAnnotationData($name, $annotationId, null, $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutSoundAnnotationDataExtract()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $outFilePath = 'outFile.dat';
+        $responseAnnotations = $this->pdfApi->getDocumentSoundAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putSoundAnnotationDataExtract($name, $annotationId, $outFilePath, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    // Redaction Annotations Tests
+
+    public function testGetDocumentRedactionAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentRedactionAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageRedactionAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageRedactionAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetRedactionAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentRedactionAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getRedactionAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageRedactionAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+        
+        $pageNumber = 1;
+
+        $annotation = new Aspose\PDF\Model\RedactionAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setZIndex(1);
+        $annotation->setQuadPoint([
+            new Aspose\PDF\Model\Point(['x' => 10, 'y' => 40]),
+            new Aspose\PDF\Model\Point(['x' => 30, 'y' => 40])
+        ]);
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        
+
+        $response = $this->pdfApi->postPageRedactionAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutRedactionAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $annotation = new Aspose\PDF\Model\RedactionAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setZIndex(1);
+        $annotation->setQuadPoint([
+            new Aspose\PDF\Model\Point(['x' => 11, 'y' => 40]),
+            new Aspose\PDF\Model\Point(['x' => 30, 'y' => 40])
+        ]);
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentRedactionAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putRedactionAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+
+    // Movie Annotations Tests
+
+    public function testGetDocumentMovieAnnotations()
+    {
+        $name = 'PdfWithAnnotations1.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentMovieAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageMovieAnnotations()
+    {
+        $name = 'PdfWithAnnotations1.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageMovieAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetMovieAnnotation()
+    {
+        $name = 'PdfWithAnnotations1.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentMovieAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getMovieAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageMovieAnnotations()
+    {
+        $name = 'PdfWithAnnotations1.pdf';
+        $this->uploadFile($name);
+
+        $attachmentFile = '4pages.pdf';
+        $this->uploadFile($attachmentFile);
+        
+        $pageNumber = 1;
+
+        $annotation = new Aspose\PDF\Model\MovieAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setZIndex(1);
+        $annotation->setFilePath($attachmentFile);
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        
+
+        $response = $this->pdfApi->postPageMovieAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutMovieAnnotation()
+    {
+        $name = 'PdfWithAnnotations1.pdf';
+        $this->uploadFile($name);
+        
+        $attachmentFile = '4pages.pdf';
+        $this->uploadFile($attachmentFile);
+
+        $annotation = new Aspose\PDF\Model\MovieAnnotation();
+        $annotation->setName("Test Text Updated");
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setZIndex(1);
+        $annotation->setFilePath($attachmentFile);
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+
+        $responseAnnotations = $this->pdfApi->getDocumentMovieAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putMovieAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    // File Attachment Annotations Tests
+
+    public function testGetDocumentFileAttachmentAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentFileAttachmentAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageFileAttachmentAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageFileAttachmentAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetFileAttachmentAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentFileAttachmentAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getFileAttachmentAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageFileAttachmentAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $attachmentFile = '4pages.pdf';
+        $this->uploadFile($attachmentFile);
+        
+        $pageNumber = 1;
+
+        $annotation = new Aspose\PDF\Model\FileAttachmentAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText('Rich Text');
+        $annotation->setSubject('Subj');
+        $annotation->setZIndex(1);
+        $annotation->setTitle('Title');
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
+        $annotation->setFileName($attachmentFile);
+
+        $response = $this->pdfApi->postPageFileAttachmentAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutFileAttachmentAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+        
+        $attachmentFile = '4pages.pdf';
+        $this->uploadFile($attachmentFile);
+
+        $annotation = new Aspose\PDF\Model\FileAttachmentAnnotation();
+        $annotation->setName('Test Text Updated');
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText('Rich Text Updated');
+        $annotation->setSubject('Subj Updated');
+        $annotation->setZIndex(1);
+        $annotation->setTitle('Title');
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
+        $annotation->setFileName($attachmentFile);
+
+        $responseAnnotations = $this->pdfApi->getDocumentFileAttachmentAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putFileAttachmentAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testGetFileAttachmentAnnotationData()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentFileAttachmentAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getFileAttachmentAnnotationData($name, $annotationId, null, $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutFileAttachmentAnnotationDataExtract()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentFileAttachmentAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putFileAttachmentAnnotationDataExtract($name, $annotationId, null, null, $this->tempFolder);
         $this->assertEquals(201, $response->getCode());
     }
 
