@@ -1,15 +1,5 @@
 <?php
 /**
- * RasterImagesSavingModes Class 
- *
- * @category Class
- * @description Converted PDF can contain raster images(.png, *.jpeg etc.) This enum defines methods of how raster images can be handled during conversion of PDF to HTML
- * @package  Aspose\PDF
- * @author   Aspose PDF Cloud
- * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
- */
-
-/**
  *
  *   Copyright (c) 2019 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,6 +20,16 @@
  *
  */
 
+
+/**
+ * RasterImagesSavingModes Class 
+ *
+ * @category Class
+ * @description Converted PDF can contain raster images(.png, *.jpeg etc.) This enum defines methods of how raster images can be handled during conversion of PDF to HTML
+ * @package  Aspose\PDF
+ * @author   Aspose PDF Cloud
+ * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
+ */
 
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;

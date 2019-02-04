@@ -1,15 +1,5 @@
 <?php
 /**
- * PartsEmbeddingModes Class 
- *
- * @category Class
- * @description This enum enumerates possible modes of embedding of files referenced in HTML It allows to control whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities
- * @package  Aspose\PDF
- * @author   Aspose PDF Cloud
- * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
- */
-
-/**
  *
  *   Copyright (c) 2019 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,6 +20,16 @@
  *
  */
 
+
+/**
+ * PartsEmbeddingModes Class 
+ *
+ * @category Class
+ * @description This enum enumerates possible modes of embedding of files referenced in HTML It allows to control whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities
+ * @package  Aspose\PDF
+ * @author   Aspose PDF Cloud
+ * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
+ */
 
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;

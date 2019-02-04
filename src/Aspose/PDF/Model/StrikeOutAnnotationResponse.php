@@ -1,15 +1,5 @@
 <?php
 /**
- * StrikeOutAnnotationResponse Class 
- *
- * @category Class
- * @description Represents response containing single strikeout annotation object
- * @package  Aspose\PDF
- * @author   Aspose PDF Cloud
- * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
- */
-
-/**
  *
  *   Copyright (c) 2019 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,6 +20,16 @@
  *
  */
 
+
+/**
+ * StrikeOutAnnotationResponse Class 
+ *
+ * @category Class
+ * @description Represents response containing single strikeout annotation object
+ * @package  Aspose\PDF
+ * @author   Aspose PDF Cloud
+ * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
+ */
 
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;

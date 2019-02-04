@@ -1,15 +1,5 @@
 <?php
 /**
- * TextRect Class 
- *
- * @category Class
- * @description Represents text occurrence.
- * @package  Aspose\PDF
- * @author   Aspose PDF Cloud
- * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
- */
-
-/**
  *
  *   Copyright (c) 2019 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,6 +20,16 @@
  *
  */
 
+
+/**
+ * TextRect Class 
+ *
+ * @category Class
+ * @description Represents text occurrence.
+ * @package  Aspose\PDF
+ * @author   Aspose PDF Cloud
+ * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
+ */
 
 namespace Aspose\PDF\Model;
 

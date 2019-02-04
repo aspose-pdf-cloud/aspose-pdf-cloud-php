@@ -1,15 +1,5 @@
 <?php
 /**
- * CompressionType Class 
- *
- * @category Class
- * @description Used to specify the parameter value passed to a Tiff image device.
- * @package  Aspose\PDF
- * @author   Aspose PDF Cloud
- * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
- */
-
-/**
  *
  *   Copyright (c) 2019 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,6 +20,16 @@
  *
  */
 
+
+/**
+ * CompressionType Class 
+ *
+ * @category Class
+ * @description Used to specify the parameter value passed to a Tiff image device.
+ * @package  Aspose\PDF
+ * @author   Aspose PDF Cloud
+ * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
+ */
 
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;

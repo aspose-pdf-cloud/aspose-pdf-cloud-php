@@ -1,15 +1,5 @@
 <?php
 /**
- * Justification Class 
- *
- * @category Class
- * @description Enumerates the forms of quadding (justification) to be used in displaying the annotation’s text.
- * @package  Aspose\PDF
- * @author   Aspose PDF Cloud
- * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
- */
-
-/**
  *
  *   Copyright (c) 2019 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,6 +20,16 @@
  *
  */
 
+
+/**
+ * Justification Class 
+ *
+ * @category Class
+ * @description Enumerates the forms of quadding (justification) to be used in displaying the annotation’s text.
+ * @package  Aspose\PDF
+ * @author   Aspose PDF Cloud
+ * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
+ */
 
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;

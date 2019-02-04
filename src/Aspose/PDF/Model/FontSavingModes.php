@@ -1,15 +1,5 @@
 <?php
 /**
- * FontSavingModes Class 
- *
- * @category Class
- * @description Enumerates modes that can be used for saving of fonts referenced in saved PDF
- * @package  Aspose\PDF
- * @author   Aspose PDF Cloud
- * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
- */
-
-/**
  *
  *   Copyright (c) 2019 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -30,6 +20,16 @@
  *
  */
 
+
+/**
+ * FontSavingModes Class 
+ *
+ * @category Class
+ * @description Enumerates modes that can be used for saving of fonts referenced in saved PDF
+ * @package  Aspose\PDF
+ * @author   Aspose PDF Cloud
+ * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
+ */
 
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
