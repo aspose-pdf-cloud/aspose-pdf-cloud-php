@@ -22,10 +22,10 @@
 
 
 /**
- * RedactionAnnotationsResponse Class 
+ * ScreenAnnotations Class 
  *
  * @category Class
- * @description Represents response containing multiple redaction annotation objects
+ * @description Object representing a list of screen annotations.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class RedactionAnnotationsResponse extends AsposeResponse 
+class ScreenAnnotations extends LinkElement 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RedactionAnnotationsResponse';
+    protected static $swaggerModelName = 'ScreenAnnotations';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'annotations' => '\Aspose\PDF\Model\RedactionAnnotations'
+        'list' => '\Aspose\PDF\Model\ScreenAnnotation[]'
     ];
 
     /**
@@ -60,7 +60,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'annotations' => null
+        'list' => null
     ];
 
     /**
@@ -90,7 +90,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'annotations' => 'Annotations'
+        'list' => 'List'
     ];
 
     /**
@@ -99,7 +99,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'annotations' => 'setAnnotations'
+        'list' => 'setList'
     ];
 
     /**
@@ -108,7 +108,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'annotations' => 'getAnnotations'
+        'list' => 'getList'
     ];
 
     /**
@@ -167,7 +167,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['annotations'] = isset($data['annotations']) ? $data['annotations'] : null;
+        $this->container['list'] = isset($data['list']) ? $data['list'] : null;
     }
 
     /**
@@ -199,25 +199,25 @@ class RedactionAnnotationsResponse extends AsposeResponse
 
 
     /**
-     * Gets annotations
+     * Gets list
      *
-     * @return \Aspose\PDF\Model\RedactionAnnotations
+     * @return \Aspose\PDF\Model\ScreenAnnotation[]
      */
-    public function getAnnotations()
+    public function getList()
     {
-        return $this->container['annotations'];
+        return $this->container['list'];
     }
 
     /**
-     * Sets annotations
+     * Sets list
      *
-     * @param \Aspose\PDF\Model\RedactionAnnotations $annotations Redaction annotations object
+     * @param \Aspose\PDF\Model\ScreenAnnotation[] $list List of screen annotations.
      *
      * @return $this
      */
-    public function setAnnotations($annotations)
+    public function setList($list)
     {
-        $this->container['annotations'] = $annotations;
+        $this->container['list'] = $list;
 
         return $this;
     }

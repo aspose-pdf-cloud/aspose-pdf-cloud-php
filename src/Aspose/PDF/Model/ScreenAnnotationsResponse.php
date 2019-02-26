@@ -22,10 +22,10 @@
 
 
 /**
- * RedactionAnnotationsResponse Class 
+ * ScreenAnnotationsResponse Class 
  *
  * @category Class
- * @description Represents response containing multiple redaction annotation objects
+ * @description Represents response containing multiple screen annotation objects
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class RedactionAnnotationsResponse extends AsposeResponse 
+class ScreenAnnotationsResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RedactionAnnotationsResponse';
+    protected static $swaggerModelName = 'ScreenAnnotationsResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'annotations' => '\Aspose\PDF\Model\RedactionAnnotations'
+        'annotations' => '\Aspose\PDF\Model\ScreenAnnotations'
     ];
 
     /**
@@ -201,7 +201,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
     /**
      * Gets annotations
      *
-     * @return \Aspose\PDF\Model\RedactionAnnotations
+     * @return \Aspose\PDF\Model\ScreenAnnotations
      */
     public function getAnnotations()
     {
@@ -211,7 +211,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
     /**
      * Sets annotations
      *
-     * @param \Aspose\PDF\Model\RedactionAnnotations $annotations Redaction annotations object
+     * @param \Aspose\PDF\Model\ScreenAnnotations $annotations Screen annotations object
      *
      * @return $this
      */

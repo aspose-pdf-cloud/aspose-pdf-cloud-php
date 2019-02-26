@@ -119,6 +119,251 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testPutAnnotationsFlatten()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $endPage = 2;
+        $annotation_types = [Aspose\PDF\Model\AnnotationType::STAMP];
+
+        $response = $this->pdfApi->putAnnotationsFlatten($name, null, $endPage, $annotation_types, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    // Screen Annotations Tests
+
+    public function testGetDocumentScreenAnnotations()
+    {
+        $name = 'PdfWithScreenAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentScreenAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageScreenAnnotations()
+    {
+        $name = 'PdfWithScreenAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 1;
+
+        $response = $this->pdfApi->getPageScreenAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetScreenAnnotation()
+    {
+        $name = 'PdfWithScreenAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentScreenAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getScreenAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageScreenAnnotations()
+    {
+        $name = 'PdfWithScreenAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $attachmentFile = 'ScreenMovie.swf';
+        $this->uploadFile($attachmentFile);
+        
+        $pageNumber = 1;
+
+        $annotation = new Aspose\PDF\Model\ScreenAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setZIndex(1);
+        $annotation->setTitle('Title');
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
+
+        $response = $this->pdfApi->postPageScreenAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutScreenAnnotation()
+    {
+        $name = 'PdfWithScreenAnnotations.pdf';
+        $this->uploadFile($name);
+        
+        $attachmentFile = 'ScreenMovie.swf';
+        $this->uploadFile($attachmentFile);
+
+        $annotation = new Aspose\PDF\Model\ScreenAnnotation();
+        $annotation->setName('Test Text Updated');
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setZIndex(1);
+        $annotation->setTitle('Title');
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
+
+        $responseAnnotations = $this->pdfApi->getDocumentScreenAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putScreenAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+/*
+    public function testGetScreenAnnotationData()
+    {
+        $name = 'PdfWithScreenAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentScreenAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getScreenAnnotationData($name, $annotationId, null, $this->tempFolder);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutScreenAnnotationDataExtract()
+    {
+        $name = 'PdfWithScreenAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentScreenAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putScreenAnnotationDataExtract($name, $annotationId, null, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+*/
+
+
+    // Stamp Annotations Tests
+
+    public function testGetDocumentStampAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentStampAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageStampAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 2;
+
+        $response = $this->pdfApi->getPageStampAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testGetStampAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentStampAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getStampAnnotation($name, $annotationId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+    public function testPostPageStampAnnotations()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $attachmentFile = '4pages.pdf';
+        $this->uploadFile($attachmentFile);
+        
+        $pageNumber = 1;
+
+        $annotation = new Aspose\PDF\Model\StampAnnotation();
+        $annotation->setName("Test Text");
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText('Rich Text');
+        $annotation->setSubject('Subj');
+        $annotation->setZIndex(1);
+        $annotation->setTitle('Title');
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
+
+        $response = $this->pdfApi->postPageStampAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutStampAnnotation()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+        
+        $attachmentFile = '4pages.pdf';
+        $this->uploadFile($attachmentFile);
+
+        $annotation = new Aspose\PDF\Model\StampAnnotation();
+        $annotation->setName('Test Text Updated');
+        $annotation->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $annotation->setFlags([Aspose\PDF\Model\AnnotationFlags::HIDDEN, Aspose\PDF\Model\AnnotationFlags::NO_VIEW]);
+        $annotation->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $annotation->setRichText('Rich Text Updated');
+        $annotation->setSubject('Subj Updated');
+        $annotation->setZIndex(1);
+        $annotation->setTitle('Title');
+        $annotation->setModified('01/01/2018 12:00:00.000 AM');
+        $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
+
+        $responseAnnotations = $this->pdfApi->getDocumentStampAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putStampAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testGetStampAnnotationData()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+
+        $responseAnnotations = $this->pdfApi->getDocumentStampAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->getStampAnnotationData($name, $annotationId, null, $this->tempFolder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutStampAnnotationDataExtract()
+    {
+        $name = 'PdfWithAnnotations.pdf';
+        $this->uploadFile($name);
+        $out_file_path = 'stamp.dat';
+        $responseAnnotations = $this->pdfApi->getDocumentStampAnnotations($name, null, $this->tempFolder);
+        $this->assertEquals(200, $responseAnnotations->getCode());
+        $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
+
+        $response = $this->pdfApi->putStampAnnotationDataExtract($name, $annotationId, $out_file_path, null, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
     //Polygon Annotations Tests
 
     public function testGetDocumentPolygonAnnotations()
