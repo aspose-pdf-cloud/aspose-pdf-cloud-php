@@ -22,10 +22,10 @@
 
 
 /**
- * RedactionAnnotationsResponse Class 
+ * StampAnnotationResponse Class 
  *
  * @category Class
- * @description Represents response containing multiple redaction annotation objects
+ * @description Represents response containing single stamp annotation object
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class RedactionAnnotationsResponse extends AsposeResponse 
+class StampAnnotationResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RedactionAnnotationsResponse';
+    protected static $swaggerModelName = 'StampAnnotationResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'annotations' => '\Aspose\PDF\Model\RedactionAnnotations'
+        'annotation' => '\Aspose\PDF\Model\StampAnnotation'
     ];
 
     /**
@@ -60,7 +60,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'annotations' => null
+        'annotation' => null
     ];
 
     /**
@@ -90,7 +90,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'annotations' => 'Annotations'
+        'annotation' => 'Annotation'
     ];
 
     /**
@@ -99,7 +99,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'annotations' => 'setAnnotations'
+        'annotation' => 'setAnnotation'
     ];
 
     /**
@@ -108,7 +108,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'annotations' => 'getAnnotations'
+        'annotation' => 'getAnnotation'
     ];
 
     /**
@@ -167,7 +167,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['annotations'] = isset($data['annotations']) ? $data['annotations'] : null;
+        $this->container['annotation'] = isset($data['annotation']) ? $data['annotation'] : null;
     }
 
     /**
@@ -199,25 +199,25 @@ class RedactionAnnotationsResponse extends AsposeResponse
 
 
     /**
-     * Gets annotations
+     * Gets annotation
      *
-     * @return \Aspose\PDF\Model\RedactionAnnotations
+     * @return \Aspose\PDF\Model\StampAnnotation
      */
-    public function getAnnotations()
+    public function getAnnotation()
     {
-        return $this->container['annotations'];
+        return $this->container['annotation'];
     }
 
     /**
-     * Sets annotations
+     * Sets annotation
      *
-     * @param \Aspose\PDF\Model\RedactionAnnotations $annotations Redaction annotations object
+     * @param \Aspose\PDF\Model\StampAnnotation $annotation Ink annotation object
      *
      * @return $this
      */
-    public function setAnnotations($annotations)
+    public function setAnnotation($annotation)
     {
-        $this->container['annotations'] = $annotations;
+        $this->container['annotation'] = $annotation;
 
         return $this;
     }

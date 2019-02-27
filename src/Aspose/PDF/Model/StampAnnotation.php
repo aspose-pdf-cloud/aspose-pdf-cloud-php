@@ -22,10 +22,10 @@
 
 
 /**
- * RedactionAnnotationsResponse Class 
+ * StampAnnotation Class 
  *
  * @category Class
- * @description Represents response containing multiple redaction annotation objects
+ * @description Provides StampAnnotation.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class RedactionAnnotationsResponse extends AsposeResponse 
+class StampAnnotation extends MarkupAnnotation 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RedactionAnnotationsResponse';
+    protected static $swaggerModelName = 'StampAnnotation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,9 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'annotations' => '\Aspose\PDF\Model\RedactionAnnotations'
+        'icon' => '\Aspose\PDF\Model\StampIcon',
+        'file_path' => 'string',
+        'has_image' => 'bool'
     ];
 
     /**
@@ -60,7 +62,9 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'annotations' => null
+        'icon' => null,
+        'file_path' => null,
+        'has_image' => null
     ];
 
     /**
@@ -90,7 +94,9 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'annotations' => 'Annotations'
+        'icon' => 'Icon',
+        'file_path' => 'FilePath',
+        'has_image' => 'HasImage'
     ];
 
     /**
@@ -99,7 +105,9 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'annotations' => 'setAnnotations'
+        'icon' => 'setIcon',
+        'file_path' => 'setFilePath',
+        'has_image' => 'setHasImage'
     ];
 
     /**
@@ -108,7 +116,9 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'annotations' => 'getAnnotations'
+        'icon' => 'getIcon',
+        'file_path' => 'getFilePath',
+        'has_image' => 'getHasImage'
     ];
 
     /**
@@ -167,7 +177,9 @@ class RedactionAnnotationsResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['annotations'] = isset($data['annotations']) ? $data['annotations'] : null;
+        $this->container['icon'] = isset($data['icon']) ? $data['icon'] : null;
+        $this->container['file_path'] = isset($data['file_path']) ? $data['file_path'] : null;
+        $this->container['has_image'] = isset($data['has_image']) ? $data['has_image'] : null;
     }
 
     /**
@@ -199,25 +211,73 @@ class RedactionAnnotationsResponse extends AsposeResponse
 
 
     /**
-     * Gets annotations
+     * Gets icon
      *
-     * @return \Aspose\PDF\Model\RedactionAnnotations
+     * @return \Aspose\PDF\Model\StampIcon
      */
-    public function getAnnotations()
+    public function getIcon()
     {
-        return $this->container['annotations'];
+        return $this->container['icon'];
     }
 
     /**
-     * Sets annotations
+     * Sets icon
      *
-     * @param \Aspose\PDF\Model\RedactionAnnotations $annotations Redaction annotations object
+     * @param \Aspose\PDF\Model\StampIcon $icon Gets or sets icon for rubber stamp.
      *
      * @return $this
      */
-    public function setAnnotations($annotations)
+    public function setIcon($icon)
     {
-        $this->container['annotations'] = $annotations;
+        $this->container['icon'] = $icon;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_path
+     *
+     * @return string
+     */
+    public function getFilePath()
+    {
+        return $this->container['file_path'];
+    }
+
+    /**
+     * Sets file_path
+     *
+     * @param string $file_path Sets content file path.
+     *
+     * @return $this
+     */
+    public function setFilePath($file_path)
+    {
+        $this->container['file_path'] = $file_path;
+
+        return $this;
+    }
+
+    /**
+     * Gets has_image
+     *
+     * @return bool
+     */
+    public function getHasImage()
+    {
+        return $this->container['has_image'];
+    }
+
+    /**
+     * Sets has_image
+     *
+     * @param bool $has_image Gets is image exist.
+     *
+     * @return $this
+     */
+    public function setHasImage($has_image)
+    {
+        $this->container['has_image'] = $has_image;
 
         return $this;
     }

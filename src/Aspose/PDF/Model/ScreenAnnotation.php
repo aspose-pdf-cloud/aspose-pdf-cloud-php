@@ -22,10 +22,10 @@
 
 
 /**
- * RedactionAnnotationsResponse Class 
+ * ScreenAnnotation Class 
  *
  * @category Class
- * @description Represents response containing multiple redaction annotation objects
+ * @description Provides ScreenAnnotation.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class RedactionAnnotationsResponse extends AsposeResponse 
+class ScreenAnnotation extends Annotation 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class RedactionAnnotationsResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'RedactionAnnotationsResponse';
+    protected static $swaggerModelName = 'ScreenAnnotation';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,7 +51,8 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'annotations' => '\Aspose\PDF\Model\RedactionAnnotations'
+        'title' => 'string',
+        'file_path' => 'string'
     ];
 
     /**
@@ -60,7 +61,8 @@ class RedactionAnnotationsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'annotations' => null
+        'title' => null,
+        'file_path' => null
     ];
 
     /**
@@ -90,7 +92,8 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'annotations' => 'Annotations'
+        'title' => 'Title',
+        'file_path' => 'FilePath'
     ];
 
     /**
@@ -99,7 +102,8 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'annotations' => 'setAnnotations'
+        'title' => 'setTitle',
+        'file_path' => 'setFilePath'
     ];
 
     /**
@@ -108,7 +112,8 @@ class RedactionAnnotationsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'annotations' => 'getAnnotations'
+        'title' => 'getTitle',
+        'file_path' => 'getFilePath'
     ];
 
     /**
@@ -167,7 +172,8 @@ class RedactionAnnotationsResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['annotations'] = isset($data['annotations']) ? $data['annotations'] : null;
+        $this->container['title'] = isset($data['title']) ? $data['title'] : null;
+        $this->container['file_path'] = isset($data['file_path']) ? $data['file_path'] : null;
     }
 
     /**
@@ -199,25 +205,49 @@ class RedactionAnnotationsResponse extends AsposeResponse
 
 
     /**
-     * Gets annotations
+     * Gets title
      *
-     * @return \Aspose\PDF\Model\RedactionAnnotations
+     * @return string
      */
-    public function getAnnotations()
+    public function getTitle()
     {
-        return $this->container['annotations'];
+        return $this->container['title'];
     }
 
     /**
-     * Sets annotations
+     * Sets title
      *
-     * @param \Aspose\PDF\Model\RedactionAnnotations $annotations Redaction annotations object
+     * @param string $title Get the annotation title.
      *
      * @return $this
      */
-    public function setAnnotations($annotations)
+    public function setTitle($title)
     {
-        $this->container['annotations'] = $annotations;
+        $this->container['title'] = $title;
+
+        return $this;
+    }
+
+    /**
+     * Gets file_path
+     *
+     * @return string
+     */
+    public function getFilePath()
+    {
+        return $this->container['file_path'];
+    }
+
+    /**
+     * Sets file_path
+     *
+     * @param string $file_path Sets content file path.
+     *
+     * @return $this
+     */
+    public function setFilePath($file_path)
+    {
+        $this->container['file_path'] = $file_path;
 
         return $this;
     }
