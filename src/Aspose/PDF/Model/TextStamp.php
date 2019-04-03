@@ -22,21 +22,19 @@
 
 
 /**
- * TextRect Class 
+ * TextStamp Class 
  *
  * @category Class
- * @description Represents text occurrence.
+ * @description Represents Pdf stamps.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
  */
 
 namespace Aspose\PDF\Model;
-
-use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class TextRect implements ModelInterface, ArrayAccess
+class TextStamp extends StampBase 
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +43,7 @@ class TextRect implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'TextRect';
+    protected static $swaggerModelName = 'TextStamp';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -53,13 +51,8 @@ class TextRect implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'text' => 'string',
-        'page' => 'int',
-        'rect' => '\Aspose\PDF\Model\Rectangle',
-        'horizontal_alignment' => '\Aspose\PDF\Model\HorizontalAlignment',
-        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
-        'position' => '\Aspose\PDF\Model\Position',
-        'baseline_position' => '\Aspose\PDF\Model\Position',
+        'text_alignment' => '\Aspose\PDF\Model\HorizontalAlignment',
+        'value' => 'string',
         'text_state' => '\Aspose\PDF\Model\TextState'
     ];
 
@@ -69,13 +62,8 @@ class TextRect implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'text' => null,
-        'page' => 'int32',
-        'rect' => null,
-        'horizontal_alignment' => null,
-        'vertical_alignment' => null,
-        'position' => null,
-        'baseline_position' => null,
+        'text_alignment' => null,
+        'value' => null,
         'text_state' => null
     ];
 
@@ -86,7 +74,7 @@ class TextRect implements ModelInterface, ArrayAccess
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes;
+        return self::$swaggerTypes + parent::swaggerTypes();
     }
 
     /**
@@ -96,7 +84,7 @@ class TextRect implements ModelInterface, ArrayAccess
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats;
+        return self::$swaggerFormats + parent::swaggerFormats();
     }
 
     /**
@@ -106,13 +94,8 @@ class TextRect implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'text' => 'Text',
-        'page' => 'Page',
-        'rect' => 'Rect',
-        'horizontal_alignment' => 'HorizontalAlignment',
-        'vertical_alignment' => 'VerticalAlignment',
-        'position' => 'Position',
-        'baseline_position' => 'BaselinePosition',
+        'text_alignment' => 'TextAlignment',
+        'value' => 'Value',
         'text_state' => 'TextState'
     ];
 
@@ -122,13 +105,8 @@ class TextRect implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'text' => 'setText',
-        'page' => 'setPage',
-        'rect' => 'setRect',
-        'horizontal_alignment' => 'setHorizontalAlignment',
-        'vertical_alignment' => 'setVerticalAlignment',
-        'position' => 'setPosition',
-        'baseline_position' => 'setBaselinePosition',
+        'text_alignment' => 'setTextAlignment',
+        'value' => 'setValue',
         'text_state' => 'setTextState'
     ];
 
@@ -138,13 +116,8 @@ class TextRect implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'text' => 'getText',
-        'page' => 'getPage',
-        'rect' => 'getRect',
-        'horizontal_alignment' => 'getHorizontalAlignment',
-        'vertical_alignment' => 'getVerticalAlignment',
-        'position' => 'getPosition',
-        'baseline_position' => 'getBaselinePosition',
+        'text_alignment' => 'getTextAlignment',
+        'value' => 'getValue',
         'text_state' => 'getTextState'
     ];
 
@@ -156,7 +129,7 @@ class TextRect implements ModelInterface, ArrayAccess
      */
     public static function attributeMap()
     {
-        return self::$attributeMap;
+        return parent::attributeMap() + self::$attributeMap;
     }
 
     /**
@@ -166,7 +139,7 @@ class TextRect implements ModelInterface, ArrayAccess
      */
     public static function setters()
     {
-        return self::$setters;
+        return parent::setters() + self::$setters;
     }
 
     /**
@@ -176,7 +149,7 @@ class TextRect implements ModelInterface, ArrayAccess
      */
     public static function getters()
     {
-        return self::$getters;
+        return parent::getters() + self::$getters;
     }
 
     /**
@@ -193,12 +166,6 @@ class TextRect implements ModelInterface, ArrayAccess
 
     
 
-    /**
-     * Associative array for storing property values
-     *
-     * @var mixed[]
-     */
-    protected $container = [];
 
     /**
      * Constructor
@@ -208,13 +175,10 @@ class TextRect implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['text'] = isset($data['text']) ? $data['text'] : null;
-        $this->container['page'] = isset($data['page']) ? $data['page'] : null;
-        $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
-        $this->container['horizontal_alignment'] = isset($data['horizontal_alignment']) ? $data['horizontal_alignment'] : null;
-        $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
-        $this->container['position'] = isset($data['position']) ? $data['position'] : null;
-        $this->container['baseline_position'] = isset($data['baseline_position']) ? $data['baseline_position'] : null;
+        parent::__construct($data);
+
+        $this->container['text_alignment'] = isset($data['text_alignment']) ? $data['text_alignment'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
         $this->container['text_state'] = isset($data['text_state']) ? $data['text_state'] : null;
     }
 
@@ -225,7 +189,7 @@ class TextRect implements ModelInterface, ArrayAccess
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = [];
+        $invalidProperties = parent::listInvalidProperties();
 
         return $invalidProperties;
     }
@@ -238,175 +202,58 @@ class TextRect implements ModelInterface, ArrayAccess
      */
     public function valid()
     {
+        if (!parent::valid()) {
+            return false;
+        }
 
         return true;
     }
 
 
     /**
-     * Gets text
-     *
-     * @return string
-     */
-    public function getText()
-    {
-        return $this->container['text'];
-    }
-
-    /**
-     * Sets text
-     *
-     * @param string $text Text of the occurrence.
-     *
-     * @return $this
-     */
-    public function setText($text)
-    {
-        $this->container['text'] = $text;
-
-        return $this;
-    }
-
-    /**
-     * Gets page
-     *
-     * @return int
-     */
-    public function getPage()
-    {
-        return $this->container['page'];
-    }
-
-    /**
-     * Sets page
-     *
-     * @param int $page Page on which the occurrence is found.
-     *
-     * @return $this
-     */
-    public function setPage($page)
-    {
-        $this->container['page'] = $page;
-
-        return $this;
-    }
-
-    /**
-     * Gets rect
-     *
-     * @return \Aspose\PDF\Model\Rectangle
-     */
-    public function getRect()
-    {
-        return $this->container['rect'];
-    }
-
-    /**
-     * Sets rect
-     *
-     * @param \Aspose\PDF\Model\Rectangle $rect Rectangle of the occurrence.
-     *
-     * @return $this
-     */
-    public function setRect($rect)
-    {
-        $this->container['rect'] = $rect;
-
-        return $this;
-    }
-
-    /**
-     * Gets horizontal_alignment
+     * Gets text_alignment
      *
      * @return \Aspose\PDF\Model\HorizontalAlignment
      */
-    public function getHorizontalAlignment()
+    public function getTextAlignment()
     {
-        return $this->container['horizontal_alignment'];
+        return $this->container['text_alignment'];
     }
 
     /**
-     * Sets horizontal_alignment
+     * Sets text_alignment
      *
-     * @param \Aspose\PDF\Model\HorizontalAlignment $horizontal_alignment Gets or sets a horizontal alignment of text fragment.
+     * @param \Aspose\PDF\Model\HorizontalAlignment $text_alignment Alignment of the text inside the stamp.
      *
      * @return $this
      */
-    public function setHorizontalAlignment($horizontal_alignment)
+    public function setTextAlignment($text_alignment)
     {
-        $this->container['horizontal_alignment'] = $horizontal_alignment;
+        $this->container['text_alignment'] = $text_alignment;
 
         return $this;
     }
 
     /**
-     * Gets vertical_alignment
+     * Gets value
      *
-     * @return \Aspose\PDF\Model\VerticalAlignment
+     * @return string
      */
-    public function getVerticalAlignment()
+    public function getValue()
     {
-        return $this->container['vertical_alignment'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets vertical_alignment
+     * Sets value
      *
-     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Gets or sets a vertical alignment of text fragment.
+     * @param string $value Gets or sets string value which is used as stamp on the page.
      *
      * @return $this
      */
-    public function setVerticalAlignment($vertical_alignment)
+    public function setValue($value)
     {
-        $this->container['vertical_alignment'] = $vertical_alignment;
-
-        return $this;
-    }
-
-    /**
-     * Gets position
-     *
-     * @return \Aspose\PDF\Model\Position
-     */
-    public function getPosition()
-    {
-        return $this->container['position'];
-    }
-
-    /**
-     * Sets position
-     *
-     * @param \Aspose\PDF\Model\Position $position Gets or sets text position for text, represented with  object.
-     *
-     * @return $this
-     */
-    public function setPosition($position)
-    {
-        $this->container['position'] = $position;
-
-        return $this;
-    }
-
-    /**
-     * Gets baseline_position
-     *
-     * @return \Aspose\PDF\Model\Position
-     */
-    public function getBaselinePosition()
-    {
-        return $this->container['baseline_position'];
-    }
-
-    /**
-     * Sets baseline_position
-     *
-     * @param \Aspose\PDF\Model\Position $baseline_position Gets text position for text, represented with  object. The YIndent of the Position structure represents baseline coordinate of the text fragment.
-     *
-     * @return $this
-     */
-    public function setBaselinePosition($baseline_position)
-    {
-        $this->container['baseline_position'] = $baseline_position;
+        $this->container['value'] = $value;
 
         return $this;
     }
@@ -424,7 +271,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Sets text_state
      *
-     * @param \Aspose\PDF\Model\TextState $text_state Gets or sets text state for the text that  object represents.
+     * @param \Aspose\PDF\Model\TextState $text_state Gets text properties of the stamp. See  for details.
      *
      * @return $this
      */
