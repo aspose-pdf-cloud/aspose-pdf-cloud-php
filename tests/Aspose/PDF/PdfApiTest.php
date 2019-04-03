@@ -218,7 +218,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->putScreenAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
         $this->assertEquals(201, $response->getCode());
     }
-/*
+
     public function testGetScreenAnnotationData()
     {
         $name = 'PdfWithScreenAnnotations.pdf';
@@ -236,16 +236,231 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     {
         $name = 'PdfWithScreenAnnotations.pdf';
         $this->uploadFile($name);
+        $outFilePath = $this->tempFolder . '/screen.dat';
 
         $responseAnnotations = $this->pdfApi->getDocumentScreenAnnotations($name, null, $this->tempFolder);
         $this->assertEquals(200, $responseAnnotations->getCode());
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
-        $response = $this->pdfApi->putScreenAnnotationDataExtract($name, $annotationId, null, null, $this->tempFolder);
+        $response = $this->pdfApi->putScreenAnnotationDataExtract($name, $annotationId, $outFilePath, null, $this->tempFolder);
         $this->assertEquals(201, $response->getCode());
     }
-*/
 
+
+    // Stamps Tests
+
+    public function testGetDocumentStamps()
+    {
+        $name = 'PageNumberStamp.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentStamps($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeleteDocumentStamps()
+    {
+        $name = 'PageNumberStamp.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->deleteDocumentStamps($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageStamps()
+    {
+        $name = 'PageNumberStamp.pdf';
+        $this->uploadFile($name);
+        $pageNumber = 1;
+
+        $response = $this->pdfApi->getPageStamps($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeletePageStamps()
+    {
+        $name = 'PageNumberStamp.pdf';
+        $this->uploadFile($name);
+        $pageNumber = 1;
+
+        $response = $this->pdfApi->deletePageStamps($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostPageTextStamps()
+    {
+        $name = 'PageNumberStamp.pdf';
+        $this->uploadFile($name);
+        $pageNumber = 1;
+
+        $textState =  new Aspose\PDF\Model\TextState();
+        $textState->setFontSize(14);
+
+        $stamp = new Aspose\PDF\Model\TextStamp();
+        $stamp->setBackground(true);
+        $stamp->setLeftMargin(1);
+        $stamp->setRightMargin(2);
+        $stamp->setTopMargin(3);
+        $stamp->setBottomMargin(4);
+        $stamp->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $stamp->setVerticalAlignment(Aspose\PDF\Model\VerticalAlignment::CENTER);
+        $stamp->setOpacity(1);
+        $stamp->setRotate(Aspose\PDF\Model\Rotation::NONE);
+        $stamp->setRotateAngle(0);
+        $stamp->setXIndent(0);
+        $stamp->setYIndent(0);
+        $stamp->setZoom(1);
+        $stamp->setTextAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $stamp->setValue("Text Stamp");
+        $stamp->setTextState($textState);
+
+        $response = $this->pdfApi->postPageTextStamps($name, $pageNumber, [$stamp], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPostPageImageStamps()
+    {
+        $name = 'PageNumberStamp.pdf';
+        $this->uploadFile($name);
+
+        $image = 'Koala.jpg';
+        $this->uploadFile($image);
+
+        $pageNumber = 1;
+
+        $stamp = new Aspose\PDF\Model\ImageStamp();
+        $stamp->setBackground(true);
+        $stamp->setLeftMargin(1);
+        $stamp->setRightMargin(2);
+        $stamp->setTopMargin(3);
+        $stamp->setBottomMargin(4);
+        $stamp->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $stamp->setVerticalAlignment(Aspose\PDF\Model\VerticalAlignment::CENTER);
+        $stamp->setOpacity(1);
+        $stamp->setRotate(Aspose\PDF\Model\Rotation::NONE);
+        $stamp->setRotateAngle(0);
+        $stamp->setXIndent(0);
+        $stamp->setYIndent(0);
+        $stamp->setZoom(1);
+        $stamp->setFileName($this->tempFolder . '/' . $image);
+
+        $response = $this->pdfApi->postPageImageStamps($name, $pageNumber, [$stamp], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPostPagePdfPageStamps()
+    {
+        $name = 'PageNumberStamp.pdf';
+        $this->uploadFile($name);
+
+        $pdf = '4pages.pdf';
+        $this->uploadFile($pdf);
+
+        $pageNumber = 1;
+
+        $stamp = new Aspose\PDF\Model\PdfPageStamp();
+        $stamp->setBackground(true);
+        $stamp->setLeftMargin(1);
+        $stamp->setRightMargin(2);
+        $stamp->setTopMargin(3);
+        $stamp->setBottomMargin(4);
+        $stamp->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $stamp->setVerticalAlignment(Aspose\PDF\Model\VerticalAlignment::CENTER);
+        $stamp->setOpacity(1);
+        $stamp->setRotate(Aspose\PDF\Model\Rotation::NONE);
+        $stamp->setRotateAngle(0);
+        $stamp->setXIndent(0);
+        $stamp->setYIndent(0);
+        $stamp->setZoom(1);
+        $stamp->setFileName($this->tempFolder . '/' . $pdf);
+        $stamp->setPageIndex(2);
+
+        $response = $this->pdfApi->postPagePdfPageStamps($name, $pageNumber, [$stamp], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testDeleteStamp()
+    {
+        $name = 'PageNumberStamp.pdf';
+        $this->uploadFile($name);
+
+        $stampsResponse = $this->pdfApi->getDocumentStamps($name, null, $this->tempFolder);
+        $this->assertEquals(200, $stampsResponse->getCode());
+        $stampId = $stampsResponse->getStamps()->getList()[0]->getId();
+
+        $response = $this->pdfApi->deleteStamp($name, $stampId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    // Tables Tests
+
+    public function testGetDocumentTables()
+    {
+        $name = 'PdfWithTable.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentTables($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeleteDocumentTables()
+    {
+        $name = 'PdfWithTable.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->deleteDocumentTables($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageTables()
+    {
+        $name = 'PdfWithTable.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 1;
+
+        $response = $this->pdfApi->getPageTables($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeletePageTables()
+    {
+        $name = 'PdfWithTable.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 1;
+
+        $response = $this->pdfApi->deletePageTables($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetTable()
+    {
+        $name = 'PdfWithTable.pdf';
+        $this->uploadFile($name);
+
+        $tablesResponse = $this->pdfApi->getDocumentTables($name, null, $this->tempFolder);
+        $this->assertEquals(200, $tablesResponse->getCode());
+        $tableId = $tablesResponse->getTables()->getList()[0]->getId();
+
+
+        $response = $this->pdfApi->getTable($name, $tableId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeleteTable()
+    {
+        $name = 'PdfWithTable.pdf';
+        $this->uploadFile($name);
+
+        $tablesResponse = $this->pdfApi->getDocumentTables($name, null, $this->tempFolder);
+        $this->assertEquals(200, $tablesResponse->getCode());
+        $tableId = $tablesResponse->getTables()->getList()[0]->getId();
+
+
+        $response = $this->pdfApi->deleteTable($name, $tableId, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
 
     // Stamp Annotations Tests
 
