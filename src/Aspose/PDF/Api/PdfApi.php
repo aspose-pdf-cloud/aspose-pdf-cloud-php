@@ -82903,17 +82903,16 @@ class PdfApi
      * @param  bool $uniform_worksheets Uniform worksheets (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
-     * @param  \SplFileObject $file2 A file to be converted. (optional)
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return \Aspose\PDF\Model\AsposeResponse
      */
-    public function putPdfInRequestToXls($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null, $file2 = null)
+    public function putPdfInRequestToXls($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null)
     {
         try
         {
-            list($response) = $this->putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file, $file2);
+            list($response) = $this->putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file);
             return $response;
         }
         catch (ApiException $ex)
@@ -82921,7 +82920,7 @@ class PdfApi
             if ($ex->getCode() == 401)
             {
                 $this->_refreshToken();
-                list($response) = $this->putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file, $file2);
+                list($response) = $this->putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file);
                 return $response;
             }
             else
@@ -82943,16 +82942,15 @@ class PdfApi
      * @param  bool $uniform_worksheets Uniform worksheets (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
-     * @param  \SplFileObject $file2 A file to be converted. (optional)
      *
      * @throws \Aspose\PDF\ApiException on non-2xx response
      * @throws \InvalidArgumentException
      * @return array of \Aspose\PDF\Model\AsposeResponse, HTTP status code, HTTP response headers (array of strings)
      */
-    public function putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null, $file2 = null)
+    public function putPdfInRequestToXlsWithHttpInfo($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null)
     {
         $returnType = '\Aspose\PDF\Model\AsposeResponse';
-        $request = $this->putPdfInRequestToXlsRequest($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file, $file2);
+        $request = $this->putPdfInRequestToXlsRequest($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file);
 
         try {
             $options = $this->createHttpClientOption();
@@ -83025,14 +83023,13 @@ class PdfApi
      * @param  bool $uniform_worksheets Uniform worksheets (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
-     * @param  \SplFileObject $file2 A file to be converted. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function putPdfInRequestToXlsAsync($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null, $file2 = null)
+    public function putPdfInRequestToXlsAsync($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null)
     {
-        return $this->putPdfInRequestToXlsAsyncWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file, $file2)
+        return $this->putPdfInRequestToXlsAsyncWithHttpInfo($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file)
             ->then(
                 function ($response) {
                     return $response[0];
@@ -83052,15 +83049,14 @@ class PdfApi
      * @param  bool $uniform_worksheets Uniform worksheets (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
-     * @param  \SplFileObject $file2 A file to be converted. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Promise\PromiseInterface
      */
-    public function putPdfInRequestToXlsAsyncWithHttpInfo($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null, $file2 = null)
+    public function putPdfInRequestToXlsAsyncWithHttpInfo($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null)
     {
         $returnType = '\Aspose\PDF\Model\AsposeResponse';
-        $request = $this->putPdfInRequestToXlsRequest($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file, $file2);
+        $request = $this->putPdfInRequestToXlsRequest($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file);
 
         return $this->client
             ->sendAsync($request, $this->createHttpClientOption())
@@ -83109,12 +83105,11 @@ class PdfApi
      * @param  bool $uniform_worksheets Uniform worksheets (optional)
      * @param  string $storage The document storage. (optional)
      * @param  \SplFileObject $file A file to be converted. (optional)
-     * @param  \SplFileObject $file2 A file to be converted. (optional)
      *
      * @throws \InvalidArgumentException
      * @return \GuzzleHttp\Psr7\Request
      */
-    protected function putPdfInRequestToXlsRequest($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null, $file2 = null)
+    protected function putPdfInRequestToXlsRequest($out_path, $insert_blank_column_at_first = null, $minimize_the_number_of_worksheets = null, $scale_factor = null, $uniform_worksheets = null, $storage = null, $file = null)
     {
         // verify the required parameter 'out_path' is set
         if ($out_path === null) {
@@ -83165,15 +83160,6 @@ class PdfApi
             $contents = fread($handle, $fsize);
             $formParams['file'] = $contents;
         }
-        // form params
-        if ($file2 !== null) {
-            $multipart = true;
-            $filename = ObjectSerializer::toFormValue($file2);
-            $handle = fopen($filename, "rb");
-            $fsize = filesize($filename);
-            $contents = fread($handle, $fsize);
-            $formParams['file2'] = $contents;
-        }
         // body params
         $_tempBody = null;
 
@@ -83210,7 +83196,7 @@ class PdfApi
                 }
                 // for HTTP post (form)
                 //$httpBody = new MultipartStream($multipartContents);
-                $httpBody = $formParams['filefile2'];
+                $httpBody = $formParams['file'];
 
             } elseif ($headers['Content-Type'] === 'application/json') {
                 $httpBody = \GuzzleHttp\json_encode($formParams);

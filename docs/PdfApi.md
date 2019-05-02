@@ -6216,7 +6216,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInRequestToXls"></a>
 ## **putPdfInRequestToXls**
-> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXls($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file, $file)
+> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXls($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file)
 
 Converts PDF document (in request content) to XLS format and uploads resulting file to storage.
 
@@ -6229,7 +6229,6 @@ Name | Type | Description  | Notes
 **$scale_factor** | **double** | Scale factor | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$storage** | **string** | The document storage. | [optional]
-**$file** | **\SplFileObject** | A file to be converted. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
 ### Return type
