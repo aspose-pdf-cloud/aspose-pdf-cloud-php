@@ -22,10 +22,10 @@
 
 
 /**
- * PdfPageStamp Class 
+ * ImageHeader Class 
  *
  * @category Class
- * @description Represents Pdf stamps.
+ * @description Represents Pdf image header.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class PdfPageStamp extends StampBase 
+class ImageHeader extends StampBase 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class PdfPageStamp extends StampBase
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PdfPageStamp';
+    protected static $swaggerModelName = 'ImageHeader';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -52,9 +52,8 @@ class PdfPageStamp extends StampBase
       */
     protected static $swaggerTypes = [
         'file_name' => 'string',
-        'page_index' => 'int',
-        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
-        'bottom_margin' => 'double',
+        'width' => 'double',
+        'height' => 'double',
         'left_margin' => 'double',
         'top_margin' => 'double',
         'right_margin' => 'double'
@@ -67,9 +66,8 @@ class PdfPageStamp extends StampBase
       */
     protected static $swaggerFormats = [
         'file_name' => null,
-        'page_index' => 'int32',
-        'vertical_alignment' => null,
-        'bottom_margin' => 'double',
+        'width' => 'double',
+        'height' => 'double',
         'left_margin' => 'double',
         'top_margin' => 'double',
         'right_margin' => 'double'
@@ -103,9 +101,8 @@ class PdfPageStamp extends StampBase
      */
     protected static $attributeMap = [
         'file_name' => 'FileName',
-        'page_index' => 'PageIndex',
-        'vertical_alignment' => 'VerticalAlignment',
-        'bottom_margin' => 'BottomMargin',
+        'width' => 'Width',
+        'height' => 'Height',
         'left_margin' => 'LeftMargin',
         'top_margin' => 'TopMargin',
         'right_margin' => 'RightMargin'
@@ -118,9 +115,8 @@ class PdfPageStamp extends StampBase
      */
     protected static $setters = [
         'file_name' => 'setFileName',
-        'page_index' => 'setPageIndex',
-        'vertical_alignment' => 'setVerticalAlignment',
-        'bottom_margin' => 'setBottomMargin',
+        'width' => 'setWidth',
+        'height' => 'setHeight',
         'left_margin' => 'setLeftMargin',
         'top_margin' => 'setTopMargin',
         'right_margin' => 'setRightMargin'
@@ -133,9 +129,8 @@ class PdfPageStamp extends StampBase
      */
     protected static $getters = [
         'file_name' => 'getFileName',
-        'page_index' => 'getPageIndex',
-        'vertical_alignment' => 'getVerticalAlignment',
-        'bottom_margin' => 'getBottomMargin',
+        'width' => 'getWidth',
+        'height' => 'getHeight',
         'left_margin' => 'getLeftMargin',
         'top_margin' => 'getTopMargin',
         'right_margin' => 'getRightMargin'
@@ -198,9 +193,8 @@ class PdfPageStamp extends StampBase
         parent::__construct($data);
 
         $this->container['file_name'] = isset($data['file_name']) ? $data['file_name'] : null;
-        $this->container['page_index'] = isset($data['page_index']) ? $data['page_index'] : null;
-        $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
-        $this->container['bottom_margin'] = isset($data['bottom_margin']) ? $data['bottom_margin'] : null;
+        $this->container['width'] = isset($data['width']) ? $data['width'] : null;
+        $this->container['height'] = isset($data['height']) ? $data['height'] : null;
         $this->container['left_margin'] = isset($data['left_margin']) ? $data['left_margin'] : null;
         $this->container['top_margin'] = isset($data['top_margin']) ? $data['top_margin'] : null;
         $this->container['right_margin'] = isset($data['right_margin']) ? $data['right_margin'] : null;
@@ -259,73 +253,49 @@ class PdfPageStamp extends StampBase
     }
 
     /**
-     * Gets page_index
-     *
-     * @return int
-     */
-    public function getPageIndex()
-    {
-        return $this->container['page_index'];
-    }
-
-    /**
-     * Sets page_index
-     *
-     * @param int $page_index Gets or sets the index of the page.
-     *
-     * @return $this
-     */
-    public function setPageIndex($page_index)
-    {
-        $this->container['page_index'] = $page_index;
-
-        return $this;
-    }
-
-    /**
-     * Gets vertical_alignment
-     *
-     * @return \Aspose\PDF\Model\VerticalAlignment
-     */
-    public function getVerticalAlignment()
-    {
-        return $this->container['vertical_alignment'];
-    }
-
-    /**
-     * Sets vertical_alignment
-     *
-     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Gets or sets vertical alignment of stamp on page.
-     *
-     * @return $this
-     */
-    public function setVerticalAlignment($vertical_alignment)
-    {
-        $this->container['vertical_alignment'] = $vertical_alignment;
-
-        return $this;
-    }
-
-    /**
-     * Gets bottom_margin
+     * Gets width
      *
      * @return double
      */
-    public function getBottomMargin()
+    public function getWidth()
     {
-        return $this->container['bottom_margin'];
+        return $this->container['width'];
     }
 
     /**
-     * Sets bottom_margin
+     * Sets width
      *
-     * @param double $bottom_margin Gets or sets bottom margin of stamp.
+     * @param double $width Gets or sets image width. Setting this property allos to scal image horizontally.
      *
      * @return $this
      */
-    public function setBottomMargin($bottom_margin)
+    public function setWidth($width)
     {
-        $this->container['bottom_margin'] = $bottom_margin;
+        $this->container['width'] = $width;
+
+        return $this;
+    }
+
+    /**
+     * Gets height
+     *
+     * @return double
+     */
+    public function getHeight()
+    {
+        return $this->container['height'];
+    }
+
+    /**
+     * Sets height
+     *
+     * @param double $height Gets or sets image height. Setting this image allows to scale image vertically.
+     *
+     * @return $this
+     */
+    public function setHeight($height)
+    {
+        $this->container['height'] = $height;
 
         return $this;
     }

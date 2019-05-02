@@ -22,19 +22,21 @@
 
 
 /**
- * PdfPageStamp Class 
+ * BorderInfo Class 
  *
  * @category Class
- * @description Represents Pdf stamps.
+ * @description This class represents border for graphics elements.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
  */
 
 namespace Aspose\PDF\Model;
+
+use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class PdfPageStamp extends StampBase 
+class BorderInfo implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +45,7 @@ class PdfPageStamp extends StampBase
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PdfPageStamp';
+    protected static $swaggerModelName = 'BorderInfo';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,13 +53,11 @@ class PdfPageStamp extends StampBase
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'file_name' => 'string',
-        'page_index' => 'int',
-        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
-        'bottom_margin' => 'double',
-        'left_margin' => 'double',
-        'top_margin' => 'double',
-        'right_margin' => 'double'
+        'left' => '\Aspose\PDF\Model\GraphInfo',
+        'right' => '\Aspose\PDF\Model\GraphInfo',
+        'top' => '\Aspose\PDF\Model\GraphInfo',
+        'bottom' => '\Aspose\PDF\Model\GraphInfo',
+        'rounded_border_radius' => 'double'
     ];
 
     /**
@@ -66,13 +66,11 @@ class PdfPageStamp extends StampBase
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'file_name' => null,
-        'page_index' => 'int32',
-        'vertical_alignment' => null,
-        'bottom_margin' => 'double',
-        'left_margin' => 'double',
-        'top_margin' => 'double',
-        'right_margin' => 'double'
+        'left' => null,
+        'right' => null,
+        'top' => null,
+        'bottom' => null,
+        'rounded_border_radius' => 'double'
     ];
 
     /**
@@ -82,7 +80,7 @@ class PdfPageStamp extends StampBase
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -92,7 +90,7 @@ class PdfPageStamp extends StampBase
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /**
@@ -102,13 +100,11 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_name' => 'FileName',
-        'page_index' => 'PageIndex',
-        'vertical_alignment' => 'VerticalAlignment',
-        'bottom_margin' => 'BottomMargin',
-        'left_margin' => 'LeftMargin',
-        'top_margin' => 'TopMargin',
-        'right_margin' => 'RightMargin'
+        'left' => 'Left',
+        'right' => 'Right',
+        'top' => 'Top',
+        'bottom' => 'Bottom',
+        'rounded_border_radius' => 'RoundedBorderRadius'
     ];
 
     /**
@@ -117,13 +113,11 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $setters = [
-        'file_name' => 'setFileName',
-        'page_index' => 'setPageIndex',
-        'vertical_alignment' => 'setVerticalAlignment',
-        'bottom_margin' => 'setBottomMargin',
-        'left_margin' => 'setLeftMargin',
-        'top_margin' => 'setTopMargin',
-        'right_margin' => 'setRightMargin'
+        'left' => 'setLeft',
+        'right' => 'setRight',
+        'top' => 'setTop',
+        'bottom' => 'setBottom',
+        'rounded_border_radius' => 'setRoundedBorderRadius'
     ];
 
     /**
@@ -132,13 +126,11 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $getters = [
-        'file_name' => 'getFileName',
-        'page_index' => 'getPageIndex',
-        'vertical_alignment' => 'getVerticalAlignment',
-        'bottom_margin' => 'getBottomMargin',
-        'left_margin' => 'getLeftMargin',
-        'top_margin' => 'getTopMargin',
-        'right_margin' => 'getRightMargin'
+        'left' => 'getLeft',
+        'right' => 'getRight',
+        'top' => 'getTop',
+        'bottom' => 'getBottom',
+        'rounded_border_radius' => 'getRoundedBorderRadius'
     ];
 
     /**
@@ -149,7 +141,7 @@ class PdfPageStamp extends StampBase
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -159,7 +151,7 @@ class PdfPageStamp extends StampBase
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -169,7 +161,7 @@ class PdfPageStamp extends StampBase
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -186,6 +178,12 @@ class PdfPageStamp extends StampBase
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -195,15 +193,11 @@ class PdfPageStamp extends StampBase
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['file_name'] = isset($data['file_name']) ? $data['file_name'] : null;
-        $this->container['page_index'] = isset($data['page_index']) ? $data['page_index'] : null;
-        $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
-        $this->container['bottom_margin'] = isset($data['bottom_margin']) ? $data['bottom_margin'] : null;
-        $this->container['left_margin'] = isset($data['left_margin']) ? $data['left_margin'] : null;
-        $this->container['top_margin'] = isset($data['top_margin']) ? $data['top_margin'] : null;
-        $this->container['right_margin'] = isset($data['right_margin']) ? $data['right_margin'] : null;
+        $this->container['left'] = isset($data['left']) ? $data['left'] : null;
+        $this->container['right'] = isset($data['right']) ? $data['right'] : null;
+        $this->container['top'] = isset($data['top']) ? $data['top'] : null;
+        $this->container['bottom'] = isset($data['bottom']) ? $data['bottom'] : null;
+        $this->container['rounded_border_radius'] = isset($data['rounded_border_radius']) ? $data['rounded_border_radius'] : null;
     }
 
     /**
@@ -213,7 +207,7 @@ class PdfPageStamp extends StampBase
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
         return $invalidProperties;
     }
@@ -226,178 +220,127 @@ class PdfPageStamp extends StampBase
      */
     public function valid()
     {
-        if (!parent::valid()) {
-            return false;
-        }
 
         return true;
     }
 
 
     /**
-     * Gets file_name
+     * Gets left
      *
-     * @return string
+     * @return \Aspose\PDF\Model\GraphInfo
      */
-    public function getFileName()
+    public function getLeft()
     {
-        return $this->container['file_name'];
+        return $this->container['left'];
     }
 
     /**
-     * Sets file_name
+     * Sets left
      *
-     * @param string $file_name Gets or sets the file name.
+     * @param \Aspose\PDF\Model\GraphInfo $left Gets or sets a object that indicates left of the border.
      *
      * @return $this
      */
-    public function setFileName($file_name)
+    public function setLeft($left)
     {
-        $this->container['file_name'] = $file_name;
+        $this->container['left'] = $left;
 
         return $this;
     }
 
     /**
-     * Gets page_index
+     * Gets right
      *
-     * @return int
+     * @return \Aspose\PDF\Model\GraphInfo
      */
-    public function getPageIndex()
+    public function getRight()
     {
-        return $this->container['page_index'];
+        return $this->container['right'];
     }
 
     /**
-     * Sets page_index
+     * Sets right
      *
-     * @param int $page_index Gets or sets the index of the page.
+     * @param \Aspose\PDF\Model\GraphInfo $right Gets or sets a object that indicates right of the border.
      *
      * @return $this
      */
-    public function setPageIndex($page_index)
+    public function setRight($right)
     {
-        $this->container['page_index'] = $page_index;
+        $this->container['right'] = $right;
 
         return $this;
     }
 
     /**
-     * Gets vertical_alignment
+     * Gets top
      *
-     * @return \Aspose\PDF\Model\VerticalAlignment
+     * @return \Aspose\PDF\Model\GraphInfo
      */
-    public function getVerticalAlignment()
+    public function getTop()
     {
-        return $this->container['vertical_alignment'];
+        return $this->container['top'];
     }
 
     /**
-     * Sets vertical_alignment
+     * Sets top
      *
-     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Gets or sets vertical alignment of stamp on page.
+     * @param \Aspose\PDF\Model\GraphInfo $top Gets or sets a object that indicates the top border.
      *
      * @return $this
      */
-    public function setVerticalAlignment($vertical_alignment)
+    public function setTop($top)
     {
-        $this->container['vertical_alignment'] = $vertical_alignment;
+        $this->container['top'] = $top;
 
         return $this;
     }
 
     /**
-     * Gets bottom_margin
+     * Gets bottom
+     *
+     * @return \Aspose\PDF\Model\GraphInfo
+     */
+    public function getBottom()
+    {
+        return $this->container['bottom'];
+    }
+
+    /**
+     * Sets bottom
+     *
+     * @param \Aspose\PDF\Model\GraphInfo $bottom Gets or sets a object that indicates bottom of the border.
+     *
+     * @return $this
+     */
+    public function setBottom($bottom)
+    {
+        $this->container['bottom'] = $bottom;
+
+        return $this;
+    }
+
+    /**
+     * Gets rounded_border_radius
      *
      * @return double
      */
-    public function getBottomMargin()
+    public function getRoundedBorderRadius()
     {
-        return $this->container['bottom_margin'];
+        return $this->container['rounded_border_radius'];
     }
 
     /**
-     * Sets bottom_margin
+     * Sets rounded_border_radius
      *
-     * @param double $bottom_margin Gets or sets bottom margin of stamp.
+     * @param double $rounded_border_radius Gets or sets a rouded border radius
      *
      * @return $this
      */
-    public function setBottomMargin($bottom_margin)
+    public function setRoundedBorderRadius($rounded_border_radius)
     {
-        $this->container['bottom_margin'] = $bottom_margin;
-
-        return $this;
-    }
-
-    /**
-     * Gets left_margin
-     *
-     * @return double
-     */
-    public function getLeftMargin()
-    {
-        return $this->container['left_margin'];
-    }
-
-    /**
-     * Sets left_margin
-     *
-     * @param double $left_margin Gets or sets left margin of stamp.
-     *
-     * @return $this
-     */
-    public function setLeftMargin($left_margin)
-    {
-        $this->container['left_margin'] = $left_margin;
-
-        return $this;
-    }
-
-    /**
-     * Gets top_margin
-     *
-     * @return double
-     */
-    public function getTopMargin()
-    {
-        return $this->container['top_margin'];
-    }
-
-    /**
-     * Sets top_margin
-     *
-     * @param double $top_margin Gets or sets top margin of stamp.
-     *
-     * @return $this
-     */
-    public function setTopMargin($top_margin)
-    {
-        $this->container['top_margin'] = $top_margin;
-
-        return $this;
-    }
-
-    /**
-     * Gets right_margin
-     *
-     * @return double
-     */
-    public function getRightMargin()
-    {
-        return $this->container['right_margin'];
-    }
-
-    /**
-     * Sets right_margin
-     *
-     * @param double $right_margin Gets or sets right margin of stamp.
-     *
-     * @return $this
-     */
-    public function setRightMargin($right_margin)
-    {
-        $this->container['right_margin'] = $right_margin;
+        $this->container['rounded_border_radius'] = $rounded_border_radius;
 
         return $this;
     }

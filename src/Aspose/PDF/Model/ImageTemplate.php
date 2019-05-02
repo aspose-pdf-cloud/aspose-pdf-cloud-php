@@ -61,7 +61,7 @@ class ImageTemplate implements ModelInterface, ArrayAccess
         'bottom_margin' => 'double',
         'page_width' => 'double',
         'page_height' => 'double',
-        'margin_info' => '\Aspose\PDF\Model\MarginInfo'
+        'margin_info' => '\Aspose\PDF\Model\MarginInfo2'
     ];
 
     /**
@@ -456,7 +456,7 @@ class ImageTemplate implements ModelInterface, ArrayAccess
     /**
      * Gets margin_info
      *
-     * @return \Aspose\PDF\Model\MarginInfo
+     * @return \Aspose\PDF\Model\MarginInfo2
      */
     public function getMarginInfo()
     {
@@ -466,7 +466,7 @@ class ImageTemplate implements ModelInterface, ArrayAccess
     /**
      * Sets margin_info
      *
-     * @param \Aspose\PDF\Model\MarginInfo $margin_info margin_info
+     * @param \Aspose\PDF\Model\MarginInfo2 $margin_info margin_info
      *
      * @return $this
      */

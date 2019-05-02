@@ -25,6 +25,7 @@
  * MarginInfo Class 
  *
  * @category Class
+ * @description This class represents a margin for different objects.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -202,18 +203,6 @@ class MarginInfo implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['left'] === null) {
-            $invalidProperties[] = "'left' can't be null";
-        }
-        if ($this->container['right'] === null) {
-            $invalidProperties[] = "'right' can't be null";
-        }
-        if ($this->container['top'] === null) {
-            $invalidProperties[] = "'top' can't be null";
-        }
-        if ($this->container['bottom'] === null) {
-            $invalidProperties[] = "'bottom' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -226,18 +215,6 @@ class MarginInfo implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['left'] === null) {
-            return false;
-        }
-        if ($this->container['right'] === null) {
-            return false;
-        }
-        if ($this->container['top'] === null) {
-            return false;
-        }
-        if ($this->container['bottom'] === null) {
-            return false;
-        }
         return true;
     }
 
@@ -255,7 +232,7 @@ class MarginInfo implements ModelInterface, ArrayAccess
     /**
      * Sets left
      *
-     * @param double $left left
+     * @param double $left Gets or sets a float value that indicates the left margin.
      *
      * @return $this
      */
@@ -279,7 +256,7 @@ class MarginInfo implements ModelInterface, ArrayAccess
     /**
      * Sets right
      *
-     * @param double $right right
+     * @param double $right Gets or sets a float value that indicates the right margin.
      *
      * @return $this
      */
@@ -303,7 +280,7 @@ class MarginInfo implements ModelInterface, ArrayAccess
     /**
      * Sets top
      *
-     * @param double $top top
+     * @param double $top Gets or sets a float value that indicates the top margin.
      *
      * @return $this
      */
@@ -327,7 +304,7 @@ class MarginInfo implements ModelInterface, ArrayAccess
     /**
      * Sets bottom
      *
-     * @param double $bottom bottom
+     * @param double $bottom Gets or sets a float value that indicates the bottom margin.
      *
      * @return $this
      */

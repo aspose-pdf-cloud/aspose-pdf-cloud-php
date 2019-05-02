@@ -65,7 +65,7 @@ class Configuration
      *
      * @var string
      */
-    protected $host = 'https://api.aspose.cloud/v2.0';
+    protected $host = 'https://api-dev.aspose.cloud/v2.0';
 
     /*
      * AppKey for API

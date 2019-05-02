@@ -22,10 +22,10 @@
 
 
 /**
- * PdfPageStamp Class 
+ * TextHeader Class 
  *
  * @category Class
- * @description Represents Pdf stamps.
+ * @description Represents Pdf text header.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class PdfPageStamp extends StampBase 
+class TextHeader extends StampBase 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class PdfPageStamp extends StampBase
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PdfPageStamp';
+    protected static $swaggerModelName = 'TextHeader';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,10 +51,9 @@ class PdfPageStamp extends StampBase
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'file_name' => 'string',
-        'page_index' => 'int',
-        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
-        'bottom_margin' => 'double',
+        'text_alignment' => '\Aspose\PDF\Model\HorizontalAlignment',
+        'value' => 'string',
+        'text_state' => '\Aspose\PDF\Model\TextState',
         'left_margin' => 'double',
         'top_margin' => 'double',
         'right_margin' => 'double'
@@ -66,10 +65,9 @@ class PdfPageStamp extends StampBase
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'file_name' => null,
-        'page_index' => 'int32',
-        'vertical_alignment' => null,
-        'bottom_margin' => 'double',
+        'text_alignment' => null,
+        'value' => null,
+        'text_state' => null,
         'left_margin' => 'double',
         'top_margin' => 'double',
         'right_margin' => 'double'
@@ -102,10 +100,9 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_name' => 'FileName',
-        'page_index' => 'PageIndex',
-        'vertical_alignment' => 'VerticalAlignment',
-        'bottom_margin' => 'BottomMargin',
+        'text_alignment' => 'TextAlignment',
+        'value' => 'Value',
+        'text_state' => 'TextState',
         'left_margin' => 'LeftMargin',
         'top_margin' => 'TopMargin',
         'right_margin' => 'RightMargin'
@@ -117,10 +114,9 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $setters = [
-        'file_name' => 'setFileName',
-        'page_index' => 'setPageIndex',
-        'vertical_alignment' => 'setVerticalAlignment',
-        'bottom_margin' => 'setBottomMargin',
+        'text_alignment' => 'setTextAlignment',
+        'value' => 'setValue',
+        'text_state' => 'setTextState',
         'left_margin' => 'setLeftMargin',
         'top_margin' => 'setTopMargin',
         'right_margin' => 'setRightMargin'
@@ -132,10 +128,9 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $getters = [
-        'file_name' => 'getFileName',
-        'page_index' => 'getPageIndex',
-        'vertical_alignment' => 'getVerticalAlignment',
-        'bottom_margin' => 'getBottomMargin',
+        'text_alignment' => 'getTextAlignment',
+        'value' => 'getValue',
+        'text_state' => 'getTextState',
         'left_margin' => 'getLeftMargin',
         'top_margin' => 'getTopMargin',
         'right_margin' => 'getRightMargin'
@@ -197,10 +192,9 @@ class PdfPageStamp extends StampBase
     {
         parent::__construct($data);
 
-        $this->container['file_name'] = isset($data['file_name']) ? $data['file_name'] : null;
-        $this->container['page_index'] = isset($data['page_index']) ? $data['page_index'] : null;
-        $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
-        $this->container['bottom_margin'] = isset($data['bottom_margin']) ? $data['bottom_margin'] : null;
+        $this->container['text_alignment'] = isset($data['text_alignment']) ? $data['text_alignment'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        $this->container['text_state'] = isset($data['text_state']) ? $data['text_state'] : null;
         $this->container['left_margin'] = isset($data['left_margin']) ? $data['left_margin'] : null;
         $this->container['top_margin'] = isset($data['top_margin']) ? $data['top_margin'] : null;
         $this->container['right_margin'] = isset($data['right_margin']) ? $data['right_margin'] : null;
@@ -235,97 +229,73 @@ class PdfPageStamp extends StampBase
 
 
     /**
-     * Gets file_name
+     * Gets text_alignment
+     *
+     * @return \Aspose\PDF\Model\HorizontalAlignment
+     */
+    public function getTextAlignment()
+    {
+        return $this->container['text_alignment'];
+    }
+
+    /**
+     * Sets text_alignment
+     *
+     * @param \Aspose\PDF\Model\HorizontalAlignment $text_alignment Alignment of the text inside the stamp.
+     *
+     * @return $this
+     */
+    public function setTextAlignment($text_alignment)
+    {
+        $this->container['text_alignment'] = $text_alignment;
+
+        return $this;
+    }
+
+    /**
+     * Gets value
      *
      * @return string
      */
-    public function getFileName()
+    public function getValue()
     {
-        return $this->container['file_name'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets file_name
+     * Sets value
      *
-     * @param string $file_name Gets or sets the file name.
+     * @param string $value Gets or sets string value which is used as stamp on the page.
      *
      * @return $this
      */
-    public function setFileName($file_name)
+    public function setValue($value)
     {
-        $this->container['file_name'] = $file_name;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets page_index
+     * Gets text_state
      *
-     * @return int
+     * @return \Aspose\PDF\Model\TextState
      */
-    public function getPageIndex()
+    public function getTextState()
     {
-        return $this->container['page_index'];
+        return $this->container['text_state'];
     }
 
     /**
-     * Sets page_index
+     * Sets text_state
      *
-     * @param int $page_index Gets or sets the index of the page.
+     * @param \Aspose\PDF\Model\TextState $text_state Gets text properties of the stamp. See  for details.
      *
      * @return $this
      */
-    public function setPageIndex($page_index)
+    public function setTextState($text_state)
     {
-        $this->container['page_index'] = $page_index;
-
-        return $this;
-    }
-
-    /**
-     * Gets vertical_alignment
-     *
-     * @return \Aspose\PDF\Model\VerticalAlignment
-     */
-    public function getVerticalAlignment()
-    {
-        return $this->container['vertical_alignment'];
-    }
-
-    /**
-     * Sets vertical_alignment
-     *
-     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Gets or sets vertical alignment of stamp on page.
-     *
-     * @return $this
-     */
-    public function setVerticalAlignment($vertical_alignment)
-    {
-        $this->container['vertical_alignment'] = $vertical_alignment;
-
-        return $this;
-    }
-
-    /**
-     * Gets bottom_margin
-     *
-     * @return double
-     */
-    public function getBottomMargin()
-    {
-        return $this->container['bottom_margin'];
-    }
-
-    /**
-     * Sets bottom_margin
-     *
-     * @param double $bottom_margin Gets or sets bottom margin of stamp.
-     *
-     * @return $this
-     */
-    public function setBottomMargin($bottom_margin)
-    {
-        $this->container['bottom_margin'] = $bottom_margin;
+        $this->container['text_state'] = $text_state;
 
         return $this;
     }

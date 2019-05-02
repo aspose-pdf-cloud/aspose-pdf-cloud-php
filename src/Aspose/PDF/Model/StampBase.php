@@ -52,15 +52,10 @@ class StampBase extends LinkElement
       */
     protected static $swaggerTypes = [
         'background' => 'bool',
-        'bottom_margin' => 'double',
         'horizontal_alignment' => '\Aspose\PDF\Model\HorizontalAlignment',
-        'left_margin' => 'double',
         'opacity' => 'double',
-        'right_margin' => 'double',
         'rotate' => '\Aspose\PDF\Model\Rotation',
         'rotate_angle' => 'double',
-        'top_margin' => 'double',
-        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
         'x_indent' => 'double',
         'y_indent' => 'double',
         'zoom' => 'double'
@@ -73,15 +68,10 @@ class StampBase extends LinkElement
       */
     protected static $swaggerFormats = [
         'background' => null,
-        'bottom_margin' => 'double',
         'horizontal_alignment' => null,
-        'left_margin' => 'double',
         'opacity' => 'double',
-        'right_margin' => 'double',
         'rotate' => null,
         'rotate_angle' => 'double',
-        'top_margin' => 'double',
-        'vertical_alignment' => null,
         'x_indent' => 'double',
         'y_indent' => 'double',
         'zoom' => 'double'
@@ -115,15 +105,10 @@ class StampBase extends LinkElement
      */
     protected static $attributeMap = [
         'background' => 'Background',
-        'bottom_margin' => 'BottomMargin',
         'horizontal_alignment' => 'HorizontalAlignment',
-        'left_margin' => 'LeftMargin',
         'opacity' => 'Opacity',
-        'right_margin' => 'RightMargin',
         'rotate' => 'Rotate',
         'rotate_angle' => 'RotateAngle',
-        'top_margin' => 'TopMargin',
-        'vertical_alignment' => 'VerticalAlignment',
         'x_indent' => 'XIndent',
         'y_indent' => 'YIndent',
         'zoom' => 'Zoom'
@@ -136,15 +121,10 @@ class StampBase extends LinkElement
      */
     protected static $setters = [
         'background' => 'setBackground',
-        'bottom_margin' => 'setBottomMargin',
         'horizontal_alignment' => 'setHorizontalAlignment',
-        'left_margin' => 'setLeftMargin',
         'opacity' => 'setOpacity',
-        'right_margin' => 'setRightMargin',
         'rotate' => 'setRotate',
         'rotate_angle' => 'setRotateAngle',
-        'top_margin' => 'setTopMargin',
-        'vertical_alignment' => 'setVerticalAlignment',
         'x_indent' => 'setXIndent',
         'y_indent' => 'setYIndent',
         'zoom' => 'setZoom'
@@ -157,15 +137,10 @@ class StampBase extends LinkElement
      */
     protected static $getters = [
         'background' => 'getBackground',
-        'bottom_margin' => 'getBottomMargin',
         'horizontal_alignment' => 'getHorizontalAlignment',
-        'left_margin' => 'getLeftMargin',
         'opacity' => 'getOpacity',
-        'right_margin' => 'getRightMargin',
         'rotate' => 'getRotate',
         'rotate_angle' => 'getRotateAngle',
-        'top_margin' => 'getTopMargin',
-        'vertical_alignment' => 'getVerticalAlignment',
         'x_indent' => 'getXIndent',
         'y_indent' => 'getYIndent',
         'zoom' => 'getZoom'
@@ -228,15 +203,10 @@ class StampBase extends LinkElement
         parent::__construct($data);
 
         $this->container['background'] = isset($data['background']) ? $data['background'] : null;
-        $this->container['bottom_margin'] = isset($data['bottom_margin']) ? $data['bottom_margin'] : null;
         $this->container['horizontal_alignment'] = isset($data['horizontal_alignment']) ? $data['horizontal_alignment'] : null;
-        $this->container['left_margin'] = isset($data['left_margin']) ? $data['left_margin'] : null;
         $this->container['opacity'] = isset($data['opacity']) ? $data['opacity'] : null;
-        $this->container['right_margin'] = isset($data['right_margin']) ? $data['right_margin'] : null;
         $this->container['rotate'] = isset($data['rotate']) ? $data['rotate'] : null;
         $this->container['rotate_angle'] = isset($data['rotate_angle']) ? $data['rotate_angle'] : null;
-        $this->container['top_margin'] = isset($data['top_margin']) ? $data['top_margin'] : null;
-        $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
         $this->container['x_indent'] = isset($data['x_indent']) ? $data['x_indent'] : null;
         $this->container['y_indent'] = isset($data['y_indent']) ? $data['y_indent'] : null;
         $this->container['zoom'] = isset($data['zoom']) ? $data['zoom'] : null;
@@ -295,30 +265,6 @@ class StampBase extends LinkElement
     }
 
     /**
-     * Gets bottom_margin
-     *
-     * @return double
-     */
-    public function getBottomMargin()
-    {
-        return $this->container['bottom_margin'];
-    }
-
-    /**
-     * Sets bottom_margin
-     *
-     * @param double $bottom_margin Gets or sets bottom margin of stamp.
-     *
-     * @return $this
-     */
-    public function setBottomMargin($bottom_margin)
-    {
-        $this->container['bottom_margin'] = $bottom_margin;
-
-        return $this;
-    }
-
-    /**
      * Gets horizontal_alignment
      *
      * @return \Aspose\PDF\Model\HorizontalAlignment
@@ -343,30 +289,6 @@ class StampBase extends LinkElement
     }
 
     /**
-     * Gets left_margin
-     *
-     * @return double
-     */
-    public function getLeftMargin()
-    {
-        return $this->container['left_margin'];
-    }
-
-    /**
-     * Sets left_margin
-     *
-     * @param double $left_margin Gets or sets left margin of stamp.
-     *
-     * @return $this
-     */
-    public function setLeftMargin($left_margin)
-    {
-        $this->container['left_margin'] = $left_margin;
-
-        return $this;
-    }
-
-    /**
      * Gets opacity
      *
      * @return double
@@ -386,30 +308,6 @@ class StampBase extends LinkElement
     public function setOpacity($opacity)
     {
         $this->container['opacity'] = $opacity;
-
-        return $this;
-    }
-
-    /**
-     * Gets right_margin
-     *
-     * @return double
-     */
-    public function getRightMargin()
-    {
-        return $this->container['right_margin'];
-    }
-
-    /**
-     * Sets right_margin
-     *
-     * @param double $right_margin Gets or sets right margin of stamp.
-     *
-     * @return $this
-     */
-    public function setRightMargin($right_margin)
-    {
-        $this->container['right_margin'] = $right_margin;
 
         return $this;
     }
@@ -458,54 +356,6 @@ class StampBase extends LinkElement
     public function setRotateAngle($rotate_angle)
     {
         $this->container['rotate_angle'] = $rotate_angle;
-
-        return $this;
-    }
-
-    /**
-     * Gets top_margin
-     *
-     * @return double
-     */
-    public function getTopMargin()
-    {
-        return $this->container['top_margin'];
-    }
-
-    /**
-     * Sets top_margin
-     *
-     * @param double $top_margin Gets or sets top margin of stamp.
-     *
-     * @return $this
-     */
-    public function setTopMargin($top_margin)
-    {
-        $this->container['top_margin'] = $top_margin;
-
-        return $this;
-    }
-
-    /**
-     * Gets vertical_alignment
-     *
-     * @return \Aspose\PDF\Model\VerticalAlignment
-     */
-    public function getVerticalAlignment()
-    {
-        return $this->container['vertical_alignment'];
-    }
-
-    /**
-     * Sets vertical_alignment
-     *
-     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Gets or sets vertical alignment of stamp on page.
-     *
-     * @return $this
-     */
-    public function setVerticalAlignment($vertical_alignment)
-    {
-        $this->container['vertical_alignment'] = $vertical_alignment;
 
         return $this;
     }

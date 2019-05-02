@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **bottom_margin** | **double** |  | [optional]
 **page_width** | **double** |  | [optional]
 **page_height** | **double** |  | [optional]
-**margin_info** | [**\Aspose\PDF\Model\MarginInfo**](MarginInfo.md) |  | [optional]
+**margin_info** | [**\Aspose\PDF\Model\MarginInfo2**](MarginInfo2.md) |  | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md) [[View Source]](../src/Aspose/PDF/Model/ImageTemplate.php)
 
