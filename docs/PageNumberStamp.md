@@ -1,13 +1,12 @@
-﻿# ImageStamp
+﻿# PageNumberStamp
 Represents Pdf stamps.
 
 *Inherited from [\Aspose\PDF\Model\StampBase](StampBase.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_name** | **string** | Gets or sets the file name. | [optional]
-**width** | **double** | Gets or sets image width. Setting this property allos to scal image horizontally. | [optional]
-**height** | **double** | Gets or sets image height. Setting this image allows to scale image vertically. | [optional]
+**value** | **string** | Gets or sets string value which is used as stamp on the page. | [optional]
+**starting_number** | **int** | Gets or sets value of the number of starting page. Other pages will be numbered starting from this value. | [optional]
 **vertical_alignment** | [**\Aspose\PDF\Model\VerticalAlignment**](VerticalAlignment.md) | Gets or sets vertical alignment of stamp on page. | [optional]
 **bottom_margin** | **double** | Gets or sets bottom margin of stamp. | [optional]
 **left_margin** | **double** | Gets or sets left margin of stamp. | [optional]
@@ -23,5 +22,5 @@ Name | Type | Description | Notes
 **zoom** | **double** | Zooming factor of the stamp. Allows to scale stamp.<br />*Inherited from [\Aspose\PDF\Model\StampBase](StampBase.md)* | [optional]
 **links** | [**\Aspose\PDF\Model\Link[]**](Link.md) | Link to the document.<br />*Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)* | [optional]
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md) [[View Source]](../src/Aspose/PDF/Model/ImageStamp.php)
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md) [[View Source]](../src/Aspose/PDF/Model/PageNumberStamp.php)
 

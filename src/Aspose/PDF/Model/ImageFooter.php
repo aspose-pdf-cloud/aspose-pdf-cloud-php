@@ -22,10 +22,10 @@
 
 
 /**
- * PdfPageStamp Class 
+ * ImageFooter Class 
  *
  * @category Class
- * @description Represents Pdf stamps.
+ * @description Represents Pdf image footer.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class PdfPageStamp extends StampBase 
+class ImageFooter extends StampBase 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class PdfPageStamp extends StampBase
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PdfPageStamp';
+    protected static $swaggerModelName = 'ImageFooter';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -52,11 +52,10 @@ class PdfPageStamp extends StampBase
       */
     protected static $swaggerTypes = [
         'file_name' => 'string',
-        'page_index' => 'int',
-        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
+        'width' => 'double',
+        'height' => 'double',
         'bottom_margin' => 'double',
         'left_margin' => 'double',
-        'top_margin' => 'double',
         'right_margin' => 'double'
     ];
 
@@ -67,11 +66,10 @@ class PdfPageStamp extends StampBase
       */
     protected static $swaggerFormats = [
         'file_name' => null,
-        'page_index' => 'int32',
-        'vertical_alignment' => null,
+        'width' => 'double',
+        'height' => 'double',
         'bottom_margin' => 'double',
         'left_margin' => 'double',
-        'top_margin' => 'double',
         'right_margin' => 'double'
     ];
 
@@ -103,11 +101,10 @@ class PdfPageStamp extends StampBase
      */
     protected static $attributeMap = [
         'file_name' => 'FileName',
-        'page_index' => 'PageIndex',
-        'vertical_alignment' => 'VerticalAlignment',
+        'width' => 'Width',
+        'height' => 'Height',
         'bottom_margin' => 'BottomMargin',
         'left_margin' => 'LeftMargin',
-        'top_margin' => 'TopMargin',
         'right_margin' => 'RightMargin'
     ];
 
@@ -118,11 +115,10 @@ class PdfPageStamp extends StampBase
      */
     protected static $setters = [
         'file_name' => 'setFileName',
-        'page_index' => 'setPageIndex',
-        'vertical_alignment' => 'setVerticalAlignment',
+        'width' => 'setWidth',
+        'height' => 'setHeight',
         'bottom_margin' => 'setBottomMargin',
         'left_margin' => 'setLeftMargin',
-        'top_margin' => 'setTopMargin',
         'right_margin' => 'setRightMargin'
     ];
 
@@ -133,11 +129,10 @@ class PdfPageStamp extends StampBase
      */
     protected static $getters = [
         'file_name' => 'getFileName',
-        'page_index' => 'getPageIndex',
-        'vertical_alignment' => 'getVerticalAlignment',
+        'width' => 'getWidth',
+        'height' => 'getHeight',
         'bottom_margin' => 'getBottomMargin',
         'left_margin' => 'getLeftMargin',
-        'top_margin' => 'getTopMargin',
         'right_margin' => 'getRightMargin'
     ];
 
@@ -198,11 +193,10 @@ class PdfPageStamp extends StampBase
         parent::__construct($data);
 
         $this->container['file_name'] = isset($data['file_name']) ? $data['file_name'] : null;
-        $this->container['page_index'] = isset($data['page_index']) ? $data['page_index'] : null;
-        $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
+        $this->container['width'] = isset($data['width']) ? $data['width'] : null;
+        $this->container['height'] = isset($data['height']) ? $data['height'] : null;
         $this->container['bottom_margin'] = isset($data['bottom_margin']) ? $data['bottom_margin'] : null;
         $this->container['left_margin'] = isset($data['left_margin']) ? $data['left_margin'] : null;
-        $this->container['top_margin'] = isset($data['top_margin']) ? $data['top_margin'] : null;
         $this->container['right_margin'] = isset($data['right_margin']) ? $data['right_margin'] : null;
     }
 
@@ -259,49 +253,49 @@ class PdfPageStamp extends StampBase
     }
 
     /**
-     * Gets page_index
+     * Gets width
      *
-     * @return int
+     * @return double
      */
-    public function getPageIndex()
+    public function getWidth()
     {
-        return $this->container['page_index'];
+        return $this->container['width'];
     }
 
     /**
-     * Sets page_index
+     * Sets width
      *
-     * @param int $page_index Gets or sets the index of the page.
+     * @param double $width Gets or sets image width. Setting this property allos to scal image horizontally.
      *
      * @return $this
      */
-    public function setPageIndex($page_index)
+    public function setWidth($width)
     {
-        $this->container['page_index'] = $page_index;
+        $this->container['width'] = $width;
 
         return $this;
     }
 
     /**
-     * Gets vertical_alignment
+     * Gets height
      *
-     * @return \Aspose\PDF\Model\VerticalAlignment
+     * @return double
      */
-    public function getVerticalAlignment()
+    public function getHeight()
     {
-        return $this->container['vertical_alignment'];
+        return $this->container['height'];
     }
 
     /**
-     * Sets vertical_alignment
+     * Sets height
      *
-     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Gets or sets vertical alignment of stamp on page.
+     * @param double $height Gets or sets image height. Setting this image allows to scale image vertically.
      *
      * @return $this
      */
-    public function setVerticalAlignment($vertical_alignment)
+    public function setHeight($height)
     {
-        $this->container['vertical_alignment'] = $vertical_alignment;
+        $this->container['height'] = $height;
 
         return $this;
     }
@@ -350,30 +344,6 @@ class PdfPageStamp extends StampBase
     public function setLeftMargin($left_margin)
     {
         $this->container['left_margin'] = $left_margin;
-
-        return $this;
-    }
-
-    /**
-     * Gets top_margin
-     *
-     * @return double
-     */
-    public function getTopMargin()
-    {
-        return $this->container['top_margin'];
-    }
-
-    /**
-     * Sets top_margin
-     *
-     * @param double $top_margin Gets or sets top margin of stamp.
-     *
-     * @return $this
-     */
-    public function setTopMargin($top_margin)
-    {
-        $this->container['top_margin'] = $top_margin;
 
         return $this;
     }

@@ -22,7 +22,7 @@
 
 
 /**
- * PdfPageStamp Class 
+ * PageNumberStamp Class 
  *
  * @category Class
  * @description Represents Pdf stamps.
@@ -34,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class PdfPageStamp extends StampBase 
+class PageNumberStamp extends StampBase 
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +43,7 @@ class PdfPageStamp extends StampBase
       *
       * @var string
       */
-    protected static $swaggerModelName = 'PdfPageStamp';
+    protected static $swaggerModelName = 'PageNumberStamp';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,8 +51,8 @@ class PdfPageStamp extends StampBase
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'file_name' => 'string',
-        'page_index' => 'int',
+        'value' => 'string',
+        'starting_number' => 'int',
         'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
         'bottom_margin' => 'double',
         'left_margin' => 'double',
@@ -66,8 +66,8 @@ class PdfPageStamp extends StampBase
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'file_name' => null,
-        'page_index' => 'int32',
+        'value' => null,
+        'starting_number' => 'int32',
         'vertical_alignment' => null,
         'bottom_margin' => 'double',
         'left_margin' => 'double',
@@ -102,8 +102,8 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_name' => 'FileName',
-        'page_index' => 'PageIndex',
+        'value' => 'Value',
+        'starting_number' => 'StartingNumber',
         'vertical_alignment' => 'VerticalAlignment',
         'bottom_margin' => 'BottomMargin',
         'left_margin' => 'LeftMargin',
@@ -117,8 +117,8 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $setters = [
-        'file_name' => 'setFileName',
-        'page_index' => 'setPageIndex',
+        'value' => 'setValue',
+        'starting_number' => 'setStartingNumber',
         'vertical_alignment' => 'setVerticalAlignment',
         'bottom_margin' => 'setBottomMargin',
         'left_margin' => 'setLeftMargin',
@@ -132,8 +132,8 @@ class PdfPageStamp extends StampBase
      * @var string[]
      */
     protected static $getters = [
-        'file_name' => 'getFileName',
-        'page_index' => 'getPageIndex',
+        'value' => 'getValue',
+        'starting_number' => 'getStartingNumber',
         'vertical_alignment' => 'getVerticalAlignment',
         'bottom_margin' => 'getBottomMargin',
         'left_margin' => 'getLeftMargin',
@@ -197,8 +197,8 @@ class PdfPageStamp extends StampBase
     {
         parent::__construct($data);
 
-        $this->container['file_name'] = isset($data['file_name']) ? $data['file_name'] : null;
-        $this->container['page_index'] = isset($data['page_index']) ? $data['page_index'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
+        $this->container['starting_number'] = isset($data['starting_number']) ? $data['starting_number'] : null;
         $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
         $this->container['bottom_margin'] = isset($data['bottom_margin']) ? $data['bottom_margin'] : null;
         $this->container['left_margin'] = isset($data['left_margin']) ? $data['left_margin'] : null;
@@ -235,49 +235,49 @@ class PdfPageStamp extends StampBase
 
 
     /**
-     * Gets file_name
+     * Gets value
      *
      * @return string
      */
-    public function getFileName()
+    public function getValue()
     {
-        return $this->container['file_name'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets file_name
+     * Sets value
      *
-     * @param string $file_name Gets or sets the file name.
+     * @param string $value Gets or sets string value which is used as stamp on the page.
      *
      * @return $this
      */
-    public function setFileName($file_name)
+    public function setValue($value)
     {
-        $this->container['file_name'] = $file_name;
+        $this->container['value'] = $value;
 
         return $this;
     }
 
     /**
-     * Gets page_index
+     * Gets starting_number
      *
      * @return int
      */
-    public function getPageIndex()
+    public function getStartingNumber()
     {
-        return $this->container['page_index'];
+        return $this->container['starting_number'];
     }
 
     /**
-     * Sets page_index
+     * Sets starting_number
      *
-     * @param int $page_index Gets or sets the index of the page.
+     * @param int $starting_number Gets or sets value of the number of starting page. Other pages will be numbered starting from this value.
      *
      * @return $this
      */
-    public function setPageIndex($page_index)
+    public function setStartingNumber($starting_number)
     {
-        $this->container['page_index'] = $page_index;
+        $this->container['starting_number'] = $starting_number;
 
         return $this;
     }

@@ -1,17 +1,15 @@
-﻿# ImageStamp
-Represents Pdf stamps.
+﻿# TextFooter
+Represents Pdf text header.
 
 *Inherited from [\Aspose\PDF\Model\StampBase](StampBase.md)*
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**file_name** | **string** | Gets or sets the file name. | [optional]
-**width** | **double** | Gets or sets image width. Setting this property allos to scal image horizontally. | [optional]
-**height** | **double** | Gets or sets image height. Setting this image allows to scale image vertically. | [optional]
-**vertical_alignment** | [**\Aspose\PDF\Model\VerticalAlignment**](VerticalAlignment.md) | Gets or sets vertical alignment of stamp on page. | [optional]
+**text_alignment** | [**\Aspose\PDF\Model\HorizontalAlignment**](HorizontalAlignment.md) | Alignment of the text inside the stamp. | [optional]
+**value** | **string** | Gets or sets string value which is used as stamp on the page. | [optional]
+**text_state** | [**\Aspose\PDF\Model\TextState**](TextState.md) | Gets text properties of the stamp. See for details. | [optional]
 **bottom_margin** | **double** | Gets or sets bottom margin of stamp. | [optional]
 **left_margin** | **double** | Gets or sets left margin of stamp. | [optional]
-**top_margin** | **double** | Gets or sets top margin of stamp. | [optional]
 **right_margin** | **double** | Gets or sets right margin of stamp. | [optional]
 **background** | **bool** | Sets or gets a bool value that indicates the content is stamped as background. If the value is true, the stamp content is layed at the bottom. By defalt, the value is false, the stamp content is layed at the top.<br />*Inherited from [\Aspose\PDF\Model\StampBase](StampBase.md)* | [optional]
 **horizontal_alignment** | [**\Aspose\PDF\Model\HorizontalAlignment**](HorizontalAlignment.md) | Gets or sets Horizontal alignment of stamp on the page. <br />*Inherited from [\Aspose\PDF\Model\StampBase](StampBase.md)* | [optional]
@@ -23,5 +21,5 @@ Name | Type | Description | Notes
 **zoom** | **double** | Zooming factor of the stamp. Allows to scale stamp.<br />*Inherited from [\Aspose\PDF\Model\StampBase](StampBase.md)* | [optional]
 **links** | [**\Aspose\PDF\Model\Link[]**](Link.md) | Link to the document.<br />*Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)* | [optional]
 
-[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md) [[View Source]](../src/Aspose/PDF/Model/ImageStamp.php)
+[[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md) [[View Source]](../src/Aspose/PDF/Model/TextFooter.php)
 

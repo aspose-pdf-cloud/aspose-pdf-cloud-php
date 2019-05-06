@@ -30,7 +30,6 @@ Method | HTTP request | Description
 *PdfApi* | [**getDocumentAnnotations**](PdfApi.md#getDocumentAnnotations) | **GET** /pdf/\{name}/annotations | Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
 *PdfApi* | [**getDocumentAttachmentByIndex**](PdfApi.md#getDocumentAttachmentByIndex) | **GET** /pdf/\{name}/attachments/\{attachmentIndex} | Read document attachment info by its index.
 *PdfApi* | [**getDocumentAttachments**](PdfApi.md#getDocumentAttachments) | **GET** /pdf/\{name}/attachments | Read document attachments info.
-*PdfApi* | [**getDocumentBookmarks**](PdfApi.md#getDocumentBookmarks) | **GET** /pdf/\{name}/bookmarks | Read document bookmark/bookmarks (including children).
 *PdfApi* | [**getDocumentCaretAnnotations**](PdfApi.md#getDocumentCaretAnnotations) | **GET** /pdf/\{name}/annotations/caret | Read document caret annotations.
 *PdfApi* | [**getDocumentCircleAnnotations**](PdfApi.md#getDocumentCircleAnnotations) | **GET** /pdf/\{name}/annotations/circle | Read document circle annotations.
 *PdfApi* | [**getDocumentFileAttachmentAnnotations**](PdfApi.md#getDocumentFileAttachmentAnnotations) | **GET** /pdf/\{name}/annotations/fileattachment | Read document FileAttachment annotations.
@@ -127,6 +126,7 @@ Method | HTTP request | Description
 *PdfApi* | [**getPdfInStorageToSvg**](PdfApi.md#getPdfInStorageToSvg) | **GET** /pdf/\{name}/convert/svg | Converts PDF document (located on storage) to SVG format and returns resulting file in response content
 *PdfApi* | [**getPdfInStorageToTiff**](PdfApi.md#getPdfInStorageToTiff) | **GET** /pdf/\{name}/convert/tiff | Converts PDF document (located on storage) to TIFF format and returns resulting file in response content
 *PdfApi* | [**getPdfInStorageToXls**](PdfApi.md#getPdfInStorageToXls) | **GET** /pdf/\{name}/convert/xls | Converts PDF document (located on storage) to XLS format and returns resulting file in response content
+*PdfApi* | [**getPdfInStorageToXlsx**](PdfApi.md#getPdfInStorageToXlsx) | **GET** /pdf/\{name}/convert/xlsx | Converts PDF document (located on storage) to XLSX format and returns resulting file in response content
 *PdfApi* | [**getPdfInStorageToXml**](PdfApi.md#getPdfInStorageToXml) | **GET** /pdf/\{name}/convert/xml | Converts PDF document (located on storage) to XML format and returns resulting file in response content
 *PdfApi* | [**getPdfInStorageToXps**](PdfApi.md#getPdfInStorageToXps) | **GET** /pdf/\{name}/convert/xps | Converts PDF document (located on storage) to XPS format and returns resulting file in response content
 *PdfApi* | [**getPolygonAnnotation**](PdfApi.md#getPolygonAnnotation) | **GET** /pdf/\{name}/annotations/polygon/\{annotationId} | Read document page polygon annotation by ID.
@@ -156,8 +156,16 @@ Method | HTTP request | Description
 *PdfApi* | [**getXpsInStorageToPdf**](PdfApi.md#getXpsInStorageToPdf) | **GET** /pdf/create/xps | Convert XPS file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**getXslFoInStorageToPdf**](PdfApi.md#getXslFoInStorageToPdf) | **GET** /pdf/create/xslfo | Convert XslFo file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**postAppendDocument**](PdfApi.md#postAppendDocument) | **POST** /pdf/\{name}/appendDocument | Append document to existing one.
+*PdfApi* | [**postChangePasswordDocumentInStorage**](PdfApi.md#postChangePasswordDocumentInStorage) | **POST** /pdf/\{name}/changepassword | Change document password in storage.
 *PdfApi* | [**postCreateField**](PdfApi.md#postCreateField) | **POST** /pdf/\{name}/fields | Create field.
+*PdfApi* | [**postDecryptDocumentInStorage**](PdfApi.md#postDecryptDocumentInStorage) | **POST** /pdf/\{name}/decrypt | Decrypt document in storage.
+*PdfApi* | [**postDocumentImageFooter**](PdfApi.md#postDocumentImageFooter) | **POST** /pdf/\{name}/footer/image | Add document image footer.
+*PdfApi* | [**postDocumentImageHeader**](PdfApi.md#postDocumentImageHeader) | **POST** /pdf/\{name}/header/image | Add document image header.
+*PdfApi* | [**postDocumentPageNumberStamps**](PdfApi.md#postDocumentPageNumberStamps) | **POST** /pdf/\{name}/stamps/pagenumber | Add document page number stamps.
+*PdfApi* | [**postDocumentTextFooter**](PdfApi.md#postDocumentTextFooter) | **POST** /pdf/\{name}/footer/text | Add document text footer.
+*PdfApi* | [**postDocumentTextHeader**](PdfApi.md#postDocumentTextHeader) | **POST** /pdf/\{name}/header/text | Add document text header.
 *PdfApi* | [**postDocumentTextReplace**](PdfApi.md#postDocumentTextReplace) | **POST** /pdf/\{name}/text/replace | Document's replace text method.
+*PdfApi* | [**postEncryptDocumentInStorage**](PdfApi.md#postEncryptDocumentInStorage) | **POST** /pdf/\{name}/encrypt | Encrypt document in storage.
 *PdfApi* | [**postFlattenDocument**](PdfApi.md#postFlattenDocument) | **POST** /pdf/\{name}/flatten | Flatten the document.
 *PdfApi* | [**postInsertImage**](PdfApi.md#postInsertImage) | **POST** /pdf/\{name}/pages/\{pageNumber}/images | Insert image to document page.
 *PdfApi* | [**postMoveFile**](PdfApi.md#postMoveFile) | **POST** /storage/file | Move a specific file
@@ -184,6 +192,7 @@ Method | HTTP request | Description
 *PdfApi* | [**postPageSquigglyAnnotations**](PdfApi.md#postPageSquigglyAnnotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/squiggly | Add document page squiggly annotations.
 *PdfApi* | [**postPageStampAnnotations**](PdfApi.md#postPageStampAnnotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/stamp | Add document page stamp annotations.
 *PdfApi* | [**postPageStrikeOutAnnotations**](PdfApi.md#postPageStrikeOutAnnotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/strikeout | Add document page StrikeOut annotations.
+*PdfApi* | [**postPageTables**](PdfApi.md#postPageTables) | **POST** /pdf/\{name}/pages/\{pageNumber}/tables | Add document page tables.
 *PdfApi* | [**postPageTextAnnotations**](PdfApi.md#postPageTextAnnotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/text | Add document page text annotations.
 *PdfApi* | [**postPageTextReplace**](PdfApi.md#postPageTextReplace) | **POST** /pdf/\{name}/pages/\{pageNumber}/text/replace | Page's replace text method.
 *PdfApi* | [**postPageTextStamps**](PdfApi.md#postPageTextStamps) | **POST** /pdf/\{name}/pages/\{pageNumber}/stamps/text | Add document page text stamps.
@@ -196,10 +205,13 @@ Method | HTTP request | Description
 *PdfApi* | [**putAddText**](PdfApi.md#putAddText) | **PUT** /pdf/\{name}/pages/\{pageNumber}/text | Add text to PDF document page.
 *PdfApi* | [**putAnnotationsFlatten**](PdfApi.md#putAnnotationsFlatten) | **PUT** /pdf/\{name}/annotations/flatten | Flattens the annotations of the specified types
 *PdfApi* | [**putCaretAnnotation**](PdfApi.md#putCaretAnnotation) | **PUT** /pdf/\{name}/annotations/caret/\{annotationId} | Replace document caret annotation
+*PdfApi* | [**putChangePasswordDocument**](PdfApi.md#putChangePasswordDocument) | **PUT** /pdf/changepassword | Change document password from content.
 *PdfApi* | [**putCircleAnnotation**](PdfApi.md#putCircleAnnotation) | **PUT** /pdf/\{name}/annotations/circle/\{annotationId} | Replace document circle annotation
 *PdfApi* | [**putCreate**](PdfApi.md#putCreate) | **PUT** /storage/file | Upload a specific file 
 *PdfApi* | [**putCreateDocument**](PdfApi.md#putCreateDocument) | **PUT** /pdf/\{name} | Create empty document.
 *PdfApi* | [**putCreateFolder**](PdfApi.md#putCreateFolder) | **PUT** /storage/folder | Create the folder 
+*PdfApi* | [**putDecryptDocument**](PdfApi.md#putDecryptDocument) | **PUT** /pdf/decrypt | Decrypt document from content.
+*PdfApi* | [**putEncryptDocument**](PdfApi.md#putEncryptDocument) | **PUT** /pdf/encrypt | Encrypt document from content.
 *PdfApi* | [**putEpubInStorageToPdf**](PdfApi.md#putEpubInStorageToPdf) | **PUT** /pdf/\{name}/create/epub | Convert EPUB file (located on storage) to PDF format and upload resulting file to storage. 
 *PdfApi* | [**putFieldsFlatten**](PdfApi.md#putFieldsFlatten) | **PUT** /pdf/\{name}/fields/flatten | Flatten form fields in document.
 *PdfApi* | [**putFileAttachmentAnnotation**](PdfApi.md#putFileAttachmentAnnotation) | **PUT** /pdf/\{name}/annotations/fileattachment/\{annotationId} | Replace document FileAttachment annotation
@@ -241,6 +253,7 @@ Method | HTTP request | Description
 *PdfApi* | [**putPdfInRequestToSvg**](PdfApi.md#putPdfInRequestToSvg) | **PUT** /pdf/convert/svg | Converts PDF document (in request content) to SVG format and uploads resulting file to storage.
 *PdfApi* | [**putPdfInRequestToTiff**](PdfApi.md#putPdfInRequestToTiff) | **PUT** /pdf/convert/tiff | Converts PDF document (in request content) to TIFF format and uploads resulting file to storage.
 *PdfApi* | [**putPdfInRequestToXls**](PdfApi.md#putPdfInRequestToXls) | **PUT** /pdf/convert/xls | Converts PDF document (in request content) to XLS format and uploads resulting file to storage.
+*PdfApi* | [**putPdfInRequestToXlsx**](PdfApi.md#putPdfInRequestToXlsx) | **PUT** /pdf/convert/xlsx | Converts PDF document (in request content) to XLSX format and uploads resulting file to storage.
 *PdfApi* | [**putPdfInRequestToXml**](PdfApi.md#putPdfInRequestToXml) | **PUT** /pdf/convert/xml | Converts PDF document (in request content) to XML format and uploads resulting file to storage.
 *PdfApi* | [**putPdfInRequestToXps**](PdfApi.md#putPdfInRequestToXps) | **PUT** /pdf/convert/xps | Converts PDF document (in request content) to XPS format and uploads resulting file to storage.
 *PdfApi* | [**putPdfInStorageToDoc**](PdfApi.md#putPdfInStorageToDoc) | **PUT** /pdf/\{name}/convert/doc | Converts PDF document (located on storage) to DOC format and uploads resulting file to storage
@@ -253,6 +266,7 @@ Method | HTTP request | Description
 *PdfApi* | [**putPdfInStorageToSvg**](PdfApi.md#putPdfInStorageToSvg) | **PUT** /pdf/\{name}/convert/svg | Converts PDF document (located on storage) to SVG format and uploads resulting file to storage
 *PdfApi* | [**putPdfInStorageToTiff**](PdfApi.md#putPdfInStorageToTiff) | **PUT** /pdf/\{name}/convert/tiff | Converts PDF document (located on storage) to TIFF format and uploads resulting file to storage
 *PdfApi* | [**putPdfInStorageToXls**](PdfApi.md#putPdfInStorageToXls) | **PUT** /pdf/\{name}/convert/xls | Converts PDF document (located on storage) to XLS format and uploads resulting file to storage
+*PdfApi* | [**putPdfInStorageToXlsx**](PdfApi.md#putPdfInStorageToXlsx) | **PUT** /pdf/\{name}/convert/xlsx | Converts PDF document (located on storage) to XLSX format and uploads resulting file to storage
 *PdfApi* | [**putPdfInStorageToXml**](PdfApi.md#putPdfInStorageToXml) | **PUT** /pdf/\{name}/convert/xml | Converts PDF document (located on storage) to XML format and uploads resulting file to storage
 *PdfApi* | [**putPdfInStorageToXps**](PdfApi.md#putPdfInStorageToXps) | **PUT** /pdf/\{name}/convert/xps | Converts PDF document (located on storage) to XPS format and uploads resulting file to storage
 *PdfApi* | [**putPolygonAnnotation**](PdfApi.md#putPolygonAnnotation) | **PUT** /pdf/\{name}/annotations/polygon/\{annotationId} | Replace document polygon annotation
@@ -274,6 +288,7 @@ Method | HTTP request | Description
 *PdfApi* | [**putStampAnnotationDataExtract**](PdfApi.md#putStampAnnotationDataExtract) | **PUT** /pdf/\{name}/annotations/stamp/\{annotationId}/data/extract | Extract document stamp annotation content to storage
 *PdfApi* | [**putStrikeOutAnnotation**](PdfApi.md#putStrikeOutAnnotation) | **PUT** /pdf/\{name}/annotations/strikeout/\{annotationId} | Replace document StrikeOut annotation
 *PdfApi* | [**putSvgInStorageToPdf**](PdfApi.md#putSvgInStorageToPdf) | **PUT** /pdf/\{name}/create/svg | Convert SVG file (located on storage) to PDF format and upload resulting file to storage. 
+*PdfApi* | [**putTable**](PdfApi.md#putTable) | **PUT** /pdf/\{name}/tables/\{tableId} | Replace document page table.
 *PdfApi* | [**putTextAnnotation**](PdfApi.md#putTextAnnotation) | **PUT** /pdf/\{name}/annotations/text/\{annotationId} | Replace document text annotation
 *PdfApi* | [**putUnderlineAnnotation**](PdfApi.md#putUnderlineAnnotation) | **PUT** /pdf/\{name}/annotations/underline/\{annotationId} | Replace document underline annotation
 *PdfApi* | [**putUpdateField**](PdfApi.md#putUpdateField) | **PUT** /pdf/\{name}/fields/\{fieldName} | Update field.
@@ -800,7 +815,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: multipart/form-data
+ - **Accept**: application/json
 
 <a name="getDocumentAnnotations"></a>
 ## **getDocumentAnnotations**
@@ -868,29 +883,6 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
-
-<a name="getDocumentBookmarks"></a>
-## **getDocumentBookmarks**
-> \SplFileObject getDocumentBookmarks($name, $bookmark_path, $storage, $folder)
-
-Read document bookmark/bookmarks (including children).
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$name** | **string** | The document name. | 
-**$bookmark_path** | **string** | The bookmark path. Leave it empty if you want to get all the bookmarks in the document. | [optional]
-**$storage** | **string** | The document storage. | [optional]
-**$folder** | **string** | The document folder. | [optional]
-
-### Return type
-
-**\SplFileObject**
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: multipart/form-data
 
 <a name="getDocumentCaretAnnotations"></a>
 ## **getDocumentCaretAnnotations**
@@ -3143,6 +3135,32 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: multipart/form-data
 
+<a name="getPdfInStorageToXlsx"></a>
+## **getPdfInStorageToXlsx**
+> \SplFileObject getPdfInStorageToXlsx($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage)
+
+Converts PDF document (located on storage) to XLSX format and returns resulting file in response content
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
+**$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
+**$scale_factor** | **double** | Scale factor | [optional]
+**$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+**\SplFileObject**
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: multipart/form-data
+
 <a name="getPdfInStorageToXml"></a>
 ## **getPdfInStorageToXml**
 > \SplFileObject getPdfInStorageToXml($name, $folder, $storage)
@@ -3819,6 +3837,31 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="postChangePasswordDocumentInStorage"></a>
+## **postChangePasswordDocumentInStorage**
+> \Aspose\PDF\Model\AsposeResponse postChangePasswordDocumentInStorage($name, $owner_password, $new_user_password, $new_owner_password, $storage, $folder)
+
+Change document password in storage.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | Document name. | 
+**$owner_password** | **string** | Owner password (encrypted Base64). | 
+**$new_user_password** | **string** | New user password (encrypted Base64). | 
+**$new_owner_password** | **string** | New owner password (encrypted Base64). | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="postCreateField"></a>
 ## **postCreateField**
 > \Aspose\PDF\Model\AsposeResponse postCreateField($name, $page, $field, $storage, $folder)
@@ -3831,6 +3874,154 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$page** | **int** | Document page number. | 
 **$field** | [**\Aspose\PDF\Model\Field**](Field.md) | with the field data. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postDecryptDocumentInStorage"></a>
+## **postDecryptDocumentInStorage**
+> \Aspose\PDF\Model\AsposeResponse postDecryptDocumentInStorage($name, $password, $storage, $folder)
+
+Decrypt document in storage.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | Document name. | 
+**$password** | **string** | The password (encrypted Base64). | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postDocumentImageFooter"></a>
+## **postDocumentImageFooter**
+> \Aspose\PDF\Model\AsposeResponse postDocumentImageFooter($name, $image_footer, $start_page_number, $end_page_number, $storage, $folder)
+
+Add document image footer.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$image_footer** | [**\Aspose\PDF\Model\ImageFooter**](ImageFooter.md) | The image footer. | 
+**$start_page_number** | **int** | The start page number. | [optional]
+**$end_page_number** | **int** | The end page number. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postDocumentImageHeader"></a>
+## **postDocumentImageHeader**
+> \Aspose\PDF\Model\AsposeResponse postDocumentImageHeader($name, $image_header, $start_page_number, $end_page_number, $storage, $folder)
+
+Add document image header.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$image_header** | [**\Aspose\PDF\Model\ImageHeader**](ImageHeader.md) | The image header. | 
+**$start_page_number** | **int** | The start page number. | [optional]
+**$end_page_number** | **int** | The end page number. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postDocumentPageNumberStamps"></a>
+## **postDocumentPageNumberStamps**
+> \Aspose\PDF\Model\AsposeResponse postDocumentPageNumberStamps($name, $stamp, $start_page_number, $end_page_number, $storage, $folder)
+
+Add document page number stamps.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$stamp** | [**\Aspose\PDF\Model\PageNumberStamp**](PageNumberStamp.md) | The stamp. | 
+**$start_page_number** | **int** | The start page number. | [optional]
+**$end_page_number** | **int** | The end page number. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postDocumentTextFooter"></a>
+## **postDocumentTextFooter**
+> \Aspose\PDF\Model\AsposeResponse postDocumentTextFooter($name, $text_footer, $start_page_number, $end_page_number, $storage, $folder)
+
+Add document text footer.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$text_footer** | [**\Aspose\PDF\Model\TextFooter**](TextFooter.md) | The text footer. | 
+**$start_page_number** | **int** | The start page number. | [optional]
+**$end_page_number** | **int** | The end page number. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postDocumentTextHeader"></a>
+## **postDocumentTextHeader**
+> \Aspose\PDF\Model\AsposeResponse postDocumentTextHeader($name, $text_header, $start_page_number, $end_page_number, $storage, $folder)
+
+Add document text header.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$text_header** | [**\Aspose\PDF\Model\TextHeader**](TextHeader.md) | The text header. | 
+**$start_page_number** | **int** | The start page number. | [optional]
+**$end_page_number** | **int** | The end page number. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -3860,6 +4051,33 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\TextReplaceResponse**](TextReplaceResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postEncryptDocumentInStorage"></a>
+## **postEncryptDocumentInStorage**
+> \Aspose\PDF\Model\AsposeResponse postEncryptDocumentInStorage($name, $user_password, $owner_password, $crypto_algorithm, $permissions_flags, $use_pdf20, $storage, $folder)
+
+Encrypt document in storage.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | Document name. | 
+**$user_password** | **string** | User password (encrypted Base64). | 
+**$owner_password** | **string** | Owner password (encrypted Base64). | 
+**$crypto_algorithm** | [**\Aspose\PDF\Model\CryptoAlgorithm**](CryptoAlgorithm.md) | Cryptographic algorithm, see for details. | 
+**$permissions_flags** | **[]** | Array of document permissions, see for details. | [optional]
+**$use_pdf20** | **bool** | Support for revision 6 (Extension 8). | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
 
 ### HTTP request headers
 
@@ -4494,6 +4712,30 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="postPageTables"></a>
+## **postPageTables**
+> \Aspose\PDF\Model\AsposeResponse postPageTables($name, $page_number, $tables, $storage, $folder)
+
+Add document page tables.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$page_number** | **int** | The page number. | 
+**$tables** | [**\Aspose\PDF\Model\Table[]**](Table.md) | The array of table. | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="postPageTextAnnotations"></a>
 ## **postPageTextAnnotations**
 > \Aspose\PDF\Model\AsposeResponse postPageTextAnnotations($name, $page_number, $annotations, $storage, $folder)
@@ -4781,6 +5023,31 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="putChangePasswordDocument"></a>
+## **putChangePasswordDocument**
+> \Aspose\PDF\Model\AsposeResponse putChangePasswordDocument($out_path, $owner_password, $new_user_password, $new_owner_password, $storage, $file)
+
+Change document password from content.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.doc) | 
+**$owner_password** | **string** | Owner password (encrypted Base64). | 
+**$new_user_password** | **string** | New user password (encrypted Base64). | 
+**$new_owner_password** | **string** | New owner password (encrypted Base64). | 
+**$storage** | **string** | The document storage. | [optional]
+**$file** | **\SplFileObject** | A file to be changed password. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
 <a name="putCircleAnnotation"></a>
 ## **putCircleAnnotation**
 > \Aspose\PDF\Model\CircleAnnotationResponse putCircleAnnotation($name, $annotation_id, $annotation, $storage, $folder)
@@ -4870,6 +5137,56 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="putDecryptDocument"></a>
+## **putDecryptDocument**
+> \Aspose\PDF\Model\AsposeResponse putDecryptDocument($out_path, $password, $storage, $file)
+
+Decrypt document from content.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.doc) | 
+**$password** | **string** | The password (encrypted Base64). | 
+**$storage** | **string** | The document storage. | [optional]
+**$file** | **\SplFileObject** | A file to be derypted. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+<a name="putEncryptDocument"></a>
+## **putEncryptDocument**
+> \Aspose\PDF\Model\AsposeResponse putEncryptDocument($out_path, $user_password, $owner_password, $crypto_algorithm, $permissions_flags, $use_pdf20, $storage, $file)
+
+Encrypt document from content.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.doc) | 
+**$user_password** | **string** | User password (encrypted Base64). | 
+**$owner_password** | **string** | Owner password (encrypted Base64). | 
+**$crypto_algorithm** | [**\Aspose\PDF\Model\CryptoAlgorithm**](CryptoAlgorithm.md) | Cryptographic algorithm, see for details. | 
+**$permissions_flags** | **[]** | Array of document permissions, see for details. | [optional]
+**$use_pdf20** | **bool** | Support for revision 6 (Extension 8). | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$file** | **\SplFileObject** | A file to be encrypted. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 <a name="putEpubInStorageToPdf"></a>
@@ -5923,6 +6240,32 @@ Name | Type | Description  | Notes
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
+<a name="putPdfInRequestToXlsx"></a>
+## **putPdfInRequestToXlsx**
+> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXlsx($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file)
+
+Converts PDF document (in request content) to XLSX format and uploads resulting file to storage.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.xlsx) | 
+**$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
+**$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
+**$scale_factor** | **double** | Scale factor | [optional]
+**$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$file** | **\SplFileObject** | A file to be converted. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
 <a name="putPdfInRequestToXml"></a>
 ## **putPdfInRequestToXml**
 > \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXml($out_path, $storage, $file)
@@ -6241,6 +6584,33 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.xls) | 
+**$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
+**$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
+**$scale_factor** | **double** | Scale factor | [optional]
+**$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="putPdfInStorageToXlsx"></a>
+## **putPdfInStorageToXlsx**
+> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToXlsx($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage)
+
+Converts PDF document (located on storage) to XLSX format and uploads resulting file to storage
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.xlsx) | 
 **$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
 **$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
 **$scale_factor** | **double** | Scale factor | [optional]
@@ -6754,6 +7124,30 @@ Name | Type | Description  | Notes
 **$margin_top** | **double** | Page margin top | [optional]
 **$dst_folder** | **string** | The destination document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="putTable"></a>
+## **putTable**
+> \Aspose\PDF\Model\AsposeResponse putTable($name, $table_id, $table, $storage, $folder)
+
+Replace document page table.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$table_id** | **string** | The table ID. | 
+**$table** | [**\Aspose\PDF\Model\Table**](Table.md) | The table. | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
 
 ### Return type
 

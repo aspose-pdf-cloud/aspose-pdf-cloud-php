@@ -392,6 +392,35 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testPostDocumentPageNumberStamps()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $startPageNumber = 2;
+        $endPageNumber = 3;
+
+        $stamp = new Aspose\PDF\Model\PageNumberStamp();
+        $stamp->setBackground(true);
+        $stamp->setLeftMargin(1);
+        $stamp->setRightMargin(2);
+        $stamp->setTopMargin(3);
+        $stamp->setBottomMargin(4);
+        $stamp->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $stamp->setVerticalAlignment(Aspose\PDF\Model\VerticalAlignment::BOTTOM);
+        $stamp->setOpacity(1);
+        $stamp->setRotate(Aspose\PDF\Model\Rotation::NONE);
+        $stamp->setRotateAngle(0);
+        $stamp->setXIndent(0);
+        $stamp->setYIndent(0);
+        $stamp->setZoom(1);
+        $stamp->setStartingNumber(3);
+        $stamp->setValue('Page #');
+
+        $response = $this->pdfApi->postDocumentPageNumberStamps($name, $stamp, $startPageNumber, $endPageNumber, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
     // Tables Tests
 
     public function testGetDocumentTables()
@@ -460,6 +489,124 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $response = $this->pdfApi->deleteTable($name, $tableId, null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostPageTables()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 1;
+
+        $table = $this->drawTable();
+        
+        $response = $this->pdfApi->postPageTables($name, $pageNumber, [$table], null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPutTable()
+    {
+        $name = 'PdfWithTable.pdf';
+        $this->uploadFile($name);
+
+        $tablesResponse = $this->pdfApi->getDocumentTables($name, null, $this->tempFolder);
+        $this->assertEquals(200, $tablesResponse->getCode());
+        $tableId = $tablesResponse->getTables()->getList()[0]->getId();
+
+
+        $table = $this->drawTable();
+        
+        $response = $this->pdfApi->putTable($name, $tableId, $table, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+    
+    private function drawTable()
+    {
+        $textState =  new Aspose\PDF\Model\TextState();
+        $textState->setFontSize(11);
+        $textState->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $textState->setBackgroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0]));
+
+        $numOfCols = 5;
+        $numOfRows = 5;
+
+        $table = new Aspose\PDF\Model\Table();
+        
+        $colWidths = "";
+        for ($c = 0; $c < $numOfCols; $c++)
+        {
+            $colWidths .= " 30";
+        }
+        $table->setColumnWidths($colWidths);
+
+        $table->setDefaultCellTextState($textState);
+        $borderTableBorder = new Aspose\PDF\Model\GraphInfo();
+        $borderTableBorder->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $borderTableBorder->setLineWidth(1);
+
+        $borderInfo = new Aspose\PDF\Model\BorderInfo();
+        $borderInfo->setTop($borderTableBorder);
+        $borderInfo->setRight($borderTableBorder);
+        $borderInfo->setBottom($borderTableBorder);
+        $borderInfo->setLeft($borderTableBorder);
+
+        $table->setDefaultCellBorder($borderInfo);
+        $table->setTop(100);
+
+        $rows = array();
+        for ($r = 0; $r < $numOfRows; $r++)
+        {
+
+            $row = new Aspose\PDF\Model\Row();
+            $cells = array();
+            for ($c = 0; $c < $numOfCols; $c++)
+            {
+
+                $cell = new Aspose\PDF\Model\Cell();
+                $cell->setBackgroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0x88, 'b' => 0]));
+                $cell->setDefaultCellTextState($textState);
+
+                $textRect = new Aspose\PDF\Model\TextRect();
+                $textRect->setText('value');
+
+                $cell->setParagraphs([$textRect]);
+                
+                // change properties on cell
+                if ($c == 1)
+                {
+                    $cell->getDefaultCellTextState(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0, 'b' => 0xFF]));
+                }
+
+                // change properties on cell AFTER first clearing and re-adding paragraphs
+                else if ($c == 2)
+                {
+                    $cell->getParagraphs()[0]->setText('y');
+                    $cell->getDefaultCellTextState()->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xAA, 'g' => 0, 'b' => 0xFF]));
+                }
+
+                // change properties on paragraph
+                else if ($c == 3)
+                {
+                    $cell->getParagraphs()[0]->setTextState($textState);
+                    $cell->getParagraphs()[0]->getTextState()->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0, 'b' => 0xFF]));
+                }
+
+                // change properties on paragraph AFTER first clearing and re-adding paragraphs
+                else if ($c == 4)
+                {
+                    $cell->getParagraphs()[0]->setText('y');
+                    $cell->getParagraphs()[0]->setTextState($textState);
+                    $cell->getParagraphs()[0]->getTextState()->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0xFF]));
+                }
+                
+                array_push($cells, $cell);
+            }
+            $row->setCells($cells);
+            array_push($rows, $row);
+            
+        }
+        $table->setRows($rows);
+        return $table;
     }
 
     // Stamp Annotations Tests
@@ -1114,6 +1261,132 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putFreeTextAnnotation($name, $annotationId, $freeTextAnnotation, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    // Header Footer Tests
+
+    public function testPostDocumentTextHeader()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $textState =  new Aspose\PDF\Model\TextState();
+        $textState->setFontSize(14);
+        $textState->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $textState->setBackgroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0]));
+
+        $header = new Aspose\PDF\Model\TextHeader();
+        $header->setBackground(true);
+        $header->setLeftMargin(1);
+        $header->setRightMargin(2);
+        $header->setTopMargin(20);
+        $header->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $header->setOpacity(1);
+        $header->setRotate(Aspose\PDF\Model\Rotation::NONE);
+        $header->setRotateAngle(0);
+        $header->setXIndent(0);
+        $header->setYIndent(0);
+        $header->setZoom(1);
+        $header->setTextAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $header->setValue('Header');
+        $header->setTextState($textState);
+
+        $startPage = 2;
+        $endPage = 3;
+
+        $response = $this->pdfApi->postDocumentTextHeader($name, $header, $startPage, $endPage, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPostDocumentTextFooter()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $textState =  new Aspose\PDF\Model\TextState();
+        $textState->setFontSize(14);
+        $textState->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $textState->setBackgroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0]));
+
+        $footer = new Aspose\PDF\Model\TextFooter();
+        $footer->setBackground(true);
+        $footer->setLeftMargin(1);
+        $footer->setRightMargin(2);
+        $footer->setBottomMargin(20);
+        $footer->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $footer->setOpacity(1);
+        $footer->setRotate(Aspose\PDF\Model\Rotation::NONE);
+        $footer->setRotateAngle(0);
+        $footer->setXIndent(0);
+        $footer->setYIndent(0);
+        $footer->setZoom(1);
+        $footer->setTextAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $footer->setValue('Footer');
+        $footer->setTextState($textState);
+
+        $startPage = 2;
+        $endPage = 3;
+
+        $response = $this->pdfApi->postDocumentTextFooter($name, $footer, $startPage, $endPage, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPostDocumentImageHeader()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $image = 'Koala.jpg';
+        $this->uploadFile($image);
+
+        $header = new Aspose\PDF\Model\ImageHeader();
+        $header->setBackground(true);
+        $header->setLeftMargin(1);
+        $header->setRightMargin(2);
+        $header->setTopMargin(20);
+        $header->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $header->setOpacity(1);
+        $header->setRotate(Aspose\PDF\Model\Rotation::NONE);
+        $header->setRotateAngle(0);
+        $header->setXIndent(0);
+        $header->setYIndent(0);
+        $header->setZoom(1);
+        $header->setFileName($this->tempFolder . '/' . $image);
+        
+        $startPage = 2;
+        $endPage = 3;
+
+        $response = $this->pdfApi->postDocumentImageHeader($name, $header, $startPage, $endPage, null, $this->tempFolder);
+        $this->assertEquals(201, $response->getCode());
+    }
+
+    public function testPostDocumentImageFooter()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $image = 'Koala.jpg';
+        $this->uploadFile($image);
+
+        $footer = new Aspose\PDF\Model\ImageFooter();
+        $footer->setBackground(true);
+        $footer->setLeftMargin(1);
+        $footer->setRightMargin(2);
+        $footer->setBottomMargin(20);
+        $footer->setHorizontalAlignment(Aspose\PDF\Model\HorizontalAlignment::CENTER);
+        $footer->setOpacity(1);
+        $footer->setRotate(Aspose\PDF\Model\Rotation::NONE);
+        $footer->setRotateAngle(0);
+        $footer->setXIndent(0);
+        $footer->setYIndent(0);
+        $footer->setZoom(1);
+        $footer->setFileName($this->tempFolder . '/' . $image);
+        
+        $startPage = 2;
+        $endPage = 3;
+
+        $response = $this->pdfApi->postDocumentImageFooter($name, $footer, $startPage, $endPage, null, $this->tempFolder);
         $this->assertEquals(201, $response->getCode());
     }
 
@@ -2335,17 +2608,6 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertNotNull($response);
     }
 
-    // Bookmarks Tests
-
-    public function testGetDocumentBookmarks()
-    {
-        $name = 'PdfWithBookmarks.pdf';
-        $this->uploadFile($name);
-
-        $response = $this->pdfApi->getDocumentBookmarks($name, null, null, $this->tempFolder);
-        $this->assertNotNull($response);
-    }
-
     // Convert Tests
 
     public function testGetPdfInStorageToDoc()
@@ -2858,6 +3120,40 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resFileName = "result.xml";
 
         $response = $this->pdfApi->putPdfInRequestToXml($this->tempFolder . '/' . $resFileName, null, $file);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetPdfInStorageToXlsx()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        
+        $folder = $this->tempFolder;
+
+
+        $response = $this->pdfApi->getPdfInStorageToXlsx($name, null, null, null, null, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+    public function testPutPdfInStorageToXlsx()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $folder = $this->tempFolder;
+        $resFileName = "result.xlsx";
+        
+        $response = $this->pdfApi->putPdfInStorageToXlsx($name, $this->tempFolder . '/' . $resFileName, null, null, null, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInRequestToXlsx()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.xlsx";
+
+        $response = $this->pdfApi->putPdfInRequestToXlsx($this->tempFolder . '/' . $resFileName, null, null, null, null, null, $file);
         $this->assertNotNull($response);
     }
 
@@ -4228,6 +4524,95 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $signature->setVisible(true);
 
         $response = $this->pdfApi->postSignPage($name, $pageNumber, $signature, $storage = null, $folder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    // Encrypt Decrypt Tests
+
+    public function testPutEncryptDocument()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $outPath = $this->tempFolder . '/' . $name;
+
+        $userPassword = 'user $^Password!&';
+        $ownerPassword = 'owner\//? $12^Password!&';
+
+
+        $response = $this->pdfApi->putEncryptDocument($outPath, base64_encode($userPassword), 
+            base64_encode($ownerPassword), Aspose\PDF\Model\CryptoAlgorithm::AE_SX128, null, null, null, $file);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostEncryptDocumentInStorage()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $userPassword = 'user $^Password!&';
+        $ownerPassword = 'owner\//? $12^Password!&';
+
+
+        $response = $this->pdfApi->postEncryptDocumentInStorage($name, base64_encode($userPassword), 
+            base64_encode($ownerPassword), Aspose\PDF\Model\CryptoAlgorithm::AE_SX128, null, null, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutDecryptDocument()
+    {
+        $name = '4pagesEncrypted.pdf';
+        $this->uploadFile($name);
+
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $outPath = $this->tempFolder . '/' . $name;
+
+        $userPassword = 'user $^Password!&';
+
+        $response = $this->pdfApi->putDecryptDocument($outPath, base64_encode($userPassword), null, $file);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostDecryptDocumentInStorage()
+    {
+        $name = '4pagesEncrypted.pdf';
+        $this->uploadFile($name);
+
+        $userPassword = 'user $^Password!&';
+
+        $response = $this->pdfApi->postDecryptDocumentInStorage($name, base64_encode($userPassword), null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutChangePasswordDocument()
+    {
+        $name = '4pagesEncrypted.pdf';
+        $this->uploadFile($name);
+
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $outPath = $this->tempFolder . '/' . $name;
+
+        $ownerPassword = 'owner\//? $12^Password!&';
+        $newUserPassword = 'user new\//? $12^Password!&';
+        $newOwnerPassword = 'owner new\//? $12^Password!&';
+
+        $response = $this->pdfApi->putChangePasswordDocument($outPath, base64_encode($ownerPassword), 
+            base64_encode($newUserPassword), base64_encode($newOwnerPassword), null, $file);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostChangePasswordDocumentInStorage()
+    {
+        $name = '4pagesEncrypted.pdf';
+        $this->uploadFile($name);
+
+        $ownerPassword = 'owner\//? $12^Password!&';
+        $newUserPassword = 'user new\//? $12^Password!&';
+        $newOwnerPassword = 'owner new\//? $12^Password!&';
+
+        $response = $this->pdfApi->postChangePasswordDocumentInStorage($name, base64_encode($ownerPassword), 
+            base64_encode($newUserPassword), base64_encode($newOwnerPassword), null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
 
