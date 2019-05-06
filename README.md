@@ -492,7 +492,6 @@ Class | Description
 [**LinkElement**](docs/LinkElement.md) | Represents base DTO object.
 [**LinkHighlightingMode**](docs/LinkHighlightingMode.md) | Enumerates the annotation’s highlighting mode, the visual effect to be used when the mouse button is pressed or held down inside its active area.
 [**MarginInfo**](docs/MarginInfo.md) | This class represents a margin for different objects.
-[**MarginInfo2**](docs/MarginInfo2.md) | 
 [**MarkupAnnotation**](docs/MarkupAnnotation.md) | Provides MarkupAnnotation.
 [**MergeDocuments**](docs/MergeDocuments.md) | Documents for merging.
 [**MovieAnnotation**](docs/MovieAnnotation.md) | Provides MovieAnnotation.
