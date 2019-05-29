@@ -1,0 +1,5 @@
+{
+    "require": {
+        "aspose/pdf-sdk-php": "^19.4"
+    }
+}
