@@ -4,14 +4,19 @@ All URIs are relative to *https://api.aspose.cloud/v2.0/*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+*PdfApi* | [**copyFile**](PdfApi.md#copyFile) | **PUT** /pdf/storage/file/copy/\{srcPath} | Copy file
+*PdfApi* | [**copyFolder**](PdfApi.md#copyFolder) | **PUT** /pdf/storage/folder/copy/\{srcPath} | Copy folder
+*PdfApi* | [**createFolder**](PdfApi.md#createFolder) | **PUT** /pdf/storage/folder/\{path} | Create the folder
 *PdfApi* | [**deleteAnnotation**](PdfApi.md#deleteAnnotation) | **DELETE** /pdf/\{name}/annotations/\{annotationId} | Delete document annotation by ID
+*PdfApi* | [**deleteBookmark**](PdfApi.md#deleteBookmark) | **DELETE** /pdf/\{name}/bookmarks/bookmark/\{bookmarkPath} | Delete document bookmark by ID.
 *PdfApi* | [**deleteDocumentAnnotations**](PdfApi.md#deleteDocumentAnnotations) | **DELETE** /pdf/\{name}/annotations | Delete all annotations from the document
+*PdfApi* | [**deleteDocumentBookmarks**](PdfApi.md#deleteDocumentBookmarks) | **DELETE** /pdf/\{name}/bookmarks/tree | Delete all document bookmarks.
 *PdfApi* | [**deleteDocumentLinkAnnotations**](PdfApi.md#deleteDocumentLinkAnnotations) | **DELETE** /pdf/\{name}/links | Delete all link annotations from the document
 *PdfApi* | [**deleteDocumentStamps**](PdfApi.md#deleteDocumentStamps) | **DELETE** /pdf/\{name}/stamps | Delete all stamps from the document
 *PdfApi* | [**deleteDocumentTables**](PdfApi.md#deleteDocumentTables) | **DELETE** /pdf/\{name}/tables | Delete all tables from the document
 *PdfApi* | [**deleteField**](PdfApi.md#deleteField) | **DELETE** /pdf/\{name}/fields/\{fieldName} | Delete document field by name.
-*PdfApi* | [**deleteFile**](PdfApi.md#deleteFile) | **DELETE** /storage/file | Remove a specific file 
-*PdfApi* | [**deleteFolder**](PdfApi.md#deleteFolder) | **DELETE** /storage/folder | Remove a specific folder 
+*PdfApi* | [**deleteFile**](PdfApi.md#deleteFile) | **DELETE** /pdf/storage/file/\{path} | Delete file
+*PdfApi* | [**deleteFolder**](PdfApi.md#deleteFolder) | **DELETE** /pdf/storage/folder/\{path} | Delete folder
 *PdfApi* | [**deleteImage**](PdfApi.md#deleteImage) | **DELETE** /pdf/\{name}/images/\{imageId} | Delete image from document page.
 *PdfApi* | [**deleteLinkAnnotation**](PdfApi.md#deleteLinkAnnotation) | **DELETE** /pdf/\{name}/links/\{linkId} | Delete document page link annotation by ID
 *PdfApi* | [**deletePage**](PdfApi.md#deletePage) | **DELETE** /pdf/\{name}/pages/\{pageNumber} | Delete document page by its number.
@@ -23,13 +28,17 @@ Method | HTTP request | Description
 *PdfApi* | [**deleteProperty**](PdfApi.md#deleteProperty) | **DELETE** /pdf/\{name}/documentproperties/\{propertyName} | Delete document property.
 *PdfApi* | [**deleteStamp**](PdfApi.md#deleteStamp) | **DELETE** /pdf/\{name}/stamps/\{stampId} | Delete document stamp by ID
 *PdfApi* | [**deleteTable**](PdfApi.md#deleteTable) | **DELETE** /pdf/\{name}/tables/\{tableId} | Delete document table by ID
+*PdfApi* | [**downloadFile**](PdfApi.md#downloadFile) | **GET** /pdf/storage/file/\{path} | Download file
+*PdfApi* | [**getBookmark**](PdfApi.md#getBookmark) | **GET** /pdf/\{name}/bookmarks/bookmark/\{bookmarkPath} | Read document bookmark.
+*PdfApi* | [**getBookmarks**](PdfApi.md#getBookmarks) | **GET** /pdf/\{name}/bookmarks/list/\{bookmarkPath} | Read document bookmarks node list.
 *PdfApi* | [**getCaretAnnotation**](PdfApi.md#getCaretAnnotation) | **GET** /pdf/\{name}/annotations/caret/\{annotationId} | Read document page caret annotation by ID.
 *PdfApi* | [**getCircleAnnotation**](PdfApi.md#getCircleAnnotation) | **GET** /pdf/\{name}/annotations/circle/\{annotationId} | Read document page circle annotation by ID.
-*PdfApi* | [**getDiscUsage**](PdfApi.md#getDiscUsage) | **GET** /storage/disc | Check the disk usage of the current account 
+*PdfApi* | [**getDiscUsage**](PdfApi.md#getDiscUsage) | **GET** /pdf/storage/disc | Get disc usage
 *PdfApi* | [**getDocument**](PdfApi.md#getDocument) | **GET** /pdf/\{name} | Read common document info.
 *PdfApi* | [**getDocumentAnnotations**](PdfApi.md#getDocumentAnnotations) | **GET** /pdf/\{name}/annotations | Read documant page annotations. Returns only FreeTextAnnotations, TextAnnotations, other annotations will implemented next releases.
 *PdfApi* | [**getDocumentAttachmentByIndex**](PdfApi.md#getDocumentAttachmentByIndex) | **GET** /pdf/\{name}/attachments/\{attachmentIndex} | Read document attachment info by its index.
 *PdfApi* | [**getDocumentAttachments**](PdfApi.md#getDocumentAttachments) | **GET** /pdf/\{name}/attachments | Read document attachments info.
+*PdfApi* | [**getDocumentBookmarks**](PdfApi.md#getDocumentBookmarks) | **GET** /pdf/\{name}/bookmarks/tree | Read document bookmarks tree.
 *PdfApi* | [**getDocumentCaretAnnotations**](PdfApi.md#getDocumentCaretAnnotations) | **GET** /pdf/\{name}/annotations/caret | Read document caret annotations.
 *PdfApi* | [**getDocumentCircleAnnotations**](PdfApi.md#getDocumentCircleAnnotations) | **GET** /pdf/\{name}/annotations/circle | Read document circle annotations.
 *PdfApi* | [**getDocumentFileAttachmentAnnotations**](PdfApi.md#getDocumentFileAttachmentAnnotations) | **GET** /pdf/\{name}/annotations/fileattachment | Read document FileAttachment annotations.
@@ -55,13 +64,14 @@ Method | HTTP request | Description
 *PdfApi* | [**getDocumentTables**](PdfApi.md#getDocumentTables) | **GET** /pdf/\{name}/tables | Read document tables.
 *PdfApi* | [**getDocumentTextAnnotations**](PdfApi.md#getDocumentTextAnnotations) | **GET** /pdf/\{name}/annotations/text | Read document text annotations.
 *PdfApi* | [**getDocumentUnderlineAnnotations**](PdfApi.md#getDocumentUnderlineAnnotations) | **GET** /pdf/\{name}/annotations/underline | Read document underline annotations.
-*PdfApi* | [**getDownload**](PdfApi.md#getDownload) | **GET** /storage/file | Download a specific file 
 *PdfApi* | [**getDownloadDocumentAttachmentByIndex**](PdfApi.md#getDownloadDocumentAttachmentByIndex) | **GET** /pdf/\{name}/attachments/\{attachmentIndex}/download | Download document attachment content by its index.
 *PdfApi* | [**getEpubInStorageToPdf**](PdfApi.md#getEpubInStorageToPdf) | **GET** /pdf/create/epub | Convert EPUB file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**getField**](PdfApi.md#getField) | **GET** /pdf/\{name}/fields/\{fieldName} | Get document field by name.
 *PdfApi* | [**getFields**](PdfApi.md#getFields) | **GET** /pdf/\{name}/fields | Get document fields.
 *PdfApi* | [**getFileAttachmentAnnotation**](PdfApi.md#getFileAttachmentAnnotation) | **GET** /pdf/\{name}/annotations/fileattachment/\{annotationId} | Read document page FileAttachment annotation by ID.
 *PdfApi* | [**getFileAttachmentAnnotationData**](PdfApi.md#getFileAttachmentAnnotationData) | **GET** /pdf/\{name}/annotations/fileattachment/\{annotationId}/data | Read document page FileAttachment annotation by ID.
+*PdfApi* | [**getFilesList**](PdfApi.md#getFilesList) | **GET** /pdf/storage/folder/\{path} | Get all files and folders within a folder
+*PdfApi* | [**getFileVersions**](PdfApi.md#getFileVersions) | **GET** /pdf/storage/version/\{path} | Get file versions
 *PdfApi* | [**getFreeTextAnnotation**](PdfApi.md#getFreeTextAnnotation) | **GET** /pdf/\{name}/annotations/freetext/\{annotationId} | Read document page free text annotation by ID.
 *PdfApi* | [**getHighlightAnnotation**](PdfApi.md#getHighlightAnnotation) | **GET** /pdf/\{name}/annotations/highlight/\{annotationId} | Read document page highlight annotation by ID.
 *PdfApi* | [**getHtmlInStorageToPdf**](PdfApi.md#getHtmlInStorageToPdf) | **GET** /pdf/create/html | Convert HTML file (located on storage) to PDF format and return resulting file in response. 
@@ -72,13 +82,9 @@ Method | HTTP request | Description
 *PdfApi* | [**getImageExtractAsTiff**](PdfApi.md#getImageExtractAsTiff) | **GET** /pdf/\{name}/images/\{imageId}/extract/tiff | Extract document image in TIFF format
 *PdfApi* | [**getImages**](PdfApi.md#getImages) | **GET** /pdf/\{name}/pages/\{pageNumber}/images | Read document images.
 *PdfApi* | [**getInkAnnotation**](PdfApi.md#getInkAnnotation) | **GET** /pdf/\{name}/annotations/ink/\{annotationId} | Read document page ink annotation by ID.
-*PdfApi* | [**getIsExist**](PdfApi.md#getIsExist) | **GET** /storage/exist | Check if a specific file or folder exists
-*PdfApi* | [**getIsStorageExist**](PdfApi.md#getIsStorageExist) | **GET** /storage/\{name}/exist | Check if storage exists 
 *PdfApi* | [**getLaTeXInStorageToPdf**](PdfApi.md#getLaTeXInStorageToPdf) | **GET** /pdf/create/latex | Convert LaTeX file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**getLineAnnotation**](PdfApi.md#getLineAnnotation) | **GET** /pdf/\{name}/annotations/line/\{annotationId} | Read document page line annotation by ID.
 *PdfApi* | [**getLinkAnnotation**](PdfApi.md#getLinkAnnotation) | **GET** /pdf/\{name}/links/\{linkId} | Read document link annotation by ID.
-*PdfApi* | [**getListFiles**](PdfApi.md#getListFiles) | **GET** /storage/folder | Get the file listing of a specific folder 
-*PdfApi* | [**getListFileVersions**](PdfApi.md#getListFileVersions) | **GET** /storage/version | Get the file's versions list 
 *PdfApi* | [**getMhtInStorageToPdf**](PdfApi.md#getMhtInStorageToPdf) | **GET** /pdf/create/mht | Convert MHT file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**getMovieAnnotation**](PdfApi.md#getMovieAnnotation) | **GET** /pdf/\{name}/annotations/movie/\{annotationId} | Read document page movie annotation by ID.
 *PdfApi* | [**getPage**](PdfApi.md#getPage) | **GET** /pdf/\{name}/pages/\{pageNumber} | Read document page info.
@@ -155,7 +161,11 @@ Method | HTTP request | Description
 *PdfApi* | [**getXmlInStorageToPdf**](PdfApi.md#getXmlInStorageToPdf) | **GET** /pdf/create/xml | Convert XML file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**getXpsInStorageToPdf**](PdfApi.md#getXpsInStorageToPdf) | **GET** /pdf/create/xps | Convert XPS file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**getXslFoInStorageToPdf**](PdfApi.md#getXslFoInStorageToPdf) | **GET** /pdf/create/xslfo | Convert XslFo file (located on storage) to PDF format and return resulting file in response. 
+*PdfApi* | [**moveFile**](PdfApi.md#moveFile) | **PUT** /pdf/storage/file/move/\{srcPath} | Move file
+*PdfApi* | [**moveFolder**](PdfApi.md#moveFolder) | **PUT** /pdf/storage/folder/move/\{srcPath} | Move folder
+*PdfApi* | [**objectExists**](PdfApi.md#objectExists) | **GET** /pdf/storage/exist/\{path} | Check if file or folder exists
 *PdfApi* | [**postAppendDocument**](PdfApi.md#postAppendDocument) | **POST** /pdf/\{name}/appendDocument | Append document to existing one.
+*PdfApi* | [**postBookmark**](PdfApi.md#postBookmark) | **POST** /pdf/\{name}/bookmarks/bookmark/\{bookmarkPath} | Add document bookmarks.
 *PdfApi* | [**postChangePasswordDocumentInStorage**](PdfApi.md#postChangePasswordDocumentInStorage) | **POST** /pdf/\{name}/changepassword | Change document password in storage.
 *PdfApi* | [**postCreateField**](PdfApi.md#postCreateField) | **POST** /pdf/\{name}/fields | Create field.
 *PdfApi* | [**postDecryptDocumentInStorage**](PdfApi.md#postDecryptDocumentInStorage) | **POST** /pdf/\{name}/decrypt | Decrypt document in storage.
@@ -168,8 +178,6 @@ Method | HTTP request | Description
 *PdfApi* | [**postEncryptDocumentInStorage**](PdfApi.md#postEncryptDocumentInStorage) | **POST** /pdf/\{name}/encrypt | Encrypt document in storage.
 *PdfApi* | [**postFlattenDocument**](PdfApi.md#postFlattenDocument) | **POST** /pdf/\{name}/flatten | Flatten the document.
 *PdfApi* | [**postInsertImage**](PdfApi.md#postInsertImage) | **POST** /pdf/\{name}/pages/\{pageNumber}/images | Insert image to document page.
-*PdfApi* | [**postMoveFile**](PdfApi.md#postMoveFile) | **POST** /storage/file | Move a specific file
-*PdfApi* | [**postMoveFolder**](PdfApi.md#postMoveFolder) | **POST** /storage/folder | Move a specific folder 
 *PdfApi* | [**postMovePage**](PdfApi.md#postMovePage) | **POST** /pdf/\{name}/pages/\{pageNumber}/movePage | Move page to new position.
 *PdfApi* | [**postOptimizeDocument**](PdfApi.md#postOptimizeDocument) | **POST** /pdf/\{name}/optimize | Optimize document.
 *PdfApi* | [**postPageCaretAnnotations**](PdfApi.md#postPageCaretAnnotations) | **POST** /pdf/\{name}/pages/\{pageNumber}/annotations/caret | Add document page caret annotations.
@@ -204,12 +212,11 @@ Method | HTTP request | Description
 *PdfApi* | [**putAddNewPage**](PdfApi.md#putAddNewPage) | **PUT** /pdf/\{name}/pages | Add new page to end of the document.
 *PdfApi* | [**putAddText**](PdfApi.md#putAddText) | **PUT** /pdf/\{name}/pages/\{pageNumber}/text | Add text to PDF document page.
 *PdfApi* | [**putAnnotationsFlatten**](PdfApi.md#putAnnotationsFlatten) | **PUT** /pdf/\{name}/annotations/flatten | Flattens the annotations of the specified types
+*PdfApi* | [**putBookmark**](PdfApi.md#putBookmark) | **PUT** /pdf/\{name}/bookmarks/bookmark/\{bookmarkPath} | Update document bookmark.
 *PdfApi* | [**putCaretAnnotation**](PdfApi.md#putCaretAnnotation) | **PUT** /pdf/\{name}/annotations/caret/\{annotationId} | Replace document caret annotation
 *PdfApi* | [**putChangePasswordDocument**](PdfApi.md#putChangePasswordDocument) | **PUT** /pdf/changepassword | Change document password from content.
 *PdfApi* | [**putCircleAnnotation**](PdfApi.md#putCircleAnnotation) | **PUT** /pdf/\{name}/annotations/circle/\{annotationId} | Replace document circle annotation
-*PdfApi* | [**putCreate**](PdfApi.md#putCreate) | **PUT** /storage/file | Upload a specific file 
 *PdfApi* | [**putCreateDocument**](PdfApi.md#putCreateDocument) | **PUT** /pdf/\{name} | Create empty document.
-*PdfApi* | [**putCreateFolder**](PdfApi.md#putCreateFolder) | **PUT** /storage/folder | Create the folder 
 *PdfApi* | [**putDecryptDocument**](PdfApi.md#putDecryptDocument) | **PUT** /pdf/decrypt | Decrypt document from content.
 *PdfApi* | [**putEncryptDocument**](PdfApi.md#putEncryptDocument) | **PUT** /pdf/encrypt | Encrypt document from content.
 *PdfApi* | [**putEpubInStorageToPdf**](PdfApi.md#putEpubInStorageToPdf) | **PUT** /pdf/\{name}/create/epub | Convert EPUB file (located on storage) to PDF format and upload resulting file to storage. 
@@ -299,6 +306,76 @@ Method | HTTP request | Description
 *PdfApi* | [**putXmlInStorageToPdf**](PdfApi.md#putXmlInStorageToPdf) | **PUT** /pdf/\{name}/create/xml | Convert XML file (located on storage) to PDF format and upload resulting file to storage. 
 *PdfApi* | [**putXpsInStorageToPdf**](PdfApi.md#putXpsInStorageToPdf) | **PUT** /pdf/\{name}/create/xps | Convert XPS file (located on storage) to PDF format and upload resulting file to storage. 
 *PdfApi* | [**putXslFoInStorageToPdf**](PdfApi.md#putXslFoInStorageToPdf) | **PUT** /pdf/\{name}/create/xslfo | Convert XslFo file (located on storage) to PDF format and upload resulting file to storage. 
+*PdfApi* | [**storageExists**](PdfApi.md#storageExists) | **GET** /pdf/storage/\{storageName}/exist | Check if storage exists
+*PdfApi* | [**uploadFile**](PdfApi.md#uploadFile) | **PUT** /pdf/storage/file/\{path} | Upload file
+<a name="copyFile"></a>
+## **copyFile**
+>  copyFile($src_path, $dest_path, $src_storage_name, $dest_storage_name, $version_id)
+
+Copy file
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$src_path** | **string** | Source file path e.g. '/folder/file.ext' | 
+**$dest_path** | **string** | Destination file path | 
+**$src_storage_name** | **string** | Source storage name | [optional]
+**$dest_storage_name** | **string** | Destination storage name | [optional]
+**$version_id** | **string** | File version ID to copy | [optional]
+
+### Return type
+
+****
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="copyFolder"></a>
+## **copyFolder**
+>  copyFolder($src_path, $dest_path, $src_storage_name, $dest_storage_name)
+
+Copy folder
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$src_path** | **string** | Source folder path e.g. '/src' | 
+**$dest_path** | **string** | Destination folder path e.g. '/dst' | 
+**$src_storage_name** | **string** | Source storage name | [optional]
+**$dest_storage_name** | **string** | Destination storage name | [optional]
+
+### Return type
+
+****
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="createFolder"></a>
+## **createFolder**
+>  createFolder($path, $storage_name)
+
+Create the folder
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$path** | **string** | Folder path to create e.g. 'folder_1/folder_2/' | 
+**$storage_name** | **string** | Storage name | [optional]
+
+### Return type
+
+****
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="deleteAnnotation"></a>
 ## **deleteAnnotation**
 > \Aspose\PDF\Model\AsposeResponse deleteAnnotation($name, $annotation_id, $storage, $folder)
@@ -322,6 +399,29 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="deleteBookmark"></a>
+## **deleteBookmark**
+> \Aspose\PDF\Model\AsposeResponse deleteBookmark($name, $bookmark_path, $folder, $storage)
+
+Delete document bookmark by ID.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$bookmark_path** | **string** | The bookmark path. | 
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="deleteDocumentAnnotations"></a>
 ## **deleteDocumentAnnotations**
 > \Aspose\PDF\Model\AsposeResponse deleteDocumentAnnotations($name, $storage, $folder)
@@ -334,6 +434,28 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="deleteDocumentBookmarks"></a>
+## **deleteDocumentBookmarks**
+> \Aspose\PDF\Model\AsposeResponse deleteDocumentBookmarks($name, $folder, $storage)
+
+Delete all document bookmarks.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
 
 ### Return type
 
@@ -435,20 +557,20 @@ Name | Type | Description  | Notes
 
 <a name="deleteFile"></a>
 ## **deleteFile**
-> \Aspose\PDF\Model\AsposeResponse deleteFile($path, $version_id, $storage)
+>  deleteFile($path, $storage_name, $version_id)
 
-Remove a specific file 
+Delete file
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**$path** | **string** | Path of the file including file name and extension e.g. /Folder1/file.ext | 
-**$version_id** | **string** | File's version | [optional]
-**$storage** | **string** | User's storage name | [optional]
+**$path** | **string** | File path e.g. '/folder/file.ext' | 
+**$storage_name** | **string** | Storage name | [optional]
+**$version_id** | **string** | File version ID to delete | [optional]
 
 ### Return type
 
-[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+****
 
 ### HTTP request headers
 
@@ -457,20 +579,20 @@ Name | Type | Description  | Notes
 
 <a name="deleteFolder"></a>
 ## **deleteFolder**
-> \Aspose\PDF\Model\AsposeResponse deleteFolder($path, $storage, $recursive)
+>  deleteFolder($path, $storage_name, $recursive)
 
-Remove a specific folder 
+Delete folder
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**$path** | **string** | Folder path e.g. /Folder1 | 
-**$storage** | **string** | User's storage name | [optional]
-**$recursive** | **bool** | Remove recursivelly inner folder/files. If false and folder contains data than exception is raised. | [optional]
+**$path** | **string** | Folder path e.g. '/folder' | 
+**$storage_name** | **string** | Storage name | [optional]
+**$recursive** | **bool** | Enable to delete folders, subfolders and files | [optional]
 
 ### Return type
 
-[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+****
 
 ### HTTP request headers
 
@@ -729,6 +851,74 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
+<a name="downloadFile"></a>
+## **downloadFile**
+> \SplFileObject downloadFile($path, $storage_name, $version_id)
+
+Download file
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$path** | **string** | File path e.g. '/folder/file.ext' | 
+**$storage_name** | **string** | Storage name | [optional]
+**$version_id** | **string** | File version ID to download | [optional]
+
+### Return type
+
+**\SplFileObject**
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: multipart/form-data
+
+<a name="getBookmark"></a>
+## **getBookmark**
+> \Aspose\PDF\Model\BookmarkResponse getBookmark($name, $bookmark_path, $folder, $storage)
+
+Read document bookmark.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$bookmark_path** | **string** | The bookmark path. | 
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\BookmarkResponse**](BookmarkResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getBookmarks"></a>
+## **getBookmarks**
+> \Aspose\PDF\Model\BookmarksResponse getBookmarks($name, $bookmark_path, $folder, $storage)
+
+Read document bookmarks node list.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$bookmark_path** | **string** | The bookmark path. | 
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\BookmarksResponse**](BookmarksResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="getCaretAnnotation"></a>
 ## **getCaretAnnotation**
 > \Aspose\PDF\Model\CaretAnnotationResponse getCaretAnnotation($name, $annotation_id, $storage, $folder)
@@ -777,18 +967,18 @@ Name | Type | Description  | Notes
 
 <a name="getDiscUsage"></a>
 ## **getDiscUsage**
-> \Aspose\PDF\Model\DiscUsageResponse getDiscUsage($storage)
+> \Aspose\PDF\Model\DiscUsage getDiscUsage($storage_name)
 
-Check the disk usage of the current account 
+Get disc usage
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**$storage** | **string** | User's storage name | [optional]
+**$storage_name** | **string** | Storage name | [optional]
 
 ### Return type
 
-[**\Aspose\PDF\Model\DiscUsageResponse**](DiscUsageResponse.md)
+[**\Aspose\PDF\Model\DiscUsage**](DiscUsage.md)
 
 ### HTTP request headers
 
@@ -878,6 +1068,28 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\AttachmentsResponse**](AttachmentsResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getDocumentBookmarks"></a>
+## **getDocumentBookmarks**
+> \Aspose\PDF\Model\BookmarksResponse getDocumentBookmarks($name, $folder, $storage)
+
+Read document bookmarks tree.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\BookmarksResponse**](BookmarksResponse.md)
 
 ### HTTP request headers
 
@@ -1436,28 +1648,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getDownload"></a>
-## **getDownload**
-> \SplFileObject getDownload($path, $version_id, $storage)
-
-Download a specific file 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$path** | **string** | Path of the file including the file name and extension e.g. /file.ext | 
-**$version_id** | **string** | File's version | [optional]
-**$storage** | **string** | User's storage name | [optional]
-
-### Return type
-
-**\SplFileObject**
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: multipart/form-data
-
 <a name="getDownloadDocumentAttachmentByIndex"></a>
 ## **getDownloadDocumentAttachmentByIndex**
 > \SplFileObject getDownloadDocumentAttachmentByIndex($name, $attachment_index, $storage, $folder)
@@ -1568,7 +1758,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: multipart/form-data
+ - **Accept**: application/json
 
 <a name="getFileAttachmentAnnotationData"></a>
 ## **getFileAttachmentAnnotationData**
@@ -1592,6 +1782,48 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: multipart/form-data
+
+<a name="getFilesList"></a>
+## **getFilesList**
+> \Aspose\PDF\Model\FilesList getFilesList($path, $storage_name)
+
+Get all files and folders within a folder
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$path** | **string** | Folder path e.g. '/folder' | 
+**$storage_name** | **string** | Storage name | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\FilesList**](FilesList.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="getFileVersions"></a>
+## **getFileVersions**
+> \Aspose\PDF\Model\FileVersions getFileVersions($path, $storage_name)
+
+Get file versions
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$path** | **string** | File path e.g. '/file.ext' | 
+**$storage_name** | **string** | Storage name | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\FileVersions**](FileVersions.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
 
 <a name="getFreeTextAnnotation"></a>
 ## **getFreeTextAnnotation**
@@ -1689,7 +1921,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: multipart/form-data
+ - **Accept**: application/json
 
 <a name="getImageExtractAsGif"></a>
 ## **getImageExtractAsGif**
@@ -1837,48 +2069,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getIsExist"></a>
-## **getIsExist**
-> \Aspose\PDF\Model\FileExistResponse getIsExist($path, $version_id, $storage)
-
-Check if a specific file or folder exists
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$path** | **string** | File or folder path e.g. /file.ext or /Folder1 | 
-**$version_id** | **string** | File's version | [optional]
-**$storage** | **string** | User's storage name | [optional]
-
-### Return type
-
-[**\Aspose\PDF\Model\FileExistResponse**](FileExistResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="getIsStorageExist"></a>
-## **getIsStorageExist**
-> \Aspose\PDF\Model\StorageExistResponse getIsStorageExist($name)
-
-Check if storage exists 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$name** | **string** | Storage name | 
-
-### Return type
-
-[**\Aspose\PDF\Model\StorageExistResponse**](StorageExistResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="getLaTeXInStorageToPdf"></a>
 ## **getLaTeXInStorageToPdf**
 > \SplFileObject getLaTeXInStorageToPdf($src_path, $storage)
@@ -1940,48 +2130,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\LinkAnnotationResponse**](LinkAnnotationResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="getListFiles"></a>
-## **getListFiles**
-> \Aspose\PDF\Model\FilesResponse getListFiles($path, $storage)
-
-Get the file listing of a specific folder 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$path** | **string** | Start with name of storage e.g. root folder '/'or some folder '/folder1/..' | [optional]
-**$storage** | **string** | User's storage name | [optional]
-
-### Return type
-
-[**\Aspose\PDF\Model\FilesResponse**](FilesResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="getListFileVersions"></a>
-## **getListFileVersions**
-> \Aspose\PDF\Model\FileVersionsResponse getListFileVersions($path, $storage)
-
-Get the file's versions list 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$path** | **string** | File path e.g. /file.ext or /Folder1/file.ext | 
-**$storage** | **string** | User's storage name | [optional]
-
-### Return type
-
-[**\Aspose\PDF\Model\FileVersionsResponse**](FileVersionsResponse.md)
 
 ### HTTP request headers
 
@@ -2053,7 +2201,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: multipart/form-data
+ - **Accept**: application/json
 
 <a name="getPageAnnotations"></a>
 ## **getPageAnnotations**
@@ -2865,11 +3013,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$add_return_to_line_end** | **bool** | Add return to line end. | [optional]
-**$format** | [**\Aspose\PDF\Model\DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
+**$format** | **string** | Allows to specify .doc or .docx file format. | [optional]
 **$image_resolution_x** | **int** | Image resolution X. | [optional]
 **$image_resolution_y** | **int** | Image resolution Y. | [optional]
 **$max_distance_between_text_lines** | **double** | Max distance between text lines. | [optional]
-**$mode** | [**\Aspose\PDF\Model\DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
+**$mode** | **string** | Allows to control how a PDF document is converted into a word processing document. | [optional]
 **$recognize_bullets** | **bool** | Recognize bullets. | [optional]
 **$relative_horizontal_proximity** | **double** | Relative horizontal proximity. | [optional]
 **$folder** | **string** | The document folder. | [optional]
@@ -2894,7 +3042,7 @@ Converts PDF document (located on storage) to EPUB format and returns resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | Property tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | **string** | Property tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -2921,7 +3069,7 @@ Name | Type | Description  | Notes
 **$compress_svg_graphics_if_any** | **bool** | The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. | [optional]
 **$convert_marked_content_to_layers** | **bool** | If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with "data-pdflayer" attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. | [optional]
 **$default_font_name** | **string** | Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. | [optional]
-**$document_type** | [**\Aspose\PDF\Model\HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
+**$document_type** | **string** | Result document type. | [optional]
 **$fixed_layout** | **bool** | The value indicating whether that HTML is created as fixed layout. | [optional]
 **$image_resolution** | **int** | Resolution for image rendering. | [optional]
 **$minimal_line_width** | **int** | This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. | [optional]
@@ -2929,16 +3077,16 @@ Name | Type | Description  | Notes
 **$split_css_into_pages** | **bool** | When multipage-mode selected(i.e 'SplitIntoPages' is 'true'), then this attribute defines whether should be created separate CSS-file for each result HTML page. | [optional]
 **$split_into_pages** | **bool** | The flag that indicates whether each page of source document will be converted into it's own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. | [optional]
 **$use_z_order** | **bool** | If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. | [optional]
-**$antialiasing_processing** | [**\Aspose\PDF\Model\AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
+**$antialiasing_processing** | **string** | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
 **$css_class_names_prefix** | **string** | When PDFtoHTML converter generates result CSSs, CSS class names (something like ".stl_01 {}" ... ".stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. | [optional]
 **$explicit_list_of_saved_pages** | **int[]** | With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. | [optional]
-**$font_encoding_strategy** | [**\Aspose\PDF\Model\FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
-**$font_saving_mode** | [**\Aspose\PDF\Model\FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
-**$html_markup_generation_mode** | [**\Aspose\PDF\Model\HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
-**$letters_positioning_method** | [**\Aspose\PDF\Model\LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
+**$font_encoding_strategy** | **string** | Defines encoding special rule to tune PDF decoding for current document. | [optional]
+**$font_saving_mode** | **string** | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
+**$html_markup_generation_mode** | **string** | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
+**$letters_positioning_method** | **string** | The mode of positioning of letters in words in result HTML. | [optional]
 **$pages_flow_type_depends_on_viewers_screen_size** | **bool** | If attribute 'SplitOnPages=false', than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. | [optional]
-**$parts_embedding_mode** | [**\Aspose\PDF\Model\PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
-**$raster_images_saving_mode** | [**\Aspose\PDF\Model\RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
+**$parts_embedding_mode** | **string** | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
+**$raster_images_saving_mode** | **string** | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
 **$remove_empty_areas_on_top_and_bottom** | **bool** | Defines whether in created HTML will be removed top and bottom empty area without any content (if any). | [optional]
 **$save_shadowed_texts_as_transparent_texts** | **bool** | Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). | [optional]
 **$save_transparent_texts** | **bool** | Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. | [optional]
@@ -3012,7 +3160,7 @@ Converts PDF document (located on storage) to PdfA format and returns resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$type** | [**\Aspose\PDF\Model\PdfAType**](PdfAType.md) | Type of PdfA format. | 
+**$type** | **string** | Type of PdfA format. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -3083,13 +3231,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$brightness** | **double** | Image brightness. | [optional]
-**$compression** | [**\Aspose\PDF\Model\CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
-**$color_depth** | [**\Aspose\PDF\Model\ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
+**$compression** | **string** | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
+**$color_depth** | **string** | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
 **$left_margin** | **int** | Left image margin. | [optional]
 **$right_margin** | **int** | Right image margin. | [optional]
 **$top_margin** | **int** | Top image margin. | [optional]
 **$bottom_margin** | **int** | Bottom image margin. | [optional]
-**$orientation** | [**\Aspose\PDF\Model\ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
+**$orientation** | **string** | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
 **$skip_blank_pages** | **bool** | Skip blank pages flag. | [optional]
 **$width** | **int** | Image width. | [optional]
 **$height** | **int** | Image height. | [optional]
@@ -3339,7 +3487,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: multipart/form-data
+ - **Accept**: application/json
 
 <a name="getScreenAnnotationData"></a>
 ## **getScreenAnnotationData**
@@ -3385,7 +3533,7 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
- - **Accept**: multipart/form-data
+ - **Accept**: application/json
 
 <a name="getSoundAnnotationData"></a>
 ## **getSoundAnnotationData**
@@ -3811,9 +3959,78 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: multipart/form-data
 
+<a name="moveFile"></a>
+## **moveFile**
+>  moveFile($src_path, $dest_path, $src_storage_name, $dest_storage_name, $version_id)
+
+Move file
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$src_path** | **string** | Source file path e.g. '/src.ext' | 
+**$dest_path** | **string** | Destination file path e.g. '/dest.ext' | 
+**$src_storage_name** | **string** | Source storage name | [optional]
+**$dest_storage_name** | **string** | Destination storage name | [optional]
+**$version_id** | **string** | File version ID to move | [optional]
+
+### Return type
+
+****
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="moveFolder"></a>
+## **moveFolder**
+>  moveFolder($src_path, $dest_path, $src_storage_name, $dest_storage_name)
+
+Move folder
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$src_path** | **string** | Folder path to move e.g. '/folder' | 
+**$dest_path** | **string** | Destination folder path to move to e.g '/dst' | 
+**$src_storage_name** | **string** | Source storage name | [optional]
+**$dest_storage_name** | **string** | Destination storage name | [optional]
+
+### Return type
+
+****
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="objectExists"></a>
+## **objectExists**
+> \Aspose\PDF\Model\ObjectExist objectExists($path, $storage_name, $version_id)
+
+Check if file or folder exists
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$path** | **string** | File or folder path e.g. '/file.ext' or '/folder' | 
+**$storage_name** | **string** | Storage name | [optional]
+**$version_id** | **string** | File version ID | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\ObjectExist**](ObjectExist.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
 <a name="postAppendDocument"></a>
 ## **postAppendDocument**
-> \Aspose\PDF\Model\DocumentResponse postAppendDocument($name, $append_document, $append_file, $start_page, $end_page, $storage, $folder)
+> \Aspose\PDF\Model\DocumentResponse postAppendDocument($name, $append_file, $start_page, $end_page, $storage, $folder)
 
 Append document to existing one.
 
@@ -3821,8 +4038,7 @@ Append document to existing one.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The original document name. | 
-**$append_document** | [**\Aspose\PDF\Model\AppendDocument**](AppendDocument.md) | with the append document data. | [optional]
-**$append_file** | **string** | Append file server path. | [optional]
+**$append_file** | **string** | Append file server path. | 
 **$start_page** | **int** | Appending start page. | [optional]
 **$end_page** | **int** | Appending end page. | [optional]
 **$storage** | **string** | The documents storage. | [optional]
@@ -3831,6 +4047,30 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\DocumentResponse**](DocumentResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="postBookmark"></a>
+## **postBookmark**
+> \Aspose\PDF\Model\BookmarksResponse postBookmark($name, $bookmark_path, $bookmarks, $folder, $storage)
+
+Add document bookmarks.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$bookmark_path** | **string** | The bookmark path. | 
+**$bookmarks** | [**\Aspose\PDF\Model\Bookmark[]**](Bookmark.md) | The array of bookmark. | 
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\BookmarksResponse**](BookmarksResponse.md)
 
 ### HTTP request headers
 
@@ -3873,7 +4113,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page** | **int** | Document page number. | 
-**$field** | [**\Aspose\PDF\Model\Field**](Field.md) | with the field data. | [optional]
+**$field** | [**\Aspose\PDF\Model\Field**](Field.md) | Field with the field data. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4069,8 +4309,8 @@ Name | Type | Description  | Notes
 **$name** | **string** | Document name. | 
 **$user_password** | **string** | User password (encrypted Base64). | 
 **$owner_password** | **string** | Owner password (encrypted Base64). | 
-**$crypto_algorithm** | [**\Aspose\PDF\Model\CryptoAlgorithm**](CryptoAlgorithm.md) | Cryptographic algorithm, see for details. | 
-**$permissions_flags** | **[]** | Array of document permissions, see for details. | [optional]
+**$crypto_algorithm** | **string** | Cryptographic algorithm, see CryptoAlgorithm for details. | 
+**$permissions_flags** | **[]** | Array of document permissions, see PermissionsFlags for details. | [optional]
 **$use_pdf20** | **bool** | Support for revision 6 (Extension 8). | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
@@ -4138,53 +4378,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
-<a name="postMoveFile"></a>
-## **postMoveFile**
-> \Aspose\PDF\Model\AsposeResponse postMoveFile($src, $dest, $version_id, $storage, $dest_storage)
-
-Move a specific file
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$src** | **string** | Source file path e.g. /fileSource.ext | 
-**$dest** | **string** | Destination file path e.g. /fileDestination.ext | 
-**$version_id** | **string** | Source file's version, | [optional]
-**$storage** | **string** | User's source storage name | [optional]
-**$dest_storage** | **string** | User's destination storage name | [optional]
-
-### Return type
-
-[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
-<a name="postMoveFolder"></a>
-## **postMoveFolder**
-> \Aspose\PDF\Model\AsposeResponse postMoveFolder($src, $dest, $storage, $dest_storage)
-
-Move a specific folder 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$src** | **string** | Source folder path e.g. /Folder1 | 
-**$dest** | **string** | Destination folder path e.g. /Folder2 | 
-**$storage** | **string** | User's source storage name | [optional]
-**$dest_storage** | **string** | User's destination storage name | [optional]
-
-### Return type
-
-[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="postMovePage"></a>
 ## **postMovePage**
 > \Aspose\PDF\Model\AsposeResponse postMovePage($name, $page_number, $new_index, $storage, $folder)
@@ -4219,7 +4412,7 @@ Optimize document.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$options** | [**\Aspose\PDF\Model\OptimizeOptions**](OptimizeOptions.md) | The optimization options. | [optional]
+**$options** | [**\Aspose\PDF\Model\OptimizeOptions**](OptimizeOptions.md) | The optimization options. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4858,7 +5051,7 @@ Name | Type | Description  | Notes
 
 <a name="postSignDocument"></a>
 ## **postSignDocument**
-> \Aspose\PDF\Model\AsposeResponse postSignDocument($name, $signature, $storage, $folder)
+> \Aspose\PDF\Model\AsposeResponse postSignDocument($name, $sign, $storage, $folder)
 
 Sign document.
 
@@ -4866,7 +5059,7 @@ Sign document.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$signature** | [**\Aspose\PDF\Model\Signature**](Signature.md) | Signature object containing signature data. | [optional]
+**$sign** | [**\Aspose\PDF\Model\Signature**](Signature.md) | Signature object containing signature data. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4881,7 +5074,7 @@ Name | Type | Description  | Notes
 
 <a name="postSignPage"></a>
 ## **postSignPage**
-> \Aspose\PDF\Model\AsposeResponse postSignPage($name, $page_number, $signature, $storage, $folder)
+> \Aspose\PDF\Model\AsposeResponse postSignPage($name, $page_number, $sign, $storage, $folder)
 
 Sign page.
 
@@ -4890,7 +5083,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$signature** | [**\Aspose\PDF\Model\Signature**](Signature.md) | Signature object containing signature data. | [optional]
+**$sign** | [**\Aspose\PDF\Model\Signature**](Signature.md) | Signature object containing signature data. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -4961,7 +5154,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | Number of page (starting from 1). | 
-**$paragraph** | [**\Aspose\PDF\Model\Paragraph**](Paragraph.md) | Paragraph data. | [optional]
+**$paragraph** | [**\Aspose\PDF\Model\Paragraph**](Paragraph.md) | Paragraph data. | 
 **$folder** | **string** | Document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -4993,6 +5186,30 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="putBookmark"></a>
+## **putBookmark**
+> \Aspose\PDF\Model\BookmarkResponse putBookmark($name, $bookmark_path, $bookmark, $folder, $storage)
+
+Update document bookmark.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$bookmark_path** | **string** | The bookmark path. | 
+**$bookmark** | [**\Aspose\PDF\Model\Bookmark**](Bookmark.md) | The bookmark. | 
+**$folder** | **string** | The document folder. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\BookmarkResponse**](BookmarkResponse.md)
 
 ### HTTP request headers
 
@@ -5072,29 +5289,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="putCreate"></a>
-## **putCreate**
-> \Aspose\PDF\Model\AsposeResponse putCreate($path, $_file, $version_id, $storage)
-
-Upload a specific file 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$path** | **string** | Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext | 
-**$_file** | **\SplFileObject** | File to upload | 
-**$version_id** | **string** | Source file's version | [optional]
-**$storage** | **string** | User's storage name | [optional]
-
-### Return type
-
-[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: multipart/form-data
- - **Accept**: application/json
-
 <a name="putCreateDocument"></a>
 ## **putCreateDocument**
 > \Aspose\PDF\Model\DocumentResponse putCreateDocument($name, $storage, $folder)
@@ -5111,28 +5305,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\DocumentResponse**](DocumentResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
-<a name="putCreateFolder"></a>
-## **putCreateFolder**
-> \Aspose\PDF\Model\AsposeResponse putCreateFolder($path, $storage, $dest_storage)
-
-Create the folder 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$path** | **string** | Target folder's path e.g. Folder1/Folder2/. The folders will be created recursively | 
-**$storage** | **string** | User's source storage name | [optional]
-**$dest_storage** | **string** | User's destination storage name | [optional]
-
-### Return type
-
-[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
 
 ### HTTP request headers
 
@@ -5174,8 +5346,8 @@ Name | Type | Description  | Notes
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.doc) | 
 **$user_password** | **string** | User password (encrypted Base64). | 
 **$owner_password** | **string** | Owner password (encrypted Base64). | 
-**$crypto_algorithm** | [**\Aspose\PDF\Model\CryptoAlgorithm**](CryptoAlgorithm.md) | Cryptographic algorithm, see for details. | 
-**$permissions_flags** | **[]** | Array of document permissions, see for details. | [optional]
+**$crypto_algorithm** | **string** | Cryptographic algorithm, see CryptoAlgorithm for details. | 
+**$permissions_flags** | **[]** | Array of document permissions, see PermissionsFlags for details. | [optional]
 **$use_pdf20** | **bool** | Support for revision 6 (Extension 8). | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be encrypted. | [optional]
@@ -5475,7 +5647,7 @@ Convert image file (located on storage) to PDF format and upload resulting file 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$image_templates** | [**\Aspose\PDF\Model\ImageTemplatesRequest**](ImageTemplatesRequest.md) | Image templates | 
+**$image_templates** | [**\Aspose\PDF\Model\ImageTemplatesRequest**](ImageTemplatesRequest.md) | ImageTemplatesRequestImage templates | 
 **$dst_folder** | **string** | The destination document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -5527,7 +5699,7 @@ Name | Type | Description  | Notes
 **$page_number** | **int** | The page number. | 
 **$width** | **int** | The converted image width. | [optional]
 **$height** | **int** | The converted image height. | [optional]
-**$storage** | **string** |  | [optional]
+**$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$dest_folder** | **string** | The document folder. | [optional]
 
@@ -5697,7 +5869,7 @@ Merge a list of documents.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | Resulting documen name. | 
-**$merge_documents** | [**\Aspose\PDF\Model\MergeDocuments**](MergeDocuments.md) | with a list of documents. | [optional]
+**$merge_documents** | [**\Aspose\PDF\Model\MergeDocuments**](MergeDocuments.md) | MergeDocuments with a list of documents. | 
 **$storage** | **string** | Resulting document storage. | [optional]
 **$folder** | **string** | Resulting document folder. | [optional]
 
@@ -5768,7 +5940,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$page_number** | **int** | The page number. | 
-**$stamp** | [**\Aspose\PDF\Model\Stamp**](Stamp.md) | with data. | 
+**$stamp** | [**\Aspose\PDF\Model\Stamp**](Stamp.md) | Stamp with data. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -5971,11 +6143,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.doc) | 
 **$add_return_to_line_end** | **bool** | Add return to line end. | [optional]
-**$format** | [**\Aspose\PDF\Model\DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
+**$format** | **string** | Allows to specify .doc or .docx file format. | [optional]
 **$image_resolution_x** | **int** | Image resolution X. | [optional]
 **$image_resolution_y** | **int** | Image resolution Y. | [optional]
 **$max_distance_between_text_lines** | **double** | Max distance between text lines. | [optional]
-**$mode** | [**\Aspose\PDF\Model\DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
+**$mode** | **string** | Allows to control how a PDF document is converted into a word processing document. | [optional]
 **$recognize_bullets** | **bool** | Recognize bullets. | [optional]
 **$relative_horizontal_proximity** | **double** | Relative horizontal proximity. | [optional]
 **$storage** | **string** | The document storage. | [optional]
@@ -6000,7 +6172,7 @@ Converts PDF document (in request content) to EPUB format and uploads resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.epub) | 
-**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | Property tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | **string** | Property tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
@@ -6027,7 +6199,7 @@ Name | Type | Description  | Notes
 **$compress_svg_graphics_if_any** | **bool** | The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. | [optional]
 **$convert_marked_content_to_layers** | **bool** | If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with "data-pdflayer" attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. | [optional]
 **$default_font_name** | **string** | Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. | [optional]
-**$document_type** | [**\Aspose\PDF\Model\HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
+**$document_type** | **string** | Result document type. | [optional]
 **$fixed_layout** | **bool** | The value indicating whether that HTML is created as fixed layout. | [optional]
 **$image_resolution** | **int** | Resolution for image rendering. | [optional]
 **$minimal_line_width** | **int** | This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. | [optional]
@@ -6035,16 +6207,16 @@ Name | Type | Description  | Notes
 **$split_css_into_pages** | **bool** | When multipage-mode selected(i.e 'SplitIntoPages' is 'true'), then this attribute defines whether should be created separate CSS-file for each result HTML page. | [optional]
 **$split_into_pages** | **bool** | The flag that indicates whether each page of source document will be converted into it's own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. | [optional]
 **$use_z_order** | **bool** | If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. | [optional]
-**$antialiasing_processing** | [**\Aspose\PDF\Model\AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
+**$antialiasing_processing** | **string** | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
 **$css_class_names_prefix** | **string** | When PDFtoHTML converter generates result CSSs, CSS class names (something like ".stl_01 {}" ... ".stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. | [optional]
 **$explicit_list_of_saved_pages** | **int[]** | With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. | [optional]
-**$font_encoding_strategy** | [**\Aspose\PDF\Model\FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
-**$font_saving_mode** | [**\Aspose\PDF\Model\FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
-**$html_markup_generation_mode** | [**\Aspose\PDF\Model\HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
-**$letters_positioning_method** | [**\Aspose\PDF\Model\LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
+**$font_encoding_strategy** | **string** | Defines encoding special rule to tune PDF decoding for current document. | [optional]
+**$font_saving_mode** | **string** | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
+**$html_markup_generation_mode** | **string** | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
+**$letters_positioning_method** | **string** | The mode of positioning of letters in words in result HTML. | [optional]
 **$pages_flow_type_depends_on_viewers_screen_size** | **bool** | If attribute 'SplitOnPages=false', than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. | [optional]
-**$parts_embedding_mode** | [**\Aspose\PDF\Model\PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
-**$raster_images_saving_mode** | [**\Aspose\PDF\Model\RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
+**$parts_embedding_mode** | **string** | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
+**$raster_images_saving_mode** | **string** | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
 **$remove_empty_areas_on_top_and_bottom** | **bool** | Defines whether in created HTML will be removed top and bottom empty area without any content (if any). | [optional]
 **$save_shadowed_texts_as_transparent_texts** | **bool** | Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). | [optional]
 **$save_transparent_texts** | **bool** | Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. | [optional]
@@ -6118,7 +6290,7 @@ Converts PDF document (in request content) to PdfA format and uploads resulting 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.pdf) | 
-**$type** | [**\Aspose\PDF\Model\PdfAType**](PdfAType.md) | Type of PdfA format. | 
+**$type** | **string** | Type of PdfA format. | 
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
@@ -6188,13 +6360,13 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.tiff) | 
 **$brightness** | **double** | Image brightness. | [optional]
-**$compression** | [**\Aspose\PDF\Model\CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
-**$color_depth** | [**\Aspose\PDF\Model\ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
+**$compression** | **string** | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
+**$color_depth** | **string** | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
 **$left_margin** | **int** | Left image margin. | [optional]
 **$right_margin** | **int** | Right image margin. | [optional]
 **$top_margin** | **int** | Top image margin. | [optional]
 **$bottom_margin** | **int** | Bottom image margin. | [optional]
-**$orientation** | [**\Aspose\PDF\Model\ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
+**$orientation** | **string** | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
 **$skip_blank_pages** | **bool** | Skip blank pages flag. | [optional]
 **$width** | **int** | Image width. | [optional]
 **$height** | **int** | Image height. | [optional]
@@ -6322,11 +6494,11 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.doc) | 
 **$add_return_to_line_end** | **bool** | Add return to line end. | [optional]
-**$format** | [**\Aspose\PDF\Model\DocFormat**](DocFormat.md) | Allows to specify .doc or .docx file format. | [optional]
+**$format** | **string** | Allows to specify .doc or .docx file format. | [optional]
 **$image_resolution_x** | **int** | Image resolution X. | [optional]
 **$image_resolution_y** | **int** | Image resolution Y. | [optional]
 **$max_distance_between_text_lines** | **double** | Max distance between text lines. | [optional]
-**$mode** | [**\Aspose\PDF\Model\DocRecognitionMode**](DocRecognitionMode.md) | Allows to control how a PDF document is converted into a word processing document. | [optional]
+**$mode** | **string** | Allows to control how a PDF document is converted into a word processing document. | [optional]
 **$recognize_bullets** | **bool** | Recognize bullets. | [optional]
 **$relative_horizontal_proximity** | **double** | Relative horizontal proximity. | [optional]
 **$folder** | **string** | The document folder. | [optional]
@@ -6352,7 +6524,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.epub) | 
-**$content_recognition_mode** | [**\Aspose\PDF\Model\EpubRecognitionMode**](EpubRecognitionMode.md) | Property tunes conversion for this or that desirable method of recognition of content. | [optional]
+**$content_recognition_mode** | **string** | Property tunes conversion for this or that desirable method of recognition of content. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -6380,7 +6552,7 @@ Name | Type | Description  | Notes
 **$compress_svg_graphics_if_any** | **bool** | The flag that indicates whether found SVG graphics(if any) will be compressed(zipped) into SVGZ format during saving. | [optional]
 **$convert_marked_content_to_layers** | **bool** | If attribute ConvertMarkedContentToLayers set to true then an all elements inside a PDF marked content (layer) will be put into an HTML div with "data-pdflayer" attribute specifying a layer name. This layer name will be extracted from optional properties of PDF marked content. If this attribute is false (by default) then no any layers will be created from PDF marked content. | [optional]
 **$default_font_name** | **string** | Specifies the name of an installed font which is used to substitute any document font that is not embedded and not installed in the system. If null then default substitution font is used. | [optional]
-**$document_type** | [**\Aspose\PDF\Model\HtmlDocumentType**](HtmlDocumentType.md) | Result document type. | [optional]
+**$document_type** | **string** | Result document type. | [optional]
 **$fixed_layout** | **bool** | The value indicating whether that HTML is created as fixed layout. | [optional]
 **$image_resolution** | **int** | Resolution for image rendering. | [optional]
 **$minimal_line_width** | **int** | This attribute sets minimal width of graphic path line. If thickness of line is less than 1px Adobe Acrobat rounds it to this value. So this attribute can be used to emulate this behavior for HTML browsers. | [optional]
@@ -6388,16 +6560,16 @@ Name | Type | Description  | Notes
 **$split_css_into_pages** | **bool** | When multipage-mode selected(i.e 'SplitIntoPages' is 'true'), then this attribute defines whether should be created separate CSS-file for each result HTML page. | [optional]
 **$split_into_pages** | **bool** | The flag that indicates whether each page of source document will be converted into it's own target HTML document, i.e whether result HTML will be splitted into several HTML-pages. | [optional]
 **$use_z_order** | **bool** | If attribute UseZORder set to true, graphics and text are added to resultant HTML document accordingly Z-order in original PDF document. If this attribute is false all graphics is put as single layer which may cause some unnecessary effects for overlapped objects. | [optional]
-**$antialiasing_processing** | [**\Aspose\PDF\Model\AntialiasingProcessingType**](AntialiasingProcessingType.md) | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
+**$antialiasing_processing** | **string** | The parameter defines required antialiasing measures during conversion of compound background images from PDF to HTML. | [optional]
 **$css_class_names_prefix** | **string** | When PDFtoHTML converter generates result CSSs, CSS class names (something like ".stl_01 {}" ... ".stl_NN {}) are generated and used in result CSS. This property allows forcibly set class name prefix. | [optional]
 **$explicit_list_of_saved_pages** | **int[]** | With this property You can explicitely define what pages of document should be converted. Pages in this list must have 1-based numbers. I.e. valid numbers of pages must be taken from range (1...[NumberOfPagesInConvertedDocument]) Order of appearing of pages in this list does not affect their order in result HTML page(s) - in result pages allways will go in order in which they are present in source PDF. | [optional]
-**$font_encoding_strategy** | [**\Aspose\PDF\Model\FontEncodingRules**](FontEncodingRules.md) | Defines encoding special rule to tune PDF decoding for current document. | [optional]
-**$font_saving_mode** | [**\Aspose\PDF\Model\FontSavingModes**](FontSavingModes.md) | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
-**$html_markup_generation_mode** | [**\Aspose\PDF\Model\HtmlMarkupGenerationModes**](HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
-**$letters_positioning_method** | [**\Aspose\PDF\Model\LettersPositioningMethods**](LettersPositioningMethods.md) | The mode of positioning of letters in words in result HTML. | [optional]
+**$font_encoding_strategy** | **string** | Defines encoding special rule to tune PDF decoding for current document. | [optional]
+**$font_saving_mode** | **string** | Defines font saving mode that will be used during saving of PDF to desirable format. | [optional]
+**$html_markup_generation_mode** | **string** | Sometimes specific reqirments to generation of HTML markup are present. This parameter defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. | [optional]
+**$letters_positioning_method** | **string** | The mode of positioning of letters in words in result HTML. | [optional]
 **$pages_flow_type_depends_on_viewers_screen_size** | **bool** | If attribute 'SplitOnPages=false', than whole HTML representing all input PDF pages will be put into one big result HTML file. This flag defines whether result HTML will be generated in such way that flow of areas that represent PDF pages in result HTML will depend on screen resolution of viewer. | [optional]
-**$parts_embedding_mode** | [**\Aspose\PDF\Model\PartsEmbeddingModes**](PartsEmbeddingModes.md) | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
-**$raster_images_saving_mode** | [**\Aspose\PDF\Model\RasterImagesSavingModes**](RasterImagesSavingModes.md) | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
+**$parts_embedding_mode** | **string** | It defines whether referenced files (HTML, Fonts,Images, CSSes) will be embedded into main HTML file or will be generated as apart binary entities. | [optional]
+**$raster_images_saving_mode** | **string** | Converted PDF can contain raster images This parameter defines how they should be handled during conversion of PDF to HTML. | [optional]
 **$remove_empty_areas_on_top_and_bottom** | **bool** | Defines whether in created HTML will be removed top and bottom empty area without any content (if any). | [optional]
 **$save_shadowed_texts_as_transparent_texts** | **bool** | Pdf can contain texts that are shadowed by another elements (f.e. by images) but can be selected to clipboard in Acrobat Reader (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML to mimic behaviour of Acrobat Reader (othervise such texts are usually saved as hidden, not available for copying to clipboard). | [optional]
 **$save_transparent_texts** | **bool** | Pdf can contain transparent texts that can be selected to clipboard (usually it happen when document contains images and OCRed texts extracted from it). This settings tells to converter whether we need save such texts as transparent selectable texts in result HTML. | [optional]
@@ -6474,7 +6646,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.pdf) | 
-**$type** | [**\Aspose\PDF\Model\PdfAType**](PdfAType.md) | Type of PdfA format. | 
+**$type** | **string** | Type of PdfA format. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -6547,13 +6719,13 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.tiff) | 
 **$brightness** | **double** | Image brightness. | [optional]
-**$compression** | [**\Aspose\PDF\Model\CompressionType**](CompressionType.md) | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
-**$color_depth** | [**\Aspose\PDF\Model\ColorDepth**](ColorDepth.md) | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
+**$compression** | **string** | Tiff compression. Possible values are: LZW, CCITT4, CCITT3, RLE, None. | [optional]
+**$color_depth** | **string** | Image color depth. Possible valuse are: Default, Format8bpp, Format4bpp, Format1bpp. | [optional]
 **$left_margin** | **int** | Left image margin. | [optional]
 **$right_margin** | **int** | Right image margin. | [optional]
 **$top_margin** | **int** | Top image margin. | [optional]
 **$bottom_margin** | **int** | Bottom image margin. | [optional]
-**$orientation** | [**\Aspose\PDF\Model\ShapeType**](ShapeType.md) | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
+**$orientation** | **string** | Image orientation. Possible values are: None, Landscape, Portait. | [optional]
 **$skip_blank_pages** | **bool** | Skip blank pages flag. | [optional]
 **$width** | **int** | Image width. | [optional]
 **$height** | **int** | Image height. | [optional]
@@ -6755,7 +6927,7 @@ Update privilege document.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$privileges** | [**\Aspose\PDF\Model\DocumentPrivilege**](DocumentPrivilege.md) | Document privileges.  | [optional]
+**$privileges** | [**\Aspose\PDF\Model\DocumentPrivilege**](DocumentPrivilege.md) | Document privileges. DocumentPrivilege | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -7217,7 +7389,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$field_name** | **string** | The name of a field to be updated. | 
-**$field** | [**\Aspose\PDF\Model\Field**](Field.md) | with the field data. | [optional]
+**$field** | [**\Aspose\PDF\Model\Field**](Field.md) | Field with the field data. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -7240,7 +7412,7 @@ Update fields.
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$fields** | [**\Aspose\PDF\Model\Fields**](Fields.md) | with the fields data. | [optional]
+**$fields** | [**\Aspose\PDF\Model\Fields**](Fields.md) | Fields with the fields data. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 
@@ -7396,6 +7568,48 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
  - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="storageExists"></a>
+## **storageExists**
+> \Aspose\PDF\Model\StorageExist storageExists($storage_name)
+
+Check if storage exists
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$storage_name** | **string** | Storage name | 
+
+### Return type
+
+[**\Aspose\PDF\Model\StorageExist**](StorageExist.md)
+
+### HTTP request headers
+
+ - **Content-Type**: application/json
+ - **Accept**: application/json
+
+<a name="uploadFile"></a>
+## **uploadFile**
+> \Aspose\PDF\Model\FilesUploadResult uploadFile($path, $_file, $storage_name)
+
+Upload file
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$path** | **string** | Path where to upload including filename and extension e.g. /file.ext or /Folder 1/file.ext If the content is multipart and path does not contains the file name it tries to get them from filename parameter from Content-Disposition header.  | 
+**$_file** | **\SplFileObject** | File to upload | 
+**$storage_name** | **string** | Storage name | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\FilesUploadResult**](FilesUploadResult.md)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
  - **Accept**: application/json
 
 

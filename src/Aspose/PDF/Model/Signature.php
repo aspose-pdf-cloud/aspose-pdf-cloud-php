@@ -260,6 +260,10 @@ class Signature implements ModelInterface, ArrayAccess
         if ($this->container['signature_path'] === null) {
             $invalidProperties[] = "'signature_path' can't be null";
         }
+        if ((strlen($this->container['signature_path']) < 1)) {
+            $invalidProperties[] = "invalid value for 'signature_path', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['signature_type'] === null) {
             $invalidProperties[] = "'signature_type' can't be null";
         }
@@ -282,6 +286,9 @@ class Signature implements ModelInterface, ArrayAccess
     {
 
         if ($this->container['signature_path'] === null) {
+            return false;
+        }
+        if (strlen($this->container['signature_path']) < 1) {
             return false;
         }
         if ($this->container['signature_type'] === null) {
@@ -316,6 +323,11 @@ class Signature implements ModelInterface, ArrayAccess
      */
     public function setSignaturePath($signature_path)
     {
+
+        if ((strlen($signature_path) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $signature_path when calling Signature., must be bigger than or equal to 1.');
+        }
+
         $this->container['signature_path'] = $signature_path;
 
         return $this;
@@ -478,7 +490,7 @@ class Signature implements ModelInterface, ArrayAccess
     /**
      * Sets visible
      *
-     * @param bool $visible Gets or sets a value indicating whether this  is visible. Supports only when signing particular page.
+     * @param bool $visible Gets or sets a value indicating whether this Signature is visible. Supports only when signing particular page.
      *
      * @return $this
      */

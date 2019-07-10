@@ -179,6 +179,9 @@ class AnnotationInfo extends Annotation
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['annotation_type'] === null) {
+            $invalidProperties[] = "'annotation_type' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -194,6 +197,9 @@ class AnnotationInfo extends Annotation
             return false;
         }
 
+        if ($this->container['annotation_type'] === null) {
+            return false;
+        }
         return true;
     }
 

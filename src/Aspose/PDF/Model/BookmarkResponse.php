@@ -22,9 +22,10 @@
 
 
 /**
- * DiscUsageResponse Class 
+ * BookmarkResponse Class 
  *
  * @category Class
+ * @description Represents response containing single bookmark info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -33,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class DiscUsageResponse extends AsposeResponse 
+class BookmarkResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class DiscUsageResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'DiscUsageResponse';
+    protected static $swaggerModelName = 'BookmarkResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +51,7 @@ class DiscUsageResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'disc_usage' => '\Aspose\PDF\Model\DiscUsage'
+        'bookmark' => '\Aspose\PDF\Model\Bookmark'
     ];
 
     /**
@@ -59,7 +60,7 @@ class DiscUsageResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'disc_usage' => null
+        'bookmark' => null
     ];
 
     /**
@@ -89,7 +90,7 @@ class DiscUsageResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'disc_usage' => 'DiscUsage'
+        'bookmark' => 'Bookmark'
     ];
 
     /**
@@ -98,7 +99,7 @@ class DiscUsageResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'disc_usage' => 'setDiscUsage'
+        'bookmark' => 'setBookmark'
     ];
 
     /**
@@ -107,7 +108,7 @@ class DiscUsageResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'disc_usage' => 'getDiscUsage'
+        'bookmark' => 'getBookmark'
     ];
 
     /**
@@ -166,7 +167,7 @@ class DiscUsageResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['disc_usage'] = isset($data['disc_usage']) ? $data['disc_usage'] : null;
+        $this->container['bookmark'] = isset($data['bookmark']) ? $data['bookmark'] : null;
     }
 
     /**
@@ -198,25 +199,25 @@ class DiscUsageResponse extends AsposeResponse
 
 
     /**
-     * Gets disc_usage
+     * Gets bookmark
      *
-     * @return \Aspose\PDF\Model\DiscUsage
+     * @return \Aspose\PDF\Model\Bookmark
      */
-    public function getDiscUsage()
+    public function getBookmark()
     {
-        return $this->container['disc_usage'];
+        return $this->container['bookmark'];
     }
 
     /**
-     * Sets disc_usage
+     * Sets bookmark
      *
-     * @param \Aspose\PDF\Model\DiscUsage $disc_usage disc_usage
+     * @param \Aspose\PDF\Model\Bookmark $bookmark Bookmark object
      *
      * @return $this
      */
-    public function setDiscUsage($disc_usage)
+    public function setBookmark($bookmark)
     {
-        $this->container['disc_usage'] = $disc_usage;
+        $this->container['bookmark'] = $bookmark;
 
         return $this;
     }

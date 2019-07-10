@@ -203,6 +203,9 @@ class PolyAnnotation extends MarkupAnnotation
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['vertices'] === null) {
+            $invalidProperties[] = "'vertices' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -218,6 +221,9 @@ class PolyAnnotation extends MarkupAnnotation
             return false;
         }
 
+        if ($this->container['vertices'] === null) {
+            return false;
+        }
         return true;
     }
 

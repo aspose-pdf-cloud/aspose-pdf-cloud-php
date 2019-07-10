@@ -514,7 +514,7 @@ class Stamp implements ModelInterface, ArrayAccess
     /**
      * Sets rotate
      *
-     * @param \Aspose\PDF\Model\Rotation $rotate Sets or gets the rotation of stamp content according  values. Note. This property is for set angles which are multiples of 90 degrees (0, 90, 180, 270 degrees). To set arbitrary angle use RotateAngle property.  If angle set by ArbitraryAngle is not multiple of 90 then Rotate property returns Rotation.None.
+     * @param \Aspose\PDF\Model\Rotation $rotate Sets or gets the rotation of stamp content according Rotation values. Note. This property is for set angles which are multiples of 90 degrees (0, 90, 180, 270 degrees). To set arbitrary angle use RotateAngle property.  If angle set by ArbitraryAngle is not multiple of 90 then Rotate property returns Rotation.None.
      *
      * @return $this
      */
@@ -730,7 +730,7 @@ class Stamp implements ModelInterface, ArrayAccess
     /**
      * Sets text_state
      *
-     * @param \Aspose\PDF\Model\TextState $text_state Gets text properties of the stamp. See  for details.
+     * @param \Aspose\PDF\Model\TextState $text_state Gets text properties of the stamp. See TextState for details.
      *
      * @return $this
      */

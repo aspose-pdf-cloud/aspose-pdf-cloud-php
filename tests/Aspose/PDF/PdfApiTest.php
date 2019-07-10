@@ -37,7 +37,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         // Get App key and App SID from https://aspose.cloud
         $appSid = '';
         $appKey = '';
-        $host = 'http://billing.cloud.saltov.dynabic.com/v2.0';
+        $host = 'https://api-qa.aspose.cloud/v3.0';
 
 
         $this->tempFolder = 'TempPdfCloud';
@@ -61,7 +61,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
             $path = $this->tempFolder . '/' . $fileName;
         }
 		$file = realpath(__DIR__ . '/../../..') . '/testData/' . $fileName;
-		$result = $this->pdfApi->PutCreate($Path=$path, $file); 
+		$result = $this->pdfApi->uploadFile($Path=$path, $file); 
 	} 
 
     //Annotations Tests
@@ -125,9 +125,9 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->uploadFile($name);
 
         $endPage = 2;
-        $annotation_types = [Aspose\PDF\Model\AnnotationType::STAMP];
+        $annotationTypes = [Aspose\PDF\Model\AnnotationType::STAMP];
 
-        $response = $this->pdfApi->putAnnotationsFlatten($name, null, $endPage, $annotation_types, null, $this->tempFolder);
+        $response = $this->pdfApi->putAnnotationsFlatten($name, null, $endPage, $annotationTypes, null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
 
@@ -190,7 +190,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
 
         $response = $this->pdfApi->postPageScreenAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutScreenAnnotation()
@@ -216,7 +216,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putScreenAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetScreenAnnotationData()
@@ -243,7 +243,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putScreenAnnotationDataExtract($name, $annotationId, $outFilePath, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
 
@@ -315,7 +315,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $stamp->setTextState($textState);
 
         $response = $this->pdfApi->postPageTextStamps($name, $pageNumber, [$stamp], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPostPageImageStamps()
@@ -345,7 +345,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $stamp->setFileName($this->tempFolder . '/' . $image);
 
         $response = $this->pdfApi->postPageImageStamps($name, $pageNumber, [$stamp], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPostPagePdfPageStamps()
@@ -376,7 +376,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $stamp->setPageIndex(2);
 
         $response = $this->pdfApi->postPagePdfPageStamps($name, $pageNumber, [$stamp], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testDeleteStamp()
@@ -418,7 +418,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $stamp->setValue('Page #');
 
         $response = $this->pdfApi->postDocumentPageNumberStamps($name, $stamp, $startPageNumber, $endPageNumber, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     // Tables Tests
@@ -501,7 +501,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $table = $this->drawTable();
         
         $response = $this->pdfApi->postPageTables($name, $pageNumber, [$table], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutTable()
@@ -517,7 +517,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $table = $this->drawTable();
         
         $response = $this->pdfApi->putTable($name, $tableId, $table, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
     
     private function drawTable()
@@ -669,7 +669,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
 
         $response = $this->pdfApi->postPageStampAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutStampAnnotation()
@@ -697,7 +697,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putStampAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetStampAnnotationData()
@@ -723,7 +723,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putStampAnnotationDataExtract($name, $annotationId, $out_file_path, null, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Polygon Annotations Tests
@@ -788,7 +788,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
             ]);
 
         $response = $this->pdfApi->postPagePolygonAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutPolygonAnnotation()
@@ -818,7 +818,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putPolygonAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //PolyLine Annotations Tests
@@ -883,7 +883,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
             ]);
 
         $response = $this->pdfApi->postPagePolyLineAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutPolyLineAnnotation()
@@ -913,7 +913,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putPolyLineAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     
@@ -972,7 +972,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setTitle("Title");
         
         $response = $this->pdfApi->postPageCircleAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutCircleAnnotation()
@@ -995,7 +995,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putCircleAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
 
@@ -1054,7 +1054,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setTitle("Title");
         
         $response = $this->pdfApi->postPageSquareAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutSquareAnnotation()
@@ -1077,7 +1077,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putSquareAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Line Annotations Tests
@@ -1137,7 +1137,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $lineAnnotation->setEnding(new Aspose\PDF\Model\Point(['x' => 100, 'y' => 100]));
 
         $response = $this->pdfApi->postPageLineAnnotations($name, $pageNumber, [$lineAnnotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutLineAnnotation()
@@ -1162,7 +1162,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putLineAnnotation($name, $annotationId, $lineAnnotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Free Text Annotations Tests
@@ -1229,7 +1229,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $freeTextAnnotation->setTitle("Title");
 
         $response = $this->pdfApi->postPageFreeTextAnnotations($name, $pageNumber, [$freeTextAnnotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutFreeTextAnnotation()
@@ -1261,7 +1261,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putFreeTextAnnotation($name, $annotationId, $freeTextAnnotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     // Header Footer Tests
@@ -1296,7 +1296,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $endPage = 3;
 
         $response = $this->pdfApi->postDocumentTextHeader($name, $header, $startPage, $endPage, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPostDocumentTextFooter()
@@ -1329,7 +1329,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $endPage = 3;
 
         $response = $this->pdfApi->postDocumentTextFooter($name, $footer, $startPage, $endPage, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPostDocumentImageHeader()
@@ -1358,7 +1358,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $endPage = 3;
 
         $response = $this->pdfApi->postDocumentImageHeader($name, $header, $startPage, $endPage, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPostDocumentImageFooter()
@@ -1387,7 +1387,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $endPage = 3;
 
         $response = $this->pdfApi->postDocumentImageFooter($name, $footer, $startPage, $endPage, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     // Sound Annotations Tests
@@ -1450,7 +1450,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setFilePath($this->tempFolder . '/' . $attachmentFile);
 
         $response = $this->pdfApi->postPageSoundAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutSoundAnnotation()
@@ -1478,7 +1478,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putSoundAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetSoundAnnotationData()
@@ -1505,7 +1505,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putSoundAnnotationDataExtract($name, $annotationId, $outFilePath, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     // Redaction Annotations Tests
@@ -1566,7 +1566,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         
 
         $response = $this->pdfApi->postPageRedactionAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutRedactionAnnotation()
@@ -1591,7 +1591,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putRedactionAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
 
@@ -1653,7 +1653,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         
 
         $response = $this->pdfApi->postPageMovieAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutMovieAnnotation()
@@ -1678,7 +1678,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putMovieAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     // File Attachment Annotations Tests
@@ -1742,7 +1742,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setFileName($attachmentFile);
 
         $response = $this->pdfApi->postPageFileAttachmentAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutFileAttachmentAnnotation()
@@ -1771,7 +1771,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putFileAttachmentAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetFileAttachmentAnnotationData()
@@ -1797,7 +1797,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putFileAttachmentAnnotationDataExtract($name, $annotationId, null, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     // Text Annotations Tests
@@ -1855,7 +1855,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $textAnnotation->setState(Aspose\PDF\Model\AnnotationState::UNDEFINED);
 
         $response = $this->pdfApi->postPageTextAnnotations($name, $pageNumber, [$textAnnotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
 
@@ -1878,7 +1878,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putTextAnnotation($name, $annotationId, $textAnnotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Highlight Annotations Tests
@@ -1943,7 +1943,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $response = $this->pdfApi->postPageHighlightAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutHighlightAnnotation()
@@ -1973,7 +1973,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putHighlightAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Squiggly Annotations Tests
@@ -2038,7 +2038,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $response = $this->pdfApi->postPageSquigglyAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutSquigglyAnnotation()
@@ -2068,7 +2068,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putSquigglyAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //StrikeOut Annotations Tests
@@ -2133,7 +2133,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $response = $this->pdfApi->postPageStrikeOutAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutStrikeOutAnnotation()
@@ -2163,7 +2163,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putStrikeOutAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Caret Annotations Tests
@@ -2223,7 +2223,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $response = $this->pdfApi->postPageCaretAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutCaretAnnotation()
@@ -2248,7 +2248,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putCaretAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Underline Annotations Tests
@@ -2313,7 +2313,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $response = $this->pdfApi->postPageUnderlineAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutUnderlineAnnotation()
@@ -2343,7 +2343,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putUnderlineAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Ink Annotations Tests
@@ -2413,7 +2413,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $response = $this->pdfApi->postPageInkAnnotations($name, $pageNumber, [$annotation], null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutInkAnnotation()
@@ -2448,7 +2448,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putInkAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Popup Annotations Tests
@@ -2516,7 +2516,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotation->setModified('02/02/2018 00:00:00.000 AM');
 
         $response = $this->pdfApi->postPopupAnnotation($name, $parentId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutPopupAnnotation()
@@ -2537,7 +2537,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
         $response = $this->pdfApi->putPopupAnnotation($name, $annotationId, $annotation, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     //Append Tests
@@ -2553,27 +2553,10 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $startPage = 2;
         $endPage = 4;
 
-        $response = $this->pdfApi->postAppendDocument($name, null, $this->tempFolder . '/' . $appendFileName, $startPage, $endPage, null, $this->tempFolder);
+        $response = $this->pdfApi->postAppendDocument($name, $this->tempFolder . '/' . $appendFileName, $startPage, $endPage, null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
 
-
-    public function testPostAppendDocumentUsingBodyParams()
-    {
-        $name = 'PdfWithImages2.pdf';
-        $appendFileName = '4pages.pdf';
-
-        $this->uploadFile($name);
-        $this->uploadFile($appendFileName);
-
-        $appendDocument = new Aspose\PDF\Model\AppendDocument();
-        $appendDocument->setDocument($this->tempFolder . '/' . $appendFileName);
-        $appendDocument->setStartPage(2);
-        $appendDocument->setEndPage(4);
-
-        $response = $this->pdfApi->postAppendDocument($name, $appendDocument, null, null, null, null, $this->tempFolder);
-        $this->assertEquals(200, $response->getCode());
-    }
 
     //Attachments Tests
 
@@ -3179,7 +3162,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resultName = "fromEpub.pdf";
 
         $response = $this->pdfApi->putEpubInStorageToPdf($resultName, $src_path, null, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
 
@@ -3201,12 +3184,12 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
                 $width = null, $is_landscape = null, $margin_left = null, 
                 $margin_bottom = null, $margin_right = null, $margin_top = null, 
                 $dst_folder = $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetLaTeXInStorageToPdf()
     {
-        $name = "TexExample.tex";
+        $name = "sample.tex";
         $this->uploadFile($name);
 
         $src_path = $this->tempFolder . '/' . $name;
@@ -3217,14 +3200,14 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
     public function testPutLaTeXInStorageToPdf()
     {
-        $name = "TexExample.tex";
+        $name = "sample.tex";
         $this->uploadFile($name);
 
         $src_path = $this->tempFolder . '/' . $name;
         $resultName = "fromTex.pdf";
 
         $response = $this->pdfApi->putLaTeXInStorageToPdf($resultName, $src_path, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetMhtInStorageToPdf()
@@ -3247,7 +3230,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resultName = "fromMht.pdf";
 
         $response = $this->pdfApi->putMhtInStorageToPdf($resultName, $src_path, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetHtmlInStorageToPdf()
@@ -3277,7 +3260,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
             $height, $width, $is_landscape = null, $margin_left = null, 
             $margin_bottom = null, $margin_right = null, $margin_top = null, 
             $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetXslFoInStorageToPdf()
@@ -3300,7 +3283,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resultName = "fromXlsFo.pdf";
 
         $response = $this->pdfApi->putXslFoInStorageToPdf($resultName, $src_path, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetXpsInStorageToPdf()
@@ -3323,7 +3306,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resultName = "fromXps.pdf";
 
         $response = $this->pdfApi->putXpsInStorageToPdf($resultName, $src_path, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
 
@@ -3349,7 +3332,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->putSvgInStorageToPdf($resultName, $src_path, $adjust_page_size = null, 
             $height = null, $width = null, $is_landscape = null, $margin_left = null, 
             $margin_bottom = null, $margin_right = null, $margin_top = null, $dst_folder = $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
 
@@ -3373,7 +3356,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resultName = "fromPcl.pdf";
 
         $response = $this->pdfApi->putPclInStorageToPdf($resultName, $src_path, $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
 
@@ -3397,7 +3380,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resultName = "fromXml.pdf";
 
         $response = $this->pdfApi->putXmlInStorageToPdf($resultName, $src_path, $xsl_file_path = null, $dst_folder = $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testGetPsInStorageToPdf()
@@ -3420,7 +3403,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $resultName = "fromPs.pdf";
 
         $response = $this->pdfApi->putPsInStorageToPdf($resultName, $src_path, $xsl_file_path = null, null, $dst_folder = $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutImageInStorageToPdf()
@@ -3446,7 +3429,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         );
 
         $response = $this->pdfApi->putImageInStorageToPdf($resultName, $imageTemplatesRequest, $dst_folder = $this->tempFolder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     // Document Tests
@@ -3714,7 +3697,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $imageFile = $folder . '/' . $imageFileName;
 
         $response = $this->pdfApi->postInsertImage($name, $pageNumber, $llx = 10, $lly = 10, $urx = 100, $ury = 100, $imageFile, $storage = null, $folder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutImagesExtractAsJpeg()
@@ -3971,7 +3954,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
 
         $response = $this->pdfApi->postPageLinkAnnotations($name, $pageNumber, $links, $storage = null, $folder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testPutLinkAnnotation()
@@ -3999,7 +3982,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $linkId = $responseAnnotations->getLinks()->getList()[0]->getId();
 
         $response = $this->pdfApi->putLinkAnnotation($name, $linkId, $linkAnnotation1, $storage = null, $folder);
-        $this->assertEquals(201, $response->getCode());
+        $this->assertEquals(200, $response->getCode());
     }
 
     public function testDeletePageLinkAnnotations()
@@ -4779,28 +4762,28 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $name = '4pages.pdf';
         $path = $this->tempFolder . '/' . $name;
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
-        $response = $this->pdfApi->putCreate($path, $file);
-        $this->assertEquals(200, $response->getCode());
+        $response = $this->pdfApi->uploadFile($path, $file);
+        $this->assertNotNull($response);
     }
 
-    public function testGetDownload()
+    public function testDownloadFile()
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
 
         $path = $this->tempFolder . '/' . $name;
 
-        $response = $this->pdfApi->getDownload($path);
+        $response = $this->pdfApi->downloadFile($path);
         $this->assertNotNull($response);
     }
 
-    public function testGetListFiles()
+    public function testGetFilesList()
     {
-        $response = $this->pdfApi->getListFiles($this->tempFolder);
-        $this->assertEquals(200, $response->getCode());
+        $response = $this->pdfApi->getFilesList($this->tempFolder);
+        $this->assertNotNull($response);
     }
 
-    public function testPostMoveFile()
+    public function testMoveFile()
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
@@ -4808,8 +4791,8 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $src = $this->tempFolder . '/' . $name;
         $dest = $this->tempFolder . '/4pages_renamed.pdf';
 
-        $response = $this->pdfApi->postMoveFile($src, $dest);
-        $this->assertEquals(200, $response->getCode());
+        $response = $this->pdfApi->moveFile($src, $dest);
+        $this->assertNull($response);
     }
 
     public function testDeleteFile()
@@ -4820,75 +4803,173 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $path = $this->tempFolder . '/' . $name;
         
         $response = $this->pdfApi->deleteFile($path);
-        $this->assertEquals(200, $response->getCode());
+        $this->assertNull($response);
     }
 
-    public function testPutCreateFolder()
+    public function testCreateFolder()
     {
         $path = $this->tempFolder . '/testFolder';
         
-        $response = $this->pdfApi->putCreateFolder($path);
-        $this->assertEquals(200, $response->getCode());
+        $response = $this->pdfApi->createFolder($path);
+        $this->assertNull($response);
     }
 
     public function testPostMoveFolder()
     {
         $src = $this->tempFolder . '/testFolder';
         
-        $responseCreateFolder = $this->pdfApi->putCreateFolder($src);
-        $this->assertEquals(200, $responseCreateFolder->getCode());
+        $responseCreateFolder = $this->pdfApi->createFolder($src);
+        $this->assertNull($responseCreateFolder);
 
         $dest = $this->tempFolder . '/testFolderRenamed';
 
-        $response = $this->pdfApi->postMoveFolder($src, $dest);
-        $this->assertEquals(200, $response->getCode());
+        $response = $this->pdfApi->moveFolder($src, $dest);
+        $this->assertNull($response);
     }
 
     public function testDeleteFolder()
     {
         $path = $this->tempFolder . '/testFolder';
         
-        $responseCreateFolder = $this->pdfApi->putCreateFolder($path);
-        $this->assertEquals(200, $responseCreateFolder->getCode());
+        $responseCreateFolder = $this->pdfApi->createFolder($path);
+        $this->assertNull($responseCreateFolder);
 
 
         $response = $this->pdfApi->deleteFolder($path);
-        $this->assertEquals(200, $response->getCode());
+        $this->assertNull($response);
     }
 
-    public function testGetIsStorageExist()
+    public function testStorageExists()
     {
         $name = 'PDF-CI';
         
-        $response = $this->pdfApi->getIsStorageExist($name);
-        $this->assertEquals(200, $response->getCode());
+        $response = $this->pdfApi->storageExists($name);
+        $this->assertNotNull($response);
     }
 
-    public function testGetIsExist()
+    public function testObjectExists()
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
 
         $path = $this->tempFolder . '/' . $name; 
         
-        $response = $this->pdfApi->getIsExist($path);
-        $this->assertEquals(200, $response->getCode());
+        $response = $this->pdfApi->objectExists($path);
+        $this->assertNotNull($response);
     }
 
     public function testGetDiscUsage()
     {
         $response = $this->pdfApi->getDiscUsage();
-        $this->assertEquals(200, $response->getCode());
+        $this->assertNotNull($response);
     }
 
-    public function testGetListFileVersions()
+    public function testGetFileVersions()
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
 
         $path = $this->tempFolder . '/' . $name; 
         
-        $response = $this->pdfApi->getListFileVersions($path);
+        $response = $this->pdfApi->getFileVersions($path);
+        $this->assertNotNull($response);
+    }
+
+    // Bookmark tests
+
+    public function testGetDocumentBookmarks()
+    {
+        $name = 'PdfWithBookmarks.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentBookmarks($name, $this->tempFolder, null);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGeBookmarks()
+    {
+        $name = 'PdfWithBookmarks.pdf';
+        $bookmarkPath = '1';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getBookmarks($name, $bookmarkPath, $this->tempFolder, null);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetBookmark()
+    {
+        $name = 'PdfWithBookmarks.pdf';
+        $bookmarkPath = '1';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getBookmark($name, $bookmarkPath, $this->tempFolder, null);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeleteDocumentBookmarks()
+    {
+        $name = 'PdfWithBookmarks.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->deleteDocumentBookmarks($name, $this->tempFolder, null);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testDeleteBookmark()
+    {
+        $name = 'PdfWithBookmarks.pdf';
+        $bookmarkPath = '1';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->deleteBookmark($name, $bookmarkPath, $this->tempFolder, null);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostBookmark()
+    {
+        $name = 'PdfWithBookmarks.pdf';
+        $bookmarkPath = '1/1';
+        $this->uploadFile($name);
+
+        $bookmark = new Aspose\PDF\Model\Bookmark();
+        $bookmark->setAction("GoTo");
+        $bookmark->setBold(true);
+        $bookmark->setItalic(false);
+        $bookmark->setTitle("New Bookmark XYZ");
+        $bookmark->setPageDisplay("XYZ");
+        $bookmark->setPageDisplayBottom(10);
+        $bookmark->setPageDisplayLeft(10);
+        $bookmark->setPageDisplayRight(10);
+        $bookmark->setPageDisplayTop(10);
+        $bookmark->setPageDisplayZoom(2);
+        $bookmark->setPageNumber(2);
+        $bookmark->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+
+        $response = $this->pdfApi->postBookmark($name, $bookmarkPath, [$bookmark], $this->tempFolder, null);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutBookmark()
+    {
+        $name = 'PdfWithBookmarks.pdf';
+        $bookmarkPath = '2';
+        $this->uploadFile($name);
+
+        $bookmark = new Aspose\PDF\Model\Bookmark();
+        $bookmark->setAction("GoTo");
+        $bookmark->setBold(true);
+        $bookmark->setItalic(false);
+        $bookmark->setTitle("New Bookmark XYZ");
+        $bookmark->setPageDisplay("XYZ");
+        $bookmark->setPageDisplayBottom(10);
+        $bookmark->setPageDisplayLeft(10);
+        $bookmark->setPageDisplayRight(10);
+        $bookmark->setPageDisplayTop(10);
+        $bookmark->setPageDisplayZoom(2);
+        $bookmark->setPageNumber(2);
+        $bookmark->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+
+        $response = $this->pdfApi->putBookmark($name, $bookmarkPath, $bookmark, $this->tempFolder, null);
         $this->assertEquals(200, $response->getCode());
     }
 }

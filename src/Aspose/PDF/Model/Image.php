@@ -203,6 +203,15 @@ class Image extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['width'] === null) {
+            $invalidProperties[] = "'width' can't be null";
+        }
+        if ($this->container['height'] === null) {
+            $invalidProperties[] = "'height' can't be null";
+        }
+        if ($this->container['page_number'] === null) {
+            $invalidProperties[] = "'page_number' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -218,6 +227,15 @@ class Image extends LinkElement
             return false;
         }
 
+        if ($this->container['width'] === null) {
+            return false;
+        }
+        if ($this->container['height'] === null) {
+            return false;
+        }
+        if ($this->container['page_number'] === null) {
+            return false;
+        }
         return true;
     }
 

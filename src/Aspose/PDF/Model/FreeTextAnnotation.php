@@ -197,6 +197,9 @@ class FreeTextAnnotation extends MarkupAnnotation
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['text_style'] === null) {
+            $invalidProperties[] = "'text_style' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -212,6 +215,9 @@ class FreeTextAnnotation extends MarkupAnnotation
             return false;
         }
 
+        if ($this->container['text_style'] === null) {
+            return false;
+        }
         return true;
     }
 

@@ -215,6 +215,9 @@ class Attachment extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['size'] === null) {
+            $invalidProperties[] = "'size' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -230,6 +233,9 @@ class Attachment extends LinkElement
             return false;
         }
 
+        if ($this->container['size'] === null) {
+            return false;
+        }
         return true;
     }
 

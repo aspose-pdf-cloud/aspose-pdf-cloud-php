@@ -191,6 +191,9 @@ class DocumentProperty extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['built_in'] === null) {
+            $invalidProperties[] = "'built_in' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -206,6 +209,9 @@ class DocumentProperty extends LinkElement
             return false;
         }
 
+        if ($this->container['built_in'] === null) {
+            return false;
+        }
         return true;
     }
 

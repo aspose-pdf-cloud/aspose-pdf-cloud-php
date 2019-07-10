@@ -245,6 +245,12 @@ class LineAnnotation extends MarkupAnnotation
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['starting'] === null) {
+            $invalidProperties[] = "'starting' can't be null";
+        }
+        if ($this->container['ending'] === null) {
+            $invalidProperties[] = "'ending' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -260,6 +266,12 @@ class LineAnnotation extends MarkupAnnotation
             return false;
         }
 
+        if ($this->container['starting'] === null) {
+            return false;
+        }
+        if ($this->container['ending'] === null) {
+            return false;
+        }
         return true;
     }
 

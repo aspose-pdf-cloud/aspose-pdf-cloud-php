@@ -22,9 +22,10 @@
 
 
 /**
- * FileExist Class 
+ * StorageFile Class 
  *
  * @category Class
+ * @description File or folder information
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -35,16 +36,16 @@ namespace Aspose\PDF\Model;
 use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class FileExist implements ModelInterface, ArrayAccess
+class StorageFile implements ModelInterface, ArrayAccess
 {
-    const DISCRIMINATOR = null;
+    const DISCRIMINATOR = 'Type';
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'FileExist';
+    protected static $swaggerModelName = 'StorageFile';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -52,8 +53,11 @@ class FileExist implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'is_exist' => 'bool',
-        'is_folder' => 'bool'
+        'name' => 'string',
+        'is_folder' => 'bool',
+        'modified_date' => '\DateTime',
+        'size' => 'int',
+        'path' => 'string'
     ];
 
     /**
@@ -62,8 +66,11 @@ class FileExist implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'is_exist' => null,
-        'is_folder' => null
+        'name' => null,
+        'is_folder' => null,
+        'modified_date' => 'date-time',
+        'size' => 'int64',
+        'path' => null
     ];
 
     /**
@@ -93,8 +100,11 @@ class FileExist implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'is_exist' => 'IsExist',
-        'is_folder' => 'IsFolder'
+        'name' => 'Name',
+        'is_folder' => 'IsFolder',
+        'modified_date' => 'ModifiedDate',
+        'size' => 'Size',
+        'path' => 'Path'
     ];
 
     /**
@@ -103,8 +113,11 @@ class FileExist implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'is_exist' => 'setIsExist',
-        'is_folder' => 'setIsFolder'
+        'name' => 'setName',
+        'is_folder' => 'setIsFolder',
+        'modified_date' => 'setModifiedDate',
+        'size' => 'setSize',
+        'path' => 'setPath'
     ];
 
     /**
@@ -113,8 +126,11 @@ class FileExist implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'is_exist' => 'getIsExist',
-        'is_folder' => 'getIsFolder'
+        'name' => 'getName',
+        'is_folder' => 'getIsFolder',
+        'modified_date' => 'getModifiedDate',
+        'size' => 'getSize',
+        'path' => 'getPath'
     ];
 
     /**
@@ -177,8 +193,15 @@ class FileExist implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['is_exist'] = isset($data['is_exist']) ? $data['is_exist'] : null;
+        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
         $this->container['is_folder'] = isset($data['is_folder']) ? $data['is_folder'] : null;
+        $this->container['modified_date'] = isset($data['modified_date']) ? $data['modified_date'] : null;
+        $this->container['size'] = isset($data['size']) ? $data['size'] : null;
+        $this->container['path'] = isset($data['path']) ? $data['path'] : null;
+
+        // Initialize discriminator property with the model name.
+        $discriminator = array_search('Type', self::$attributeMap);
+        $this->container[$discriminator] = static::$swaggerModelName;
     }
 
     /**
@@ -190,11 +213,11 @@ class FileExist implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['is_exist'] === null) {
-            $invalidProperties[] = "'is_exist' can't be null";
-        }
         if ($this->container['is_folder'] === null) {
             $invalidProperties[] = "'is_folder' can't be null";
+        }
+        if ($this->container['size'] === null) {
+            $invalidProperties[] = "'size' can't be null";
         }
         return $invalidProperties;
     }
@@ -208,10 +231,10 @@ class FileExist implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['is_exist'] === null) {
+        if ($this->container['is_folder'] === null) {
             return false;
         }
-        if ($this->container['is_folder'] === null) {
+        if ($this->container['size'] === null) {
             return false;
         }
         return true;
@@ -219,25 +242,25 @@ class FileExist implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets is_exist
+     * Gets name
      *
-     * @return bool
+     * @return string
      */
-    public function getIsExist()
+    public function getName()
     {
-        return $this->container['is_exist'];
+        return $this->container['name'];
     }
 
     /**
-     * Sets is_exist
+     * Sets name
      *
-     * @param bool $is_exist is_exist
+     * @param string $name File or folder name.
      *
      * @return $this
      */
-    public function setIsExist($is_exist)
+    public function setName($name)
     {
-        $this->container['is_exist'] = $is_exist;
+        $this->container['name'] = $name;
 
         return $this;
     }
@@ -255,13 +278,85 @@ class FileExist implements ModelInterface, ArrayAccess
     /**
      * Sets is_folder
      *
-     * @param bool $is_folder is_folder
+     * @param bool $is_folder True if it is a folder.
      *
      * @return $this
      */
     public function setIsFolder($is_folder)
     {
         $this->container['is_folder'] = $is_folder;
+
+        return $this;
+    }
+
+    /**
+     * Gets modified_date
+     *
+     * @return \DateTime
+     */
+    public function getModifiedDate()
+    {
+        return $this->container['modified_date'];
+    }
+
+    /**
+     * Sets modified_date
+     *
+     * @param \DateTime $modified_date File or folder last modified DateTime.
+     *
+     * @return $this
+     */
+    public function setModifiedDate($modified_date)
+    {
+        $this->container['modified_date'] = $modified_date;
+
+        return $this;
+    }
+
+    /**
+     * Gets size
+     *
+     * @return int
+     */
+    public function getSize()
+    {
+        return $this->container['size'];
+    }
+
+    /**
+     * Sets size
+     *
+     * @param int $size File or folder size.
+     *
+     * @return $this
+     */
+    public function setSize($size)
+    {
+        $this->container['size'] = $size;
+
+        return $this;
+    }
+
+    /**
+     * Gets path
+     *
+     * @return string
+     */
+    public function getPath()
+    {
+        return $this->container['path'];
+    }
+
+    /**
+     * Sets path
+     *
+     * @param string $path File or folder path.
+     *
+     * @return $this
+     */
+    public function setPath($path)
+    {
+        $this->container['path'] = $path;
 
         return $this;
     }

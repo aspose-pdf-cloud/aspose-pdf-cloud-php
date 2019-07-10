@@ -211,7 +211,7 @@ class WordCountResponse extends AsposeResponse
     /**
      * Sets words_per_page
      *
-     * @param \Aspose\PDF\Model\WordCount $words_per_page with words per page info.
+     * @param \Aspose\PDF\Model\WordCount $words_per_page WordCount with words per page info.
      *
      * @return $this
      */

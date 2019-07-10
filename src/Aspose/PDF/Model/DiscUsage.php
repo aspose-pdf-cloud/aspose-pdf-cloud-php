@@ -25,6 +25,7 @@
  * DiscUsage Class 
  *
  * @category Class
+ * @description Class for disc space information.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -231,7 +232,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
     /**
      * Sets used_size
      *
-     * @param int $used_size used_size
+     * @param int $used_size Application used disc space.
      *
      * @return $this
      */
@@ -255,7 +256,7 @@ class DiscUsage implements ModelInterface, ArrayAccess
     /**
      * Sets total_size
      *
-     * @param int $total_size total_size
+     * @param int $total_size Total disc space.
      *
      * @return $this
      */

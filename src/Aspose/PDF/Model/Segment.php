@@ -194,6 +194,10 @@ class Segment implements ModelInterface, ArrayAccess
         if ($this->container['value'] === null) {
             $invalidProperties[] = "'value' can't be null";
         }
+        if ((strlen($this->container['value']) < 1)) {
+            $invalidProperties[] = "invalid value for 'value', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -207,6 +211,9 @@ class Segment implements ModelInterface, ArrayAccess
     {
 
         if ($this->container['value'] === null) {
+            return false;
+        }
+        if (strlen($this->container['value']) < 1) {
             return false;
         }
         return true;
@@ -232,6 +239,11 @@ class Segment implements ModelInterface, ArrayAccess
      */
     public function setValue($value)
     {
+
+        if ((strlen($value) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $value when calling Segment., must be bigger than or equal to 1.');
+        }
+
         $this->container['value'] = $value;
 
         return $this;

@@ -25,6 +25,7 @@
  * FileVersion Class 
  *
  * @category Class
+ * @description File Version
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -33,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class FileVersion extends File 
+class FileVersion extends StorageFile 
 {
     const DISCRIMINATOR = null;
 
@@ -184,6 +185,9 @@ class FileVersion extends File
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['is_latest'] === null) {
+            $invalidProperties[] = "'is_latest' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -199,6 +203,9 @@ class FileVersion extends File
             return false;
         }
 
+        if ($this->container['is_latest'] === null) {
+            return false;
+        }
         return true;
     }
 
@@ -216,7 +223,7 @@ class FileVersion extends File
     /**
      * Sets version_id
      *
-     * @param string $version_id version_id
+     * @param string $version_id File Version ID.
      *
      * @return $this
      */
@@ -240,7 +247,7 @@ class FileVersion extends File
     /**
      * Sets is_latest
      *
-     * @param bool $is_latest is_latest
+     * @param bool $is_latest Specifies whether the file is (true) or is not (false) the latest version of an file.
      *
      * @return $this
      */

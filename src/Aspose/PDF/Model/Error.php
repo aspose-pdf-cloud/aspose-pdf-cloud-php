@@ -22,18 +22,21 @@
 
 
 /**
- * FileVersionsResponse Class 
+ * Error Class 
  *
  * @category Class
+ * @description Error
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
  */
 
 namespace Aspose\PDF\Model;
+
+use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class FileVersionsResponse extends AsposeResponse 
+class Error implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -42,7 +45,7 @@ class FileVersionsResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'FileVersionsResponse';
+    protected static $swaggerModelName = 'Error';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +53,10 @@ class FileVersionsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'file_versions' => '\Aspose\PDF\Model\FileVersion[]'
+        'code' => 'string',
+        'message' => 'string',
+        'description' => 'string',
+        'inner_error' => '\Aspose\PDF\Model\ErrorDetails'
     ];
 
     /**
@@ -59,7 +65,10 @@ class FileVersionsResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'file_versions' => null
+        'code' => null,
+        'message' => null,
+        'description' => null,
+        'inner_error' => null
     ];
 
     /**
@@ -69,7 +78,7 @@ class FileVersionsResponse extends AsposeResponse
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -79,7 +88,7 @@ class FileVersionsResponse extends AsposeResponse
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /**
@@ -89,7 +98,10 @@ class FileVersionsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_versions' => 'FileVersions'
+        'code' => 'Code',
+        'message' => 'Message',
+        'description' => 'Description',
+        'inner_error' => 'InnerError'
     ];
 
     /**
@@ -98,7 +110,10 @@ class FileVersionsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'file_versions' => 'setFileVersions'
+        'code' => 'setCode',
+        'message' => 'setMessage',
+        'description' => 'setDescription',
+        'inner_error' => 'setInnerError'
     ];
 
     /**
@@ -107,7 +122,10 @@ class FileVersionsResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'file_versions' => 'getFileVersions'
+        'code' => 'getCode',
+        'message' => 'getMessage',
+        'description' => 'getDescription',
+        'inner_error' => 'getInnerError'
     ];
 
     /**
@@ -118,7 +136,7 @@ class FileVersionsResponse extends AsposeResponse
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -128,7 +146,7 @@ class FileVersionsResponse extends AsposeResponse
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -138,7 +156,7 @@ class FileVersionsResponse extends AsposeResponse
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -155,6 +173,12 @@ class FileVersionsResponse extends AsposeResponse
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -164,9 +188,10 @@ class FileVersionsResponse extends AsposeResponse
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['file_versions'] = isset($data['file_versions']) ? $data['file_versions'] : null;
+        $this->container['code'] = isset($data['code']) ? $data['code'] : null;
+        $this->container['message'] = isset($data['message']) ? $data['message'] : null;
+        $this->container['description'] = isset($data['description']) ? $data['description'] : null;
+        $this->container['inner_error'] = isset($data['inner_error']) ? $data['inner_error'] : null;
     }
 
     /**
@@ -176,7 +201,7 @@ class FileVersionsResponse extends AsposeResponse
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
         return $invalidProperties;
     }
@@ -189,34 +214,103 @@ class FileVersionsResponse extends AsposeResponse
      */
     public function valid()
     {
-        if (!parent::valid()) {
-            return false;
-        }
 
         return true;
     }
 
 
     /**
-     * Gets file_versions
+     * Gets code
      *
-     * @return \Aspose\PDF\Model\FileVersion[]
+     * @return string
      */
-    public function getFileVersions()
+    public function getCode()
     {
-        return $this->container['file_versions'];
+        return $this->container['code'];
     }
 
     /**
-     * Sets file_versions
+     * Sets code
      *
-     * @param \Aspose\PDF\Model\FileVersion[] $file_versions file_versions
+     * @param string $code Code
      *
      * @return $this
      */
-    public function setFileVersions($file_versions)
+    public function setCode($code)
     {
-        $this->container['file_versions'] = $file_versions;
+        $this->container['code'] = $code;
+
+        return $this;
+    }
+
+    /**
+     * Gets message
+     *
+     * @return string
+     */
+    public function getMessage()
+    {
+        return $this->container['message'];
+    }
+
+    /**
+     * Sets message
+     *
+     * @param string $message Message
+     *
+     * @return $this
+     */
+    public function setMessage($message)
+    {
+        $this->container['message'] = $message;
+
+        return $this;
+    }
+
+    /**
+     * Gets description
+     *
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->container['description'];
+    }
+
+    /**
+     * Sets description
+     *
+     * @param string $description Description
+     *
+     * @return $this
+     */
+    public function setDescription($description)
+    {
+        $this->container['description'] = $description;
+
+        return $this;
+    }
+
+    /**
+     * Gets inner_error
+     *
+     * @return \Aspose\PDF\Model\ErrorDetails
+     */
+    public function getInnerError()
+    {
+        return $this->container['inner_error'];
+    }
+
+    /**
+     * Sets inner_error
+     *
+     * @param \Aspose\PDF\Model\ErrorDetails $inner_error Inner Error
+     *
+     * @return $this
+     */
+    public function setInnerError($inner_error)
+    {
+        $this->container['inner_error'] = $inner_error;
 
         return $this;
     }

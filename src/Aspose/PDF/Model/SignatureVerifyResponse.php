@@ -179,6 +179,9 @@ class SignatureVerifyResponse extends AsposeResponse
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['valid'] === null) {
+            $invalidProperties[] = "'valid' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -194,6 +197,9 @@ class SignatureVerifyResponse extends AsposeResponse
             return false;
         }
 
+        if ($this->container['valid'] === null) {
+            return false;
+        }
         return true;
     }
 

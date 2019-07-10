@@ -212,9 +212,17 @@ class TextReplace implements ModelInterface, ArrayAccess
         if ($this->container['old_value'] === null) {
             $invalidProperties[] = "'old_value' can't be null";
         }
+        if ((strlen($this->container['old_value']) < 1)) {
+            $invalidProperties[] = "invalid value for 'old_value', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['new_value'] === null) {
             $invalidProperties[] = "'new_value' can't be null";
         }
+        if ((strlen($this->container['new_value']) < 1)) {
+            $invalidProperties[] = "invalid value for 'new_value', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['regex'] === null) {
             $invalidProperties[] = "'regex' can't be null";
         }
@@ -233,7 +241,13 @@ class TextReplace implements ModelInterface, ArrayAccess
         if ($this->container['old_value'] === null) {
             return false;
         }
+        if (strlen($this->container['old_value']) < 1) {
+            return false;
+        }
         if ($this->container['new_value'] === null) {
+            return false;
+        }
+        if (strlen($this->container['new_value']) < 1) {
             return false;
         }
         if ($this->container['regex'] === null) {
@@ -262,6 +276,11 @@ class TextReplace implements ModelInterface, ArrayAccess
      */
     public function setOldValue($old_value)
     {
+
+        if ((strlen($old_value) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $old_value when calling TextReplace., must be bigger than or equal to 1.');
+        }
+
         $this->container['old_value'] = $old_value;
 
         return $this;
@@ -286,6 +305,11 @@ class TextReplace implements ModelInterface, ArrayAccess
      */
     public function setNewValue($new_value)
     {
+
+        if ((strlen($new_value) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $new_value when calling TextReplace., must be bigger than or equal to 1.');
+        }
+
         $this->container['new_value'] = $new_value;
 
         return $this;

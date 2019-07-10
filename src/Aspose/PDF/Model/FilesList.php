@@ -22,19 +22,21 @@
 
 
 /**
- * StampInfo Class 
+ * FilesList Class 
  *
  * @category Class
- * @description Provides stamp info.
+ * @description Files list
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
  */
 
 namespace Aspose\PDF\Model;
+
+use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class StampInfo extends LinkElement 
+class FilesList implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -43,7 +45,7 @@ class StampInfo extends LinkElement
       *
       * @var string
       */
-    protected static $swaggerModelName = 'StampInfo';
+    protected static $swaggerModelName = 'FilesList';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -51,13 +53,7 @@ class StampInfo extends LinkElement
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'id' => 'string',
-        'index_on_page' => 'int',
-        'page_index' => 'int',
-        'rect' => '\Aspose\PDF\Model\Rectangle',
-        'text' => 'string',
-        'visible' => 'bool',
-        'stamp_type' => '\Aspose\PDF\Model\StampType'
+        'value' => '\Aspose\PDF\Model\StorageFile[]'
     ];
 
     /**
@@ -66,13 +62,7 @@ class StampInfo extends LinkElement
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'id' => null,
-        'index_on_page' => 'int32',
-        'page_index' => 'int32',
-        'rect' => null,
-        'text' => null,
-        'visible' => null,
-        'stamp_type' => null
+        'value' => null
     ];
 
     /**
@@ -82,7 +72,7 @@ class StampInfo extends LinkElement
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -92,7 +82,7 @@ class StampInfo extends LinkElement
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /**
@@ -102,13 +92,7 @@ class StampInfo extends LinkElement
      * @var string[]
      */
     protected static $attributeMap = [
-        'id' => 'Id',
-        'index_on_page' => 'IndexOnPage',
-        'page_index' => 'PageIndex',
-        'rect' => 'Rect',
-        'text' => 'Text',
-        'visible' => 'Visible',
-        'stamp_type' => 'StampType'
+        'value' => 'Value'
     ];
 
     /**
@@ -117,13 +101,7 @@ class StampInfo extends LinkElement
      * @var string[]
      */
     protected static $setters = [
-        'id' => 'setId',
-        'index_on_page' => 'setIndexOnPage',
-        'page_index' => 'setPageIndex',
-        'rect' => 'setRect',
-        'text' => 'setText',
-        'visible' => 'setVisible',
-        'stamp_type' => 'setStampType'
+        'value' => 'setValue'
     ];
 
     /**
@@ -132,13 +110,7 @@ class StampInfo extends LinkElement
      * @var string[]
      */
     protected static $getters = [
-        'id' => 'getId',
-        'index_on_page' => 'getIndexOnPage',
-        'page_index' => 'getPageIndex',
-        'rect' => 'getRect',
-        'text' => 'getText',
-        'visible' => 'getVisible',
-        'stamp_type' => 'getStampType'
+        'value' => 'getValue'
     ];
 
     /**
@@ -149,7 +121,7 @@ class StampInfo extends LinkElement
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -159,7 +131,7 @@ class StampInfo extends LinkElement
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -169,7 +141,7 @@ class StampInfo extends LinkElement
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -186,6 +158,12 @@ class StampInfo extends LinkElement
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -195,15 +173,7 @@ class StampInfo extends LinkElement
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['index_on_page'] = isset($data['index_on_page']) ? $data['index_on_page'] : null;
-        $this->container['page_index'] = isset($data['page_index']) ? $data['page_index'] : null;
-        $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
-        $this->container['text'] = isset($data['text']) ? $data['text'] : null;
-        $this->container['visible'] = isset($data['visible']) ? $data['visible'] : null;
-        $this->container['stamp_type'] = isset($data['stamp_type']) ? $data['stamp_type'] : null;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
     }
 
     /**
@@ -213,11 +183,8 @@ class StampInfo extends LinkElement
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
-        if ($this->container['stamp_type'] === null) {
-            $invalidProperties[] = "'stamp_type' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -229,181 +196,31 @@ class StampInfo extends LinkElement
      */
     public function valid()
     {
-        if (!parent::valid()) {
-            return false;
-        }
 
-        if ($this->container['stamp_type'] === null) {
-            return false;
-        }
         return true;
     }
 
 
     /**
-     * Gets id
+     * Gets value
      *
-     * @return string
+     * @return \Aspose\PDF\Model\StorageFile[]
      */
-    public function getId()
+    public function getValue()
     {
-        return $this->container['id'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets id
+     * Sets value
      *
-     * @param string $id Gets ID of the stamp.
+     * @param \Aspose\PDF\Model\StorageFile[] $value Files and folders contained by folder StorageFile.
      *
      * @return $this
      */
-    public function setId($id)
+    public function setValue($value)
     {
-        $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets index_on_page
-     *
-     * @return int
-     */
-    public function getIndexOnPage()
-    {
-        return $this->container['index_on_page'];
-    }
-
-    /**
-     * Sets index_on_page
-     *
-     * @param int $index_on_page Gets index on page of the stamp.
-     *
-     * @return $this
-     */
-    public function setIndexOnPage($index_on_page)
-    {
-        $this->container['index_on_page'] = $index_on_page;
-
-        return $this;
-    }
-
-    /**
-     * Gets page_index
-     *
-     * @return int
-     */
-    public function getPageIndex()
-    {
-        return $this->container['page_index'];
-    }
-
-    /**
-     * Sets page_index
-     *
-     * @param int $page_index Gets PageIndex of the annotation.
-     *
-     * @return $this
-     */
-    public function setPageIndex($page_index)
-    {
-        $this->container['page_index'] = $page_index;
-
-        return $this;
-    }
-
-    /**
-     * Gets rect
-     *
-     * @return \Aspose\PDF\Model\Rectangle
-     */
-    public function getRect()
-    {
-        return $this->container['rect'];
-    }
-
-    /**
-     * Sets rect
-     *
-     * @param \Aspose\PDF\Model\Rectangle $rect Gets Rect of the annotation.
-     *
-     * @return $this
-     */
-    public function setRect($rect)
-    {
-        $this->container['rect'] = $rect;
-
-        return $this;
-    }
-
-    /**
-     * Gets text
-     *
-     * @return string
-     */
-    public function getText()
-    {
-        return $this->container['text'];
-    }
-
-    /**
-     * Sets text
-     *
-     * @param string $text Get the text content.
-     *
-     * @return $this
-     */
-    public function setText($text)
-    {
-        $this->container['text'] = $text;
-
-        return $this;
-    }
-
-    /**
-     * Gets visible
-     *
-     * @return bool
-     */
-    public function getVisible()
-    {
-        return $this->container['visible'];
-    }
-
-    /**
-     * Sets visible
-     *
-     * @param bool $visible Gets the stamp is visible.
-     *
-     * @return $this
-     */
-    public function setVisible($visible)
-    {
-        $this->container['visible'] = $visible;
-
-        return $this;
-    }
-
-    /**
-     * Gets stamp_type
-     *
-     * @return \Aspose\PDF\Model\StampType
-     */
-    public function getStampType()
-    {
-        return $this->container['stamp_type'];
-    }
-
-    /**
-     * Sets stamp_type
-     *
-     * @param \Aspose\PDF\Model\StampType $stamp_type Gets stamp type.
-     *
-     * @return $this
-     */
-    public function setStampType($stamp_type)
-    {
-        $this->container['stamp_type'] = $stamp_type;
+        $this->container['value'] = $value;
 
         return $this;
     }

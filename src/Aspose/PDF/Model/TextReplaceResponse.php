@@ -179,6 +179,9 @@ class TextReplaceResponse extends AsposeResponse
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['matches'] === null) {
+            $invalidProperties[] = "'matches' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -194,6 +197,9 @@ class TextReplaceResponse extends AsposeResponse
             return false;
         }
 
+        if ($this->container['matches'] === null) {
+            return false;
+        }
         return true;
     }
 
