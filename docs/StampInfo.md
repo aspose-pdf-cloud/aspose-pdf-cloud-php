@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Gets Rect of the annotation. | [optional]
 **text** | **string** | Get the text content. | [optional]
 **visible** | **bool** | Gets the stamp is visible. | [optional]
-**stamp_type** | [**\Aspose\PDF\Model\StampType**](StampType.md) | Gets stamp type. | [optional]
+**stamp_type** | [**\Aspose\PDF\Model\StampType**](StampType.md) | Gets stamp type. | 
 **links** | [**\Aspose\PDF\Model\Link[]**](Link.md) | Link to the document.<br />*Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)* | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md) [[View Source]](../src/Aspose/PDF/Model/StampInfo.php)

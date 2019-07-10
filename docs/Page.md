@@ -5,7 +5,7 @@ Provides link to page.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**id** | **int** | Page's id. | [optional]
+**id** | **int** | Page's id. | 
 **images** | [**\Aspose\PDF\Model\Images**](Images.md) | Page's images | [optional]
 **rectangle** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Page's rectangle | [optional]
 **links** | [**\Aspose\PDF\Model\Link[]**](Link.md) | Link to the document.<br />*Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)* | [optional]

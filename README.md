@@ -432,7 +432,7 @@ Class | Description
 [**Document**](docs/Document.md) | Represents document DTO.
 [**DocumentPageResponse**](docs/DocumentPageResponse.md) | Represents response containing single page info
 [**DocumentPagesResponse**](docs/DocumentPagesResponse.md) | Represents response containing multiple pages info
-[**DocumentPrivilege**](docs/DocumentPrivilege.md) | Represents the privileges for accessing Pdf file./&gt;.
+[**DocumentPrivilege**](docs/DocumentPrivilege.md) | Represents the privileges for accessing Pdf file.
 [**DocumentProperties**](docs/DocumentProperties.md) | Represents list of PDF document properties.
 [**DocumentPropertiesResponse**](docs/DocumentPropertiesResponse.md) | Represents response containing multiple document properties info
 [**DocumentProperty**](docs/DocumentProperty.md) | Pdf document property.

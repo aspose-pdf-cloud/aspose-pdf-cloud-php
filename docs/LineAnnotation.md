@@ -5,9 +5,9 @@ Provides LineAnnotation.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**starting** | [**\Aspose\PDF\Model\Point**](Point.md) | Gets or sets starting point of line. | [optional]
+**starting** | [**\Aspose\PDF\Model\Point**](Point.md) | Gets or sets starting point of line. | 
 **starting_style** | [**\Aspose\PDF\Model\LineEnding**](LineEnding.md) | Gets or sets line ending style for line starting point. | [optional]
-**ending** | [**\Aspose\PDF\Model\Point**](Point.md) | Gets or sets ending point of line. | [optional]
+**ending** | [**\Aspose\PDF\Model\Point**](Point.md) | Gets or sets ending point of line. | 
 **ending_style** | [**\Aspose\PDF\Model\LineEnding**](LineEnding.md) | Gets or sets ending style for end point of line. | [optional]
 **interior_color** | [**\Aspose\PDF\Model\Color**](Color.md) | Gets or sets interior color of the annotation. | [optional]
 **leader_line** | **double** | Gets or sets leader line length. | [optional]
@@ -27,7 +27,7 @@ Name | Type | Description | Notes
 **id** | **string** | Gets ID of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **flags** | [**\Aspose\PDF\Model\AnnotationFlags[]**](AnnotationFlags.md) | Gets Flags of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **name** | **string** | Gets Name of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
-**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Gets Rect of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
+**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Gets Rect of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | 
 **page_index** | **int** | Gets PageIndex of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **z_index** | **int** | Gets ZIndex of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **horizontal_alignment** | [**\Aspose\PDF\Model\HorizontalAlignment**](HorizontalAlignment.md) | Gets HorizontalAlignment of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
