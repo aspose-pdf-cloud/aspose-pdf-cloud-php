@@ -22,9 +22,10 @@
 
 
 /**
- * FilesResponse Class 
+ * Bookmarks Class 
  *
  * @category Class
+ * @description Represents list of bookmark.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -33,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class FilesResponse extends AsposeResponse 
+class Bookmarks extends LinkElement 
 {
     const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class FilesResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'FilesResponse';
+    protected static $swaggerModelName = 'Bookmarks';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +51,7 @@ class FilesResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'files' => '\Aspose\PDF\Model\File[]'
+        'list' => '\Aspose\PDF\Model\Bookmark[]'
     ];
 
     /**
@@ -59,7 +60,7 @@ class FilesResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'files' => null
+        'list' => null
     ];
 
     /**
@@ -89,7 +90,7 @@ class FilesResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'files' => 'Files'
+        'list' => 'List'
     ];
 
     /**
@@ -98,7 +99,7 @@ class FilesResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'files' => 'setFiles'
+        'list' => 'setList'
     ];
 
     /**
@@ -107,7 +108,7 @@ class FilesResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'files' => 'getFiles'
+        'list' => 'getList'
     ];
 
     /**
@@ -166,7 +167,7 @@ class FilesResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['files'] = isset($data['files']) ? $data['files'] : null;
+        $this->container['list'] = isset($data['list']) ? $data['list'] : null;
     }
 
     /**
@@ -198,25 +199,25 @@ class FilesResponse extends AsposeResponse
 
 
     /**
-     * Gets files
+     * Gets list
      *
-     * @return \Aspose\PDF\Model\File[]
+     * @return \Aspose\PDF\Model\Bookmark[]
      */
-    public function getFiles()
+    public function getList()
     {
-        return $this->container['files'];
+        return $this->container['list'];
     }
 
     /**
-     * Sets files
+     * Sets list
      *
-     * @param \Aspose\PDF\Model\File[] $files files
+     * @param \Aspose\PDF\Model\Bookmark[] $list List of bookmarks.
      *
      * @return $this
      */
-    public function setFiles($files)
+    public function setList($list)
     {
-        $this->container['files'] = $files;
+        $this->container['list'] = $list;
 
         return $this;
     }

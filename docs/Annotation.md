@@ -11,7 +11,7 @@ Name | Type | Description | Notes
 **id** | **string** | Gets ID of the annotation. | [optional]
 **flags** | [**\Aspose\PDF\Model\AnnotationFlags[]**](AnnotationFlags.md) | Gets Flags of the annotation. | [optional]
 **name** | **string** | Gets Name of the annotation. | [optional]
-**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Gets Rect of the annotation. | 
+**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Gets Rect of the annotation. | [optional]
 **page_index** | **int** | Gets PageIndex of the annotation. | [optional]
 **z_index** | **int** | Gets ZIndex of the annotation. | [optional]
 **horizontal_alignment** | [**\Aspose\PDF\Model\HorizontalAlignment**](HorizontalAlignment.md) | Gets HorizontalAlignment of the annotation. | [optional]

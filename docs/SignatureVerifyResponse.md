@@ -5,7 +5,7 @@ Represent responce containing signature verification result
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**valid** | **bool** | True if signature is valid and false if not | 
+**valid** | **bool** | True if signature is valid and false if not | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

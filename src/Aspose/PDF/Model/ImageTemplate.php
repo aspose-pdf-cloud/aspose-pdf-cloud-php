@@ -236,6 +236,10 @@ class ImageTemplate implements ModelInterface, ArrayAccess
         if ($this->container['image_path'] === null) {
             $invalidProperties[] = "'image_path' can't be null";
         }
+        if ((strlen($this->container['image_path']) < 1)) {
+            $invalidProperties[] = "invalid value for 'image_path', the character length must be bigger than or equal to 1.";
+        }
+
         if ($this->container['image_src_type'] === null) {
             $invalidProperties[] = "'image_src_type' can't be null";
         }
@@ -252,6 +256,9 @@ class ImageTemplate implements ModelInterface, ArrayAccess
     {
 
         if ($this->container['image_path'] === null) {
+            return false;
+        }
+        if (strlen($this->container['image_path']) < 1) {
             return false;
         }
         if ($this->container['image_src_type'] === null) {
@@ -280,6 +287,11 @@ class ImageTemplate implements ModelInterface, ArrayAccess
      */
     public function setImagePath($image_path)
     {
+
+        if ((strlen($image_path) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $image_path when calling ImageTemplate., must be bigger than or equal to 1.');
+        }
+
         $this->container['image_path'] = $image_path;
 
         return $this;

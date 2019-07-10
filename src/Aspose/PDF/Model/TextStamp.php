@@ -301,7 +301,7 @@ class TextStamp extends StampBase
     /**
      * Sets text_state
      *
-     * @param \Aspose\PDF\Model\TextState $text_state Gets text properties of the stamp. See  for details.
+     * @param \Aspose\PDF\Model\TextState $text_state Gets text properties of the stamp. See TextState for details.
      *
      * @return $this
      */

@@ -25,7 +25,7 @@
  * DocumentPrivilege Class 
  *
  * @category Class
- * @description Represents the privileges for accessing Pdf file./&gt;.
+ * @description Represents the privileges for accessing Pdf file./&amp;gt;.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php

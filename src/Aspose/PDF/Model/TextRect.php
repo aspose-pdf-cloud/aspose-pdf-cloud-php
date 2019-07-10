@@ -376,7 +376,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Sets position
      *
-     * @param \Aspose\PDF\Model\Position $position Gets or sets text position for text, represented with  object.
+     * @param \Aspose\PDF\Model\Position $position Gets or sets text position for text, represented with TextRect object.
      *
      * @return $this
      */
@@ -400,7 +400,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Sets baseline_position
      *
-     * @param \Aspose\PDF\Model\Position $baseline_position Gets text position for text, represented with  object. The YIndent of the Position structure represents baseline coordinate of the text fragment.
+     * @param \Aspose\PDF\Model\Position $baseline_position Gets text position for text, represented with TextRect object. The YIndent of the Position structure represents baseline coordinate of the text fragment.
      *
      * @return $this
      */
@@ -424,7 +424,7 @@ class TextRect implements ModelInterface, ArrayAccess
     /**
      * Sets text_state
      *
-     * @param \Aspose\PDF\Model\TextState $text_state Gets or sets text state for the text that  object represents.
+     * @param \Aspose\PDF\Model\TextState $text_state Gets or sets text state for the text that TextRect object represents.
      *
      * @return $this
      */

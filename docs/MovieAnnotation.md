@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 **id** | **string** | Gets ID of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **flags** | [**\Aspose\PDF\Model\AnnotationFlags[]**](AnnotationFlags.md) | Gets Flags of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **name** | **string** | Gets Name of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
-**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Gets Rect of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | 
+**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Gets Rect of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **page_index** | **int** | Gets PageIndex of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **z_index** | **int** | Gets ZIndex of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **horizontal_alignment** | [**\Aspose\PDF\Model\HorizontalAlignment**](HorizontalAlignment.md) | Gets HorizontalAlignment of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]

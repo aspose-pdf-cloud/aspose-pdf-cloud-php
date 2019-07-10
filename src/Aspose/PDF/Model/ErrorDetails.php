@@ -22,18 +22,21 @@
 
 
 /**
- * FileExistResponse Class 
+ * ErrorDetails Class 
  *
  * @category Class
+ * @description The error details
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
  */
 
 namespace Aspose\PDF\Model;
+
+use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class FileExistResponse extends AsposeResponse 
+class ErrorDetails implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -42,7 +45,7 @@ class FileExistResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'FileExistResponse';
+    protected static $swaggerModelName = 'ErrorDetails';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +53,8 @@ class FileExistResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'file_exist' => '\Aspose\PDF\Model\FileExist'
+        'request_id' => 'string',
+        'date' => '\DateTime'
     ];
 
     /**
@@ -59,7 +63,8 @@ class FileExistResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'file_exist' => null
+        'request_id' => null,
+        'date' => 'date-time'
     ];
 
     /**
@@ -69,7 +74,7 @@ class FileExistResponse extends AsposeResponse
      */
     public static function swaggerTypes()
     {
-        return self::$swaggerTypes + parent::swaggerTypes();
+        return self::$swaggerTypes;
     }
 
     /**
@@ -79,7 +84,7 @@ class FileExistResponse extends AsposeResponse
      */
     public static function swaggerFormats()
     {
-        return self::$swaggerFormats + parent::swaggerFormats();
+        return self::$swaggerFormats;
     }
 
     /**
@@ -89,7 +94,8 @@ class FileExistResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'file_exist' => 'FileExist'
+        'request_id' => 'RequestId',
+        'date' => 'Date'
     ];
 
     /**
@@ -98,7 +104,8 @@ class FileExistResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'file_exist' => 'setFileExist'
+        'request_id' => 'setRequestId',
+        'date' => 'setDate'
     ];
 
     /**
@@ -107,7 +114,8 @@ class FileExistResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'file_exist' => 'getFileExist'
+        'request_id' => 'getRequestId',
+        'date' => 'getDate'
     ];
 
     /**
@@ -118,7 +126,7 @@ class FileExistResponse extends AsposeResponse
      */
     public static function attributeMap()
     {
-        return parent::attributeMap() + self::$attributeMap;
+        return self::$attributeMap;
     }
 
     /**
@@ -128,7 +136,7 @@ class FileExistResponse extends AsposeResponse
      */
     public static function setters()
     {
-        return parent::setters() + self::$setters;
+        return self::$setters;
     }
 
     /**
@@ -138,7 +146,7 @@ class FileExistResponse extends AsposeResponse
      */
     public static function getters()
     {
-        return parent::getters() + self::$getters;
+        return self::$getters;
     }
 
     /**
@@ -155,6 +163,12 @@ class FileExistResponse extends AsposeResponse
 
     
 
+    /**
+     * Associative array for storing property values
+     *
+     * @var mixed[]
+     */
+    protected $container = [];
 
     /**
      * Constructor
@@ -164,9 +178,8 @@ class FileExistResponse extends AsposeResponse
      */
     public function __construct(array $data = null)
     {
-        parent::__construct($data);
-
-        $this->container['file_exist'] = isset($data['file_exist']) ? $data['file_exist'] : null;
+        $this->container['request_id'] = isset($data['request_id']) ? $data['request_id'] : null;
+        $this->container['date'] = isset($data['date']) ? $data['date'] : null;
     }
 
     /**
@@ -176,8 +189,11 @@ class FileExistResponse extends AsposeResponse
      */
     public function listInvalidProperties()
     {
-        $invalidProperties = parent::listInvalidProperties();
+        $invalidProperties = [];
 
+        if ($this->container['date'] === null) {
+            $invalidProperties[] = "'date' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -189,34 +205,58 @@ class FileExistResponse extends AsposeResponse
      */
     public function valid()
     {
-        if (!parent::valid()) {
+
+        if ($this->container['date'] === null) {
             return false;
         }
-
         return true;
     }
 
 
     /**
-     * Gets file_exist
+     * Gets request_id
      *
-     * @return \Aspose\PDF\Model\FileExist
+     * @return string
      */
-    public function getFileExist()
+    public function getRequestId()
     {
-        return $this->container['file_exist'];
+        return $this->container['request_id'];
     }
 
     /**
-     * Sets file_exist
+     * Sets request_id
      *
-     * @param \Aspose\PDF\Model\FileExist $file_exist file_exist
+     * @param string $request_id The request id
      *
      * @return $this
      */
-    public function setFileExist($file_exist)
+    public function setRequestId($request_id)
     {
-        $this->container['file_exist'] = $file_exist;
+        $this->container['request_id'] = $request_id;
+
+        return $this;
+    }
+
+    /**
+     * Gets date
+     *
+     * @return \DateTime
+     */
+    public function getDate()
+    {
+        return $this->container['date'];
+    }
+
+    /**
+     * Sets date
+     *
+     * @param \DateTime $date Date
+     *
+     * @return $this
+     */
+    public function setDate($date)
+    {
+        $this->container['date'] = $date;
 
         return $this;
     }

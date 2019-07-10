@@ -191,6 +191,9 @@ class Page extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -206,6 +209,9 @@ class Page extends LinkElement
             return false;
         }
 
+        if ($this->container['id'] === null) {
+            return false;
+        }
         return true;
     }
 

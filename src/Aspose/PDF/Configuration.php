@@ -53,19 +53,12 @@ class Configuration
      */
     protected $accessToken = '';
 
-    /*
-     * Refresh token for OAuth
-     *
-     * @var string
-     */
-    protected $refreshToken = '';
-
     /**
      * The host
      *
      * @var string
      */
-    protected $host = 'https://api.aspose.cloud/v2.0';
+    protected $host = 'https://api.aspose.cloud/v3.0';
 
     /*
      * AppKey for API
@@ -180,29 +173,6 @@ class Configuration
     public function getAccessToken()
     {
         return $this->accessToken;
-    }
-
-    /*
-     * Sets the refresh token for OAuth
-     *
-     * @param string $refreshToken Token for OAuth
-     *
-     * @return $this
-     */
-    public function setRefreshToken($refreshToken)
-    {
-        $this->refreshToken = $refreshToken;
-        return $this;
-    }
-
-    /*
-     * Gets the refresh token for OAuth
-     *
-     * @return string refresh token for OAuth
-     */
-    public function getRefreshToken()
-    {
-        return $this->refreshToken;
     }
 
     /**
@@ -361,8 +331,8 @@ class Configuration
         $report  = 'PHP SDK (Aspose\PDF) Debug Report:' . PHP_EOL;
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
-        $report .= '    OpenAPI Spec Version: 2.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 19.5.0' . PHP_EOL;
+        $report .= '    OpenAPI Spec Version: 3.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 19.6.0' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

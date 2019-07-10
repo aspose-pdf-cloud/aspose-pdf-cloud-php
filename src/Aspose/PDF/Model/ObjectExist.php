@@ -22,10 +22,10 @@
 
 
 /**
- * AppendDocument Class 
+ * ObjectExist Class 
  *
  * @category Class
- * @description Class for appendDocument service request building.
+ * @description Object exists
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -36,7 +36,7 @@ namespace Aspose\PDF\Model;
 use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class AppendDocument implements ModelInterface, ArrayAccess
+class ObjectExist implements ModelInterface, ArrayAccess
 {
     const DISCRIMINATOR = null;
 
@@ -45,7 +45,7 @@ class AppendDocument implements ModelInterface, ArrayAccess
       *
       * @var string
       */
-    protected static $swaggerModelName = 'AppendDocument';
+    protected static $swaggerModelName = 'ObjectExist';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -53,9 +53,8 @@ class AppendDocument implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'document' => 'string',
-        'start_page' => 'int',
-        'end_page' => 'int'
+        'exists' => 'bool',
+        'is_folder' => 'bool'
     ];
 
     /**
@@ -64,9 +63,8 @@ class AppendDocument implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'document' => null,
-        'start_page' => 'int32',
-        'end_page' => 'int32'
+        'exists' => null,
+        'is_folder' => null
     ];
 
     /**
@@ -96,9 +94,8 @@ class AppendDocument implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'document' => 'Document',
-        'start_page' => 'StartPage',
-        'end_page' => 'EndPage'
+        'exists' => 'Exists',
+        'is_folder' => 'IsFolder'
     ];
 
     /**
@@ -107,9 +104,8 @@ class AppendDocument implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'document' => 'setDocument',
-        'start_page' => 'setStartPage',
-        'end_page' => 'setEndPage'
+        'exists' => 'setExists',
+        'is_folder' => 'setIsFolder'
     ];
 
     /**
@@ -118,9 +114,8 @@ class AppendDocument implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'document' => 'getDocument',
-        'start_page' => 'getStartPage',
-        'end_page' => 'getEndPage'
+        'exists' => 'getExists',
+        'is_folder' => 'getIsFolder'
     ];
 
     /**
@@ -183,9 +178,8 @@ class AppendDocument implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['document'] = isset($data['document']) ? $data['document'] : null;
-        $this->container['start_page'] = isset($data['start_page']) ? $data['start_page'] : null;
-        $this->container['end_page'] = isset($data['end_page']) ? $data['end_page'] : null;
+        $this->container['exists'] = isset($data['exists']) ? $data['exists'] : null;
+        $this->container['is_folder'] = isset($data['is_folder']) ? $data['is_folder'] : null;
     }
 
     /**
@@ -197,14 +191,11 @@ class AppendDocument implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['document'] === null) {
-            $invalidProperties[] = "'document' can't be null";
+        if ($this->container['exists'] === null) {
+            $invalidProperties[] = "'exists' can't be null";
         }
-        if ($this->container['start_page'] === null) {
-            $invalidProperties[] = "'start_page' can't be null";
-        }
-        if ($this->container['end_page'] === null) {
-            $invalidProperties[] = "'end_page' can't be null";
+        if ($this->container['is_folder'] === null) {
+            $invalidProperties[] = "'is_folder' can't be null";
         }
         return $invalidProperties;
     }
@@ -218,13 +209,10 @@ class AppendDocument implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['document'] === null) {
+        if ($this->container['exists'] === null) {
             return false;
         }
-        if ($this->container['start_page'] === null) {
-            return false;
-        }
-        if ($this->container['end_page'] === null) {
+        if ($this->container['is_folder'] === null) {
             return false;
         }
         return true;
@@ -232,73 +220,49 @@ class AppendDocument implements ModelInterface, ArrayAccess
 
 
     /**
-     * Gets document
+     * Gets exists
      *
-     * @return string
+     * @return bool
      */
-    public function getDocument()
+    public function getExists()
     {
-        return $this->container['document'];
+        return $this->container['exists'];
     }
 
     /**
-     * Sets document
+     * Sets exists
      *
-     * @param string $document Document to append (server path).
+     * @param bool $exists Indicates that the file or folder exists.
      *
      * @return $this
      */
-    public function setDocument($document)
+    public function setExists($exists)
     {
-        $this->container['document'] = $document;
+        $this->container['exists'] = $exists;
 
         return $this;
     }
 
     /**
-     * Gets start_page
+     * Gets is_folder
      *
-     * @return int
+     * @return bool
      */
-    public function getStartPage()
+    public function getIsFolder()
     {
-        return $this->container['start_page'];
+        return $this->container['is_folder'];
     }
 
     /**
-     * Sets start_page
+     * Sets is_folder
      *
-     * @param int $start_page Appending start page.
+     * @param bool $is_folder True if it is a folder, false if it is a file.
      *
      * @return $this
      */
-    public function setStartPage($start_page)
+    public function setIsFolder($is_folder)
     {
-        $this->container['start_page'] = $start_page;
-
-        return $this;
-    }
-
-    /**
-     * Gets end_page
-     *
-     * @return int
-     */
-    public function getEndPage()
-    {
-        return $this->container['end_page'];
-    }
-
-    /**
-     * Sets end_page
-     *
-     * @param int $end_page Appending end page.
-     *
-     * @return $this
-     */
-    public function setEndPage($end_page)
-    {
-        $this->container['end_page'] = $end_page;
+        $this->container['is_folder'] = $is_folder;
 
         return $this;
     }

@@ -219,7 +219,7 @@ class CellRecognized implements ModelInterface, ArrayAccess
     /**
      * Sets text_rects
      *
-     * @param \Aspose\PDF\Model\TextRects $text_rects Gets collection of  objects that describes text containing in the cell
+     * @param \Aspose\PDF\Model\TextRects $text_rects Gets collection of TextRect objects that describes text containing in the cell
      *
      * @return $this
      */

@@ -262,7 +262,7 @@ class TextReplaceListRequest implements ModelInterface, ArrayAccess
     /**
      * Sets default_font
      *
-     * @param string $default_font default_font
+     * @param string $default_font Name of font to use if requested font is not embedded into document.
      *
      * @return $this
      */

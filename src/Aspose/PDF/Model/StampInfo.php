@@ -215,6 +215,9 @@ class StampInfo extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['stamp_type'] === null) {
+            $invalidProperties[] = "'stamp_type' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -230,6 +233,9 @@ class StampInfo extends LinkElement
             return false;
         }
 
+        if ($this->container['stamp_type'] === null) {
+            return false;
+        }
         return true;
     }
 

@@ -298,7 +298,7 @@ class GraphInfo implements ModelInterface, ArrayAccess
     /**
      * Sets color
      *
-     * @param \Aspose\PDF\Model\Color $color Gets or sets a  object that indicates the color of the graph.
+     * @param \Aspose\PDF\Model\Color $color Gets or sets a Color object that indicates the color of the graph.
      *
      * @return $this
      */
@@ -370,7 +370,7 @@ class GraphInfo implements ModelInterface, ArrayAccess
     /**
      * Sets fill_color
      *
-     * @param \Aspose\PDF\Model\Color $fill_color Gets or sets a  object that indicates the fill color of the graph.
+     * @param \Aspose\PDF\Model\Color $fill_color Gets or sets a Color object that indicates the fill color of the graph.
      *
      * @return $this
      */

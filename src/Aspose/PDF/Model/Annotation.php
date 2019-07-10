@@ -239,6 +239,9 @@ class Annotation extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['rect'] === null) {
+            $invalidProperties[] = "'rect' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -254,6 +257,9 @@ class Annotation extends LinkElement
             return false;
         }
 
+        if ($this->container['rect'] === null) {
+            return false;
+        }
         return true;
     }
 

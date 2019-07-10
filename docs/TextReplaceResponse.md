@@ -5,7 +5,7 @@ Represents response containing the result of text replacement
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**matches** | **int** | Number of matches | 
+**matches** | **int** | Number of matches | [optional]
 **code** | **int** | Response status code.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | 
 **status** | **string** | Response status.<br />*Inherited from [\Aspose\PDF\Model\AsposeResponse](AsposeResponse.md)* | [optional]
 

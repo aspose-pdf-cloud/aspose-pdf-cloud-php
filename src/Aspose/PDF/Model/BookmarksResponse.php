@@ -22,9 +22,10 @@
 
 
 /**
- * StorageExistResponse Class 
+ * BookmarksResponse Class 
  *
  * @category Class
+ * @description Represents response containing multiple bookmarks info
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -33,7 +34,7 @@
 namespace Aspose\PDF\Model;
 use \Aspose\PDF\ObjectSerializer;
 
-class StorageExistResponse extends AsposeResponse 
+class BookmarksResponse extends AsposeResponse 
 {
     const DISCRIMINATOR = null;
 
@@ -42,7 +43,7 @@ class StorageExistResponse extends AsposeResponse
       *
       * @var string
       */
-    protected static $swaggerModelName = 'StorageExistResponse';
+    protected static $swaggerModelName = 'BookmarksResponse';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -50,7 +51,7 @@ class StorageExistResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'is_exist' => 'bool'
+        'bookmarks' => '\Aspose\PDF\Model\Bookmarks'
     ];
 
     /**
@@ -59,7 +60,7 @@ class StorageExistResponse extends AsposeResponse
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'is_exist' => null
+        'bookmarks' => null
     ];
 
     /**
@@ -89,7 +90,7 @@ class StorageExistResponse extends AsposeResponse
      * @var string[]
      */
     protected static $attributeMap = [
-        'is_exist' => 'IsExist'
+        'bookmarks' => 'Bookmarks'
     ];
 
     /**
@@ -98,7 +99,7 @@ class StorageExistResponse extends AsposeResponse
      * @var string[]
      */
     protected static $setters = [
-        'is_exist' => 'setIsExist'
+        'bookmarks' => 'setBookmarks'
     ];
 
     /**
@@ -107,7 +108,7 @@ class StorageExistResponse extends AsposeResponse
      * @var string[]
      */
     protected static $getters = [
-        'is_exist' => 'getIsExist'
+        'bookmarks' => 'getBookmarks'
     ];
 
     /**
@@ -166,7 +167,7 @@ class StorageExistResponse extends AsposeResponse
     {
         parent::__construct($data);
 
-        $this->container['is_exist'] = isset($data['is_exist']) ? $data['is_exist'] : null;
+        $this->container['bookmarks'] = isset($data['bookmarks']) ? $data['bookmarks'] : null;
     }
 
     /**
@@ -198,25 +199,25 @@ class StorageExistResponse extends AsposeResponse
 
 
     /**
-     * Gets is_exist
+     * Gets bookmarks
      *
-     * @return bool
+     * @return \Aspose\PDF\Model\Bookmarks
      */
-    public function getIsExist()
+    public function getBookmarks()
     {
-        return $this->container['is_exist'];
+        return $this->container['bookmarks'];
     }
 
     /**
-     * Sets is_exist
+     * Sets bookmarks
      *
-     * @param bool $is_exist is_exist
+     * @param \Aspose\PDF\Model\Bookmarks $bookmarks Bookmarks object
      *
      * @return $this
      */
-    public function setIsExist($is_exist)
+    public function setBookmarks($bookmarks)
     {
-        $this->container['is_exist'] = $is_exist;
+        $this->container['bookmarks'] = $bookmarks;
 
         return $this;
     }

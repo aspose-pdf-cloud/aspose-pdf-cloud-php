@@ -22,10 +22,10 @@
 
 
 /**
- * File Class 
+ * FileVersions Class 
  *
  * @category Class
- * @description Represents file DTO.
+ * @description File versions FileVersion.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
@@ -36,16 +36,16 @@ namespace Aspose\PDF\Model;
 use \ArrayAccess;
 use \Aspose\PDF\ObjectSerializer;
 
-class File implements ModelInterface, ArrayAccess
+class FileVersions implements ModelInterface, ArrayAccess
 {
-    const DISCRIMINATOR = 'Type';
+    const DISCRIMINATOR = null;
 
     /**
       * The original name of the model.
       *
       * @var string
       */
-    protected static $swaggerModelName = 'File';
+    protected static $swaggerModelName = 'FileVersions';
 
     /**
       * Array of property to type mappings. Used for (de)serialization
@@ -53,11 +53,7 @@ class File implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'name' => 'string',
-        'is_folder' => 'bool',
-        'modified_date' => '\DateTime',
-        'size' => 'int',
-        'path' => 'string'
+        'value' => '\Aspose\PDF\Model\FileVersion[]'
     ];
 
     /**
@@ -66,11 +62,7 @@ class File implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'name' => null,
-        'is_folder' => null,
-        'modified_date' => 'date-time',
-        'size' => 'int64',
-        'path' => null
+        'value' => null
     ];
 
     /**
@@ -100,11 +92,7 @@ class File implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'name' => 'Name',
-        'is_folder' => 'IsFolder',
-        'modified_date' => 'ModifiedDate',
-        'size' => 'Size',
-        'path' => 'Path'
+        'value' => 'Value'
     ];
 
     /**
@@ -113,11 +101,7 @@ class File implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
-        'name' => 'setName',
-        'is_folder' => 'setIsFolder',
-        'modified_date' => 'setModifiedDate',
-        'size' => 'setSize',
-        'path' => 'setPath'
+        'value' => 'setValue'
     ];
 
     /**
@@ -126,11 +110,7 @@ class File implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
-        'name' => 'getName',
-        'is_folder' => 'getIsFolder',
-        'modified_date' => 'getModifiedDate',
-        'size' => 'getSize',
-        'path' => 'getPath'
+        'value' => 'getValue'
     ];
 
     /**
@@ -193,15 +173,7 @@ class File implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
-        $this->container['name'] = isset($data['name']) ? $data['name'] : null;
-        $this->container['is_folder'] = isset($data['is_folder']) ? $data['is_folder'] : null;
-        $this->container['modified_date'] = isset($data['modified_date']) ? $data['modified_date'] : null;
-        $this->container['size'] = isset($data['size']) ? $data['size'] : null;
-        $this->container['path'] = isset($data['path']) ? $data['path'] : null;
-
-        // Initialize discriminator property with the model name.
-        $discriminator = array_search('Type', self::$attributeMap);
-        $this->container[$discriminator] = static::$swaggerModelName;
+        $this->container['value'] = isset($data['value']) ? $data['value'] : null;
     }
 
     /**
@@ -213,12 +185,6 @@ class File implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['is_folder'] === null) {
-            $invalidProperties[] = "'is_folder' can't be null";
-        }
-        if ($this->container['size'] === null) {
-            $invalidProperties[] = "'size' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -231,132 +197,30 @@ class File implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['is_folder'] === null) {
-            return false;
-        }
-        if ($this->container['size'] === null) {
-            return false;
-        }
         return true;
     }
 
 
     /**
-     * Gets name
+     * Gets value
      *
-     * @return string
+     * @return \Aspose\PDF\Model\FileVersion[]
      */
-    public function getName()
+    public function getValue()
     {
-        return $this->container['name'];
+        return $this->container['value'];
     }
 
     /**
-     * Sets name
+     * Sets value
      *
-     * @param string $name name
+     * @param \Aspose\PDF\Model\FileVersion[] $value File versions FileVersion.
      *
      * @return $this
      */
-    public function setName($name)
+    public function setValue($value)
     {
-        $this->container['name'] = $name;
-
-        return $this;
-    }
-
-    /**
-     * Gets is_folder
-     *
-     * @return bool
-     */
-    public function getIsFolder()
-    {
-        return $this->container['is_folder'];
-    }
-
-    /**
-     * Sets is_folder
-     *
-     * @param bool $is_folder is_folder
-     *
-     * @return $this
-     */
-    public function setIsFolder($is_folder)
-    {
-        $this->container['is_folder'] = $is_folder;
-
-        return $this;
-    }
-
-    /**
-     * Gets modified_date
-     *
-     * @return \DateTime
-     */
-    public function getModifiedDate()
-    {
-        return $this->container['modified_date'];
-    }
-
-    /**
-     * Sets modified_date
-     *
-     * @param \DateTime $modified_date modified_date
-     *
-     * @return $this
-     */
-    public function setModifiedDate($modified_date)
-    {
-        $this->container['modified_date'] = $modified_date;
-
-        return $this;
-    }
-
-    /**
-     * Gets size
-     *
-     * @return int
-     */
-    public function getSize()
-    {
-        return $this->container['size'];
-    }
-
-    /**
-     * Sets size
-     *
-     * @param int $size size
-     *
-     * @return $this
-     */
-    public function setSize($size)
-    {
-        $this->container['size'] = $size;
-
-        return $this;
-    }
-
-    /**
-     * Gets path
-     *
-     * @return string
-     */
-    public function getPath()
-    {
-        return $this->container['path'];
-    }
-
-    /**
-     * Sets path
-     *
-     * @param string $path path
-     *
-     * @return $this
-     */
-    public function setPath($path)
-    {
-        $this->container['path'] = $path;
+        $this->container['value'] = $value;
 
         return $this;
     }

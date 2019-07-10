@@ -179,6 +179,9 @@ class Fields extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['list'] === null) {
+            $invalidProperties[] = "'list' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -194,6 +197,9 @@ class Fields extends LinkElement
             return false;
         }
 
+        if ($this->container['list'] === null) {
+            return false;
+        }
         return true;
     }
 

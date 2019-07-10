@@ -179,6 +179,9 @@ class SplitResultDocument extends Link
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['id'] === null) {
+            $invalidProperties[] = "'id' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -194,6 +197,9 @@ class SplitResultDocument extends Link
             return false;
         }
 
+        if ($this->container['id'] === null) {
+            return false;
+        }
         return true;
     }
 

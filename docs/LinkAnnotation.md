@@ -5,11 +5,11 @@ Provides link to linkAnnotation.
 ## Properties
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**action_type** | [**\Aspose\PDF\Model\LinkActionType**](LinkActionType.md) |  | 
-**action** | **string** |  | 
-**highlighting** | [**\Aspose\PDF\Model\LinkHighlightingMode**](LinkHighlightingMode.md) |  | 
+**action_type** | [**\Aspose\PDF\Model\LinkActionType**](LinkActionType.md) |  | [optional]
+**action** | **string** |  | [optional]
+**highlighting** | [**\Aspose\PDF\Model\LinkHighlightingMode**](LinkHighlightingMode.md) |  | [optional]
 **color** | [**\Aspose\PDF\Model\Color**](Color.md) |  | [optional]
-**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) |  | 
+**rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) |  | [optional]
 **id** | **string** |  | [optional]
 **links** | [**\Aspose\PDF\Model\Link[]**](Link.md) | Link to the document.<br />*Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)* | [optional]
 

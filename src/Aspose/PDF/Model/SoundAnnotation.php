@@ -209,6 +209,13 @@ class SoundAnnotation extends MarkupAnnotation
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['file_path'] === null) {
+            $invalidProperties[] = "'file_path' can't be null";
+        }
+        if ((strlen($this->container['file_path']) < 1)) {
+            $invalidProperties[] = "invalid value for 'file_path', the character length must be bigger than or equal to 1.";
+        }
+
         return $invalidProperties;
     }
 
@@ -224,6 +231,12 @@ class SoundAnnotation extends MarkupAnnotation
             return false;
         }
 
+        if ($this->container['file_path'] === null) {
+            return false;
+        }
+        if (strlen($this->container['file_path']) < 1) {
+            return false;
+        }
         return true;
     }
 
@@ -247,6 +260,11 @@ class SoundAnnotation extends MarkupAnnotation
      */
     public function setFilePath($file_path)
     {
+
+        if ((strlen($file_path) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $file_path when calling SoundAnnotation., must be bigger than or equal to 1.');
+        }
+
         $this->container['file_path'] = $file_path;
 
         return $this;

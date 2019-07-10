@@ -209,6 +209,22 @@ class LinkAnnotation extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['action_type'] === null) {
+            $invalidProperties[] = "'action_type' can't be null";
+        }
+        if ($this->container['action'] === null) {
+            $invalidProperties[] = "'action' can't be null";
+        }
+        if ((strlen($this->container['action']) < 1)) {
+            $invalidProperties[] = "invalid value for 'action', the character length must be bigger than or equal to 1.";
+        }
+
+        if ($this->container['highlighting'] === null) {
+            $invalidProperties[] = "'highlighting' can't be null";
+        }
+        if ($this->container['rect'] === null) {
+            $invalidProperties[] = "'rect' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -224,6 +240,21 @@ class LinkAnnotation extends LinkElement
             return false;
         }
 
+        if ($this->container['action_type'] === null) {
+            return false;
+        }
+        if ($this->container['action'] === null) {
+            return false;
+        }
+        if (strlen($this->container['action']) < 1) {
+            return false;
+        }
+        if ($this->container['highlighting'] === null) {
+            return false;
+        }
+        if ($this->container['rect'] === null) {
+            return false;
+        }
         return true;
     }
 
@@ -271,6 +302,11 @@ class LinkAnnotation extends LinkElement
      */
     public function setAction($action)
     {
+
+        if ((strlen($action) < 1)) {
+            throw new \InvalidArgumentException('invalid length for $action when calling LinkAnnotation., must be bigger than or equal to 1.');
+        }
+
         $this->container['action'] = $action;
 
         return $this;

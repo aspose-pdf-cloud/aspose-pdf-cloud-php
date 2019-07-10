@@ -305,6 +305,9 @@ class Table extends LinkElement
     {
         $invalidProperties = parent::listInvalidProperties();
 
+        if ($this->container['rows'] === null) {
+            $invalidProperties[] = "'rows' can't be null";
+        }
         return $invalidProperties;
     }
 
@@ -320,6 +323,9 @@ class Table extends LinkElement
             return false;
         }
 
+        if ($this->container['rows'] === null) {
+            return false;
+        }
         return true;
     }
 
