@@ -4,9 +4,8 @@ require __DIR__.'\..\vendor\autoload.php';
 use Aspose\PDF\Api\PdfApi;
 use Aspose\PDF\Configuration;
 
-
-$appSid = '78946fb4-3bd4-4d3e-b309-f9e2ff9ac6f9';
-$appKey = 'b125f13bf6b76ed81ee990142d841195';
+$appSid = 'XXXXXXX';
+$appKey = 'XXXXXXX';
 
 $tempFolder = null;
 
