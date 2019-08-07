@@ -4972,4 +4972,195 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $response = $this->pdfApi->putBookmark($name, $bookmarkPath, $bookmark, $this->tempFolder, null);
         $this->assertEquals(200, $response->getCode());
     }
+
+    // Export Import tests
+
+    public function testGetExportFieldsFromPdfToXmlInStorage()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getExportFieldsFromPdfToXmlInStorage($name, null, $this->tempFolder);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetExportFieldsFromPdfToFdfInStorage()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getExportFieldsFromPdfToFdfInStorage($name, null, $this->tempFolder);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetExportFieldsFromPdfToXfdfInStorage()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getExportFieldsFromPdfToXfdfInStorage($name, null, $this->tempFolder);
+        $this->assertNotNull($response);
+    }
+
+
+    public function testPutExportFieldsFromPdfToXmlInStorage()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $outPath = $this->tempFolder . '/exportData.xml';
+
+        $response = $this->pdfApi->putExportFieldsFromPdfToXmlInStorage($name, $outPath, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutExportFieldsFromPdfToFdfInStorage()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $outPath = $this->tempFolder . '/exportData.fdf';
+
+        $response = $this->pdfApi->putExportFieldsFromPdfToFdfInStorage($name, $outPath, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutExportFieldsFromPdfToXfdfInStorage()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $outPath = $this->tempFolder . '/exportData.xfdf';
+
+        $response = $this->pdfApi->putExportFieldsFromPdfToXfdfInStorage($name, $outPath, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+
+    public function testGetImportFieldsFromFdfInStorage()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormData.fdf';
+        $this->uploadFile($dataFile);
+
+        $dataFilePath = $this->tempFolder . '/' . $dataFile;
+
+        $response = $this->pdfApi->getImportFieldsFromFdfInStorage($name, $dataFilePath, null, $this->tempFolder);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetImportFieldsFromXfdfInStorage()
+    {
+        $name = 'FormDataXfdf_in.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormDataXfdf_in.xfdf';
+        $this->uploadFile($dataFile);
+
+        $dataFilePath = $this->tempFolder . '/' . $dataFile;
+
+        $response = $this->pdfApi->getImportFieldsFromXfdfInStorage($name, $dataFilePath, null, $this->tempFolder);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetImportFieldsFromXmlInStorage()
+    {
+        $name = 'FormDataXfa_in.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormDataXfa_in.xml';
+        $this->uploadFile($dataFile);
+
+        $dataFilePath = $this->tempFolder . '/' . $dataFile;
+
+        $response = $this->pdfApi->getImportFieldsFromXmlInStorage($name, $dataFilePath, null, $this->tempFolder);
+        $this->assertNotNull($response);
+    }
+
+
+
+    public function testPutImportFieldsFromFdfInStorage()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormData.fdf';
+        $this->uploadFile($dataFile);
+
+        $dataFilePath = $this->tempFolder . '/' . $dataFile;
+
+        $response = $this->pdfApi->putImportFieldsFromFdfInStorage($name, $dataFilePath, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutImportFieldsFromXfdfInStorage()
+    {
+        $name = 'FormDataXfdf_in.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormDataXfdf_in.xfdf';
+        $this->uploadFile($dataFile);
+
+        $dataFilePath = $this->tempFolder . '/' . $dataFile;
+
+        $response = $this->pdfApi->putImportFieldsFromXfdfInStorage($name, $dataFilePath, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutImportFieldsFromXmlInStorage()
+    {
+        $name = 'FormDataXfa_in.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormDataXfa_in.xml';
+        $this->uploadFile($dataFile);
+
+        $dataFilePath = $this->tempFolder . '/' . $dataFile;
+
+        $response = $this->pdfApi->putImportFieldsFromXmlInStorage($name, $dataFilePath, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+
+
+
+    public function testPostImportFieldsFromFdf()
+    {
+        $name = 'FormData.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormData.fdf';
+
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $dataFile;
+
+        $response = $this->pdfApi->postImportFieldsFromFdf($name, null, $this->tempFolder, $file);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostImportFieldsFromXfdf()
+    {
+        $name = 'FormDataXfdf_in.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormDataXfdf_in.xfdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $dataFile;
+
+        $response = $this->pdfApi->postImportFieldsFromXfdf($name, null, $this->tempFolder, $file);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostImportFieldsFromXml()
+    {
+        $name = 'FormDataXfa_in.pdf';
+        $this->uploadFile($name);
+
+        $dataFile = 'FormDataXfa_in.xml';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $dataFile;
+
+        $response = $this->pdfApi->postImportFieldsFromXml($name, null, $this->tempFolder, $file);
+        $this->assertEquals(200, $response->getCode());
+    }
 }
