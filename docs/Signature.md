@@ -17,6 +17,9 @@ Name | Type | Description | Notes
 **authority** | **string** | Gets or sets the name of the person or authority signing the document.. | [optional]
 **date** | **string** | Gets or sets the time of signing. | [optional]
 **show_properties** | **bool** | Gets or sets the showproperties in signature field | 
+**timestamp_settings** | [**\Aspose\PDF\Model\TimestampSettings**](TimestampSettings.md) | Gets/sets timestamp settings. | [optional]
+**is_valid** | **bool** | Verify the document regarding this signature and return true if document is valid or otherwise false. | [optional]
+**custom_appearance** | [**\Aspose\PDF\Model\SignatureCustomAppearance**](SignatureCustomAppearance.md) | Gets/sets the custom appearance. | [optional]
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md) [[View Source]](../src/Aspose/PDF/Model/Signature.php)
 

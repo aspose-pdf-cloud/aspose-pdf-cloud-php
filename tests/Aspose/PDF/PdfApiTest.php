@@ -3432,6 +3432,29 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testGetMarkdownInStorageToPdf()
+    {
+        $name = "mixed.md";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getMarkdownInStorageToPdf($src_path);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutMarkdownInStorageToPdf()
+    {
+        $name = "mixed.md";
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromMd.pdf";
+
+        $response = $this->pdfApi->putMarkdownInStorageToPdf($resultName, $src_path, $xsl_file_path = null, null, $dst_folder = $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
     // Document Tests
 
     public function testGetDocument()
@@ -3610,6 +3633,35 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $folder = $this->tempFolder;
 
         $response = $this->pdfApi->postFlattenDocument($name, $update_appearances = false, $call_events = null, $hide_buttons = true, $storage = null, $folder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetDocumentSignatureFields()
+    {
+        $name = 'adbe.x509.rsa_sha1.valid.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentSignatureFields($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetPageSignatureFields()
+    {
+        $name = 'adbe.x509.rsa_sha1.valid.pdf';
+        $this->uploadFile($name);
+
+        $pageNumber = 1;
+        $response = $this->pdfApi->getPageSignatureFields($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetSignatureField()
+    {
+        $name = 'adbe.x509.rsa_sha1.valid.pdf';
+        $this->uploadFile($name);
+
+        $fieldName = 'Signature1';
+        $response = $this->pdfApi->getSignatureField($name, $fieldName, null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
 
@@ -4507,6 +4559,42 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $signature->setVisible(true);
 
         $response = $this->pdfApi->postSignPage($name, $pageNumber, $signature, $storage = null, $folder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostPageCertify()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $signatureFileName = '33226.p12';
+        $this->uploadFile($signatureFileName);
+
+        $pageNumber = 1;
+
+        $rectangle = new Aspose\PDF\Model\Rectangle();
+        $rectangle->setLlx(100);
+        $rectangle->setLly(100);
+        $rectangle->setUrx(500);
+        $rectangle->setUry(200);
+
+        $folder = $this->tempFolder;
+
+        $signature = new Aspose\PDF\Model\Signature();
+        $signature->setAuthority('Sergey Smal');
+        $signature->setContact('test@mail.ru');
+        $signature->setDate('08/01/2012 12:15:00.000 PM');
+        $signature->setFormFieldName('Signature1');
+        $signature->setLocation('Ukraine');
+        $signature->setPassword('sIikZSmz');
+        $signature->setRectangle($rectangle);
+        $signature->setSignaturePath($folder . '/' . $signatureFileName);
+        $signature->setSignatureType(Aspose\PDF\Model\SignatureType::PKCS7);
+        $signature->setVisible(true);
+
+        $permissionType = Aspose\PDF\Model\DocMDPAccessPermissionType::NO_CHANGES;
+
+        $response = $this->pdfApi->postPageCertify($name, $pageNumber, $signature, $permissionType, $storage = null, $folder);
         $this->assertEquals(200, $response->getCode());
     }
 

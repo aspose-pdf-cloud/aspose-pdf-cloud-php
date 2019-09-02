@@ -65,7 +65,10 @@ class Signature implements ModelInterface, ArrayAccess
         'form_field_name' => 'string',
         'authority' => 'string',
         'date' => 'string',
-        'show_properties' => 'bool'
+        'show_properties' => 'bool',
+        'timestamp_settings' => '\Aspose\PDF\Model\TimestampSettings',
+        'is_valid' => 'bool',
+        'custom_appearance' => '\Aspose\PDF\Model\SignatureCustomAppearance'
     ];
 
     /**
@@ -86,7 +89,10 @@ class Signature implements ModelInterface, ArrayAccess
         'form_field_name' => null,
         'authority' => null,
         'date' => null,
-        'show_properties' => null
+        'show_properties' => null,
+        'timestamp_settings' => null,
+        'is_valid' => null,
+        'custom_appearance' => null
     ];
 
     /**
@@ -128,7 +134,10 @@ class Signature implements ModelInterface, ArrayAccess
         'form_field_name' => 'FormFieldName',
         'authority' => 'Authority',
         'date' => 'Date',
-        'show_properties' => 'ShowProperties'
+        'show_properties' => 'ShowProperties',
+        'timestamp_settings' => 'TimestampSettings',
+        'is_valid' => 'IsValid',
+        'custom_appearance' => 'CustomAppearance'
     ];
 
     /**
@@ -149,7 +158,10 @@ class Signature implements ModelInterface, ArrayAccess
         'form_field_name' => 'setFormFieldName',
         'authority' => 'setAuthority',
         'date' => 'setDate',
-        'show_properties' => 'setShowProperties'
+        'show_properties' => 'setShowProperties',
+        'timestamp_settings' => 'setTimestampSettings',
+        'is_valid' => 'setIsValid',
+        'custom_appearance' => 'setCustomAppearance'
     ];
 
     /**
@@ -170,7 +182,10 @@ class Signature implements ModelInterface, ArrayAccess
         'form_field_name' => 'getFormFieldName',
         'authority' => 'getAuthority',
         'date' => 'getDate',
-        'show_properties' => 'getShowProperties'
+        'show_properties' => 'getShowProperties',
+        'timestamp_settings' => 'getTimestampSettings',
+        'is_valid' => 'getIsValid',
+        'custom_appearance' => 'getCustomAppearance'
     ];
 
     /**
@@ -246,6 +261,9 @@ class Signature implements ModelInterface, ArrayAccess
         $this->container['authority'] = isset($data['authority']) ? $data['authority'] : null;
         $this->container['date'] = isset($data['date']) ? $data['date'] : null;
         $this->container['show_properties'] = isset($data['show_properties']) ? $data['show_properties'] : null;
+        $this->container['timestamp_settings'] = isset($data['timestamp_settings']) ? $data['timestamp_settings'] : null;
+        $this->container['is_valid'] = isset($data['is_valid']) ? $data['is_valid'] : null;
+        $this->container['custom_appearance'] = isset($data['custom_appearance']) ? $data['custom_appearance'] : null;
     }
 
     /**
@@ -617,6 +635,78 @@ class Signature implements ModelInterface, ArrayAccess
     public function setShowProperties($show_properties)
     {
         $this->container['show_properties'] = $show_properties;
+
+        return $this;
+    }
+
+    /**
+     * Gets timestamp_settings
+     *
+     * @return \Aspose\PDF\Model\TimestampSettings
+     */
+    public function getTimestampSettings()
+    {
+        return $this->container['timestamp_settings'];
+    }
+
+    /**
+     * Sets timestamp_settings
+     *
+     * @param \Aspose\PDF\Model\TimestampSettings $timestamp_settings Gets/sets timestamp settings.
+     *
+     * @return $this
+     */
+    public function setTimestampSettings($timestamp_settings)
+    {
+        $this->container['timestamp_settings'] = $timestamp_settings;
+
+        return $this;
+    }
+
+    /**
+     * Gets is_valid
+     *
+     * @return bool
+     */
+    public function getIsValid()
+    {
+        return $this->container['is_valid'];
+    }
+
+    /**
+     * Sets is_valid
+     *
+     * @param bool $is_valid Verify the document regarding this signature and return true if document is valid or otherwise false.
+     *
+     * @return $this
+     */
+    public function setIsValid($is_valid)
+    {
+        $this->container['is_valid'] = $is_valid;
+
+        return $this;
+    }
+
+    /**
+     * Gets custom_appearance
+     *
+     * @return \Aspose\PDF\Model\SignatureCustomAppearance
+     */
+    public function getCustomAppearance()
+    {
+        return $this->container['custom_appearance'];
+    }
+
+    /**
+     * Sets custom_appearance
+     *
+     * @param \Aspose\PDF\Model\SignatureCustomAppearance $custom_appearance Gets/sets the custom appearance.
+     *
+     * @return $this
+     */
+    public function setCustomAppearance($custom_appearance)
+    {
+        $this->container['custom_appearance'] = $custom_appearance;
 
         return $this;
     }
