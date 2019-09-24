@@ -3665,6 +3665,72 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testGetDocumentTextBoxFields()
+    {
+        $name = 'FormDataTextBox.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentTextBoxFields($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+    
+    public function testGetPageTextBoxFields()
+    {
+        $name = 'FormDataTextBox.pdf';
+        $this->uploadFile($name);
+        $pageNumber = 1;
+        $response = $this->pdfApi->getPageTextBoxFields($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetTextBoxField()
+    {
+        $name = 'FormDataTextBox.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'Petitioner';
+        $response = $this->pdfApi->getTextBoxField($name, $fieldName, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostTextBoxFields()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $textBox = new Aspose\PDF\Model\TextBoxField();
+        $textBox->setPageIndex(1);
+        $textBox->setIsGroup(false);
+        $textBox->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $textBox->setMultiline(true);
+        $textBox->setMaxLen(100);
+        $textBox->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 500, 'ury' => 200]));
+        $textBox->setPartialName('testField');
+        $textBox->setValue('Page 1\nValue');
+
+        $response = $this->pdfApi->postTextBoxFields($name, [$textBox], null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutTextBoxField()
+    {
+        $name = 'FormDataTextBox.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'Petitioner';
+
+        $textBox = new Aspose\PDF\Model\TextBoxField();
+        $textBox->setPageIndex(1);
+        $textBox->setIsGroup(false);
+        $textBox->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $textBox->setMultiline(true);
+        $textBox->setMaxLen(100);
+        $textBox->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 500, 'ury' => 200]));
+        $textBox->setPartialName('testField');
+        $textBox->setValue('Page 1\nValue');
+
+        $response = $this->pdfApi->putTextBoxField($name, $fieldName, $textBox, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
     // Images Tests
 
     public function testGetImage()
