@@ -8,7 +8,7 @@ Valid values are:
 ## Enum
 Name | Type | Value | Description
 ------------ | ------------- | ------------- | -------------
-**ANNOTATION_MODIFICATION** | **string** | 'AnnotationModification' | Permitted changes are the same as for 2, as well as annotation creation, deletion, and modification; other changes invalidate the signature.
+**ANNOTATION_MODIFICATION** | **string** | 'AnnotationModification' | Permitted changes are the same as for FillingInForms, as well as annotation creation, deletion, and modification; other changes invalidate the signature.
 **FILLING_IN_FORMS** | **string** | 'FillingInForms' | Permitted changes are filling in forms, instantiating page templates, and signing; other changes invalidate the signature.
 **NO_CHANGES** | **string** | 'NoChanges' | No changes to the document are permitted; any change to the document invalidates the signature.
 
