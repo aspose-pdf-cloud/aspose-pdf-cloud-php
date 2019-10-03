@@ -114,7 +114,7 @@ class ObjectSerializer
      */
     public static function toPathValue($value)
     {
-        return rawurlencode(self::toString($value));
+        return str_replace('%2F', '/', rawurlencode(self::toString($value)));
     }
 
     /**

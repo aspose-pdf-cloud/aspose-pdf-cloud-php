@@ -717,12 +717,12 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     {
         $name = 'PdfWithAnnotations.pdf';
         $this->uploadFile($name);
-        $out_file_path = 'stamp.dat';
+        $out_file_path = "$this->tempFolder/stamp.dat";
         $responseAnnotations = $this->pdfApi->getDocumentStampAnnotations($name, null, $this->tempFolder);
         $this->assertEquals(200, $responseAnnotations->getCode());
         $annotationId = $responseAnnotations->getAnnotations()->getList()[0]->getId();
 
-        $response = $this->pdfApi->putStampAnnotationDataExtract($name, $annotationId, $out_file_path, null, null, $this->tempFolder);
+        $response = $this->pdfApi->putStampAnnotationDataExtract($name, $annotationId, $out_file_path, null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
 
