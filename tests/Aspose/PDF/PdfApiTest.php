@@ -3731,6 +3731,171 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testGetDocumentCheckBoxFields()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentCheckBoxFields($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+    
+    public function testGetPageCheckBoxFields()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $pageNumber = 1;
+        $response = $this->pdfApi->getPageCheckBoxFields($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetCheckBoxField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'checkboxField';
+        $response = $this->pdfApi->getCheckBoxField($name, $fieldName, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostCheckBoxFields()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $field = new Aspose\PDF\Model\CheckBoxField();
+        $field->setPageIndex(1);
+        $field->setIsGroup(false);
+        $field->setChecked(true);
+        $field->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $field->setPartialName('testField');
+        $field->setExportValue('true');
+        $field->setStyle(Aspose\PDF\Model\BoxStyle::CROSS);
+
+        $response = $this->pdfApi->postCheckBoxFields($name, [$field], null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutCheckBoxField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'checkboxField';
+
+        $field = new Aspose\PDF\Model\CheckBoxField();
+        $field->setPageIndex(1);
+        $field->setIsGroup(false);
+        $field->setChecked(true);
+        $field->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 200, 'ury' => 200]));
+        $field->setPartialName('testField');
+        $field->setExportValue('true');
+        $field->setStyle(Aspose\PDF\Model\BoxStyle::CROSS);
+
+        $response = $this->pdfApi->putCheckBoxField($name, $fieldName, $field, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetDocumentRadioButtonFields()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentRadioButtonFields($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+    
+    public function testGetPageRadioButtonFields()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $pageNumber = 1;
+        $response = $this->pdfApi->getPageRadioButtonFields($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetRadioButtonField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'radiobuttonField';
+        $response = $this->pdfApi->getRadioButtonField($name, $fieldName, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostRadioButtonFields()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $field = new Aspose\PDF\Model\RadioButtonField();
+        $field->setPageIndex(1);
+        $field->setIsGroup(false);
+        $field->setSelected(1);
+        $field->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 160, 'ury' => 140]));
+        $field->setPartialName('testField');
+        $field->setStyle(Aspose\PDF\Model\BoxStyle::CROSS);
+        $field->setMargin(new Aspose\PDF\Model\MarginInfo(['bottom' => 0, 'left' => 0, 'right' => 0, 'top' => 0]));
+        $field->setRadioButtonOptionsField([
+            new  Aspose\PDF\Model\RadioButtonOptionField([
+                'page_index' => 1,
+                'is_group' => false,
+                'option_name' => '1',
+                'rect' => new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 130, 'urx' => 160, 'ury' => 140]),
+                'style' => Aspose\PDF\Model\BoxStyle::CROSS
+            ]),
+            new  Aspose\PDF\Model\RadioButtonOptionField([
+                'page_index' => 1,
+                'is_group' => false,
+                'option_name' => '2',
+                'rect' => new Aspose\PDF\Model\Rectangle(['llx' => 150, 'lly' => 120, 'urx' => 160, 'ury' => 130]),
+                'style' => Aspose\PDF\Model\BoxStyle::CROSS
+            ])
+        ]);
+
+
+        $response = $this->pdfApi->postRadioButtonFields($name, [$field], null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutRadioButtonField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'radiobuttonField';
+
+        $field = new Aspose\PDF\Model\RadioButtonField();
+        $field->setPageIndex(1);
+        $field->setIsGroup(false);
+        $field->setSelected(1);
+        $field->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 160, 'ury' => 140]));
+        $field->setPartialName('testField');
+        $field->setStyle(Aspose\PDF\Model\BoxStyle::CROSS);
+        $field->setMargin(new Aspose\PDF\Model\MarginInfo(['bottom' => 0, 'left' => 0, 'right' => 0, 'top' => 0]));
+        $field->setRadioButtonOptionsField([
+            new  Aspose\PDF\Model\RadioButtonOptionField([
+                'page_index' => 1,
+                'is_group' => false,
+                'option_name' => '1',
+                'rect' => new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 130, 'urx' => 160, 'ury' => 140]),
+                'style' => Aspose\PDF\Model\BoxStyle::CROSS
+            ]),
+            new  Aspose\PDF\Model\RadioButtonOptionField([
+                'page_index' => 1,
+                'is_group' => false,
+                'option_name' => '2',
+                'rect' => new Aspose\PDF\Model\Rectangle(['llx' => 150, 'lly' => 120, 'urx' => 160, 'ury' => 130]),
+                'style' => Aspose\PDF\Model\BoxStyle::CROSS
+            ])
+        ]);
+
+        $response = $this->pdfApi->putRadioButtonField($name, $fieldName, $field, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+    
     // Images Tests
 
     public function testGetImage()
