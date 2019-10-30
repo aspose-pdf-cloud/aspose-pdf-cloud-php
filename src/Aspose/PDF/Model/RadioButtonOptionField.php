@@ -52,8 +52,7 @@ class RadioButtonOptionField extends FormField
       */
     protected static $swaggerTypes = [
         'option_name' => 'string',
-        'style' => '\Aspose\PDF\Model\BoxStyle',
-        'rect' => '\Aspose\PDF\Model\Rectangle'
+        'style' => '\Aspose\PDF\Model\BoxStyle'
     ];
 
     /**
@@ -63,8 +62,7 @@ class RadioButtonOptionField extends FormField
       */
     protected static $swaggerFormats = [
         'option_name' => null,
-        'style' => null,
-        'rect' => null
+        'style' => null
     ];
 
     /**
@@ -95,8 +93,7 @@ class RadioButtonOptionField extends FormField
      */
     protected static $attributeMap = [
         'option_name' => 'OptionName',
-        'style' => 'Style',
-        'rect' => 'Rect'
+        'style' => 'Style'
     ];
 
     /**
@@ -106,8 +103,7 @@ class RadioButtonOptionField extends FormField
      */
     protected static $setters = [
         'option_name' => 'setOptionName',
-        'style' => 'setStyle',
-        'rect' => 'setRect'
+        'style' => 'setStyle'
     ];
 
     /**
@@ -117,8 +113,7 @@ class RadioButtonOptionField extends FormField
      */
     protected static $getters = [
         'option_name' => 'getOptionName',
-        'style' => 'getStyle',
-        'rect' => 'getRect'
+        'style' => 'getStyle'
     ];
 
     /**
@@ -179,7 +174,6 @@ class RadioButtonOptionField extends FormField
 
         $this->container['option_name'] = isset($data['option_name']) ? $data['option_name'] : null;
         $this->container['style'] = isset($data['style']) ? $data['style'] : null;
-        $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
     }
 
     /**
@@ -254,30 +248,6 @@ class RadioButtonOptionField extends FormField
     public function setStyle($style)
     {
         $this->container['style'] = $style;
-
-        return $this;
-    }
-
-    /**
-     * Gets rect
-     *
-     * @return \Aspose\PDF\Model\Rectangle
-     */
-    public function getRect()
-    {
-        return $this->container['rect'];
-    }
-
-    /**
-     * Sets rect
-     *
-     * @param \Aspose\PDF\Model\Rectangle $rect Field rectangle.
-     *
-     * @return $this
-     */
-    public function setRect($rect)
-    {
-        $this->container['rect'] = $rect;
 
         return $this;
     }
