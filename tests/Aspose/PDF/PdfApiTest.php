@@ -37,7 +37,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         // Get App key and App SID from https://aspose.cloud
         $appSid = '';
         $appKey = '';
-        $host = 'https://api-qa.aspose.cloud/v3.0';
+        $host = 'https://api.aspose.cloud/v3.0';
 
 
         $this->tempFolder = 'TempPdfCloud';
@@ -3893,6 +3893,91 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         ]);
 
         $response = $this->pdfApi->putRadioButtonField($name, $fieldName, $field, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetDocumentComboBoxFields()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentComboBoxFields($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+    
+    public function testGetPageComboBoxFields()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $pageNumber = 1;
+        $response = $this->pdfApi->getPageComboBoxFields($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetComboBoxField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'comboboxField';
+        $response = $this->pdfApi->getComboBoxField($name, $fieldName, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostComboBoxFields()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $field = new Aspose\PDF\Model\ComboBoxField();
+        $field->setPageIndex(1);
+        $field->setIsGroup(false);
+        $field->setSelected(2);
+        $field->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 160, 'ury' => 140]));
+        $field->setPartialName('testField');
+        $field->setMargin(new Aspose\PDF\Model\MarginInfo(['bottom' => 0, 'left' => 0, 'right' => 0, 'top' => 0]));
+        $field->setOptions([
+            new  Aspose\PDF\Model\Option([
+                'name' => 'one',
+                'value' => 'one',
+            ]),
+            new  Aspose\PDF\Model\Option([
+                'name' => 'two',
+                'value' => 'two',
+            ]),
+        ]);
+
+
+        $response = $this->pdfApi->postComboBoxFields($name, [$field], null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutComboBoxField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'comboboxField';
+
+        $field = new Aspose\PDF\Model\ComboBoxField();
+        $field->setPageIndex(1);
+        $field->setIsGroup(false);
+        $field->setSelected(2);
+        $field->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 160, 'ury' => 140]));
+        $field->setPartialName('testField');
+        $field->setMargin(new Aspose\PDF\Model\MarginInfo(['bottom' => 0, 'left' => 0, 'right' => 0, 'top' => 0]));
+        $field->setOptions([
+            new  Aspose\PDF\Model\Option([
+                'name' => 'one',
+                'value' => 'one',
+            ]),
+            new  Aspose\PDF\Model\Option([
+                'name' => 'two',
+                'value' => 'two',
+            ]),
+        ]);
+
+        $response = $this->pdfApi->putComboBoxField($name, $fieldName, $field, null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
     
