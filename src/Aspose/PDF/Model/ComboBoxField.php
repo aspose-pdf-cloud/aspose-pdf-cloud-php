@@ -1,7 +1,7 @@
 <?php
 /**
  *
- *   Copyright (c) 2019 Aspose.PDF Cloud
+ *   Copyright (c) 2020 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -54,8 +54,7 @@ class ComboBoxField extends ChoiceField
         'options' => '\Aspose\PDF\Model\Option[]',
         'active_state' => 'string',
         'editable' => 'bool',
-        'spell_check' => 'bool',
-        'selected' => 'int'
+        'spell_check' => 'bool'
     ];
 
     /**
@@ -67,8 +66,7 @@ class ComboBoxField extends ChoiceField
         'options' => null,
         'active_state' => null,
         'editable' => null,
-        'spell_check' => null,
-        'selected' => 'int32'
+        'spell_check' => null
     ];
 
     /**
@@ -101,8 +99,7 @@ class ComboBoxField extends ChoiceField
         'options' => 'Options',
         'active_state' => 'ActiveState',
         'editable' => 'Editable',
-        'spell_check' => 'SpellCheck',
-        'selected' => 'Selected'
+        'spell_check' => 'SpellCheck'
     ];
 
     /**
@@ -114,8 +111,7 @@ class ComboBoxField extends ChoiceField
         'options' => 'setOptions',
         'active_state' => 'setActiveState',
         'editable' => 'setEditable',
-        'spell_check' => 'setSpellCheck',
-        'selected' => 'setSelected'
+        'spell_check' => 'setSpellCheck'
     ];
 
     /**
@@ -127,8 +123,7 @@ class ComboBoxField extends ChoiceField
         'options' => 'getOptions',
         'active_state' => 'getActiveState',
         'editable' => 'getEditable',
-        'spell_check' => 'getSpellCheck',
-        'selected' => 'getSelected'
+        'spell_check' => 'getSpellCheck'
     ];
 
     /**
@@ -191,7 +186,6 @@ class ComboBoxField extends ChoiceField
         $this->container['active_state'] = isset($data['active_state']) ? $data['active_state'] : null;
         $this->container['editable'] = isset($data['editable']) ? $data['editable'] : null;
         $this->container['spell_check'] = isset($data['spell_check']) ? $data['spell_check'] : null;
-        $this->container['selected'] = isset($data['selected']) ? $data['selected'] : null;
     }
 
     /**
@@ -203,9 +197,6 @@ class ComboBoxField extends ChoiceField
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['selected'] === null) {
-            $invalidProperties[] = "'selected' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -221,9 +212,6 @@ class ComboBoxField extends ChoiceField
             return false;
         }
 
-        if ($this->container['selected'] === null) {
-            return false;
-        }
         return true;
     }
 
@@ -320,30 +308,6 @@ class ComboBoxField extends ChoiceField
     public function setSpellCheck($spell_check)
     {
         $this->container['spell_check'] = $spell_check;
-
-        return $this;
-    }
-
-    /**
-     * Gets selected
-     *
-     * @return int
-     */
-    public function getSelected()
-    {
-        return $this->container['selected'];
-    }
-
-    /**
-     * Sets selected
-     *
-     * @param int $selected Gets or sets index of selected item. Numbering of items is started from 1.
-     *
-     * @return $this
-     */
-    public function setSelected($selected)
-    {
-        $this->container['selected'] = $selected;
 
         return $this;
     }

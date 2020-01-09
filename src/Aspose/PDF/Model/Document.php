@@ -1,7 +1,7 @@
 <?php
 /**
  *
- *   Copyright (c) 2019 Aspose.PDF Cloud
+ *   Copyright (c) 2020 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -52,6 +52,7 @@ class Document extends LinkElement
       */
     protected static $swaggerTypes = [
         'document_properties' => '\Aspose\PDF\Model\DocumentProperties',
+        'display_properties' => '\Aspose\PDF\Model\DisplayProperties',
         'pages' => '\Aspose\PDF\Model\Pages'
     ];
 
@@ -62,6 +63,7 @@ class Document extends LinkElement
       */
     protected static $swaggerFormats = [
         'document_properties' => null,
+        'display_properties' => null,
         'pages' => null
     ];
 
@@ -93,6 +95,7 @@ class Document extends LinkElement
      */
     protected static $attributeMap = [
         'document_properties' => 'DocumentProperties',
+        'display_properties' => 'DisplayProperties',
         'pages' => 'Pages'
     ];
 
@@ -103,6 +106,7 @@ class Document extends LinkElement
      */
     protected static $setters = [
         'document_properties' => 'setDocumentProperties',
+        'display_properties' => 'setDisplayProperties',
         'pages' => 'setPages'
     ];
 
@@ -113,6 +117,7 @@ class Document extends LinkElement
      */
     protected static $getters = [
         'document_properties' => 'getDocumentProperties',
+        'display_properties' => 'getDisplayProperties',
         'pages' => 'getPages'
     ];
 
@@ -173,6 +178,7 @@ class Document extends LinkElement
         parent::__construct($data);
 
         $this->container['document_properties'] = isset($data['document_properties']) ? $data['document_properties'] : null;
+        $this->container['display_properties'] = isset($data['display_properties']) ? $data['display_properties'] : null;
         $this->container['pages'] = isset($data['pages']) ? $data['pages'] : null;
     }
 
@@ -224,6 +230,30 @@ class Document extends LinkElement
     public function setDocumentProperties($document_properties)
     {
         $this->container['document_properties'] = $document_properties;
+
+        return $this;
+    }
+
+    /**
+     * Gets display_properties
+     *
+     * @return \Aspose\PDF\Model\DisplayProperties
+     */
+    public function getDisplayProperties()
+    {
+        return $this->container['display_properties'];
+    }
+
+    /**
+     * Sets display_properties
+     *
+     * @param \Aspose\PDF\Model\DisplayProperties $display_properties Document display properties.
+     *
+     * @return $this
+     */
+    public function setDisplayProperties($display_properties)
+    {
+        $this->container['display_properties'] = $display_properties;
 
         return $this;
     }
