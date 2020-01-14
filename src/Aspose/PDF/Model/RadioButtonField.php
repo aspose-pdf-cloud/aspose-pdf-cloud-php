@@ -1,7 +1,7 @@
 <?php
 /**
  *
- *   Copyright (c) 2019 Aspose.PDF Cloud
+ *   Copyright (c) 2020 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -53,8 +53,7 @@ class RadioButtonField extends ChoiceField
     protected static $swaggerTypes = [
         'options' => '\Aspose\PDF\Model\Option[]',
         'radio_button_options_field' => '\Aspose\PDF\Model\RadioButtonOptionField[]',
-        'style' => '\Aspose\PDF\Model\BoxStyle',
-        'selected' => 'int'
+        'style' => '\Aspose\PDF\Model\BoxStyle'
     ];
 
     /**
@@ -65,8 +64,7 @@ class RadioButtonField extends ChoiceField
     protected static $swaggerFormats = [
         'options' => null,
         'radio_button_options_field' => null,
-        'style' => null,
-        'selected' => 'int32'
+        'style' => null
     ];
 
     /**
@@ -98,8 +96,7 @@ class RadioButtonField extends ChoiceField
     protected static $attributeMap = [
         'options' => 'Options',
         'radio_button_options_field' => 'RadioButtonOptionsField',
-        'style' => 'Style',
-        'selected' => 'Selected'
+        'style' => 'Style'
     ];
 
     /**
@@ -110,8 +107,7 @@ class RadioButtonField extends ChoiceField
     protected static $setters = [
         'options' => 'setOptions',
         'radio_button_options_field' => 'setRadioButtonOptionsField',
-        'style' => 'setStyle',
-        'selected' => 'setSelected'
+        'style' => 'setStyle'
     ];
 
     /**
@@ -122,8 +118,7 @@ class RadioButtonField extends ChoiceField
     protected static $getters = [
         'options' => 'getOptions',
         'radio_button_options_field' => 'getRadioButtonOptionsField',
-        'style' => 'getStyle',
-        'selected' => 'getSelected'
+        'style' => 'getStyle'
     ];
 
     /**
@@ -185,7 +180,6 @@ class RadioButtonField extends ChoiceField
         $this->container['options'] = isset($data['options']) ? $data['options'] : null;
         $this->container['radio_button_options_field'] = isset($data['radio_button_options_field']) ? $data['radio_button_options_field'] : null;
         $this->container['style'] = isset($data['style']) ? $data['style'] : null;
-        $this->container['selected'] = isset($data['selected']) ? $data['selected'] : null;
     }
 
     /**
@@ -197,9 +191,6 @@ class RadioButtonField extends ChoiceField
     {
         $invalidProperties = parent::listInvalidProperties();
 
-        if ($this->container['selected'] === null) {
-            $invalidProperties[] = "'selected' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -215,9 +206,6 @@ class RadioButtonField extends ChoiceField
             return false;
         }
 
-        if ($this->container['selected'] === null) {
-            return false;
-        }
         return true;
     }
 
@@ -290,30 +278,6 @@ class RadioButtonField extends ChoiceField
     public function setStyle($style)
     {
         $this->container['style'] = $style;
-
-        return $this;
-    }
-
-    /**
-     * Gets selected
-     *
-     * @return int
-     */
-    public function getSelected()
-    {
-        return $this->container['selected'];
-    }
-
-    /**
-     * Sets selected
-     *
-     * @param int $selected Gets or sets index of selected item. Numbering of items is started from 1.
-     *
-     * @return $this
-     */
-    public function setSelected($selected)
-    {
-        $this->container['selected'] = $selected;
 
         return $this;
     }

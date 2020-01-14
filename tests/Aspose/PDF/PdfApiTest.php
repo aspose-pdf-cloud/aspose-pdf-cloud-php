@@ -2,7 +2,7 @@
 
 /**
  *
- *   Copyright (c) 2019 Aspose.PDF Cloud
+ *   Copyright (c) 2020 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -2890,7 +2890,8 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
             $special_folder_for_all_images = null, 
             $special_folder_for_svg_images = null, 
             $try_save_text_underlining_and_strikeouting_in_css = null,
-            $storage = null, 
+            $storage = null,
+            $flow_layout_paragraph_full_width = null, 
             $file);
         $this->assertNotNull($response);
     }
@@ -3509,6 +3510,64 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testPostCreateEmptyDocument()
+    {
+        $name = 'empty_post.pdf';
+        
+        $doc_prop = new Aspose\PDF\Model\DocumentProperty();
+        $doc_prop->setName('prop1');
+        $doc_prop->setValue('val1');
+
+        $doc_props = new Aspose\PDF\Model\DocumentProperties();
+        $doc_props->setList([$doc_prop]);
+
+        $display_props = new Aspose\PDF\Model\DisplayProperties();
+        $display_props->setCenterWindow(true);
+        $display_props->setHideMenuBar(true);
+
+        $page_config = new Aspose\PDF\Model\DefaultPageConfig();
+        $page_config->setHeight(100);
+        $page_config->setWidth(100);
+
+        $doc_config = new Aspose\PDF\Model\DocumentConfig();
+        $doc_config->setDocumentProperties($doc_props);
+        $doc_config->setDisplayProperties($display_props);
+        $doc_config->setDefaultPageConfig($page_config);
+
+        $response = $this->pdfApi->postCreateDocument($name, $doc_config, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetDocumentDisplayProperties()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentDisplayProperties($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutDocumentDisplayProperties()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $display_properties = new Aspose\PDF\Model\DisplayProperties();
+        
+        $display_properties->setCenterWindow(true);
+        $display_properties->setDirection(Aspose\PDF\Model\Direction::L2_R);
+        $display_properties->setDisplayDocTitle(true);
+        $display_properties->setHideMenuBar(true);
+        $display_properties->setHideToolBar(true);
+        $display_properties->setHideWindowUI(true);
+        $display_properties->setNonFullScreenPageMode(Aspose\PDF\Model\PageMode::USE_NONE);
+        $display_properties->setPageLayout(Aspose\PDF\Model\PageLayout::TWO_PAGE_LEFT);
+        $display_properties->setPageMode(Aspose\PDF\Model\PageMode::USE_OC);
+
+        $response = $this->pdfApi->putDocumentDisplayProperties($name, $display_properties, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
     // Fields Tests
 
     public function testGetField()
@@ -3978,6 +4037,107 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         ]);
 
         $response = $this->pdfApi->putComboBoxField($name, $fieldName, $field, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetDocumentListBoxFields()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentListBoxFields($name, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+    
+    public function testGetPageListBoxFields()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $pageNumber = 1;
+        $response = $this->pdfApi->getPageListBoxFields($name, $pageNumber, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testGetListBoxField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'listboxField';
+        $response = $this->pdfApi->getListBoxField($name, $fieldName, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostListBoxFields()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $field = new Aspose\PDF\Model\ListBoxField();
+        $field->setPageIndex(1);
+        $field->setSelectedItems([1, 4]);
+        $field->setMultiselect(true);
+        $field->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 160, 'ury' => 140]));
+        $field->setPartialName('testField');
+        $field->setMargin(new Aspose\PDF\Model\MarginInfo(['bottom' => 0, 'left' => 0, 'right' => 0, 'top' => 0]));
+        $field->setOptions([
+            new  Aspose\PDF\Model\Option([
+                'name' => 'one',
+                'value' => 'one',
+            ]),
+            new  Aspose\PDF\Model\Option([
+                'name' => 'two',
+                'value' => 'two',
+            ]),
+            new  Aspose\PDF\Model\Option([
+                'name' => 'three',
+                'value' => 'three',
+            ]),
+            new  Aspose\PDF\Model\Option([
+                'name' => 'four',
+                'value' => 'four',
+            ]),
+        ]);
+
+
+        $response = $this->pdfApi->postListBoxFields($name, [$field], null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutListBoxField()
+    {
+        $name = 'PdfWithAcroForm.pdf';
+        $this->uploadFile($name);
+        $fieldName = 'listboxField';
+
+        $field = new Aspose\PDF\Model\ListBoxField();
+        $field->setPageIndex(1);
+        $field->setSelectedItems([1, 4]);
+        $field->setMultiselect(true);
+        $field->setColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 160, 'ury' => 140]));
+        $field->setPartialName('testField');
+        $field->setMargin(new Aspose\PDF\Model\MarginInfo(['bottom' => 0, 'left' => 0, 'right' => 0, 'top' => 0]));
+        $field->setOptions([
+            new  Aspose\PDF\Model\Option([
+                'name' => 'one',
+                'value' => 'one',
+            ]),
+            new  Aspose\PDF\Model\Option([
+                'name' => 'two',
+                'value' => 'two',
+            ]),
+            new  Aspose\PDF\Model\Option([
+                'name' => 'three',
+                'value' => 'three',
+            ]),
+            new  Aspose\PDF\Model\Option([
+                'name' => 'four',
+                'value' => 'four',
+            ]),
+        ]);
+
+        $response = $this->pdfApi->putListBoxField($name, $fieldName, $field, null, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
     

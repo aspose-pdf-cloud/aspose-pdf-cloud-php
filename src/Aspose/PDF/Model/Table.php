@@ -1,7 +1,7 @@
 <?php
 /**
  *
- *   Copyright (c) 2019 Aspose.PDF Cloud
+ *   Copyright (c) 2020 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -59,6 +59,7 @@ class Table extends LinkElement
         'default_cell_text_state' => '\Aspose\PDF\Model\TextState',
         'default_cell_padding' => '\Aspose\PDF\Model\MarginInfo',
         'border' => '\Aspose\PDF\Model\BorderInfo',
+        'margin' => '\Aspose\PDF\Model\MarginInfo',
         'rows' => '\Aspose\PDF\Model\Row[]',
         'default_column_width' => 'string',
         'default_cell_border' => '\Aspose\PDF\Model\BorderInfo',
@@ -89,6 +90,7 @@ class Table extends LinkElement
         'default_cell_text_state' => null,
         'default_cell_padding' => null,
         'border' => null,
+        'margin' => null,
         'rows' => null,
         'default_column_width' => null,
         'default_cell_border' => null,
@@ -140,6 +142,7 @@ class Table extends LinkElement
         'default_cell_text_state' => 'DefaultCellTextState',
         'default_cell_padding' => 'DefaultCellPadding',
         'border' => 'Border',
+        'margin' => 'Margin',
         'rows' => 'Rows',
         'default_column_width' => 'DefaultColumnWidth',
         'default_cell_border' => 'DefaultCellBorder',
@@ -170,6 +173,7 @@ class Table extends LinkElement
         'default_cell_text_state' => 'setDefaultCellTextState',
         'default_cell_padding' => 'setDefaultCellPadding',
         'border' => 'setBorder',
+        'margin' => 'setMargin',
         'rows' => 'setRows',
         'default_column_width' => 'setDefaultColumnWidth',
         'default_cell_border' => 'setDefaultCellBorder',
@@ -200,6 +204,7 @@ class Table extends LinkElement
         'default_cell_text_state' => 'getDefaultCellTextState',
         'default_cell_padding' => 'getDefaultCellPadding',
         'border' => 'getBorder',
+        'margin' => 'getMargin',
         'rows' => 'getRows',
         'default_column_width' => 'getDefaultColumnWidth',
         'default_cell_border' => 'getDefaultCellBorder',
@@ -280,6 +285,7 @@ class Table extends LinkElement
         $this->container['default_cell_text_state'] = isset($data['default_cell_text_state']) ? $data['default_cell_text_state'] : null;
         $this->container['default_cell_padding'] = isset($data['default_cell_padding']) ? $data['default_cell_padding'] : null;
         $this->container['border'] = isset($data['border']) ? $data['border'] : null;
+        $this->container['margin'] = isset($data['margin']) ? $data['margin'] : null;
         $this->container['rows'] = isset($data['rows']) ? $data['rows'] : null;
         $this->container['default_column_width'] = isset($data['default_column_width']) ? $data['default_column_width'] : null;
         $this->container['default_cell_border'] = isset($data['default_cell_border']) ? $data['default_cell_border'] : null;
@@ -518,6 +524,30 @@ class Table extends LinkElement
     public function setBorder($border)
     {
         $this->container['border'] = $border;
+
+        return $this;
+    }
+
+    /**
+     * Gets margin
+     *
+     * @return \Aspose\PDF\Model\MarginInfo
+     */
+    public function getMargin()
+    {
+        return $this->container['margin'];
+    }
+
+    /**
+     * Sets margin
+     *
+     * @param \Aspose\PDF\Model\MarginInfo $margin Gets or sets a outer margin for paragraph (for pdf generation)
+     *
+     * @return $this
+     */
+    public function setMargin($margin)
+    {
+        $this->container['margin'] = $margin;
 
         return $this;
     }

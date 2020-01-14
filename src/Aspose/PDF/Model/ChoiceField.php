@@ -1,7 +1,7 @@
 <?php
 /**
  *
- *   Copyright (c) 2019 Aspose.PDF Cloud
+ *   Copyright (c) 2020 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -51,7 +51,8 @@ class ChoiceField extends FormField
       * @var string[]
       */
     protected static $swaggerTypes = [
-        'multi_select' => 'bool'
+        'multi_select' => 'bool',
+        'selected' => 'int'
     ];
 
     /**
@@ -60,7 +61,8 @@ class ChoiceField extends FormField
       * @var string[]
       */
     protected static $swaggerFormats = [
-        'multi_select' => null
+        'multi_select' => null,
+        'selected' => 'int32'
     ];
 
     /**
@@ -90,7 +92,8 @@ class ChoiceField extends FormField
      * @var string[]
      */
     protected static $attributeMap = [
-        'multi_select' => 'MultiSelect'
+        'multi_select' => 'MultiSelect',
+        'selected' => 'Selected'
     ];
 
     /**
@@ -99,7 +102,8 @@ class ChoiceField extends FormField
      * @var string[]
      */
     protected static $setters = [
-        'multi_select' => 'setMultiSelect'
+        'multi_select' => 'setMultiSelect',
+        'selected' => 'setSelected'
     ];
 
     /**
@@ -108,7 +112,8 @@ class ChoiceField extends FormField
      * @var string[]
      */
     protected static $getters = [
-        'multi_select' => 'getMultiSelect'
+        'multi_select' => 'getMultiSelect',
+        'selected' => 'getSelected'
     ];
 
     /**
@@ -168,6 +173,7 @@ class ChoiceField extends FormField
         parent::__construct($data);
 
         $this->container['multi_select'] = isset($data['multi_select']) ? $data['multi_select'] : null;
+        $this->container['selected'] = isset($data['selected']) ? $data['selected'] : null;
     }
 
     /**
@@ -218,6 +224,30 @@ class ChoiceField extends FormField
     public function setMultiSelect($multi_select)
     {
         $this->container['multi_select'] = $multi_select;
+
+        return $this;
+    }
+
+    /**
+     * Gets selected
+     *
+     * @return int
+     */
+    public function getSelected()
+    {
+        return $this->container['selected'];
+    }
+
+    /**
+     * Sets selected
+     *
+     * @param int $selected Gets or sets index of selected item. Numbering of items is started from 1.
+     *
+     * @return $this
+     */
+    public function setSelected($selected)
+    {
+        $this->container['selected'] = $selected;
 
         return $this;
     }

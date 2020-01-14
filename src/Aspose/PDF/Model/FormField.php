@@ -1,7 +1,7 @@
 <?php
 /**
  *
- *   Copyright (c) 2019 Aspose.PDF Cloud
+ *   Copyright (c) 2020 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -67,7 +67,8 @@ class FormField extends LinkElement
         'margin' => '\Aspose\PDF\Model\MarginInfo',
         'highlighting' => '\Aspose\PDF\Model\LinkHighlightingMode',
         'horizontal_alignment' => '\Aspose\PDF\Model\HorizontalAlignment',
-        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment'
+        'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
+        'border' => '\Aspose\PDF\Model\Border'
     ];
 
     /**
@@ -92,7 +93,8 @@ class FormField extends LinkElement
         'margin' => null,
         'highlighting' => null,
         'horizontal_alignment' => null,
-        'vertical_alignment' => null
+        'vertical_alignment' => null,
+        'border' => null
     ];
 
     /**
@@ -138,7 +140,8 @@ class FormField extends LinkElement
         'margin' => 'Margin',
         'highlighting' => 'Highlighting',
         'horizontal_alignment' => 'HorizontalAlignment',
-        'vertical_alignment' => 'VerticalAlignment'
+        'vertical_alignment' => 'VerticalAlignment',
+        'border' => 'Border'
     ];
 
     /**
@@ -163,7 +166,8 @@ class FormField extends LinkElement
         'margin' => 'setMargin',
         'highlighting' => 'setHighlighting',
         'horizontal_alignment' => 'setHorizontalAlignment',
-        'vertical_alignment' => 'setVerticalAlignment'
+        'vertical_alignment' => 'setVerticalAlignment',
+        'border' => 'setBorder'
     ];
 
     /**
@@ -188,7 +192,8 @@ class FormField extends LinkElement
         'margin' => 'getMargin',
         'highlighting' => 'getHighlighting',
         'horizontal_alignment' => 'getHorizontalAlignment',
-        'vertical_alignment' => 'getVerticalAlignment'
+        'vertical_alignment' => 'getVerticalAlignment',
+        'border' => 'getBorder'
     ];
 
     /**
@@ -264,6 +269,7 @@ class FormField extends LinkElement
         $this->container['highlighting'] = isset($data['highlighting']) ? $data['highlighting'] : null;
         $this->container['horizontal_alignment'] = isset($data['horizontal_alignment']) ? $data['horizontal_alignment'] : null;
         $this->container['vertical_alignment'] = isset($data['vertical_alignment']) ? $data['vertical_alignment'] : null;
+        $this->container['border'] = isset($data['border']) ? $data['border'] : null;
     }
 
     /**
@@ -277,9 +283,6 @@ class FormField extends LinkElement
 
         if ($this->container['page_index'] === null) {
             $invalidProperties[] = "'page_index' can't be null";
-        }
-        if ($this->container['is_group'] === null) {
-            $invalidProperties[] = "'is_group' can't be null";
         }
         return $invalidProperties;
     }
@@ -297,9 +300,6 @@ class FormField extends LinkElement
         }
 
         if ($this->container['page_index'] === null) {
-            return false;
-        }
-        if ($this->container['is_group'] === null) {
             return false;
         }
         return true;
@@ -710,6 +710,30 @@ class FormField extends LinkElement
     public function setVerticalAlignment($vertical_alignment)
     {
         $this->container['vertical_alignment'] = $vertical_alignment;
+
+        return $this;
+    }
+
+    /**
+     * Gets border
+     *
+     * @return \Aspose\PDF\Model\Border
+     */
+    public function getBorder()
+    {
+        return $this->container['border'];
+    }
+
+    /**
+     * Sets border
+     *
+     * @param \Aspose\PDF\Model\Border $border Gets or sets annotation border characteristics.
+     *
+     * @return $this
+     */
+    public function setBorder($border)
+    {
+        $this->container['border'] = $border;
 
         return $this;
     }

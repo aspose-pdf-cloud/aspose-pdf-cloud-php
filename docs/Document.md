@@ -6,6 +6,7 @@ Represents document DTO.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **document_properties** | [**\Aspose\PDF\Model\DocumentProperties**](DocumentProperties.md) | Document properties. | [optional]
+**display_properties** | [**\Aspose\PDF\Model\DisplayProperties**](DisplayProperties.md) | Document display properties. | [optional]
 **pages** | [**\Aspose\PDF\Model\Pages**](Pages.md) | Document pages. | [optional]
 **links** | [**\Aspose\PDF\Model\Link[]**](Link.md) | Link to the document.<br />*Inherited from [\Aspose\PDF\Model\LinkElement](LinkElement.md)* | [optional]
 
