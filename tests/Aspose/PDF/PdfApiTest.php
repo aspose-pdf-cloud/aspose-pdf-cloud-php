@@ -3724,6 +3724,72 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testPostSignatureField()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+
+        $signatureFileName = '33226.p12';
+        $this->uploadFile($signatureFileName);
+
+        $folder = $this->tempFolder;
+
+        $signature = new Aspose\PDF\Model\Signature();
+        $signature->setAuthority('Sergey Smal');
+        $signature->setContact('test@mail.ru');
+        $signature->setDate('08/01/2012 12:15:00.000 PM');
+        $signature->setFormFieldName('Signature1');
+        $signature->setLocation('Ukraine');
+        $signature->setPassword('sIikZSmz');
+        $signature->setRectangle(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 0, 'ury' => 0]));
+        $signature->setSignaturePath($folder . '/' . $signatureFileName);
+        $signature->setSignatureType(Aspose\PDF\Model\SignatureType::PKCS7);
+        $signature->setVisible(true);
+        $signature->setShowProperties(false);
+
+        $field = new Aspose\PDF\Model\SignatureField();
+        $field->setPartialName('sign1');
+        $field->setPageIndex(1);
+        $field->setSignature($signature);
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 160, 'ury' => 140]));
+
+        $response = $this->pdfApi->postSignatureField($name, $field, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutSignatureField()
+    {
+        $name = 'adbe.x509.rsa_sha1.valid.pdf';
+        $this->uploadFile($name);
+
+        $signatureFileName = '33226.p12';
+        $this->uploadFile($signatureFileName);
+
+        $folder = $this->tempFolder;
+
+        $signature = new Aspose\PDF\Model\Signature();
+        $signature->setAuthority('Sergey Smal');
+        $signature->setContact('test@mail.ru');
+        $signature->setDate('08/01/2012 12:15:00.000 PM');
+        $signature->setFormFieldName('Signature1');
+        $signature->setLocation('Ukraine');
+        $signature->setPassword('sIikZSmz');
+        $signature->setRectangle(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 0, 'ury' => 0]));
+        $signature->setSignaturePath($folder . '/' . $signatureFileName);
+        $signature->setSignatureType(Aspose\PDF\Model\SignatureType::PKCS7);
+        $signature->setVisible(true);
+        $signature->setShowProperties(false);
+
+        $field = new Aspose\PDF\Model\SignatureField();
+        $field->setPartialName('sign1');
+        $field->setPageIndex(1);
+        $field->setSignature($signature);
+        $field->setRect(new Aspose\PDF\Model\Rectangle(['llx' => 100, 'lly' => 100, 'urx' => 160, 'ury' => 140]));
+
+        $response = $this->pdfApi->putSignatureField($name, 'Signature1', $field, null, $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
     public function testGetDocumentTextBoxFields()
     {
         $name = 'FormDataTextBox.pdf';
