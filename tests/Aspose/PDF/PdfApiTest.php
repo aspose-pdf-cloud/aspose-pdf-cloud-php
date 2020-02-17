@@ -3456,6 +3456,29 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testGetPdfAInStorageToPdf()
+    {
+        $name = '4pagesPdfA.pdf';
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+
+        $response = $this->pdfApi->getPdfAInStorageToPdf($src_path, null, null);
+        $this->assertGreaterThan(0, $response->getSize());
+    }
+
+    public function testPutPdfAInStorageToPdf()
+    {
+        $name = '4pagesPdfA.pdf';
+        $this->uploadFile($name);
+
+        $src_path = $this->tempFolder . '/' . $name;
+        $resultName = "fromPdfA.pdf";
+
+        $response = $this->pdfApi->putPdfAInStorageToPdf($resultName, $src_path, $this->tempFolder, null, null);
+        $this->assertEquals(200, $response->getCode());
+    }
+
     // Document Tests
 
     public function testGetDocument()
