@@ -1,6 +1,6 @@
 ﻿# Aspose.PDF Cloud
 - API version: 3.0
-- Package version: 20.2.0
+- Package version: 20.4.0
 
 [Aspose.PDF Cloud](https://products.aspose.cloud/pdf) is a true REST API that enables you to perform a wide range of document processing operations including creation, manipulation, conversion and rendering of Pdf documents in the cloud.
 
@@ -549,6 +549,7 @@ Class | Description
 [**HtmlMarkupGenerationModes**](docs/HtmlMarkupGenerationModes.md) | Sometimes specific reqirments to created HTML are present. This enum defines HTML preparing modes that can be used during conversion of PDF to HTML to match such specific requirments. 
 [**Image**](docs/Image.md) | Represents image DTO.
 [**ImageFooter**](docs/ImageFooter.md) | Represents Pdf image footer.
+[**ImageFragment**](docs/ImageFragment.md) | Represents Image Fragment DTO.
 [**ImageHeader**](docs/ImageHeader.md) | Represents Pdf image header.
 [**ImageResponse**](docs/ImageResponse.md) | Represents response containing single image info
 [**Images**](docs/Images.md) | Represents list of images.

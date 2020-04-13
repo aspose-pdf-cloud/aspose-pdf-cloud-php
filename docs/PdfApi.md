@@ -3700,7 +3700,7 @@ Name | Type | Description  | Notes
 
 <a name="getPdfInStorageToLaTeX"></a>
 ## **getPdfInStorageToLaTeX**
-> \SplFileObject getPdfInStorageToLaTeX($name, $pages_count, $folder, $storage)
+> \SplFileObject getPdfInStorageToLaTeX($name, $folder, $storage)
 
 Converts PDF document (located on storage) to LaTeX format and returns resulting file in response content
 
@@ -3708,7 +3708,6 @@ Converts PDF document (located on storage) to LaTeX format and returns resulting
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
-**$pages_count** | **int** | Pages count. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 
@@ -7435,7 +7434,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInRequestToLaTeX"></a>
 ## **putPdfInRequestToLaTeX**
-> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToLaTeX($out_path, $pages_count, $storage, $file)
+> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToLaTeX($out_path, $storage, $file)
 
 Converts PDF document (in request content) to LaTeX format and uploads resulting file to storage.
 
@@ -7443,7 +7442,6 @@ Converts PDF document (in request content) to LaTeX format and uploads resulting
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.tex) | 
-**$pages_count** | **int** | Pages count. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
@@ -7789,7 +7787,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInStorageToLaTeX"></a>
 ## **putPdfInStorageToLaTeX**
-> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToLaTeX($name, $out_path, $pages_count, $folder, $storage)
+> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToLaTeX($name, $out_path, $folder, $storage)
 
 Converts PDF document (located on storage) to LaTeX format and uploads resulting file to storage
 
@@ -7798,7 +7796,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$name** | **string** | The document name. | 
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.tex) | 
-**$pages_count** | **int** | Pages count. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 

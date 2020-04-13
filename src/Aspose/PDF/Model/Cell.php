@@ -58,6 +58,7 @@ class Cell implements ModelInterface, ArrayAccess
         'border' => '\Aspose\PDF\Model\BorderInfo',
         'background_color' => '\Aspose\PDF\Model\Color',
         'background_image_file' => 'string',
+        'background_image_storage_file' => 'string',
         'alignment' => '\Aspose\PDF\Model\HorizontalAlignment',
         'default_cell_text_state' => '\Aspose\PDF\Model\TextState',
         'paragraphs' => '\Aspose\PDF\Model\TextRect[]',
@@ -65,7 +66,9 @@ class Cell implements ModelInterface, ArrayAccess
         'vertical_alignment' => '\Aspose\PDF\Model\VerticalAlignment',
         'col_span' => 'int',
         'row_span' => 'int',
-        'width' => 'double'
+        'width' => 'double',
+        'html_fragment' => 'string',
+        'images' => '\Aspose\PDF\Model\ImageFragment[]'
     ];
 
     /**
@@ -79,6 +82,7 @@ class Cell implements ModelInterface, ArrayAccess
         'border' => null,
         'background_color' => null,
         'background_image_file' => null,
+        'background_image_storage_file' => null,
         'alignment' => null,
         'default_cell_text_state' => null,
         'paragraphs' => null,
@@ -86,7 +90,9 @@ class Cell implements ModelInterface, ArrayAccess
         'vertical_alignment' => null,
         'col_span' => 'int32',
         'row_span' => 'int32',
-        'width' => 'double'
+        'width' => 'double',
+        'html_fragment' => null,
+        'images' => null
     ];
 
     /**
@@ -121,6 +127,7 @@ class Cell implements ModelInterface, ArrayAccess
         'border' => 'Border',
         'background_color' => 'BackgroundColor',
         'background_image_file' => 'BackgroundImageFile',
+        'background_image_storage_file' => 'BackgroundImageStorageFile',
         'alignment' => 'Alignment',
         'default_cell_text_state' => 'DefaultCellTextState',
         'paragraphs' => 'Paragraphs',
@@ -128,7 +135,9 @@ class Cell implements ModelInterface, ArrayAccess
         'vertical_alignment' => 'VerticalAlignment',
         'col_span' => 'ColSpan',
         'row_span' => 'RowSpan',
-        'width' => 'Width'
+        'width' => 'Width',
+        'html_fragment' => 'HtmlFragment',
+        'images' => 'Images'
     ];
 
     /**
@@ -142,6 +151,7 @@ class Cell implements ModelInterface, ArrayAccess
         'border' => 'setBorder',
         'background_color' => 'setBackgroundColor',
         'background_image_file' => 'setBackgroundImageFile',
+        'background_image_storage_file' => 'setBackgroundImageStorageFile',
         'alignment' => 'setAlignment',
         'default_cell_text_state' => 'setDefaultCellTextState',
         'paragraphs' => 'setParagraphs',
@@ -149,7 +159,9 @@ class Cell implements ModelInterface, ArrayAccess
         'vertical_alignment' => 'setVerticalAlignment',
         'col_span' => 'setColSpan',
         'row_span' => 'setRowSpan',
-        'width' => 'setWidth'
+        'width' => 'setWidth',
+        'html_fragment' => 'setHtmlFragment',
+        'images' => 'setImages'
     ];
 
     /**
@@ -163,6 +175,7 @@ class Cell implements ModelInterface, ArrayAccess
         'border' => 'getBorder',
         'background_color' => 'getBackgroundColor',
         'background_image_file' => 'getBackgroundImageFile',
+        'background_image_storage_file' => 'getBackgroundImageStorageFile',
         'alignment' => 'getAlignment',
         'default_cell_text_state' => 'getDefaultCellTextState',
         'paragraphs' => 'getParagraphs',
@@ -170,7 +183,9 @@ class Cell implements ModelInterface, ArrayAccess
         'vertical_alignment' => 'getVerticalAlignment',
         'col_span' => 'getColSpan',
         'row_span' => 'getRowSpan',
-        'width' => 'getWidth'
+        'width' => 'getWidth',
+        'html_fragment' => 'getHtmlFragment',
+        'images' => 'getImages'
     ];
 
     /**
@@ -238,6 +253,7 @@ class Cell implements ModelInterface, ArrayAccess
         $this->container['border'] = isset($data['border']) ? $data['border'] : null;
         $this->container['background_color'] = isset($data['background_color']) ? $data['background_color'] : null;
         $this->container['background_image_file'] = isset($data['background_image_file']) ? $data['background_image_file'] : null;
+        $this->container['background_image_storage_file'] = isset($data['background_image_storage_file']) ? $data['background_image_storage_file'] : null;
         $this->container['alignment'] = isset($data['alignment']) ? $data['alignment'] : null;
         $this->container['default_cell_text_state'] = isset($data['default_cell_text_state']) ? $data['default_cell_text_state'] : null;
         $this->container['paragraphs'] = isset($data['paragraphs']) ? $data['paragraphs'] : null;
@@ -246,6 +262,8 @@ class Cell implements ModelInterface, ArrayAccess
         $this->container['col_span'] = isset($data['col_span']) ? $data['col_span'] : null;
         $this->container['row_span'] = isset($data['row_span']) ? $data['row_span'] : null;
         $this->container['width'] = isset($data['width']) ? $data['width'] : null;
+        $this->container['html_fragment'] = isset($data['html_fragment']) ? $data['html_fragment'] : null;
+        $this->container['images'] = isset($data['images']) ? $data['images'] : null;
     }
 
     /**
@@ -389,6 +407,30 @@ class Cell implements ModelInterface, ArrayAccess
     public function setBackgroundImageFile($background_image_file)
     {
         $this->container['background_image_file'] = $background_image_file;
+
+        return $this;
+    }
+
+    /**
+     * Gets background_image_storage_file
+     *
+     * @return string
+     */
+    public function getBackgroundImageStorageFile()
+    {
+        return $this->container['background_image_storage_file'];
+    }
+
+    /**
+     * Sets background_image_storage_file
+     *
+     * @param string $background_image_storage_file Gets or sets path of the background image file from storage.
+     *
+     * @return $this
+     */
+    public function setBackgroundImageStorageFile($background_image_storage_file)
+    {
+        $this->container['background_image_storage_file'] = $background_image_storage_file;
 
         return $this;
     }
@@ -581,6 +623,54 @@ class Cell implements ModelInterface, ArrayAccess
     public function setWidth($width)
     {
         $this->container['width'] = $width;
+
+        return $this;
+    }
+
+    /**
+     * Gets html_fragment
+     *
+     * @return string
+     */
+    public function getHtmlFragment()
+    {
+        return $this->container['html_fragment'];
+    }
+
+    /**
+     * Sets html_fragment
+     *
+     * @param string $html_fragment Gets or sets Html fragment.
+     *
+     * @return $this
+     */
+    public function setHtmlFragment($html_fragment)
+    {
+        $this->container['html_fragment'] = $html_fragment;
+
+        return $this;
+    }
+
+    /**
+     * Gets images
+     *
+     * @return \Aspose\PDF\Model\ImageFragment[]
+     */
+    public function getImages()
+    {
+        return $this->container['images'];
+    }
+
+    /**
+     * Sets images
+     *
+     * @param \Aspose\PDF\Model\ImageFragment[] $images Gets or sets ImageFragment list.
+     *
+     * @return $this
+     */
+    public function setImages($images)
+    {
+        $this->container['images'] = $images;
 
         return $this;
     }
