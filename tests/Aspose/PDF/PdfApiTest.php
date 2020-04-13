@@ -594,9 +594,8 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
                 // change properties on paragraph AFTER first clearing and re-adding paragraphs
                 else if ($c == 4)
                 {
-                    $cell->getParagraphs()[0]->setText('y');
-                    $cell->getParagraphs()[0]->setTextState($textState);
-                    $cell->getParagraphs()[0]->getTextState()->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0xFF]));
+                    $cell->setParagraphs(null);
+                    $cell->setHtmlFragment('<ul><li>First</li><li>Second</li></ul>');
                 }
                 
                 array_push($cells, $cell);
@@ -2974,7 +2973,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $folder = $this->tempFolder;
 
 
-        $response = $this->pdfApi->getPdfInStorageToLaTeX($name, null, $folder);
+        $response = $this->pdfApi->getPdfInStorageToLaTeX($name, $folder, null);
         $this->assertNotNull($response);        
     }
         
@@ -2986,7 +2985,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $folder = $this->tempFolder;
         $resFileName = "result.latex";
         
-        $response = $this->pdfApi->putPdfInStorageToLaTeX($name, $this->tempFolder . '/' . $resFileName, null, $folder);
+        $response = $this->pdfApi->putPdfInStorageToLaTeX($name, $this->tempFolder . '/' . $resFileName, $folder, null);
         $this->assertNotNull($response);
     }
 
@@ -2996,7 +2995,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
         $resFileName = "result.latex";
 
-        $response = $this->pdfApi->putPdfInRequestToLaTeX($this->tempFolder . '/' . $resFileName, null, null, $file);
+        $response = $this->pdfApi->putPdfInRequestToLaTeX($this->tempFolder . '/' . $resFileName, null, $file);
         $this->assertNotNull($response);
     }
 
