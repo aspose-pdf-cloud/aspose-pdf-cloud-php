@@ -2965,7 +2965,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     }
 
 
-    public function testGetPdfInStorageToLaTeX()
+    public function testGetPdfInStorageToTeX()
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
@@ -2973,29 +2973,29 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $folder = $this->tempFolder;
 
 
-        $response = $this->pdfApi->getPdfInStorageToLaTeX($name, $folder, null);
+        $response = $this->pdfApi->getPdfInStorageToTeX($name, $folder, null);
         $this->assertNotNull($response);        
     }
         
-    public function testPutPdfInStorageToLaTeX()
+    public function testPutPdfInStorageToTeX()
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
 
         $folder = $this->tempFolder;
-        $resFileName = "result.latex";
+        $resFileName = "result.tex";
         
-        $response = $this->pdfApi->putPdfInStorageToLaTeX($name, $this->tempFolder . '/' . $resFileName, $folder, null);
+        $response = $this->pdfApi->putPdfInStorageToTeX($name, $this->tempFolder . '/' . $resFileName, $folder, null);
         $this->assertNotNull($response);
     }
 
-    public function testPutPdfInRequestToLaTeX()
+    public function testPutPdfInRequestToTeX()
     {
         $name = '4pages.pdf';
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
         $resFileName = "result.latex";
 
-        $response = $this->pdfApi->putPdfInRequestToLaTeX($this->tempFolder . '/' . $resFileName, null, $file);
+        $response = $this->pdfApi->putPdfInRequestToTeX($this->tempFolder . '/' . $resFileName, null, $file);
         $this->assertNotNull($response);
     }
 
@@ -3187,18 +3187,18 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
-    public function testGetLaTeXInStorageToPdf()
+    public function testGetTeXInStorageToPdf()
     {
         $name = "sample.tex";
         $this->uploadFile($name);
 
         $src_path = $this->tempFolder . '/' . $name;
 
-        $response = $this->pdfApi->getLaTeXInStorageToPdf($src_path);
+        $response = $this->pdfApi->getTeXInStorageToPdf($src_path);
         $this->assertGreaterThan(0, $response->getSize());
     }
 
-    public function testPutLaTeXInStorageToPdf()
+    public function testPutTeXInStorageToPdf()
     {
         $name = "sample.tex";
         $this->uploadFile($name);
@@ -3206,7 +3206,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $src_path = $this->tempFolder . '/' . $name;
         $resultName = "fromTex.pdf";
 
-        $response = $this->pdfApi->putLaTeXInStorageToPdf($resultName, $src_path, $this->tempFolder);
+        $response = $this->pdfApi->putTeXInStorageToPdf($resultName, $src_path, $this->tempFolder);
         $this->assertEquals(200, $response->getCode());
     }
 
