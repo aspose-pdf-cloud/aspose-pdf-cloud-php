@@ -7431,7 +7431,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInRequestToHtml"></a>
 ## **putPdfInRequestToHtml**
-> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToHtml($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $storage, $flow_layout_paragraph_full_width, $file)
+> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToHtml($out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $storage, $flow_layout_paragraph_full_width, $output_format, $file)
 
 Converts PDF document (in request content) to Html format and uploads resulting file to storage.
 
@@ -7469,6 +7469,7 @@ Name | Type | Description  | Notes
 **$try_save_text_underlining_and_strikeouting_in_css** | **bool** | PDF itself does not contain underlining markers for texts. It emulated with line situated under text. This option allows converter try guess that this or that line is a text's underlining and put this info into CSS instead of drawing of underlining graphically. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$flow_layout_paragraph_full_width** | **bool** | This attribute specifies full width paragraph text for Flow mode, FixedLayout = false. | [optional]
+**$output_format** | [**\Aspose\PDF\Model\OutputFormat**](OutputFormat.md) | This parameter determines the type of result. The zip archive will be uploaded into the storage if the parameter is "Zip" or missed (default). In case of the "Folder", all resulting files and directories will be uploaded to the folder of the resulting HTML file. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
 ### Return type
@@ -7805,7 +7806,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInStorageToHtml"></a>
 ## **putPdfInStorageToHtml**
-> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToHtml($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder, $storage, $flow_layout_paragraph_full_width)
+> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToHtml($name, $out_path, $additional_margin_width_in_points, $compress_svg_graphics_if_any, $convert_marked_content_to_layers, $default_font_name, $document_type, $fixed_layout, $image_resolution, $minimal_line_width, $prevent_glyphs_grouping, $split_css_into_pages, $split_into_pages, $use_z_order, $antialiasing_processing, $css_class_names_prefix, $explicit_list_of_saved_pages, $font_encoding_strategy, $font_saving_mode, $html_markup_generation_mode, $letters_positioning_method, $pages_flow_type_depends_on_viewers_screen_size, $parts_embedding_mode, $raster_images_saving_mode, $remove_empty_areas_on_top_and_bottom, $save_shadowed_texts_as_transparent_texts, $save_transparent_texts, $special_folder_for_all_images, $special_folder_for_svg_images, $try_save_text_underlining_and_strikeouting_in_css, $folder, $storage, $flow_layout_paragraph_full_width, $output_format)
 
 Converts PDF document (located on storage) to Html format and uploads resulting file to storage
 
@@ -7845,6 +7846,7 @@ Name | Type | Description  | Notes
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$flow_layout_paragraph_full_width** | **bool** | This attribute specifies full width paragraph text for Flow mode, FixedLayout = false. | [optional]
+**$output_format** | [**\Aspose\PDF\Model\OutputFormat**](OutputFormat.md) | This parameter determines the type of result. The zip archive will be uploaded into the storage if the parameter is "Zip" or missed (default). In case of the "Folder", all resulting files and directories will be uploaded to the folder of the resulting HTML file. | [optional]
 
 ### Return type
 

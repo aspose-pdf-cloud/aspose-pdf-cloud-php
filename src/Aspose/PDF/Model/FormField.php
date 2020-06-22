@@ -52,6 +52,7 @@ class FormField extends LinkElement
       */
     protected static $swaggerTypes = [
         'partial_name' => 'string',
+        'full_name' => 'string',
         'rect' => '\Aspose\PDF\Model\Rectangle',
         'value' => 'string',
         'page_index' => 'int',
@@ -78,6 +79,7 @@ class FormField extends LinkElement
       */
     protected static $swaggerFormats = [
         'partial_name' => null,
+        'full_name' => null,
         'rect' => null,
         'value' => null,
         'page_index' => 'int32',
@@ -125,6 +127,7 @@ class FormField extends LinkElement
      */
     protected static $attributeMap = [
         'partial_name' => 'PartialName',
+        'full_name' => 'FullName',
         'rect' => 'Rect',
         'value' => 'Value',
         'page_index' => 'PageIndex',
@@ -151,6 +154,7 @@ class FormField extends LinkElement
      */
     protected static $setters = [
         'partial_name' => 'setPartialName',
+        'full_name' => 'setFullName',
         'rect' => 'setRect',
         'value' => 'setValue',
         'page_index' => 'setPageIndex',
@@ -177,6 +181,7 @@ class FormField extends LinkElement
      */
     protected static $getters = [
         'partial_name' => 'getPartialName',
+        'full_name' => 'getFullName',
         'rect' => 'getRect',
         'value' => 'getValue',
         'page_index' => 'getPageIndex',
@@ -253,6 +258,7 @@ class FormField extends LinkElement
         parent::__construct($data);
 
         $this->container['partial_name'] = isset($data['partial_name']) ? $data['partial_name'] : null;
+        $this->container['full_name'] = isset($data['full_name']) ? $data['full_name'] : null;
         $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
         $this->container['value'] = isset($data['value']) ? $data['value'] : null;
         $this->container['page_index'] = isset($data['page_index']) ? $data['page_index'] : null;
@@ -326,6 +332,30 @@ class FormField extends LinkElement
     public function setPartialName($partial_name)
     {
         $this->container['partial_name'] = $partial_name;
+
+        return $this;
+    }
+
+    /**
+     * Gets full_name
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->container['full_name'];
+    }
+
+    /**
+     * Sets full_name
+     *
+     * @param string $full_name Full Field name.
+     *
+     * @return $this
+     */
+    public function setFullName($full_name)
+    {
+        $this->container['full_name'] = $full_name;
 
         return $this;
     }

@@ -2816,7 +2816,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $this->uploadFile($name);
 
         $folder = $this->tempFolder;
-        $resFileName = "result.zip";
+        $resFileName = "result_4pages.html";
         
         $response = $this->pdfApi->putPdfInStorageToHtml(
             $name, 
@@ -2849,7 +2849,10 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
             $special_folder_for_all_images = null, 
             $special_folder_for_svg_images = null, 
             $try_save_text_underlining_and_strikeouting_in_css = null, 
-            $folder);
+            $folder,
+            $storage = null,
+            $flow_layout_paragraph_full_width = null,
+            Aspose\PDF\Model\OutputFormat::FOLDER);
         $this->assertNotNull($response);
     }
 
@@ -2890,7 +2893,8 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
             $special_folder_for_svg_images = null, 
             $try_save_text_underlining_and_strikeouting_in_css = null,
             $storage = null,
-            $flow_layout_paragraph_full_width = null, 
+            $flow_layout_paragraph_full_width = null,
+            $output_format = null, 
             $file);
         $this->assertNotNull($response);
     }

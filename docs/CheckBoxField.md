@@ -11,6 +11,7 @@ Name | Type | Description | Notes
 **checked** | **bool** | Gets or sets state of check box. | 
 **export_value** | **string** | Gets or sets export value of CheckBox field. | [optional]
 **partial_name** | **string** | Field name.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | [optional]
+**full_name** | **string** | Full Field name.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | [optional]
 **rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Field rectangle.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | [optional]
 **value** | **string** | Field value.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | [optional]
 **page_index** | **int** | Page index.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | 

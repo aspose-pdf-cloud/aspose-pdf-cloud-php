@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **multi_select** | **bool** | Gets or sets multiselection flag. | [optional]
 **selected** | **int** | Gets or sets index of selected item. Numbering of items is started from 1. | [optional]
 **partial_name** | **string** | Field name.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | [optional]
+**full_name** | **string** | Full Field name.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | [optional]
 **rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Field rectangle.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | [optional]
 **value** | **string** | Field value.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | [optional]
 **page_index** | **int** | Page index.<br />*Inherited from [\Aspose\PDF\Model\FormField](FormField.md)* | 

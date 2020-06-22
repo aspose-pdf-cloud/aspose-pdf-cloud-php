@@ -1,6 +1,6 @@
 ﻿# Aspose.PDF Cloud
 - API version: 3.0
-- Package version: 20.5.0
+- Package version: 20.6.0
 
 [Aspose.PDF Cloud](https://products.aspose.cloud/pdf) is a true REST API that enables you to perform a wide range of document processing operations including creation, manipulation, conversion and rendering of Pdf documents in the cloud.
 
@@ -598,6 +598,7 @@ Class | Description
 [**ObjectExist**](docs/ObjectExist.md) | Object exists
 [**OptimizeOptions**](docs/OptimizeOptions.md) | Represents Pdf optimize options.
 [**Option**](docs/Option.md) | Provides form option.
+[**OutputFormat**](docs/OutputFormat.md) | Enumeration for output type format.
 [**Page**](docs/Page.md) | Provides link to page.
 [**PageLayout**](docs/PageLayout.md) | Descibes page layout.
 [**PageMode**](docs/PageMode.md) | Class descibes used components of the document page.
