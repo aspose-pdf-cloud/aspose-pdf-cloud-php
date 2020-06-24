@@ -6,6 +6,7 @@ Provides form field.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **partial_name** | **string** | Field name. | [optional]
+**full_name** | **string** | Full Field name. | [optional]
 **rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Field rectangle. | [optional]
 **value** | **string** | Field value. | [optional]
 **page_index** | **int** | Page index. | 
