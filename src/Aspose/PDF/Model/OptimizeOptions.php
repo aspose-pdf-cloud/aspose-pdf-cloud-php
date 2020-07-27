@@ -59,7 +59,13 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
         'link_duplcate_streams' => 'bool',
         'remove_unused_objects' => 'bool',
         'remove_unused_streams' => 'bool',
-        'unembed_fonts' => 'bool'
+        'unembed_fonts' => 'bool',
+        'resize_images' => 'bool',
+        'max_resolution' => 'int',
+        'subset_fonts' => 'bool',
+        'remove_private_info' => 'bool',
+        'image_encoding' => '\Aspose\PDF\Model\ImageEncoding',
+        'image_compression_version' => '\Aspose\PDF\Model\ImageCompressionVersion'
     ];
 
     /**
@@ -74,7 +80,13 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
         'link_duplcate_streams' => null,
         'remove_unused_objects' => null,
         'remove_unused_streams' => null,
-        'unembed_fonts' => null
+        'unembed_fonts' => null,
+        'resize_images' => null,
+        'max_resolution' => 'int32',
+        'subset_fonts' => null,
+        'remove_private_info' => null,
+        'image_encoding' => null,
+        'image_compression_version' => null
     ];
 
     /**
@@ -110,7 +122,13 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
         'link_duplcate_streams' => 'LinkDuplcateStreams',
         'remove_unused_objects' => 'RemoveUnusedObjects',
         'remove_unused_streams' => 'RemoveUnusedStreams',
-        'unembed_fonts' => 'UnembedFonts'
+        'unembed_fonts' => 'UnembedFonts',
+        'resize_images' => 'ResizeImages',
+        'max_resolution' => 'MaxResolution',
+        'subset_fonts' => 'SubsetFonts',
+        'remove_private_info' => 'RemovePrivateInfo',
+        'image_encoding' => 'ImageEncoding',
+        'image_compression_version' => 'ImageCompressionVersion'
     ];
 
     /**
@@ -125,7 +143,13 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
         'link_duplcate_streams' => 'setLinkDuplcateStreams',
         'remove_unused_objects' => 'setRemoveUnusedObjects',
         'remove_unused_streams' => 'setRemoveUnusedStreams',
-        'unembed_fonts' => 'setUnembedFonts'
+        'unembed_fonts' => 'setUnembedFonts',
+        'resize_images' => 'setResizeImages',
+        'max_resolution' => 'setMaxResolution',
+        'subset_fonts' => 'setSubsetFonts',
+        'remove_private_info' => 'setRemovePrivateInfo',
+        'image_encoding' => 'setImageEncoding',
+        'image_compression_version' => 'setImageCompressionVersion'
     ];
 
     /**
@@ -140,7 +164,13 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
         'link_duplcate_streams' => 'getLinkDuplcateStreams',
         'remove_unused_objects' => 'getRemoveUnusedObjects',
         'remove_unused_streams' => 'getRemoveUnusedStreams',
-        'unembed_fonts' => 'getUnembedFonts'
+        'unembed_fonts' => 'getUnembedFonts',
+        'resize_images' => 'getResizeImages',
+        'max_resolution' => 'getMaxResolution',
+        'subset_fonts' => 'getSubsetFonts',
+        'remove_private_info' => 'getRemovePrivateInfo',
+        'image_encoding' => 'getImageEncoding',
+        'image_compression_version' => 'getImageCompressionVersion'
     ];
 
     /**
@@ -210,6 +240,12 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
         $this->container['remove_unused_objects'] = isset($data['remove_unused_objects']) ? $data['remove_unused_objects'] : null;
         $this->container['remove_unused_streams'] = isset($data['remove_unused_streams']) ? $data['remove_unused_streams'] : null;
         $this->container['unembed_fonts'] = isset($data['unembed_fonts']) ? $data['unembed_fonts'] : null;
+        $this->container['resize_images'] = isset($data['resize_images']) ? $data['resize_images'] : null;
+        $this->container['max_resolution'] = isset($data['max_resolution']) ? $data['max_resolution'] : null;
+        $this->container['subset_fonts'] = isset($data['subset_fonts']) ? $data['subset_fonts'] : null;
+        $this->container['remove_private_info'] = isset($data['remove_private_info']) ? $data['remove_private_info'] : null;
+        $this->container['image_encoding'] = isset($data['image_encoding']) ? $data['image_encoding'] : null;
+        $this->container['image_compression_version'] = isset($data['image_compression_version']) ? $data['image_compression_version'] : null;
     }
 
     /**
@@ -221,27 +257,6 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     {
         $invalidProperties = [];
 
-        if ($this->container['allow_reuse_page_content'] === null) {
-            $invalidProperties[] = "'allow_reuse_page_content' can't be null";
-        }
-        if ($this->container['compress_images'] === null) {
-            $invalidProperties[] = "'compress_images' can't be null";
-        }
-        if ($this->container['image_quality'] === null) {
-            $invalidProperties[] = "'image_quality' can't be null";
-        }
-        if ($this->container['link_duplcate_streams'] === null) {
-            $invalidProperties[] = "'link_duplcate_streams' can't be null";
-        }
-        if ($this->container['remove_unused_objects'] === null) {
-            $invalidProperties[] = "'remove_unused_objects' can't be null";
-        }
-        if ($this->container['remove_unused_streams'] === null) {
-            $invalidProperties[] = "'remove_unused_streams' can't be null";
-        }
-        if ($this->container['unembed_fonts'] === null) {
-            $invalidProperties[] = "'unembed_fonts' can't be null";
-        }
         return $invalidProperties;
     }
 
@@ -254,27 +269,6 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     public function valid()
     {
 
-        if ($this->container['allow_reuse_page_content'] === null) {
-            return false;
-        }
-        if ($this->container['compress_images'] === null) {
-            return false;
-        }
-        if ($this->container['image_quality'] === null) {
-            return false;
-        }
-        if ($this->container['link_duplcate_streams'] === null) {
-            return false;
-        }
-        if ($this->container['remove_unused_objects'] === null) {
-            return false;
-        }
-        if ($this->container['remove_unused_streams'] === null) {
-            return false;
-        }
-        if ($this->container['unembed_fonts'] === null) {
-            return false;
-        }
         return true;
     }
 
@@ -316,7 +310,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     /**
      * Sets compress_images
      *
-     * @param bool $compress_images If this flag is set to true images will be compressed in the document. compression level is specfied with ImageQuality property.
+     * @param bool $compress_images If this flag is set to true images will be compressed in the document. Compression level is specified with ImageQuality property.
      *
      * @return $this
      */
@@ -340,7 +334,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     /**
      * Sets image_quality
      *
-     * @param int $image_quality Specifie slevel of image compression when CompressIamges flag is used.
+     * @param int $image_quality Specifies level of image compression when CompressImages flag is used.
      *
      * @return $this
      */
@@ -364,7 +358,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     /**
      * Sets link_duplcate_streams
      *
-     * @param bool $link_duplcate_streams If this flag is set to true, Resource streams will be analyzed. If duplicate streams are found (i.e. if stream contents is equal), then thes streams will be stored as one object.  This allows to decrease document size in some cases (for example, when same document was concatenedted multiple times).
+     * @param bool $link_duplcate_streams If this flag is set to true, Resource streams will be analyzed. If duplicate streams are found (i.e. if stream contents is equal), then thees streams will be stored as one object.  This allows to decrease document size in some cases (for example, when same document was concatenated multiple times).
      *
      * @return $this
      */
@@ -443,6 +437,150 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     public function setUnembedFonts($unembed_fonts)
     {
         $this->container['unembed_fonts'] = $unembed_fonts;
+
+        return $this;
+    }
+
+    /**
+     * Gets resize_images
+     *
+     * @return bool
+     */
+    public function getResizeImages()
+    {
+        return $this->container['resize_images'];
+    }
+
+    /**
+     * Sets resize_images
+     *
+     * @param bool $resize_images If this flag set to true and CompressImages is true images will be resized if image resolution is greater then specified MaxResolution parameter.
+     *
+     * @return $this
+     */
+    public function setResizeImages($resize_images)
+    {
+        $this->container['resize_images'] = $resize_images;
+
+        return $this;
+    }
+
+    /**
+     * Gets max_resolution
+     *
+     * @return int
+     */
+    public function getMaxResolution()
+    {
+        return $this->container['max_resolution'];
+    }
+
+    /**
+     * Sets max_resolution
+     *
+     * @param int $max_resolution Specifies maximum resolution of images. If image has higher resolution it will be scaled.
+     *
+     * @return $this
+     */
+    public function setMaxResolution($max_resolution)
+    {
+        $this->container['max_resolution'] = $max_resolution;
+
+        return $this;
+    }
+
+    /**
+     * Gets subset_fonts
+     *
+     * @return bool
+     */
+    public function getSubsetFonts()
+    {
+        return $this->container['subset_fonts'];
+    }
+
+    /**
+     * Sets subset_fonts
+     *
+     * @param bool $subset_fonts Fonts will be converted into subsets if set to true.
+     *
+     * @return $this
+     */
+    public function setSubsetFonts($subset_fonts)
+    {
+        $this->container['subset_fonts'] = $subset_fonts;
+
+        return $this;
+    }
+
+    /**
+     * Gets remove_private_info
+     *
+     * @return bool
+     */
+    public function getRemovePrivateInfo()
+    {
+        return $this->container['remove_private_info'];
+    }
+
+    /**
+     * Sets remove_private_info
+     *
+     * @param bool $remove_private_info Remove private information (page piece info).
+     *
+     * @return $this
+     */
+    public function setRemovePrivateInfo($remove_private_info)
+    {
+        $this->container['remove_private_info'] = $remove_private_info;
+
+        return $this;
+    }
+
+    /**
+     * Gets image_encoding
+     *
+     * @return \Aspose\PDF\Model\ImageEncoding
+     */
+    public function getImageEncoding()
+    {
+        return $this->container['image_encoding'];
+    }
+
+    /**
+     * Sets image_encoding
+     *
+     * @param \Aspose\PDF\Model\ImageEncoding $image_encoding Image encode which will be used.
+     *
+     * @return $this
+     */
+    public function setImageEncoding($image_encoding)
+    {
+        $this->container['image_encoding'] = $image_encoding;
+
+        return $this;
+    }
+
+    /**
+     * Gets image_compression_version
+     *
+     * @return \Aspose\PDF\Model\ImageCompressionVersion
+     */
+    public function getImageCompressionVersion()
+    {
+        return $this->container['image_compression_version'];
+    }
+
+    /**
+     * Sets image_compression_version
+     *
+     * @param \Aspose\PDF\Model\ImageCompressionVersion $image_compression_version Version of compression algorithm. Possible values are: \"Standard\" - standard compression, \"Fast\" - fast (improved compression which is faster then standard but may be applicable not for all images), \"Mixed\" - mixed (standard compression is applied to images which can not be compressed by  faster algorithm, this may give best compression but more slow then \"Fast\" algorithm. Version \"Fast\" is not applicable for resizing images (standard method will be used). Default is \"Standard\".
+     *
+     * @return $this
+     */
+    public function setImageCompressionVersion($image_compression_version)
+    {
+        $this->container['image_compression_version'] = $image_compression_version;
 
         return $this;
     }
