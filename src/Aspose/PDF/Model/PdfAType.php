@@ -41,6 +41,7 @@ class PdfAType
      */
     const PDFA1_A = 'PDFA1A';
     const PDFA1_B = 'PDFA1B';
+    const PDFA3_A = 'PDFA3A';
     
     /**
      * Gets allowable values of the enum
@@ -51,6 +52,7 @@ class PdfAType
         return [
             self::PDFA1_A,
             self::PDFA1_B,
+            self::PDFA3_A,
         ];
     }
 }
