@@ -295,6 +295,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $textState =  new Aspose\PDF\Model\TextState();
         $textState->setFontSize(14);
+        $textState->setFont('Arial');
 
         $stamp = new Aspose\PDF\Model\TextStamp();
         $stamp->setBackground(true);
@@ -1274,6 +1275,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $textState->setFontSize(14);
         $textState->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
         $textState->setBackgroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0]));
+        $textState->setFont('Arial');
 
         $header = new Aspose\PDF\Model\TextHeader();
         $header->setBackground(true);
@@ -1307,6 +1309,7 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $textState->setFontSize(14);
         $textState->setForegroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0, 'g' => 0xFF, 'b' => 0]));
         $textState->setBackgroundColor(new Aspose\PDF\Model\Color(['a' => 0xFF, 'r' => 0xFF, 'g' => 0, 'b' => 0]));
+        $textState->setFont('Arial');
 
         $footer = new Aspose\PDF\Model\TextFooter();
         $footer->setBackground(true);
@@ -5355,6 +5358,8 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
+        $fontName = 'Righteous-Regular.ttf';
+        $this->uploadFile($fontName);
 
         $pageNumber = 1;
         $folder = $this->tempFolder;
@@ -5378,11 +5383,12 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
         $backgroundColor->setB(0x00);
 
         $textState = new Aspose\PDF\Model\TextState();
-        $textState->setFont('Arial');
+        $textState->setFont('Righteous');
         $textState->setFontSize(10);
         $textState->setForegroundColor($foregroundColor);
         $textState->setBackgroundColor($backgroundColor);
-        $textState->setFontStyle(Aspose\PDF\Model\FontStyles::BOLD);
+        $textState->setFontStyle(Aspose\PDF\Model\FontStyles::REGULAR);
+        $textState->setFontFile($this->tempFolder . '/' . $fontName);
 
         $segment = new Aspose\PDF\Model\Segment();
         $segment->setValue('segment 1');

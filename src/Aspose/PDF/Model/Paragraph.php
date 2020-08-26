@@ -334,7 +334,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets horizontal_alignment
      *
-     * @param \Aspose\PDF\Model\TextHorizontalAlignment $horizontal_alignment Horizontal alignment for the text inside paragrph's rectangle.
+     * @param \Aspose\PDF\Model\TextHorizontalAlignment $horizontal_alignment Horizontal alignment for the text inside paragraph's rectangle.
      *
      * @return $this
      */
@@ -526,7 +526,7 @@ class Paragraph implements ModelInterface, ArrayAccess
     /**
      * Sets vertical_alignment
      *
-     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Vertical alignment for the text inside paragrph's rectangle
+     * @param \Aspose\PDF\Model\VerticalAlignment $vertical_alignment Vertical alignment for the text inside paragraph's rectangle
      *
      * @return $this
      */

@@ -57,7 +57,8 @@ class TextState implements ModelInterface, ArrayAccess
         'font' => 'string',
         'foreground_color' => '\Aspose\PDF\Model\Color',
         'background_color' => '\Aspose\PDF\Model\Color',
-        'font_style' => '\Aspose\PDF\Model\FontStyles'
+        'font_style' => '\Aspose\PDF\Model\FontStyles',
+        'font_file' => 'string'
     ];
 
     /**
@@ -70,7 +71,8 @@ class TextState implements ModelInterface, ArrayAccess
         'font' => null,
         'foreground_color' => null,
         'background_color' => null,
-        'font_style' => null
+        'font_style' => null,
+        'font_file' => null
     ];
 
     /**
@@ -104,7 +106,8 @@ class TextState implements ModelInterface, ArrayAccess
         'font' => 'Font',
         'foreground_color' => 'ForegroundColor',
         'background_color' => 'BackgroundColor',
-        'font_style' => 'FontStyle'
+        'font_style' => 'FontStyle',
+        'font_file' => 'FontFile'
     ];
 
     /**
@@ -117,7 +120,8 @@ class TextState implements ModelInterface, ArrayAccess
         'font' => 'setFont',
         'foreground_color' => 'setForegroundColor',
         'background_color' => 'setBackgroundColor',
-        'font_style' => 'setFontStyle'
+        'font_style' => 'setFontStyle',
+        'font_file' => 'setFontFile'
     ];
 
     /**
@@ -130,7 +134,8 @@ class TextState implements ModelInterface, ArrayAccess
         'font' => 'getFont',
         'foreground_color' => 'getForegroundColor',
         'background_color' => 'getBackgroundColor',
-        'font_style' => 'getFontStyle'
+        'font_style' => 'getFontStyle',
+        'font_file' => 'getFontFile'
     ];
 
     /**
@@ -198,6 +203,7 @@ class TextState implements ModelInterface, ArrayAccess
         $this->container['foreground_color'] = isset($data['foreground_color']) ? $data['foreground_color'] : null;
         $this->container['background_color'] = isset($data['background_color']) ? $data['background_color'] : null;
         $this->container['font_style'] = isset($data['font_style']) ? $data['font_style'] : null;
+        $this->container['font_file'] = isset($data['font_file']) ? $data['font_file'] : null;
     }
 
     /**
@@ -274,7 +280,7 @@ class TextState implements ModelInterface, ArrayAccess
     /**
      * Sets font
      *
-     * @param string $font Gets or sets font of the text.
+     * @param string $font Gets or sets font name of the text.
      *
      * @return $this
      */
@@ -353,6 +359,30 @@ class TextState implements ModelInterface, ArrayAccess
     public function setFontStyle($font_style)
     {
         $this->container['font_style'] = $font_style;
+
+        return $this;
+    }
+
+    /**
+     * Gets font_file
+     *
+     * @return string
+     */
+    public function getFontFile()
+    {
+        return $this->container['font_file'];
+    }
+
+    /**
+     * Sets font_file
+     *
+     * @param string $font_file Sets path of font file in storage.
+     *
+     * @return $this
+     */
+    public function setFontFile($font_file)
+    {
+        $this->container['font_file'] = $font_file;
 
         return $this;
     }
