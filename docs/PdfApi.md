@@ -5655,7 +5655,7 @@ Name | Type | Description  | Notes
 
 <a name="postPageRedactionAnnotations"></a>
 ## **postPageRedactionAnnotations**
-> \Aspose\PDF\Model\AsposeResponse postPageRedactionAnnotations($name, $page_number, $annotations, $storage, $folder)
+> \Aspose\PDF\Model\AsposeResponse postPageRedactionAnnotations($name, $page_number, $annotations, $storage, $folder, $apply)
 
 Add document page redaction annotations.
 
@@ -5667,6 +5667,7 @@ Name | Type | Description  | Notes
 **$annotations** | [**\Aspose\PDF\Model\RedactionAnnotation[]**](RedactionAnnotation.md) | The array of annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
+**$apply** | **bool** | Apply redaction immediately after adding. | [optional]
 
 ### Return type
 
@@ -8301,7 +8302,7 @@ Name | Type | Description  | Notes
 
 <a name="putRedactionAnnotation"></a>
 ## **putRedactionAnnotation**
-> \Aspose\PDF\Model\RedactionAnnotationResponse putRedactionAnnotation($name, $annotation_id, $annotation, $storage, $folder)
+> \Aspose\PDF\Model\RedactionAnnotationResponse putRedactionAnnotation($name, $annotation_id, $annotation, $storage, $folder, $apply)
 
 Replace document redaction annotation
 
@@ -8313,6 +8314,7 @@ Name | Type | Description  | Notes
 **$annotation** | [**\Aspose\PDF\Model\RedactionAnnotation**](RedactionAnnotation.md) | Annotation. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
+**$apply** | **bool** | Apply redaction immediately after adding. | [optional]
 
 ### Return type
 

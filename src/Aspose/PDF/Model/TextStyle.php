@@ -56,7 +56,8 @@ class TextStyle implements ModelInterface, ArrayAccess
         'font_size' => 'double',
         'font' => 'string',
         'foreground_color' => '\Aspose\PDF\Model\Color',
-        'background_color' => '\Aspose\PDF\Model\Color'
+        'background_color' => '\Aspose\PDF\Model\Color',
+        'font_file' => 'string'
     ];
 
     /**
@@ -68,7 +69,8 @@ class TextStyle implements ModelInterface, ArrayAccess
         'font_size' => 'double',
         'font' => null,
         'foreground_color' => null,
-        'background_color' => null
+        'background_color' => null,
+        'font_file' => null
     ];
 
     /**
@@ -101,7 +103,8 @@ class TextStyle implements ModelInterface, ArrayAccess
         'font_size' => 'FontSize',
         'font' => 'Font',
         'foreground_color' => 'ForegroundColor',
-        'background_color' => 'BackgroundColor'
+        'background_color' => 'BackgroundColor',
+        'font_file' => 'FontFile'
     ];
 
     /**
@@ -113,7 +116,8 @@ class TextStyle implements ModelInterface, ArrayAccess
         'font_size' => 'setFontSize',
         'font' => 'setFont',
         'foreground_color' => 'setForegroundColor',
-        'background_color' => 'setBackgroundColor'
+        'background_color' => 'setBackgroundColor',
+        'font_file' => 'setFontFile'
     ];
 
     /**
@@ -125,7 +129,8 @@ class TextStyle implements ModelInterface, ArrayAccess
         'font_size' => 'getFontSize',
         'font' => 'getFont',
         'foreground_color' => 'getForegroundColor',
-        'background_color' => 'getBackgroundColor'
+        'background_color' => 'getBackgroundColor',
+        'font_file' => 'getFontFile'
     ];
 
     /**
@@ -192,6 +197,7 @@ class TextStyle implements ModelInterface, ArrayAccess
         $this->container['font'] = isset($data['font']) ? $data['font'] : null;
         $this->container['foreground_color'] = isset($data['foreground_color']) ? $data['foreground_color'] : null;
         $this->container['background_color'] = isset($data['background_color']) ? $data['background_color'] : null;
+        $this->container['font_file'] = isset($data['font_file']) ? $data['font_file'] : null;
     }
 
     /**
@@ -317,6 +323,30 @@ class TextStyle implements ModelInterface, ArrayAccess
     public function setBackgroundColor($background_color)
     {
         $this->container['background_color'] = $background_color;
+
+        return $this;
+    }
+
+    /**
+     * Gets font_file
+     *
+     * @return string
+     */
+    public function getFontFile()
+    {
+        return $this->container['font_file'];
+    }
+
+    /**
+     * Sets font_file
+     *
+     * @param string $font_file Sets path of font file in storage.
+     *
+     * @return $this
+     */
+    public function setFontFile($font_file)
+    {
+        $this->container['font_file'] = $font_file;
 
         return $this;
     }

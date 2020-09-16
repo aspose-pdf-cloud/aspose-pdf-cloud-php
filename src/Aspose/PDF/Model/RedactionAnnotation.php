@@ -337,7 +337,7 @@ class RedactionAnnotation extends Annotation
     /**
      * Sets repeat
      *
-     * @param bool $repeat If true overlay text will be repated on the annotation.
+     * @param bool $repeat If true overlay text will be repeated on the annotation.
      *
      * @return $this
      */
