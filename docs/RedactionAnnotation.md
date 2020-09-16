@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **fill_color** | [**\Aspose\PDF\Model\Color**](Color.md) | Gets or sets color to fill annotation. | [optional]
 **border_color** | [**\Aspose\PDF\Model\Color**](Color.md) | Gets or sets color of border which is drawn when redaction is not active. | [optional]
 **overlay_text** | **string** | Text to print on redact annotation. | [optional]
-**repeat** | **bool** | If true overlay text will be repated on the annotation.  | [optional]
+**repeat** | **bool** | If true overlay text will be repeated on the annotation.  | [optional]
 **text_alignment** | [**\Aspose\PDF\Model\HorizontalAlignment**](HorizontalAlignment.md) | Gets or sets. Alignment of Overlay Text. | [optional]
 **color** | [**\Aspose\PDF\Model\Color**](Color.md) | Color of the annotation.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]
 **contents** | **string** | Get the annotation content.<br />*Inherited from [\Aspose\PDF\Model\Annotation](Annotation.md)* | [optional]

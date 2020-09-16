@@ -25,7 +25,7 @@
  * SignatureCustomAppearance Class 
  *
  * @category Class
- * @description An abstract class which represents signature custon appearance object.
+ * @description An abstract class which represents signature custom appearance object.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
