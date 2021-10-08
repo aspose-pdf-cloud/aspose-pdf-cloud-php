@@ -5,7 +5,7 @@ Single text replacement setting.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **old_value** | **string** | Original text. | 
-**new_value** | **string** | New text. | 
+**new_value** | **string** | New text. | [optional]
 **regex** | **bool** | Gets or sets a value indicating whether search text is regular expression. | 
 **text_state** | [**\Aspose\PDF\Model\TextState**](TextState.md) | Text properties of a new text. | [optional]
 **rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Rectangle area where searched original text. | [optional]

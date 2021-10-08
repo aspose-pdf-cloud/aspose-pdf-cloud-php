@@ -1,7 +1,7 @@
 <?php
 /**
  *
- *   Copyright (c) 2020 Aspose.PDF Cloud
+ * Copyright (c) 2021 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -216,13 +216,6 @@ class TextReplace implements ModelInterface, ArrayAccess
             $invalidProperties[] = "invalid value for 'old_value', the character length must be bigger than or equal to 1.";
         }
 
-        if ($this->container['new_value'] === null) {
-            $invalidProperties[] = "'new_value' can't be null";
-        }
-        if ((strlen($this->container['new_value']) < 1)) {
-            $invalidProperties[] = "invalid value for 'new_value', the character length must be bigger than or equal to 1.";
-        }
-
         if ($this->container['regex'] === null) {
             $invalidProperties[] = "'regex' can't be null";
         }
@@ -242,12 +235,6 @@ class TextReplace implements ModelInterface, ArrayAccess
             return false;
         }
         if (strlen($this->container['old_value']) < 1) {
-            return false;
-        }
-        if ($this->container['new_value'] === null) {
-            return false;
-        }
-        if (strlen($this->container['new_value']) < 1) {
             return false;
         }
         if ($this->container['regex'] === null) {
@@ -305,11 +292,6 @@ class TextReplace implements ModelInterface, ArrayAccess
      */
     public function setNewValue($new_value)
     {
-
-        if ((strlen($new_value) < 1)) {
-            throw new \InvalidArgumentException('invalid length for $new_value when calling TextReplace., must be bigger than or equal to 1.');
-        }
-
         $this->container['new_value'] = $new_value;
 
         return $this;
