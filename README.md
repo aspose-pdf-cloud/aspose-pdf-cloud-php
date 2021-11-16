@@ -9,7 +9,6 @@ These SDKs are now fully supported. If you have any questions, see any bugs or h
 Extract Text & Images of a PDF document online https://products.aspose.app/pdf/parser.
 
 ## PDF Processing Features
-
 - Add PDF document's header & footer in text or image format.
 - Add tables & stamps (text or image) to PDF documents.
 - Append multiple PDF documents to an existing file.
@@ -22,21 +21,16 @@ Extract Text & Images of a PDF document online https://products.aspose.app/pdf/p
 - Extract various elements of PDF files & make PDF documents optimized.
 
 ## Read & Write PDF Formats
-
 PDF, EPUB, HTML, TeX, SVG, XML, XPS, FDF, XFDF
+
 ## Save PDF As
 XLS, XLSX, PPTX, DOC, DOCX, MobiXML, JPEG, EMF, PNG, BMP, GIF, TIFF, Text
+
 ## Read PDF Formats
 MHT, PCL, PS, XSLFO, MD
 
-## Enhancements in Version 21.9
-- A new version of Aspose.PDF Cloud was prepared using the latest version of Aspose.PDF for .Net.
-
-## Enhancements in Version 20.12
-- A new version of Aspose.PDF Cloud was prepared using the latest version of Aspose.PDF for .Net.
-
-## Enhancements in Version 20.10
-- A new version of Aspose.PDF Cloud was prepared using the latest version of Aspose.PDF for .Net.
+## Enhancements in Version 21.10
+- A new version of Aspose.PDF Cloud was prepared using the latest version of Aspose.PDF for .NET.
 
 ## Enhancements in Version 20.9
 * Implemented custom fonts for Text API.
@@ -46,7 +40,6 @@ MHT, PCL, PS, XSLFO, MD
 * Included custom fonts for Replace Text API.
 
 ## Requirements
-
 PHP 5.4.0 and later
 
 ## Unit Tests
