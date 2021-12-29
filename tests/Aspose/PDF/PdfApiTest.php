@@ -34,14 +34,13 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
     protected function setUp()
     {
-        // Get App key and App SID from https://aspose.cloud
-        $appSid = '';
-        $appKey = '';
-        $host = 'https://api.aspose.cloud/v3.0';
+        $servercreds_json = file_get_contents('../../../../../Settings/servercreds.json');
+        $creds = json_decode($servercreds_json, true);
+        $appSid = $creds['AppSID'];
+        $appKey = $creds['AppKey'];
+        $host = $creds['ProductUri'];
 
-
-        $this->tempFolder = 'TempPdfCloud';
-        
+        $this->tempFolder = 'TempPdfCloud';        
         $this->config = new Configuration();
         $this->config->setAppKey($appKey);
         $this->config->setAppSid($appSid);
