@@ -43,3 +43,5 @@ runTempTests.bat
 .settings
 /.vscode/
 
+################################
+/Examples/vendor
