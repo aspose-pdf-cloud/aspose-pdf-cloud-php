@@ -97,7 +97,6 @@ Method | HTTP request | Description
 *PdfApi* | [**getImportFieldsFromXfdfInStorage**](PdfApi.md#getImportFieldsFromXfdfInStorage) | **GET** /pdf/\{name}/import/xfdf | Update fields from XFDF file in storage.
 *PdfApi* | [**getImportFieldsFromXmlInStorage**](PdfApi.md#getImportFieldsFromXmlInStorage) | **GET** /pdf/\{name}/import/xml | Import from XML file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**getInkAnnotation**](PdfApi.md#getInkAnnotation) | **GET** /pdf/\{name}/annotations/ink/\{annotationId} | Read document page ink annotation by ID.
-*PdfApi* | [**getLaTeXInStorageToPdf**](PdfApi.md#getLaTeXInStorageToPdf) | **GET** /pdf/create/latex | Convert TeX file (located on storage) to PDF format and return resulting file in response. 
 *PdfApi* | [**getLineAnnotation**](PdfApi.md#getLineAnnotation) | **GET** /pdf/\{name}/annotations/line/\{annotationId} | Read document page line annotation by ID.
 *PdfApi* | [**getLinkAnnotation**](PdfApi.md#getLinkAnnotation) | **GET** /pdf/\{name}/links/\{linkId} | Read document link annotation by ID.
 *PdfApi* | [**getListBoxField**](PdfApi.md#getListBoxField) | **GET** /pdf/\{name}/fields/listbox/\{fieldName} | Read document listbox field by name.
@@ -284,7 +283,6 @@ Method | HTTP request | Description
 *PdfApi* | [**putImportFieldsFromXfdfInStorage**](PdfApi.md#putImportFieldsFromXfdfInStorage) | **PUT** /pdf/\{name}/import/xfdf | Update fields from XFDF file in storage.
 *PdfApi* | [**putImportFieldsFromXmlInStorage**](PdfApi.md#putImportFieldsFromXmlInStorage) | **PUT** /pdf/\{name}/import/xml | Update fields from XML file in storage.
 *PdfApi* | [**putInkAnnotation**](PdfApi.md#putInkAnnotation) | **PUT** /pdf/\{name}/annotations/ink/\{annotationId} | Replace document ink annotation
-*PdfApi* | [**putLaTeXInStorageToPdf**](PdfApi.md#putLaTeXInStorageToPdf) | **PUT** /pdf/\{name}/create/latex | Convert TeX file (located on storage) to PDF format and upload resulting file to storage. 
 *PdfApi* | [**putLineAnnotation**](PdfApi.md#putLineAnnotation) | **PUT** /pdf/\{name}/annotations/line/\{annotationId} | Replace document line annotation
 *PdfApi* | [**putLinkAnnotation**](PdfApi.md#putLinkAnnotation) | **PUT** /pdf/\{name}/links/\{linkId} | Replace document page link annotations
 *PdfApi* | [**putListBoxField**](PdfApi.md#putListBoxField) | **PUT** /pdf/\{name}/fields/listbox/\{fieldName} | Replace document listbox field
@@ -2459,27 +2457,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="getLaTeXInStorageToPdf"></a>
-## **getLaTeXInStorageToPdf**
-> \SplFileObject getLaTeXInStorageToPdf($src_path, $storage)
-
-Convert TeX file (located on storage) to PDF format and return resulting file in response. 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$src_path** | **string** | Full source filename (ex. /folder1/folder2/template.tex) | 
-**$storage** | **string** | The document storage. | [optional]
-
-### Return type
-
-**\SplFileObject**
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: multipart/form-data
-
 <a name="getLineAnnotation"></a>
 ## **getLineAnnotation**
 > \Aspose\PDF\Model\LineAnnotationResponse getLineAnnotation($name, $annotation_id, $storage, $folder)
@@ -3863,7 +3840,7 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
 **$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
-**$scale_factor** | **double** | Scale factor | [optional]
+**$scale_factor** | **double** | Scale factor (Obsolete) | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
@@ -3889,7 +3866,7 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
 **$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
-**$scale_factor** | **double** | Scale factor | [optional]
+**$scale_factor** | **double** | Scale factor (Obsolete) | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
@@ -6937,29 +6914,6 @@ Name | Type | Description  | Notes
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a name="putLaTeXInStorageToPdf"></a>
-## **putLaTeXInStorageToPdf**
-> \Aspose\PDF\Model\AsposeResponse putLaTeXInStorageToPdf($name, $src_path, $dst_folder, $storage)
-
-Convert TeX file (located on storage) to PDF format and upload resulting file to storage. 
-
-### Parameters
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**$name** | **string** | The document name. | 
-**$src_path** | **string** | Full source filename (ex. /folder1/folder2/template.tex) | 
-**$dst_folder** | **string** | The destination document folder. | [optional]
-**$storage** | **string** | The document storage. | [optional]
-
-### Return type
-
-[**\Aspose\PDF\Model\AsposeResponse**](AsposeResponse.md)
-
-### HTTP request headers
-
- - **Content-Type**: application/json
- - **Accept**: application/json
-
 <a name="putLineAnnotation"></a>
 ## **putLineAnnotation**
 > \Aspose\PDF\Model\LineAnnotationResponse putLineAnnotation($name, $annotation_id, $annotation, $storage, $folder)
@@ -7619,7 +7573,7 @@ Name | Type | Description  | Notes
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.xls) | 
 **$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
 **$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
-**$scale_factor** | **double** | Scale factor | [optional]
+**$scale_factor** | **double** | Scale factor (Obsolete) | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
@@ -7645,7 +7599,7 @@ Name | Type | Description  | Notes
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.xlsx) | 
 **$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
 **$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
-**$scale_factor** | **double** | Scale factor | [optional]
+**$scale_factor** | **double** | Scale factor (Obsolete) | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
@@ -7980,7 +7934,7 @@ Name | Type | Description  | Notes
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.xls) | 
 **$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
 **$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
-**$scale_factor** | **double** | Scale factor | [optional]
+**$scale_factor** | **double** | Scale factor (Obsolete) | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
@@ -8007,7 +7961,7 @@ Name | Type | Description  | Notes
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.xlsx) | 
 **$insert_blank_column_at_first** | **bool** | Insert blank column at first | [optional]
 **$minimize_the_number_of_worksheets** | **bool** | Minimize the number of worksheets | [optional]
-**$scale_factor** | **double** | Scale factor | [optional]
+**$scale_factor** | **double** | Scale factor (Obsolete) | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
