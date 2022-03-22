@@ -58,7 +58,11 @@ class TextState implements ModelInterface, ArrayAccess
         'foreground_color' => '\Aspose\PDF\Model\Color',
         'background_color' => '\Aspose\PDF\Model\Color',
         'font_style' => '\Aspose\PDF\Model\FontStyles',
-        'font_file' => 'string'
+        'font_file' => 'string',
+        'underline' => 'bool',
+        'strike_out' => 'bool',
+        'superscript' => 'bool',
+        'subscript' => 'bool'
     ];
 
     /**
@@ -72,7 +76,11 @@ class TextState implements ModelInterface, ArrayAccess
         'foreground_color' => null,
         'background_color' => null,
         'font_style' => null,
-        'font_file' => null
+        'font_file' => null,
+        'underline' => null,
+        'strike_out' => null,
+        'superscript' => null,
+        'subscript' => null
     ];
 
     /**
@@ -107,7 +115,11 @@ class TextState implements ModelInterface, ArrayAccess
         'foreground_color' => 'ForegroundColor',
         'background_color' => 'BackgroundColor',
         'font_style' => 'FontStyle',
-        'font_file' => 'FontFile'
+        'font_file' => 'FontFile',
+        'underline' => 'Underline',
+        'strike_out' => 'StrikeOut',
+        'superscript' => 'Superscript',
+        'subscript' => 'Subscript'
     ];
 
     /**
@@ -121,7 +133,11 @@ class TextState implements ModelInterface, ArrayAccess
         'foreground_color' => 'setForegroundColor',
         'background_color' => 'setBackgroundColor',
         'font_style' => 'setFontStyle',
-        'font_file' => 'setFontFile'
+        'font_file' => 'setFontFile',
+        'underline' => 'setUnderline',
+        'strike_out' => 'setStrikeOut',
+        'superscript' => 'setSuperscript',
+        'subscript' => 'setSubscript'
     ];
 
     /**
@@ -135,7 +151,11 @@ class TextState implements ModelInterface, ArrayAccess
         'foreground_color' => 'getForegroundColor',
         'background_color' => 'getBackgroundColor',
         'font_style' => 'getFontStyle',
-        'font_file' => 'getFontFile'
+        'font_file' => 'getFontFile',
+        'underline' => 'getUnderline',
+        'strike_out' => 'getStrikeOut',
+        'superscript' => 'getSuperscript',
+        'subscript' => 'getSubscript'
     ];
 
     /**
@@ -204,6 +224,10 @@ class TextState implements ModelInterface, ArrayAccess
         $this->container['background_color'] = isset($data['background_color']) ? $data['background_color'] : null;
         $this->container['font_style'] = isset($data['font_style']) ? $data['font_style'] : null;
         $this->container['font_file'] = isset($data['font_file']) ? $data['font_file'] : null;
+        $this->container['underline'] = isset($data['underline']) ? $data['underline'] : null;
+        $this->container['strike_out'] = isset($data['strike_out']) ? $data['strike_out'] : null;
+        $this->container['superscript'] = isset($data['superscript']) ? $data['superscript'] : null;
+        $this->container['subscript'] = isset($data['subscript']) ? $data['subscript'] : null;
     }
 
     /**
@@ -383,6 +407,102 @@ class TextState implements ModelInterface, ArrayAccess
     public function setFontFile($font_file)
     {
         $this->container['font_file'] = $font_file;
+
+        return $this;
+    }
+
+    /**
+     * Gets underline
+     *
+     * @return bool
+     */
+    public function getUnderline()
+    {
+        return $this->container['underline'];
+    }
+
+    /**
+     * Sets underline
+     *
+     * @param bool $underline Gets or sets underline of the text.
+     *
+     * @return $this
+     */
+    public function setUnderline($underline)
+    {
+        $this->container['underline'] = $underline;
+
+        return $this;
+    }
+
+    /**
+     * Gets strike_out
+     *
+     * @return bool
+     */
+    public function getStrikeOut()
+    {
+        return $this->container['strike_out'];
+    }
+
+    /**
+     * Sets strike_out
+     *
+     * @param bool $strike_out Gets or sets strikeout of the text.
+     *
+     * @return $this
+     */
+    public function setStrikeOut($strike_out)
+    {
+        $this->container['strike_out'] = $strike_out;
+
+        return $this;
+    }
+
+    /**
+     * Gets superscript
+     *
+     * @return bool
+     */
+    public function getSuperscript()
+    {
+        return $this->container['superscript'];
+    }
+
+    /**
+     * Sets superscript
+     *
+     * @param bool $superscript Gets or sets superscript mode of the text.
+     *
+     * @return $this
+     */
+    public function setSuperscript($superscript)
+    {
+        $this->container['superscript'] = $superscript;
+
+        return $this;
+    }
+
+    /**
+     * Gets subscript
+     *
+     * @return bool
+     */
+    public function getSubscript()
+    {
+        return $this->container['subscript'];
+    }
+
+    /**
+     * Sets subscript
+     *
+     * @param bool $subscript Gets or sets subscript mode of the text.
+     *
+     * @return $this
+     */
+    public function setSubscript($subscript)
+    {
+        $this->container['subscript'] = $subscript;
 
         return $this;
     }
