@@ -3521,10 +3521,26 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
-
         $folder = $this->tempFolder;
-
         $response = $this->pdfApi->postSplitDocument($name, $format = null, $from = null, $to = null, $storage = null, $folder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostSplitRangePdfDocument()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        $pageRange1 = new Aspose\PDF\Model\PageRange();
+        $pageRange1->setTo(2);
+        $pageRange2 = new Aspose\PDF\Model\PageRange();
+        $pageRange2->setFrom(3);
+        $pageRange3 = new Aspose\PDF\Model\PageRange();
+        $pageRange3->setFrom(2);
+        $pageRange3->setTo(3);
+        $rangeOptions = new Aspose\PDF\Model\SplitRangePdfOptions();
+        $rangeOptions->setPageRanges([$pageRange1, $pageRange2, $pageRange3]);
+        $folder = $this->tempFolder;
+        $response = $this->pdfApi->postSplitRangePdfDocument($name, $rangeOptions, $storage = null, $folder);
         $this->assertEquals(200, $response->getCode());
     }
 
