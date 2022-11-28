@@ -25,6 +25,7 @@
  * SplitRangePdfOptions Class 
  *
  * @category Class
+ * @description Represents Pdf split into ranges options.
  * @package  Aspose\PDF
  * @author   Aspose PDF Cloud
  * @link     https://github.com/aspose-pdf-cloud/aspose-pdf-cloud-php
