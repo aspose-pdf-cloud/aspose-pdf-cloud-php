@@ -57,7 +57,8 @@ class TextReplace implements ModelInterface, ArrayAccess
         'new_value' => 'string',
         'regex' => 'bool',
         'text_state' => '\Aspose\PDF\Model\TextState',
-        'rect' => '\Aspose\PDF\Model\Rectangle'
+        'rect' => '\Aspose\PDF\Model\Rectangle',
+        'center_text_horizontally' => 'bool'
     ];
 
     /**
@@ -70,7 +71,8 @@ class TextReplace implements ModelInterface, ArrayAccess
         'new_value' => null,
         'regex' => null,
         'text_state' => null,
-        'rect' => null
+        'rect' => null,
+        'center_text_horizontally' => null
     ];
 
     /**
@@ -104,7 +106,8 @@ class TextReplace implements ModelInterface, ArrayAccess
         'new_value' => 'NewValue',
         'regex' => 'Regex',
         'text_state' => 'TextState',
-        'rect' => 'Rect'
+        'rect' => 'Rect',
+        'center_text_horizontally' => 'CenterTextHorizontally'
     ];
 
     /**
@@ -117,7 +120,8 @@ class TextReplace implements ModelInterface, ArrayAccess
         'new_value' => 'setNewValue',
         'regex' => 'setRegex',
         'text_state' => 'setTextState',
-        'rect' => 'setRect'
+        'rect' => 'setRect',
+        'center_text_horizontally' => 'setCenterTextHorizontally'
     ];
 
     /**
@@ -130,7 +134,8 @@ class TextReplace implements ModelInterface, ArrayAccess
         'new_value' => 'getNewValue',
         'regex' => 'getRegex',
         'text_state' => 'getTextState',
-        'rect' => 'getRect'
+        'rect' => 'getRect',
+        'center_text_horizontally' => 'getCenterTextHorizontally'
     ];
 
     /**
@@ -198,6 +203,7 @@ class TextReplace implements ModelInterface, ArrayAccess
         $this->container['regex'] = isset($data['regex']) ? $data['regex'] : null;
         $this->container['text_state'] = isset($data['text_state']) ? $data['text_state'] : null;
         $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
+        $this->container['center_text_horizontally'] = isset($data['center_text_horizontally']) ? $data['center_text_horizontally'] : null;
     }
 
     /**
@@ -365,6 +371,30 @@ class TextReplace implements ModelInterface, ArrayAccess
     public function setRect($rect)
     {
         $this->container['rect'] = $rect;
+
+        return $this;
+    }
+
+    /**
+     * Gets center_text_horizontally
+     *
+     * @return bool
+     */
+    public function getCenterTextHorizontally()
+    {
+        return $this->container['center_text_horizontally'];
+    }
+
+    /**
+     * Sets center_text_horizontally
+     *
+     * @param bool $center_text_horizontally The text after replacement is centered horizontally relative to the text being replaced.
+     *
+     * @return $this
+     */
+    public function setCenterTextHorizontally($center_text_horizontally)
+    {
+        $this->container['center_text_horizontally'] = $center_text_horizontally;
 
         return $this;
     }
