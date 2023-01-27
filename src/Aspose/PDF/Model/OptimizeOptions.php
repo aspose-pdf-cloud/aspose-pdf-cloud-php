@@ -1,7 +1,7 @@
 <?php
 /**
  *
- * Copyright (c) 2022 Aspose.PDF Cloud
+ * Copyright (c) 2023 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -53,6 +53,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerTypes = [
+        'password' => 'string',
         'allow_reuse_page_content' => 'bool',
         'compress_images' => 'bool',
         'image_quality' => 'int',
@@ -74,6 +75,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
       * @var string[]
       */
     protected static $swaggerFormats = [
+        'password' => null,
         'allow_reuse_page_content' => null,
         'compress_images' => null,
         'image_quality' => 'int32',
@@ -116,6 +118,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
+        'password' => 'Password',
         'allow_reuse_page_content' => 'AllowReusePageContent',
         'compress_images' => 'CompressImages',
         'image_quality' => 'ImageQuality',
@@ -137,6 +140,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $setters = [
+        'password' => 'setPassword',
         'allow_reuse_page_content' => 'setAllowReusePageContent',
         'compress_images' => 'setCompressImages',
         'image_quality' => 'setImageQuality',
@@ -158,6 +162,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $getters = [
+        'password' => 'getPassword',
         'allow_reuse_page_content' => 'getAllowReusePageContent',
         'compress_images' => 'getCompressImages',
         'image_quality' => 'getImageQuality',
@@ -233,6 +238,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
      */
     public function __construct(array $data = null)
     {
+        $this->container['password'] = isset($data['password']) ? $data['password'] : null;
         $this->container['allow_reuse_page_content'] = isset($data['allow_reuse_page_content']) ? $data['allow_reuse_page_content'] : null;
         $this->container['compress_images'] = isset($data['compress_images']) ? $data['compress_images'] : null;
         $this->container['image_quality'] = isset($data['image_quality']) ? $data['image_quality'] : null;
@@ -272,6 +278,30 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
         return true;
     }
 
+
+    /**
+     * Gets password
+     *
+     * @return string
+     */
+    public function getPassword()
+    {
+        return $this->container['password'];
+    }
+
+    /**
+     * Sets password
+     *
+     * @param string $password Specifies document password (if any) encoded with base-64.
+     *
+     * @return $this
+     */
+    public function setPassword($password)
+    {
+        $this->container['password'] = $password;
+
+        return $this;
+    }
 
     /**
      * Gets allow_reuse_page_content
