@@ -2,7 +2,7 @@
 
 /**
  *
- * Copyright (c) 2022 Aspose.PDF Cloud
+ * Copyright (c) 2023 Aspose.PDF Cloud
  * Permission is hereby granted, free of charge, to any person obtaining a copy
  * of this software and associated documentation files (the "Software"), to deal
  * in the Software without restriction, including without limitation the rights
@@ -3513,6 +3513,24 @@ class PdfApiTest extends PHPUnit_Framework_TestCase
 
         $folder = $this->tempFolder;
 
+        $response = $this->pdfApi->postOptimizeDocument($name, $optimizeOptions, $storage = null, $folder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostOptimizeDocumentWithPassword()
+    {
+        $name = '4pagesEncrypted.pdf';
+        $this->uploadFile($name);
+        $optimizeOptions = new Aspose\PDF\Model\OptimizeOptions();
+        $optimizeOptions->setPassword(base64_encode('user $^Password!&'));
+        $optimizeOptions->setAllowReusePageContent(false);
+        $optimizeOptions->setCompressImages(true);
+        $optimizeOptions->setImageQuality(100);
+        $optimizeOptions->setLinkDuplcateStreams(true);
+        $optimizeOptions->setRemoveUnusedObjects(true);
+        $optimizeOptions->setRemoveUnusedStreams(true);
+        $optimizeOptions->setUnembedFonts(true);
+        $folder = $this->tempFolder;
         $response = $this->pdfApi->postOptimizeDocument($name, $optimizeOptions, $storage = null, $folder);
         $this->assertEquals(200, $response->getCode());
     }
