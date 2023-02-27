@@ -25,14 +25,14 @@
 use Aspose\PDF\Api\PdfApi;
 use Aspose\PDF\Configuration;
 
-class PdfApiTest extends PHPUnit_Framework_TestCase
+class PdfApiTest extends PHPUnit\Framework\TestCase
 {
 
     protected $pdfApi;
     protected $tempFolder;
     protected $config;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $servercreds_json = file_get_contents('../../../../../Settings/servercreds.json');
         $creds = json_decode($servercreds_json, true);
