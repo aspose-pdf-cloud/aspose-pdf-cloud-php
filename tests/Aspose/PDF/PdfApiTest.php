@@ -3630,6 +3630,36 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
+    public function testPostOrganizeDocument()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        $folder = $this->tempFolder;
+        $response = $this->pdfApi->postOrganizeDocument($name, '1,4-2', $this->tempFolder . '/' . $name, $storage = null, $folder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPostOrganizeDocuments()
+    {
+        $name1 = '4pages.pdf';
+        $this->uploadFile($name1);
+        $name2 = 'marketing.pdf';
+        $this->uploadFile($name2);
+        $data1 = new Aspose\PDF\Model\OrganizeDocumentData();
+        $data1->setPath($this->tempFolder . '/' . $name1);
+        $data1->setPages('4-2');
+        $data2 = new Aspose\PDF\Model\OrganizeDocumentData();
+        $data2->setPath($this->tempFolder . '/' . $name2);
+        $data2->setPages('2');
+        $data3 = new Aspose\PDF\Model\OrganizeDocumentData();
+        $data3->setPath($this->tempFolder . '/' . $name1);
+        $data3->setPages('3,1');
+        $request = new Aspose\PDF\Model\OrganizeDocumentRequest();
+        $request->setList([$data1, $data2, $data3]);
+        $response = $this->pdfApi->postOrganizeDocuments($request, $this->tempFolder . '/OrganizeMany.pdf', $storage = null);
+        $this->assertEquals(200, $response->getCode());
+    }
+
     // Fields Tests
 
     public function testGetField()
