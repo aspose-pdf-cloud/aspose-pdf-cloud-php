@@ -93,8 +93,8 @@ class PageRange implements ModelInterface, ArrayAccess
      * @var string[]
      */
     protected static $attributeMap = [
-        'from' => 'from',
-        'to' => 'to'
+        'from' => 'From',
+        'to' => 'To'
     ];
 
     /**
