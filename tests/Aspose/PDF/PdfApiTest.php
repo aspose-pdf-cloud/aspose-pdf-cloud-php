@@ -2939,12 +2939,18 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
     public function testGetPdfInStorageToPptx()
     {
         $name = '4pages.pdf';
-        $this->uploadFile($name);
-        
+        $this->uploadFile($name);        
         $folder = $this->tempFolder;
-
-
         $response = $this->pdfApi->getPdfInStorageToPptx($name, null, null, $folder);
+        $this->assertNotNull($response);        
+    }
+        
+    public function testGetPdfInStorageToPptxWithPassword()
+    {
+        $name = '4pagesEncrypted.pdf';
+        $this->uploadFile($name);        
+        $folder = $this->tempFolder;
+        $response = $this->pdfApi->getPdfInStorageToPptx($name, null, null, $folder, null, base64_encode('user $^Password!&'));
         $this->assertNotNull($response);        
     }
         
@@ -2952,11 +2958,20 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
-
         $folder = $this->tempFolder;
-        $resFileName = "result.pptx";
-        
+        $resFileName = "result.pptx";        
         $response = $this->pdfApi->putPdfInStorageToPptx($name, $this->tempFolder . '/' . $resFileName, null, null, $folder);
+        $this->assertNotNull($response);
+    }
+
+    public function testPutPdfInStorageToPptxWithPassword()
+    {
+        $name = '4pagesEncrypted.pdf';
+        $this->uploadFile($name);
+        $folder = $this->tempFolder;
+        $resFileName = "result.pptx";        
+        $response = $this->pdfApi->putPdfInStorageToPptx($name, $this->tempFolder . '/' . $resFileName, null, null, $folder,
+            null, base64_encode('user $^Password!&'));
         $this->assertNotNull($response);
     }
 
@@ -2965,11 +2980,19 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $name = '4pages.pdf';
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
         $resFileName = "result.pptx";
-
-        $response = $this->pdfApi->putPdfInRequestToPptx($this->tempFolder . '/' . $resFileName, null, null, null, $file);
+        $response = $this->pdfApi->putPdfInRequestToPptx($this->tempFolder . '/' . $resFileName, null, null, null, null, $file);
         $this->assertNotNull($response);
     }
 
+    public function testPutPdfInRequestToPptxWithPassword()
+    {
+        $name = '4pagesEncrypted.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $resFileName = "result.pptx";
+        $response = $this->pdfApi->putPdfInRequestToPptx($this->tempFolder . '/' . $resFileName, null, null, null,
+            base64_encode('user $^Password!&'), $file);
+        $this->assertNotNull($response);
+    }
 
     public function testGetPdfInStorageToTeX()
     {
