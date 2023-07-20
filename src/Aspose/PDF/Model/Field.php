@@ -52,6 +52,7 @@ class Field extends LinkElement
       */
     protected static $swaggerTypes = [
         'name' => 'string',
+        'mapping_name' => 'string',
         'selected_items' => 'int[]',
         'type' => '\Aspose\PDF\Model\FieldType',
         'rect' => '\Aspose\PDF\Model\Rectangle',
@@ -65,6 +66,7 @@ class Field extends LinkElement
       */
     protected static $swaggerFormats = [
         'name' => null,
+        'mapping_name' => null,
         'selected_items' => 'int32',
         'type' => null,
         'rect' => null,
@@ -99,6 +101,7 @@ class Field extends LinkElement
      */
     protected static $attributeMap = [
         'name' => 'Name',
+        'mapping_name' => 'MappingName',
         'selected_items' => 'SelectedItems',
         'type' => 'Type',
         'rect' => 'Rect',
@@ -112,6 +115,7 @@ class Field extends LinkElement
      */
     protected static $setters = [
         'name' => 'setName',
+        'mapping_name' => 'setMappingName',
         'selected_items' => 'setSelectedItems',
         'type' => 'setType',
         'rect' => 'setRect',
@@ -125,6 +129,7 @@ class Field extends LinkElement
      */
     protected static $getters = [
         'name' => 'getName',
+        'mapping_name' => 'getMappingName',
         'selected_items' => 'getSelectedItems',
         'type' => 'getType',
         'rect' => 'getRect',
@@ -188,6 +193,7 @@ class Field extends LinkElement
         parent::__construct($data);
 
         $this->container['name'] = isset($data['name']) ? $data['name'] : null;
+        $this->container['mapping_name'] = isset($data['mapping_name']) ? $data['mapping_name'] : null;
         $this->container['selected_items'] = isset($data['selected_items']) ? $data['selected_items'] : null;
         $this->container['type'] = isset($data['type']) ? $data['type'] : null;
         $this->container['rect'] = isset($data['rect']) ? $data['rect'] : null;
@@ -248,6 +254,30 @@ class Field extends LinkElement
     public function setName($name)
     {
         $this->container['name'] = $name;
+
+        return $this;
+    }
+
+    /**
+     * Gets mapping_name
+     *
+     * @return string
+     */
+    public function getMappingName()
+    {
+        return $this->container['mapping_name'];
+    }
+
+    /**
+     * Sets mapping_name
+     *
+     * @param string $mapping_name Mapping name.
+     *
+     * @return $this
+     */
+    public function setMappingName($mapping_name)
+    {
+        $this->container['mapping_name'] = $mapping_name;
 
         return $this;
     }

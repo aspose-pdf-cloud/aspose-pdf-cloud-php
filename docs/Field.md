@@ -6,6 +6,7 @@ Represents form field.
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **name** | **string** | Field name. | [optional]
+**mapping_name** | **string** | Mapping name. | [optional]
 **selected_items** | **int[]** | Selected items. | [optional]
 **type** | [**\Aspose\PDF\Model\FieldType**](FieldType.md) | Field type. | [optional]
 **rect** | [**\Aspose\PDF\Model\Rectangle**](Rectangle.md) | Field rectangle. | [optional]
