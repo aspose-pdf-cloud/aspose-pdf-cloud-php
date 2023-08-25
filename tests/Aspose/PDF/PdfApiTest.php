@@ -2794,7 +2794,7 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
         $resFileName = "result.xls";
 
-        $response = $this->pdfApi->putPdfInRequestToXls($this->tempFolder . '/' . $resFileName, null, null, null, null, null, $file);
+        $response = $this->pdfApi->putPdfInRequestToXls($this->tempFolder . '/' . $resFileName, null, null, null, null, null, null, $file);
         $this->assertNotNull($response);
     }
 
@@ -3165,7 +3165,7 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
         $resFileName = "result.xlsx";
 
-        $response = $this->pdfApi->putPdfInRequestToXlsx($this->tempFolder . '/' . $resFileName, null, null, null, null, null, $file);
+        $response = $this->pdfApi->putPdfInRequestToXlsx($this->tempFolder . '/' . $resFileName, null, null, null, null, null, null, $file);
         $this->assertNotNull($response);
     }
 
@@ -4370,25 +4370,32 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $this->assertEquals(200, $response->getCode());
     }
 
-
     public function testPutReplaceImage()
     {
         $name = 'PdfWithImages2.pdf';
         $this->uploadFile($name);
-
         $imageFileName = 'Koala.jpg';
         $this->uploadFile($imageFileName);
-
         $pageNumber = 1;
-        $imageNumber = 1;
         $folder = $this->tempFolder;
         $imageFile = $folder . '/' . $imageFileName;
-
         $responseImages = $this->pdfApi->getImages($name, $pageNumber, $storage = null, $folder);
         $this->assertEquals(200, $responseImages->getCode());
         $imageId = $responseImages->getImages()->getList()[0]->getId();
-
         $response = $this->pdfApi->putReplaceImage($name, $imageId, $imageFile, $storage = null, $folder);
+        $this->assertEquals(200, $response->getCode());
+    }
+
+    public function testPutReplaceMultipleImage()
+    {
+        $name = 'PdfWithImages.pdf';
+        $this->uploadFile($name);
+        $imageFileName = 'butterfly.jpg';
+        $this->uploadFile($imageFileName);
+        $folder = $this->tempFolder;
+        $imageFile = $folder . '/' . $imageFileName;
+        $imageIds = ['GE5TENJVGQZTWMJYGQWDINRUFQ2DCMRMGY4TC', 'GE5TIMJSGY3TWMJXG4WDIMBZFQ2DCOJMGQ3DK'];
+        $response = $this->pdfApi->putReplaceMultipleImage($name, $imageIds, $imageFile, $storage = null, $folder);
         $this->assertEquals(200, $response->getCode());
     }
 
@@ -4401,7 +4408,6 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $this->uploadFile($imageFileName);
 
         $pageNumber = 1;
-        $imageNumber = 1;
         $folder = $this->tempFolder;
         $imageFile = $folder . '/' . $imageFileName;
 

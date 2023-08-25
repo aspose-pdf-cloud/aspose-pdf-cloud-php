@@ -336,6 +336,7 @@ Method | HTTP request | Description
 *PdfApi* | [**putRadioButtonField**](PdfApi.md#putRadioButtonField) | **PUT** /pdf/\{name}/fields/radiobutton/\{fieldName} | Replace document RadioButton field
 *PdfApi* | [**putRedactionAnnotation**](PdfApi.md#putRedactionAnnotation) | **PUT** /pdf/\{name}/annotations/redaction/\{annotationId} | Replace document redaction annotation
 *PdfApi* | [**putReplaceImage**](PdfApi.md#putReplaceImage) | **PUT** /pdf/\{name}/images/\{imageId} | Replace document image.
+*PdfApi* | [**putReplaceMultipleImage**](PdfApi.md#putReplaceMultipleImage) | **PUT** /pdf/\{name}/images/replace | Replace document multiple image.
 *PdfApi* | [**putScreenAnnotation**](PdfApi.md#putScreenAnnotation) | **PUT** /pdf/\{name}/annotations/screen/\{annotationId} | Replace document screen annotation
 *PdfApi* | [**putScreenAnnotationDataExtract**](PdfApi.md#putScreenAnnotationDataExtract) | **PUT** /pdf/\{name}/annotations/screen/\{annotationId}/data/extract | Extract document screen annotation content to storage
 *PdfApi* | [**putSearchableDocument**](PdfApi.md#putSearchableDocument) | **PUT** /pdf/\{name}/ocr | Create searchable PDF document. Generate OCR layer for images in input PDF document.
@@ -3841,7 +3842,7 @@ Name | Type | Description  | Notes
 
 <a name="getPdfInStorageToXls"></a>
 ## **getPdfInStorageToXls**
-> \SplFileObject getPdfInStorageToXls($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage)
+> \SplFileObject getPdfInStorageToXls($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage, $password)
 
 Converts PDF document (located on storage) to XLS format and returns resulting file in response content
 
@@ -3855,6 +3856,7 @@ Name | Type | Description  | Notes
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -3867,7 +3869,7 @@ Name | Type | Description  | Notes
 
 <a name="getPdfInStorageToXlsx"></a>
 ## **getPdfInStorageToXlsx**
-> \SplFileObject getPdfInStorageToXlsx($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage)
+> \SplFileObject getPdfInStorageToXlsx($name, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage, $password)
 
 Converts PDF document (located on storage) to XLSX format and returns resulting file in response content
 
@@ -3881,6 +3883,7 @@ Name | Type | Description  | Notes
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -6049,7 +6052,7 @@ Name | Type | Description  | Notes
 
 <a name="postSplitDocument"></a>
 ## **postSplitDocument**
-> \Aspose\PDF\Model\SplitResultResponse postSplitDocument($name, $format, $from, $to, $storage, $folder)
+> \Aspose\PDF\Model\SplitResultResponse postSplitDocument($name, $format, $from, $to, $storage, $folder, $password)
 
 Split document to parts.
 
@@ -6062,6 +6065,7 @@ Name | Type | Description  | Notes
 **$to** | **int** | End page if defined. | [optional]
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
+**$password** | **string** | Base64 encoded password. | [optional]
 
 ### Return type
 
@@ -6074,7 +6078,7 @@ Name | Type | Description  | Notes
 
 <a name="postSplitRangePdfDocument"></a>
 ## **postSplitRangePdfDocument**
-> \Aspose\PDF\Model\SplitResultResponse postSplitRangePdfDocument($name, $options, $storage, $folder)
+> \Aspose\PDF\Model\SplitResultResponse postSplitRangePdfDocument($name, $options, $storage, $folder, $password)
 
 Split document into ranges.
 
@@ -6085,6 +6089,7 @@ Name | Type | Description  | Notes
 **$options** | [**\Aspose\PDF\Model\SplitRangePdfOptions**](SplitRangePdfOptions.md) | The splitting options. | 
 **$storage** | **string** | The document storage. | [optional]
 **$folder** | **string** | The document folder. | [optional]
+**$password** | **string** | Base64 encoded password. | [optional]
 
 ### Return type
 
@@ -7651,7 +7656,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInRequestToXls"></a>
 ## **putPdfInRequestToXls**
-> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXls($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file)
+> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXls($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $password, $file)
 
 Converts PDF document (in request content) to XLS format and uploads resulting file to storage.
 
@@ -7664,6 +7669,7 @@ Name | Type | Description  | Notes
 **$scale_factor** | **double** | Scale factor (Obsolete) | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
 ### Return type
@@ -7677,7 +7683,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInRequestToXlsx"></a>
 ## **putPdfInRequestToXlsx**
-> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXlsx($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $file)
+> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToXlsx($out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $storage, $password, $file)
 
 Converts PDF document (in request content) to XLSX format and uploads resulting file to storage.
 
@@ -7690,6 +7696,7 @@ Name | Type | Description  | Notes
 **$scale_factor** | **double** | Scale factor (Obsolete) | [optional]
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
 ### Return type
@@ -8013,7 +8020,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInStorageToXls"></a>
 ## **putPdfInStorageToXls**
-> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToXls($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage)
+> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToXls($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage, $password)
 
 Converts PDF document (located on storage) to XLS format and uploads resulting file to storage
 
@@ -8028,6 +8035,7 @@ Name | Type | Description  | Notes
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -8040,7 +8048,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInStorageToXlsx"></a>
 ## **putPdfInStorageToXlsx**
-> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToXlsx($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage)
+> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToXlsx($name, $out_path, $insert_blank_column_at_first, $minimize_the_number_of_worksheets, $scale_factor, $uniform_worksheets, $folder, $storage, $password)
 
 Converts PDF document (located on storage) to XLSX format and uploads resulting file to storage
 
@@ -8055,6 +8063,7 @@ Name | Type | Description  | Notes
 **$uniform_worksheets** | **bool** | Uniform worksheets | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -8297,6 +8306,31 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**\Aspose\PDF\Model\ImageResponse**](ImageResponse.md)
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: application/json
+
+<a name="putReplaceMultipleImage"></a>
+## **putReplaceMultipleImage**
+> \Aspose\PDF\Model\ImagesResponse putReplaceMultipleImage($name, $image_ids, $image_file_path, $storage, $folder, $image)
+
+Replace document multiple image.
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$name** | **string** | The document name. | 
+**$image_ids** | **string[]** | The image IDs. | 
+**$image_file_path** | **string** | Path to image file if specified. Request content is used otherwise. | [optional]
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+**$image** | **\SplFileObject** | Image file. | [optional]
+
+### Return type
+
+[**\Aspose\PDF\Model\ImagesResponse**](ImagesResponse.md)
 
 ### HTTP request headers
 
