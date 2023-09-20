@@ -2658,7 +2658,7 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $type = Aspose\PDF\Model\PdfAType::PDFA1_A;
         $resFileName = "result.pdf";
 
-        $response = $this->pdfApi->putPdfInRequestToPdfA($this->tempFolder . '/' . $resFileName, $type, null, $file);
+        $response = $this->pdfApi->putPdfInRequestToPdfA($this->tempFolder . '/' . $resFileName, $type, null, null, $file);
         $this->assertNotNull($response);
     }
 
