@@ -52,7 +52,6 @@ class Page extends LinkElement
       */
     protected static $swaggerTypes = [
         'id' => 'int',
-        'images' => '\Aspose\PDF\Model\Images',
         'rectangle' => '\Aspose\PDF\Model\Rectangle'
     ];
 
@@ -63,7 +62,6 @@ class Page extends LinkElement
       */
     protected static $swaggerFormats = [
         'id' => 'int32',
-        'images' => null,
         'rectangle' => null
     ];
 
@@ -95,7 +93,6 @@ class Page extends LinkElement
      */
     protected static $attributeMap = [
         'id' => 'Id',
-        'images' => 'Images',
         'rectangle' => 'Rectangle'
     ];
 
@@ -106,7 +103,6 @@ class Page extends LinkElement
      */
     protected static $setters = [
         'id' => 'setId',
-        'images' => 'setImages',
         'rectangle' => 'setRectangle'
     ];
 
@@ -117,7 +113,6 @@ class Page extends LinkElement
      */
     protected static $getters = [
         'id' => 'getId',
-        'images' => 'getImages',
         'rectangle' => 'getRectangle'
     ];
 
@@ -178,7 +173,6 @@ class Page extends LinkElement
         parent::__construct($data);
 
         $this->container['id'] = isset($data['id']) ? $data['id'] : null;
-        $this->container['images'] = isset($data['images']) ? $data['images'] : null;
         $this->container['rectangle'] = isset($data['rectangle']) ? $data['rectangle'] : null;
     }
 
@@ -236,30 +230,6 @@ class Page extends LinkElement
     public function setId($id)
     {
         $this->container['id'] = $id;
-
-        return $this;
-    }
-
-    /**
-     * Gets images
-     *
-     * @return \Aspose\PDF\Model\Images
-     */
-    public function getImages()
-    {
-        return $this->container['images'];
-    }
-
-    /**
-     * Sets images
-     *
-     * @param \Aspose\PDF\Model\Images $images Page's images
-     *
-     * @return $this
-     */
-    public function setImages($images)
-    {
-        $this->container['images'] = $images;
 
         return $this;
     }
