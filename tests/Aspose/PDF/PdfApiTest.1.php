@@ -59,49 +59,17 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         {
             $path = $this->tempFolder . '/' . $fileName;
         }
-		$file = realpath(__DIR__ . '/../../..') . '/testData/' . $fileName;
-		$result = $this->pdfApi->uploadFile($Path=$path, $file); 
-	} 
+	$file = realpath(__DIR__ . '/../../..') . '/testData/' . $fileName;
+	$result = $this->pdfApi->uploadFile($Path=$path, $file); 
+    } 
 
-    //Annotations Tests
-
-    public function testGetDocumentAnnotations()
+    public function testPutCreateEmptyDocument()
     {
-        $name = 'PdfWithAnnotations.pdf';
-        $this->uploadFile($name);
+        $name = 'empty.pdf';
 
-        $response = $this->pdfApi->getDocumentAnnotations($name, null, $this->tempFolder);
-        $this->assertEquals(200, $response->getCode());
-    }
+        $folder = $this->tempFolder;
 
-    public function testDeleteDocumentAnnotations()
-    {
-        $name = 'PdfWithAnnotations.pdf';
-        $this->uploadFile($name);
-
-        $response = $this->pdfApi->deleteDocumentAnnotations($name, null, $this->tempFolder);
-        $this->assertEquals(200, $response->getCode());
-    }
-
-    public function testGetPageAnnotations()
-    {
-        $name = 'PdfWithAnnotations.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 2;
-
-        $response = $this->pdfApi->getPageAnnotations($name, $pageNumber, null, $this->tempFolder);
-        $this->assertEquals(200, $response->getCode());
-    }
-
-    public function testDeletePageAnnotations()
-    {
-        $name = 'PdfWithAnnotations.pdf';
-        $this->uploadFile($name);
-
-        $pageNumber = 2;
-
-        $response = $this->pdfApi->deletePageAnnotations($name, $pageNumber, null, $this->tempFolder);
+        $response = $this->pdfApi->putCreateDocument($name, $template_file = null, $data_file = null, $template_type = null, $storage = null, $folder);
         $this->assertEquals(200, $response->getCode());
     }
 
