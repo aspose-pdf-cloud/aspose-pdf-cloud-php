@@ -459,7 +459,7 @@ Name | Type | Description  | Notes
 
 <a name="deleteBookmark"></a>
 ## **deleteBookmark**
-> \Aspose\PDF\Model\AsposeResponse deleteBookmark($name, $bookmark_path, $folder, $storage)
+> \Aspose\PDF\Model\AsposeResponse deleteBookmark($name, $bookmark_path, $folder, $storage, $password)
 
 Delete document bookmark by ID.
 
@@ -470,6 +470,7 @@ Name | Type | Description  | Notes
 **$bookmark_path** | **string** | The bookmark path. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -504,7 +505,7 @@ Name | Type | Description  | Notes
 
 <a name="deleteDocumentBookmarks"></a>
 ## **deleteDocumentBookmarks**
-> \Aspose\PDF\Model\AsposeResponse deleteDocumentBookmarks($name, $folder, $storage)
+> \Aspose\PDF\Model\AsposeResponse deleteDocumentBookmarks($name, $folder, $storage, $password)
 
 Delete all document bookmarks.
 
@@ -514,6 +515,7 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -822,16 +824,17 @@ Name | Type | Description  | Notes
 
 <a name="deleteProperties"></a>
 ## **deleteProperties**
-> \Aspose\PDF\Model\AsposeResponse deleteProperties($name, $storage, $folder)
+> \Aspose\PDF\Model\AsposeResponse deleteProperties($name, $storage, $folder, $password)
 
 Delete custom document properties.
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**$name** | **string** |  | 
-**$storage** | **string** |  | [optional]
-**$folder** | **string** |  | [optional]
+**$name** | **string** | The document name. | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -844,17 +847,18 @@ Name | Type | Description  | Notes
 
 <a name="deleteProperty"></a>
 ## **deleteProperty**
-> \Aspose\PDF\Model\AsposeResponse deleteProperty($name, $property_name, $storage, $folder)
+> \Aspose\PDF\Model\AsposeResponse deleteProperty($name, $property_name, $storage, $folder, $password)
 
 Delete document property.
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**$name** | **string** |  | 
-**$property_name** | **string** |  | 
-**$storage** | **string** |  | [optional]
-**$folder** | **string** |  | [optional]
+**$name** | **string** | The document name. | 
+**$property_name** | **string** | Property name. | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -936,7 +940,7 @@ Name | Type | Description  | Notes
 
 <a name="getBookmark"></a>
 ## **getBookmark**
-> \Aspose\PDF\Model\BookmarkResponse getBookmark($name, $bookmark_path, $folder, $storage)
+> \Aspose\PDF\Model\BookmarkResponse getBookmark($name, $bookmark_path, $folder, $storage, $password)
 
 Read document bookmark.
 
@@ -947,6 +951,7 @@ Name | Type | Description  | Notes
 **$bookmark_path** | **string** | The bookmark path. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -959,7 +964,7 @@ Name | Type | Description  | Notes
 
 <a name="getBookmarks"></a>
 ## **getBookmarks**
-> \Aspose\PDF\Model\BookmarksResponse getBookmarks($name, $bookmark_path, $folder, $storage)
+> \Aspose\PDF\Model\BookmarksResponse getBookmarks($name, $bookmark_path, $folder, $storage, $password)
 
 Read document bookmarks node list.
 
@@ -970,6 +975,7 @@ Name | Type | Description  | Notes
 **$bookmark_path** | **string** | The bookmark path. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -1184,7 +1190,7 @@ Name | Type | Description  | Notes
 
 <a name="getDocumentBookmarks"></a>
 ## **getDocumentBookmarks**
-> \Aspose\PDF\Model\BookmarksResponse getDocumentBookmarks($name, $folder, $storage)
+> \Aspose\PDF\Model\BookmarksResponse getDocumentBookmarks($name, $folder, $storage, $password)
 
 Read document bookmarks tree.
 
@@ -1194,6 +1200,7 @@ Name | Type | Description  | Notes
 **$name** | **string** | The document name. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -1559,16 +1566,17 @@ Name | Type | Description  | Notes
 
 <a name="getDocumentProperties"></a>
 ## **getDocumentProperties**
-> \Aspose\PDF\Model\DocumentPropertiesResponse getDocumentProperties($name, $storage, $folder)
+> \Aspose\PDF\Model\DocumentPropertiesResponse getDocumentProperties($name, $storage, $folder, $password)
 
 Read document properties.
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**$name** | **string** |  | 
-**$storage** | **string** |  | [optional]
-**$folder** | **string** |  | [optional]
+**$name** | **string** | The document name. | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -1581,17 +1589,18 @@ Name | Type | Description  | Notes
 
 <a name="getDocumentProperty"></a>
 ## **getDocumentProperty**
-> \Aspose\PDF\Model\DocumentPropertyResponse getDocumentProperty($name, $property_name, $storage, $folder)
+> \Aspose\PDF\Model\DocumentPropertyResponse getDocumentProperty($name, $property_name, $storage, $folder, $password)
 
 Read document property by name.
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**$name** | **string** |  | 
-**$property_name** | **string** |  | 
-**$storage** | **string** |  | [optional]
-**$folder** | **string** |  | [optional]
+**$name** | **string** | The document name. | 
+**$property_name** | **string** | Property name. | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -4760,7 +4769,7 @@ Name | Type | Description  | Notes
 
 <a name="postBookmark"></a>
 ## **postBookmark**
-> \Aspose\PDF\Model\BookmarksResponse postBookmark($name, $bookmark_path, $bookmarks, $folder, $storage)
+> \Aspose\PDF\Model\BookmarksResponse postBookmark($name, $bookmark_path, $bookmarks, $folder, $storage, $password)
 
 Add document bookmarks.
 
@@ -4772,6 +4781,7 @@ Name | Type | Description  | Notes
 **$bookmarks** | [**\Aspose\PDF\Model\Bookmark[]**](Bookmark.md) | The array of bookmark. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -6230,7 +6240,7 @@ Name | Type | Description  | Notes
 
 <a name="putBookmark"></a>
 ## **putBookmark**
-> \Aspose\PDF\Model\BookmarkResponse putBookmark($name, $bookmark_path, $bookmark, $folder, $storage)
+> \Aspose\PDF\Model\BookmarkResponse putBookmark($name, $bookmark_path, $bookmark, $folder, $storage, $password)
 
 Update document bookmark.
 
@@ -6242,6 +6252,7 @@ Name | Type | Description  | Notes
 **$bookmark** | [**\Aspose\PDF\Model\Bookmark**](Bookmark.md) | The bookmark. | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -8446,18 +8457,19 @@ Name | Type | Description  | Notes
 
 <a name="putSetProperty"></a>
 ## **putSetProperty**
-> \Aspose\PDF\Model\DocumentPropertyResponse putSetProperty($name, $property_name, $value, $storage, $folder)
+> \Aspose\PDF\Model\DocumentPropertyResponse putSetProperty($name, $property_name, $value, $storage, $folder, $password)
 
 Add/update document property.
 
 ### Parameters
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
-**$name** | **string** |  | 
-**$property_name** | **string** |  | 
-**$value** | **string** |  | 
-**$storage** | **string** |  | [optional]
-**$folder** | **string** |  | [optional]
+**$name** | **string** | The document name. | 
+**$property_name** | **string** | Property name. | 
+**$value** | **string** | Property value. | 
+**$storage** | **string** | The document storage. | [optional]
+**$folder** | **string** | The document folder. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
