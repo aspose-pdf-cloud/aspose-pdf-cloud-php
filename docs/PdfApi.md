@@ -3776,7 +3776,7 @@ Name | Type | Description  | Notes
 
 <a name="getPdfInStorageToSvg"></a>
 ## **getPdfInStorageToSvg**
-> \SplFileObject getPdfInStorageToSvg($name, $compress_output_to_zip_archive, $folder, $storage)
+> \SplFileObject getPdfInStorageToSvg($name, $compress_output_to_zip_archive, $folder, $storage, $password)
 
 Converts PDF document (located on storage) to SVG format and returns resulting file in response content
 
@@ -3787,6 +3787,7 @@ Name | Type | Description  | Notes
 **$compress_output_to_zip_archive** | **bool** | Specifies whether output will be created as one zip-archive. | [optional]
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
@@ -7621,7 +7622,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInRequestToSvg"></a>
 ## **putPdfInRequestToSvg**
-> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToSvg($out_path, $storage, $file)
+> \Aspose\PDF\Model\AsposeResponse putPdfInRequestToSvg($out_path, $storage, $password, $file)
 
 Converts PDF document (in request content) to SVG format and uploads resulting file to storage.
 
@@ -7630,6 +7631,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.svg) | 
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 **$file** | **\SplFileObject** | A file to be converted. | [optional]
 
 ### Return type
@@ -7983,7 +7985,7 @@ Name | Type | Description  | Notes
 
 <a name="putPdfInStorageToSvg"></a>
 ## **putPdfInStorageToSvg**
-> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToSvg($name, $out_path, $folder, $storage)
+> \Aspose\PDF\Model\AsposeResponse putPdfInStorageToSvg($name, $out_path, $folder, $storage, $password)
 
 Converts PDF document (located on storage) to SVG format and uploads resulting file to storage
 
@@ -7994,6 +7996,7 @@ Name | Type | Description  | Notes
 **$out_path** | **string** | Full resulting filename (ex. /folder1/folder2/result.svg) | 
 **$folder** | **string** | The document folder. | [optional]
 **$storage** | **string** | The document storage. | [optional]
+**$password** | **string** | The password (Base64). | [optional]
 
 ### Return type
 
