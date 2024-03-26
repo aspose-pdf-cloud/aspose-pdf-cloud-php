@@ -34,29 +34,30 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
 
     protected function setUp(): void
     {
-        $servercreds_json = file_get_contents('../../../../../Settings/servercreds.json');
-        $creds = json_decode($servercreds_json, true);
-        $appSid = $creds['AppSID'];
-        $appKey = $creds['AppKey'];
-        $host = $creds['ProductUri'];
-
         $this->tempFolder = 'TempPdfCloud';        
         $this->config = new Configuration();
-        $this->config->setAppKey($appKey);
-        $this->config->setAppSid($appSid);
-        $this->config->setHost($host);
-
+        $servercreds_json = file_get_contents('../../../../../Settings/servercreds.json');
+        $creds = json_decode($servercreds_json, true);
+        if (array_key_exists('SelfHost', $creds)) {
+            $this->config->setSelfHost($creds['SelfHost']);
+        }
+        if (array_key_exists('AppSID', $creds)) {
+            $this->config->setAppSid($creds['AppSID']);
+        }
+        if (array_key_exists('AppKey', $creds)) {
+            $this->config->setAppKey($creds['AppKey']);
+        }
+        if (array_key_exists('ProductUri', $creds)) {
+            $this->config->setHost($creds['ProductUri']);
+        }
         $this->pdfApi = new PdfApi(null, $this->config);
     }
 
     private function uploadFile($fileName, $subFolder = null) 
     {
-        if (null != $subFolder)
-        {
+        if (null != $subFolder) {
             $path = $this->tempFolder . '/' . $subFolder . '/' . $fileName;       
-        }
-        else
-        {
+        } else {
             $path = $this->tempFolder . '/' . $fileName;
         }
 		$file = realpath(__DIR__ . '/../../..') . '/testData/' . $fileName;
