@@ -47,6 +47,13 @@ class Configuration
     private static $defaultConfiguration;
 
     /**
+     * SelfHost
+     *
+     * @var bool
+     */
+    protected $selfHost = false;
+
+    /**
      * Access token for OAuth
      *
      * @var string
@@ -106,6 +113,29 @@ class Configuration
     public function __construct()
     {
         $this->tempFolderPath = sys_get_temp_dir();
+    }
+
+    /*
+     * Sets SelfHost
+     *
+     * @param bool $selfHost SelfHost
+     *
+     * @return $this
+     */
+    public function setSelfHost($selfHost)
+    {
+        $this->selfHost = $selfHost;
+        return $this;
+    }
+
+    /*
+     * Gets SelfHost
+     *
+     * @return bool
+     */
+    public function getSelfHost()
+    {
+        return $this->selfHost;
     }
 
     /*
@@ -332,7 +362,7 @@ class Configuration
         $report .= '    OS: ' . php_uname() . PHP_EOL;
         $report .= '    PHP Version: ' . PHP_VERSION . PHP_EOL;
         $report .= '    OpenAPI Spec Version: 3.0' . PHP_EOL;
-        $report .= '    SDK Package Version: 24.2.0' . PHP_EOL;
+        $report .= '    SDK Package Version: 24.3.0' . PHP_EOL;
         $report .= '    Temp Folder Path: ' . self::getDefaultConfiguration()->getTempFolderPath() . PHP_EOL;
 
         return $report;

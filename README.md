@@ -29,8 +29,7 @@ XLS, XLSX, PPTX, DOC, DOCX, MobiXML, JPEG, EMF, PNG, BMP, GIF, TIFF, Text
 ## Read PDF Formats
 MHT, PCL, PS, XSLFO, MD
 
-## Enhancements in Version 24.2
-- Memory leak when converting PDF to DOCX.
+## Enhancements in Version 24.3
 - A new version of Aspose.PDF Cloud was prepared using the latest version of Aspose.PDF for .NET.
 
 ## Requirements
@@ -60,6 +59,13 @@ composer install
 	$pageNumber = 2;
 
 	$response = $pdfApi->getPageAnnotations($name, $pageNumber, null, "tempFolder");
+```
+
+## SelfHost Aspose.PDF Cloud
+Create **Configuration** object without **AppSid** and **AppKey**, with **SelfHost** set to `true` and with **Host** set to *url of SelfHost Aspose.PDF Cloud*:
+```php
+	$config->setSelfHost(true);
+	$config->setHost('MY_SELF_HOST_URL');
 ```
 
 ## Licensing
