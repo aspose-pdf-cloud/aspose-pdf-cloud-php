@@ -2600,7 +2600,6 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $name = '4pages.pdf';
         $this->uploadFile($name);
         $folder = $this->tempFolder;
-
         $response = $this->pdfApi->getPdfInStorageToDoc($name, null, null, null, null, null, null, null, null, $folder);
         $this->assertNotNull($response);        
     }
@@ -2906,10 +2905,7 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
-        
         $folder = $this->tempFolder;
-
-
         $response = $this->pdfApi->getPdfInStorageToEpub($name, null, $folder);
         $this->assertNotNull($response);        
     }
@@ -2999,10 +2995,7 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
-        
         $folder = $this->tempFolder;
-
-
         $response = $this->pdfApi->getPdfInStorageToTeX($name, $folder, null);
         $this->assertNotNull($response);        
     }
@@ -3011,10 +3004,8 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
-
         $folder = $this->tempFolder;
         $resFileName = "result.tex";
-        
         $response = $this->pdfApi->putPdfInStorageToTeX($name, $this->tempFolder . '/' . $resFileName, $folder, null);
         $this->assertNotNull($response);
     }
@@ -3034,10 +3025,7 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
-        
         $folder = $this->tempFolder;
-
-
         $response = $this->pdfApi->getPdfInStorageToMobiXml($name, $folder);
         $this->assertNotNull($response);        
     }
@@ -3055,17 +3043,14 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $this->assertNotNull($response);
     }
 
-
     public function testPutPdfInRequestToMobiXml()
     {
         $name = '4pages.pdf';
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
         $resFileName = "result.mobi";
-
         $response = $this->pdfApi->putPdfInRequestToMobiXml($this->tempFolder . '/' . $resFileName, null, $file);
         $this->assertNotNull($response);
     }
-
 
     public function testGetXfaPdfInStorageToAcroForm()
     {
@@ -3100,7 +3085,6 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $response = $this->pdfApi->putXfaPdfInRequestToAcroForm($this->tempFolder . '/' . $resFileName, null, $file);
         $this->assertNotNull($response);
     }
-
 
     public function testGetPdfInStorageToXml()
     {
@@ -3152,10 +3136,8 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
     {
         $name = '4pages.pdf';
         $this->uploadFile($name);
-
         $folder = $this->tempFolder;
-        $resFileName = "result.xlsx";
-        
+        $resFileName = "result.xlsx";        
         $response = $this->pdfApi->putPdfInStorageToXlsx($name, $this->tempFolder . '/' . $resFileName, null, null, null, null, $folder);
         $this->assertNotNull($response);
     }
@@ -3165,9 +3147,25 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $name = '4pages.pdf';
         $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
         $resFileName = "result.xlsx";
-
         $response = $this->pdfApi->putPdfInRequestToXlsx($this->tempFolder . '/' . $resFileName, null, null, null, null, null, null, $file);
         $this->assertNotNull($response);
+    }
+
+    public function testPostPdfToXlsx()
+    {
+        $name = '4pages.pdf';
+        $file = realpath(__DIR__ . '/../../..') . '/testData/' . $name;
+        $response = $this->pdfApi->postPdfToXlsx(null, null, null, null, $file);
+        $this->assertNotNull($response);
+    }
+
+    public function testGetPdfInStorageToText()
+    {
+        $name = '4pages.pdf';
+        $this->uploadFile($name);
+        $folder = $this->tempFolder;
+        $response = $this->pdfApi->getPdfInStorageToText($name, $folder);
+        $this->assertNotNull($response);        
     }
 
     //Convert to PDF Tests
