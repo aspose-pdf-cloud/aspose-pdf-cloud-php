@@ -209,6 +209,7 @@ Method | HTTP request | Description
 *PdfApi* | [**postDocumentTextReplace**](PdfApi.md#postDocumentTextReplace) | **POST** /pdf/\{name}/text/replace | Document's replace text method.
 *PdfApi* | [**postEncryptDocumentInStorage**](PdfApi.md#postEncryptDocumentInStorage) | **POST** /pdf/\{name}/encrypt | Encrypt document in storage.
 *PdfApi* | [**postFlattenDocument**](PdfApi.md#postFlattenDocument) | **POST** /pdf/\{name}/flatten | Flatten the document.
+*PdfApi* | [**postHtmlToPdf**](PdfApi.md#postHtmlToPdf) | **POST** /pdf/create/html | Convert HTML file (zip archive in request content) to PDF format and return resulting file in response. 
 *PdfApi* | [**postImportFieldsFromFdf**](PdfApi.md#postImportFieldsFromFdf) | **POST** /pdf/\{name}/import/fdf | Update fields from FDF file in request.
 *PdfApi* | [**postImportFieldsFromXfdf**](PdfApi.md#postImportFieldsFromXfdf) | **POST** /pdf/\{name}/import/xfdf | Update fields from XFDF file in request.
 *PdfApi* | [**postImportFieldsFromXml**](PdfApi.md#postImportFieldsFromXml) | **POST** /pdf/\{name}/import/xml | Update fields from XML file in request.
@@ -5158,6 +5159,33 @@ Name | Type | Description  | Notes
 
  - **Content-Type**: application/json
  - **Accept**: application/json
+
+<a name="postHtmlToPdf"></a>
+## **postHtmlToPdf**
+> \SplFileObject postHtmlToPdf($html_file_name, $height, $width, $is_landscape, $margin_left, $margin_bottom, $margin_right, $margin_top)
+
+Convert HTML file (zip archive in request content) to PDF format and return resulting file in response. 
+
+### Parameters
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**$html_file_name** | **string** | Name of HTML file in ZIP. | [optional]
+**$height** | **double** | Page height | [optional]
+**$width** | **double** | Page width | [optional]
+**$is_landscape** | **bool** | Is page landscaped | [optional]
+**$margin_left** | **double** | Page margin left | [optional]
+**$margin_bottom** | **double** | Page margin bottom | [optional]
+**$margin_right** | **double** | Page margin right | [optional]
+**$margin_top** | **double** | Page margin top | [optional]
+
+### Return type
+
+**\SplFileObject**
+
+### HTTP request headers
+
+ - **Content-Type**: multipart/form-data
+ - **Accept**: multipart/form-data
 
 <a name="postImportFieldsFromFdf"></a>
 ## **postImportFieldsFromFdf**
