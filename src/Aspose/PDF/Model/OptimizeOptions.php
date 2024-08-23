@@ -316,7 +316,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     /**
      * Sets allow_reuse_page_content
      *
-     * @param bool $allow_reuse_page_content If true page contents will be reused when document is optimized for equal pages.
+     * @param bool $allow_reuse_page_content If true page contents will be reused when document is optimized for equal pages. LinkDuplcateStreams option must be set to true.
      *
      * @return $this
      */
@@ -460,7 +460,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     /**
      * Sets unembed_fonts
      *
-     * @param bool $unembed_fonts Make fonts not embedded if set to true.
+     * @param bool $unembed_fonts Make fonts not embedded if set to true. Unembedding a font means removing the embedded byte stream data of the font included in a PDF document.
      *
      * @return $this
      */
@@ -532,7 +532,7 @@ class OptimizeOptions implements ModelInterface, ArrayAccess
     /**
      * Sets subset_fonts
      *
-     * @param bool $subset_fonts Fonts will be converted into subsets if set to true.
+     * @param bool $subset_fonts Fonts will be converted into subsets if set to true. Only those characters that are actually used in the layout are stored in the PDF.
      *
      * @return $this
      */
