@@ -5976,4 +5976,37 @@ class PdfApiTest extends PHPUnit\Framework\TestCase
         $response = $this->pdfApi->postImportFieldsFromXml($name, null, $this->tempFolder, $file);
         $this->assertEquals(200, $response->getCode());
     }
+
+
+    //Layers Tests
+
+    public function testGetDocumentLayers()
+    {
+        $name = 'PdfWithLayers.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->getDocumentLayers($name, $this->tempFolder);
+        $this->assertEquals(2, count($response->getLayers()));
+    }
+
+    public function testDeleteDocumentLayer()
+    {
+        $name = 'PdfWithLayers.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->deleteDocumentLayer($name, 1, "oc1", $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+
+        $layers = $this->pdfApi->getDocumentLayers($name, $this->tempFolder);
+        $this->assertEquals(1, count($layers->getLayers()));
+    }
+
+    public function testPutCreatePdfFromLayer()
+    {
+        $name = 'PdfWithLayers.pdf';
+        $this->uploadFile($name);
+
+        $response = $this->pdfApi->putCreatePdfFromLayer($name, 1, "output.pdf", "oc1", $this->tempFolder);
+        $this->assertEquals(200, $response->getCode());
+    }
 }
